@@ -253,6 +253,7 @@ class Molecule:
             str += "{x} {y} {size}\n".format(x=x,y=y,size=atom.getSize())
         return str
 
+
     def getDist(self):
         return self.dist
 
@@ -289,6 +290,9 @@ class Snowman(Molecule):
     
     def area(self):
         return math.pi*(sum([a.size()**2 for a in self]))
+
+    def getFilename(self):
+        return "{shape}-{radius}-{dist}".format(shape=self.getName(), radius=self.getRadius(), dist=self.getDist())
 
 class Trimer(Molecule):
     """ Creates a trimer with 2 degrees of freedom. The first atom
@@ -327,6 +331,10 @@ class Trimer(Molecule):
     def area(self):
         d2 = math.sqrt(sum([d[-1]**2 for d in self.getBonds()]) + reduce(mul, [x[-1] for x in self.getBonds()])*math.cos(self.getAngles()[-1]))
         return math.pi*([ d[-1]**2 for d in self.getBonds()])
+
+    def getFilename(self):
+        return "{shape}-{radius}-{dist}-{theta}".format(shape=self.getName(), radius=self.getRadius(), dist=self.getDist(), theta=self.getTheta())
+
 
 class Disc(Molecule):
     """ Creates a single disc as a molecule, with radius 1"""

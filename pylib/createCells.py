@@ -34,6 +34,10 @@ def create(a, b, theta, x, y, phi, molecule, crys, mols=2500, path='.', boundary
     unitCell.molFile(s.getMol(), path, s.getCrys())
     unitCell.lammpsFile(s, path, filename)
 
+    f = open('{PATH}/{filename}-mol.dat'.format(PATH=path,filename=s.getMol().getFilename()),'w')
+    f.write(str(s.getMol()))
+    f.close()
+
 if __name__ == "__main__":
     args = sys.argv
     line = sys.stdin.readline().split()

@@ -9,7 +9,27 @@ imageext = ".jpg"
 frameExt = ".png"
 
 
-plot_dict = {"order":("order/*[0-9].png","Order Parameter"), "frame":("trj_contact/*[0-9].png", "Configuration"), "angle":("trj_contact/*-angles.png","Angle Distribution"), "short-order":("short_order.png", "Short Range Ordering"), "msd":("msd.png", "Mean Squared Displacement"), "rotation":("rotation.png", "Rotational Relaxation"), "hist":("histogram.png", "Contact Number"), "props":("props.png", "Properties"), "short-order-hist":("short_order_hist.png", "Short Order Histogram"), "radial":("radial.png", "Radial Distribution"), "struct":("struct.png", "Structural Relaxation"), "com":("complot.png", "Centers of Mass"), "moved":("moved.png", "Motion of Particles"), "alpha":("alpha.png", "Non Gaussian"), "regio":("regio*.png", "Regional Relaxation"), "hexatic":('hexatic_order.png', "Hexatic Ordering"), "table":("contact.log", "Data"), "rot-diff":("rot_diff.png", "Rotation vs Diffusion")}
+plot_dict = {\
+        "order":("order/*[0-9].*","Order Parameter"),\
+        "frame":("trj_contact/*[0-9].*", "Configuration"),\
+        "angle":("trj_contact/*-angles.*","Angle Distribution"),\
+        "short-order":("short_order.*", "Short Range Ordering"),\
+        "msd":("msd.*", "Mean Squared Displacement"),\
+        "rotation":("rotation.*", "Rotational Relaxation"),\
+        "hist":("histogram.*", "Contact Number"),\
+        "props":("props.*", "Properties"),\
+        "short-order-hist":("short_order_hist.*", "Short Order Histogram"),\
+        "radial":("radial.*", "Radial Distribution"),\
+        "struct":("struct.*", "Structural Relaxation"),\
+        "com":("complot.*", "Centers of Mass"),\
+        "moved":("moved.*", "Motion of Particles"),\
+        "alpha":("alpha.*", "Non Gaussian"),\
+        "regio":("regio*.*", "Regional Relaxation"),\
+        "hexatic":('hexatic_order.*', "Hexatic Ordering"),\
+        "table":("contact.log", "Data"),\
+        "rot-diff":("rot_diff.*", "Rotation vs Diffusion"),\
+        "radial2d":("radial2d_*", "2D Radial Distribution")
+        }
 
 plots=plot_dict.values()
 

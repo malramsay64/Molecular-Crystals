@@ -9,8 +9,7 @@ include settings
 include config
 
 export
-
-# Generating all shapes {{{
+# Generat ing all shapes {{{
 mol := $(shape)
 mol_d := $(filter Disc%, $(mol))
 # Radius
@@ -41,7 +40,7 @@ else
 endif
 #}}}
 
-VPATH=.:$(BIN_PATH):$(LIB)
+VPATH=.:$(BIN_PATH):$(LIB):gnuplot
 
 distances = $(foreach m, $(mol), $(call p_dist, $m))
 export $(addprefix temp_, $(distances))
@@ -63,12 +62,17 @@ collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@rm -f $(PREFIX)/latex/collate.tex
 	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
-%.tex: %
-	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
-	gnuplot -e 'prefix="$(PREFIX)/"; molecule="$<"' gnuplot/log_time.plot
+%.tex: % plot-dynamics | $(PREFIX)/latex
 	@echo "\section{$<}" > $(PREFIX)/latex/$@
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
+
+ifeq ($(dynamics), true)
+plot-dynamics: dynamics.plot $(mol) | $(PREFIX)/plots
+	@gnuplot -e 'prefix="$(PREFIX)/"; term_type="$(term_type)"' $<
+else
+plot-dynamics: dynamics.plot
+endif
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
@@ -97,7 +101,6 @@ vars.mak:
 $(TARGETS): $(mol)
 
 $(PRE): $(mol)
-
 
 present: program $(mol) collate | output/.output
 	@pdflatex -draftmode $(latex-flags) output/collate.tex
@@ -132,6 +135,8 @@ $(PREFIX):
 $(PREFIX)/plots:
 	@mkdir -p $@
 
+$(PREFIX)latex:
+	@mkdir -p $@
 
 .PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE) clean-plot clean-collate
 
@@ -143,7 +148,7 @@ clean:
 
 clean-collate: $(mol)
 	-rm -f $(PREFIX)/plots/*
-	rm -f $(PREFIX)/latex/$<.tex
+	-rm -f $(PREFIX)/latex/$<.tex
 
 delete:
 	-rm -rf $(PREFIX)/*
@@ -152,5 +157,6 @@ output/.output:
 	-mkdir -p $@
 
 clean-plot: clean-collate $(mol)
+	rm -r $(PREFIX)/plots/*
 
 # vim:foldmethod=marker:foldlevel=0

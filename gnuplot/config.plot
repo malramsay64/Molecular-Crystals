@@ -1,7 +1,6 @@
 # Default values for plotting each at each temperature
 
 if (!exists("term_type")) term_type = 'pdf'
-
 if (term_type eq 'pdf'){
     term_size = 5
     term_y = 3
@@ -15,7 +14,7 @@ else {
     }
 }
 ext = ".".term_type
-font_size = 12*scaling
+font_size = 10*scaling
 
 if (!exists("plot_dir")) plot_dir = 'myplot/'
 if (!exists("prefix")) prefix = './'

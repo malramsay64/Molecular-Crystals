@@ -138,7 +138,6 @@ contact: program props.csv | $(FOLDERS) trj/out.lammpstrj
 
 trj/out.lammpstrj:
 	touch $@
-	
 
 props.csv: | trj/out.lammpstrj
 	@python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
@@ -182,8 +181,6 @@ restarts:
 $(FOLDERS):
 	@mkdir -p $@
 
-$(to_plot):
-	@mkdir -p $(PREFIX)/plots/$@
 
 my_latex:
 	@mkdir -p $@
@@ -203,8 +200,11 @@ copy-%: plot-% | %
 	@$(foreach f, $(wildcard myplot/$(subst plot-,,$<)*), cp $f ../plots/$(subst plot-,,$<)/$(notdir $(shell pwd))-$(notdir $f); )
 
 plot-%: %.plot contact | %
-	@gnuplot -e "prefix='$(shell pwd)'" $<  #&> $(LOG)
+	@gnuplot -e "prefix='$(shell pwd)/'; term_type='$(term_type)'" $<  #&> $(LOG)
 	@touch .make/$@
+
+$(to_plot):
+	@mkdir -p $(PREFIX)/plots/$@
 
 # }}}
 # Clean functions {{{

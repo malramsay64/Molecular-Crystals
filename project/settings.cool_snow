@@ -1,6 +1,7 @@
 include system
 
 # Cool snowman
+# settings.cool_snow
 
 # Molecule Settings {{{
 # -----------------
@@ -91,7 +92,15 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
 # All
 #to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct rot-diff
-to_plot = frame radial
+to_plot = frame radial radial2d hist moved
+
+# Collate, Plots which take data from a number of temperatures or molecules
+# ( order | temp_dep | dynamics )
+collate_plots = order dynamics collate-msd collate-rot collate-struct
+
+# Output filetype
+# ( png | pdf )
+term_type = png
 
 # }}}
 # Path variables {{{
@@ -100,7 +109,7 @@ to_plot = frame radial
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=cool
+d_name=cool_snow
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/$(d_name)

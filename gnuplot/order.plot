@@ -1,25 +1,28 @@
-set terminal png enhanced transparent truecolor size 800,800
+load '~/make/gnuplot/collate_config.plot'
 
-ext = ".png"
-prefix = "./"
+set terminal term_type enhanced size term_size*scaling, term_y*scaling font ",".font_size
 
-
-set polar
-set yrange[-10:10]
-set xrange[-10:10]
-set size ratio -1
-unset raxis
-unset rtics
 set datafile separator ","
-set style fill transparent solid 0.04 noborder
 
-files = system("ls ".prefix."/order/*.csv")
+set key off
+set logscale y
+set format y "10^{%L}"
+set style line 5 pt 7 lw 2*scaling ps 0.5*scaling
+set title font ",14"
 
-do for [i=1:words(files)] {
+columns(f) = system(sprintf("awk -F, 'NR==1 {print NF;exit}' %s.csv", f))
+shape(s) = system(sprintf("echo %s | cut -d/ -f7-",s))
 
-    f = word(files,i)
+# Ordering
 
-    set output system("basename ".f." .csv")
-    plot f using 1:2:(0.1):3 with circles lc variable
+ordering = prefix.plot_dir.molecule."-order"
+num_o = columns(ordering)
+set output ordering.ext
+set nologscale y
+set format y "%g"
+set yrange [0:1]
+set key on autotitle columnhead
+set xlabel "1/T"
+set ylabel
 
-}
+plot for [i=2:num_o] ordering.".csv" using (1/$1):i with linespoints ls 5 lc i-1

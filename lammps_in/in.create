@@ -43,7 +43,7 @@ compute diam all property/atom d_diam
 
 # Thermodynamic output
 thermo          1000
-thermo_style    custom step temp press etotal ke pe enthalpy density
+thermo_style    custom step temp press etotal ke pe enthalpy density lx ly xy
 
 log     ${my_path}/logs/create.log
 

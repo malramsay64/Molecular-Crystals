@@ -52,7 +52,7 @@ wo_temp = $(subst $(space),-,$(strip $(call t_shape, $1) $(call t_rad, $1) $(cal
 # C settings {{{
 CC = gcc
 CXX = g++
-CFLAGS = -O2 -std=c99
+CFLAGS = -O3
 CXXFLAGS := -Ofast -stdlib=libc++ -std=gnu++11
 LDFLAGS = -lm
 

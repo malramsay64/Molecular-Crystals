@@ -365,4 +365,7 @@ if __name__ == "__main__":
     c.replicate(2,2)
     cellFile(c)
     molFile(c.getMol())
+    f = open('{filename}-mol.dat'.format(filename=c.getMol().getFilename()),'w')
+    f.write(string)
+    f.close()
 

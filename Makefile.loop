@@ -36,6 +36,8 @@ all_temps = $(notdir $(wildcard $(PREFIX)/$(subst $(space),-,$(strip $(shape) * 
 
 export
 
+VPATH := .:gnuplot:$(BIN_PATH)
+
 $(PRE): $(save)
 
 clean-collate:$(save)
@@ -44,21 +46,25 @@ $(TARGETS): $(save)
 
 $(PRESENT): $(save)
 
-present: $(save) collate | latex
+present: $(save) collate plot | $(PREFIX)/latex
 	@$(foreach p, $(to_plot),\
     $(foreach s, $(save), rm -f $(PREFIX)/latex/$(mol)-$p.tex;))
 	@$(foreach p, $(to_plot),\
     $(foreach s, $(save), cat $(PREFIX)/$s/my_latex/$p.tex >> $(PREFIX)/latex/$(mol)-$p.tex;))
 
-collate: contact.log order.log | plots
+collate: collate-plot | plots
 
 order.log contact.log: $(save)
 	@-rm -f $(PREFIX)/plots/$(mol)-$(basename $@).csv
-	$(call collate_header,$(word 1, $(save)))
+	@$(call collate_header,$(word 1, $(save)))
 	@$(foreach s, $(all_temps), $(call collate_command,$s, 2);)
 
+collate-plot: $(addprefix plot-,$(collate_plots))
 
-%.tex: $(save) | latex
+plot-%: %.plot $(save) order.log contact.log
+	@gnuplot -e 'prefix="$(PREFIX)/"; molecule="$(mol)"; term_type="$(term_type)"' $< #&> out.log
+
+%.tex: $(save) | $(PREFIX)/latex
 	@$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))
 
 $(save): always | $(dirs)
@@ -79,8 +85,8 @@ $(dirs):
 plots:
 	@-mkdir -p $(PREFIX)/$@
 
-latex:
-	@-mkdir -p $(PREFIX)/$@
+$(PREFIX)/latex:
+	@-mkdir -p $@
 
 .PHONY: always
 always:

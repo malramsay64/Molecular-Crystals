@@ -1,6 +1,7 @@
 include system
 
 # Cool Trimer
+# setitings.cool_tri
 
 # Molecule Settings {{{
 # -----------------
@@ -90,6 +91,14 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # All
 #to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct rot-diff
 to_plot = frame radial
+
+# Collate, Plots which take data from a number of temperatures or molecules
+# ( order | temp_dep | dynamics )
+collate_plots = order dynamics temp_dep
+
+# Output filetype
+# ( png | pdf )
+term_type = png
 
 # }}}
 # Path variables {{{

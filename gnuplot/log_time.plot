@@ -1,16 +1,8 @@
 
-term_type = 'png'
-ext = '.'.term_type
-if (!exists("prefix")) prefix = './'
-if (!exists("plot_dir")) plot_dir = 'plots/'
-if (!exists("molecule")) molecule = 'Snowman-0.637556-1.0'
+load '~/make/gnuplot/collate_config.plot'
 
 set terminal term_type enhanced
 
-glob = system('echo '.molecule.' | sed s/-/-*-/')
-files = system("ls -d ".prefix.glob)
-
-temp(s) = system(sprintf("echo %s | cut -d- -f2",s))
 e = 2.71828
 
 set xlabel "Timestep"
@@ -19,7 +11,6 @@ set format x "10^{%L}"
 set format y "10^{%L}"
 set title molecule font ",14"
 set key outside right
-
 
 set logscale x
 set logscale y
