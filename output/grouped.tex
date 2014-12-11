@@ -1,0 +1,30 @@
+% vim:ft=tex:
+%
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{python}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{caption}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\title{
+    Ordering
+}
+
+\renewcommand{\thesubfigure}{\thefigure.\arabic{subfigure}}
+
+\newcommand{\numcols}{1}
+\newcommand{\mywidth}{\linewidth}
+
+\begin{document}
+\input{grouped.out}
+
+\end{document}

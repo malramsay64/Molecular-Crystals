@@ -1,0 +1,31 @@
+
+t_shape = $(word 1, $(subst -,$(space),$(1)) )
+t_rad = $(word 2, $(subst -,$(space),$(1)) )
+t_dist = $(word 3, $(subst -,$(space),$(1)) )
+t_theta = $(word 4, $(subst -,$(space),$(1)) )
+s_temp = $(word 2, $(subst -,$(space),$(1)) )
+
+shape := $(call t_shape, $(mol))
+radius := $(call t_rad, $(mol))
+dist := $(call t_dist, $(mol))
+theta := $(call t_theta, $(mol))
+save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(theta))), $(temp)) 
+save := $(addprefix $(strip $(shape))-, $(save1)) 
+
+dirs:=$(addprefix $(PREFIX)/,$(save))
+last_t:=$(word 1, $(temp))
+
+OPTIONS = --no-print-directory $(if $(filter $(MAKECMDGOALS), $(PRE)), -j 1)
+
+
+$(MAKECMDGOALS): $(save)
+
+$(save): always | $(dirs)
+	$(foreach t, $(temp), $(if $(filter $(call s_temp, $@), $t), $(eval prev_t=$(last_t)), $(eval last_t=$t)))
+	@$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
+
+$(dirs):
+	-mkdir $@
+
+.PHONY:always
+always:

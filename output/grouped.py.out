@@ -1,0 +1,1159 @@
+\section{Order Parameter}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.0/order/0000001400}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.0/order/0000001500}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.637556/order/0000001000}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.637556/order/0000001064}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.0/order/0000001400}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.0/order/0000001458}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.637556/order/0000001000}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.637556/order/0000001071}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.0/order/0000001400}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.0/order/0000001406}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.637556/order/0000001000}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.637556/order/0000001088}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.0/order/0000001400}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.0/order/0000001500}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.637556/order/0000001000}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.637556/order/0000001098}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.0/order/0000001400}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.0/order/0000001499}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.637556/order/0000001100}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.637556/order/0000001108}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.0/order/0000001400}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.0/order/0000001474}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.637556/order/0000001100}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.637556/order/0000001130}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.0/order/0000001500}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.0/order/0000001502}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.637556/order/0000001100}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.637556/order/0000001162}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.0/order/0000001500}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.0/order/0000001511}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.637556/order/0000001100}
+\caption{Pre minimisation}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.637556/order/0000001150}
+\caption{Post CG minimisation}
+\end{subfigure}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\section{Short Range Ordering}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.0/short_order}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.637556/short_order}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.0/short_order}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.637556/short_order}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.0/short_order}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.637556/short_order}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.0/short_order}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.637556/short_order}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.0/short_order}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.637556/short_order}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.0/short_order}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.637556/short_order}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.0/short_order}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.637556/short_order}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.0/short_order}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.637556/short_order}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\section{Mean Squared Displacement}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.0/msd}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.637556/msd}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.0/msd}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.637556/msd}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.0/msd}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.637556/msd}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.0/msd}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.637556/msd}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.0/msd}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.637556/msd}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.0/msd}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.637556/msd}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.0/msd}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.637556/msd}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.0/msd}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.637556/msd}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\section{Rotational Relaxation}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.0/rotation}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.637556/rotation}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.0/rotation}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.637556/rotation}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.0/rotation}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.637556/rotation}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.0/rotation}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.637556/rotation}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.0/rotation}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.637556/rotation}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.0/rotation}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.637556/rotation}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.0/rotation}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.637556/rotation}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.0/rotation}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.637556/rotation}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\section{Contact Number}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.0/histogram}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.637556/histogram}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.0/histogram}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.637556/histogram}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.0/histogram}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.637556/histogram}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.0/histogram}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.637556/histogram}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.0/histogram}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.637556/histogram}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.0/histogram}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.637556/histogram}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.0/histogram}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.637556/histogram}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.0/histogram}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.637556/histogram}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\section{Properties}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.0/props}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.2-0.637556-1.637556/props}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.0/props}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.4-0.637556-1.637556/props}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.0/props}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.6-0.637556-1.637556/props}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.0/props}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-0.8-0.637556-1.637556/props}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.0/props}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-1.0-0.637556-1.637556/props}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.0/props}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-2.0-0.637556-1.637556/props}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.0/props}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-3.0-0.637556-1.637556/props}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.0/props}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_crys/Snowman-5.0-0.637556-1.637556/props}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$}
+\end{figure}
+\end{minipage}
+\section{Data}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4701
+\\
+Total Energy &  1.0783
+\\
+Packing Fraction &  0.9597
+\\
+
+\\
+Diffusion Constant (parallel) &  0.0121223
+\\
+Average rotational change (parallel) &  26.1914
+\\
+Average dist moved (mean) &  0.02835
+\\
+Average bond fraction (parallel) &  0.9055
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4173
+\\
+Total Energy &  0.8556
+\\
+Packing Fraction &  0.9220
+\\
+
+\\
+Diffusion Constant (parallel) &  0.000102834
+\\
+Average rotational change (parallel) &  1.88663
+\\
+Average dist moved (mean) &  0.002765
+\\
+Average bond fraction (parallel) &  0.877
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4772
+\\
+Total Energy &  0.8245
+\\
+Packing Fraction &  0.9740
+\\
+
+\\
+Diffusion Constant (parallel) &  0.00378309
+\\
+Average rotational change (parallel) &  13.0194
+\\
+Average dist moved (mean) &  0.0175
+\\
+Average bond fraction (parallel) &  0.9001
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4173
+\\
+Total Energy &  0.8502
+\\
+Packing Fraction &  0.9219
+\\
+
+\\
+Diffusion Constant (parallel) &  0.000113426
+\\
+Average rotational change (parallel) &  1.69592
+\\
+Average dist moved (mean) &  0.00287
+\\
+Average bond fraction (parallel) &  0.8771
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4796
+\\
+Total Energy &  0.7204
+\\
+Packing Fraction &  0.9790
+\\
+
+\\
+Diffusion Constant (parallel) &  0.00234336
+\\
+Average rotational change (parallel) &  8.66205
+\\
+Average dist moved (mean) &  0.01281
+\\
+Average bond fraction (parallel) &  0.8979
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4167
+\\
+Total Energy &  0.8924
+\\
+Packing Fraction &  0.9205
+\\
+
+\\
+Diffusion Constant (parallel) &  0.000145885
+\\
+Average rotational change (parallel) &  1.92132
+\\
+Average dist moved (mean) &  0.003212
+\\
+Average bond fraction (parallel) &  0.8777
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4793
+\\
+Total Energy &  0.7495
+\\
+Packing Fraction &  0.9784
+\\
+
+\\
+Diffusion Constant (parallel) &  0.00165711
+\\
+Average rotational change (parallel) &  7.38638
+\\
+Average dist moved (mean) &  0.0114
+\\
+Average bond fraction (parallel) &  0.8977
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4159
+\\
+Total Energy &  0.9399
+\\
+Packing Fraction &  0.9188
+\\
+
+\\
+Diffusion Constant (parallel) &  0.00018911
+\\
+Average rotational change (parallel) &  2.11617
+\\
+Average dist moved (mean) &  0.003747
+\\
+Average bond fraction (parallel) &  0.8788
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4770
+\\
+Total Energy &  0.8387
+\\
+Packing Fraction &  0.9737
+\\
+
+\\
+Diffusion Constant (parallel) &  0.0021937
+\\
+Average rotational change (parallel) &  9.94849
+\\
+Average dist moved (mean) &  0.01399
+\\
+Average bond fraction (parallel) &  0.8994
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4147
+\\
+Total Energy &  0.9811
+\\
+Packing Fraction &  0.9162
+\\
+
+\\
+Diffusion Constant (parallel) &  0.00024794
+\\
+Average rotational change (parallel) &  2.42716
+\\
+Average dist moved (mean) &  0.004199
+\\
+Average bond fraction (parallel) &  0.8802
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4726
+\\
+Total Energy &  1.0080
+\\
+Packing Fraction &  0.9646
+\\
+
+\\
+Diffusion Constant (parallel) &  0.00470254
+\\
+Average rotational change (parallel) &  15.4537
+\\
+Average dist moved (mean) &  0.01987
+\\
+Average bond fraction (parallel) &  0.9039
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4130
+\\
+Total Energy &  1.0790
+\\
+Packing Fraction &  0.9125
+\\
+
+\\
+Diffusion Constant (parallel) &  0.000358822
+\\
+Average rotational change (parallel) &  2.78611
+\\
+Average dist moved (mean) &  0.005323
+\\
+Average bond fraction (parallel) &  0.8821
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4660
+\\
+Total Energy &  1.2579
+\\
+Packing Fraction &  0.9513
+\\
+
+\\
+Diffusion Constant (parallel) &  0.00884828
+\\
+Average rotational change (parallel) &  27.7476
+\\
+Average dist moved (mean) &  0.02576
+\\
+Average bond fraction (parallel) &  0.9112
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4107
+\\
+Total Energy &  1.1940
+\\
+Packing Fraction &  0.9073
+\\
+
+\\
+Diffusion Constant (parallel) &  0.000499651
+\\
+Average rotational change (parallel) &  3.24918
+\\
+Average dist moved (mean) &  0.006132
+\\
+Average bond fraction (parallel) &  0.8851
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4592
+\\
+Total Energy &  1.5541
+\\
+Packing Fraction &  0.9374
+\\
+
+\\
+Diffusion Constant (parallel) &  0.00531353
+\\
+Average rotational change (parallel) &  25.0191
+\\
+Average dist moved (mean) &  0.02088
+\\
+Average bond fraction (parallel) &  0.92
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+Density &  0.4082
+\\
+Total Energy &  1.3513
+\\
+Packing Fraction &  0.9018
+\\
+
+\\
+Diffusion Constant (parallel) &  0.000675091
+\\
+Average rotational change (parallel) &  3.73725
+\\
+Average dist moved (mean) &  0.007148
+\\
+Average bond fraction (parallel) &  0.8883
+\\
+Reference Frame &  Mol
+\\
+Threads &  1
+\\
+\end{tabular}
+\end{minipage}

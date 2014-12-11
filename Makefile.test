@@ -1,0 +1,4 @@
+test:
+	@echo $(radius)
+	@echo $(dist)
+	@echo $(theta)

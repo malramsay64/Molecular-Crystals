@@ -1,0 +1,209 @@
+
+t_shape = $(word 1, $(subst -,$(space),$(1)) )
+t_temp = $(word 2, $(subst -,$(space),$(1)) )
+t_rad = $(word 3, $(subst -,$(space),$(1)) )
+t_dist = $(word 4, $(subst -,$(space),$(1)) )
+t_theta = $(word 5, $(subst -,$(space),$(1)) )
+
+FOLDERS=images trj trj_contact stats order logs
+VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX)
+vars = shape radius dist theta temp
+all_plots = plot-order plot-frame plot-angle plot-dynamic plot-short-order
+PRESENT=grouped individual
+
+include $(my_dir)/plot.settings
+
+shape := $(call t_shape, $(mol))
+radius := $(call t_rad, $(mol))
+dist := $(call t_dist, $(mol))
+theta := $(call t_theta, $(mol))
+temp := $(call t_temp, $(mol))
+
+ifeq ($(shape), Snowman)
+    atoms := 2
+    t_crys := $(theta)
+else
+    atoms := 3
+endif
+
+ifneq ($(t_crys), )
+    CREATE_IN:=$(CRYS_IN)
+endif
+
+SAVE:=$(mol)
+
+# Filenames generated from properties
+ifeq ($(temp), $(prev_t))
+    last_restart=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(n_mol))).rt
+else
+    last_restart=$(subst $(space),-,$(strip $(prev_t) $(shape) $(radius) $(dist) $(theta) $(n_mol))).rt
+endif
+restart=$(subst $(space),-,$(strip $(temp) $(shape) $(radius) $(dist) $(theta) $(n_mol))).rt
+molecule=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta))).mol
+mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta))).dat
+base=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta)))
+
+all:
+	@echo $(VPATH)
+
+.PHONY:test
+test:
+	@echo $(shape) $(radius) $(dist) $(theta) $(temp) $(prev_t) 
+
+# Create data files for molecule if not already generated
+files: $(molecule) $(mol_settings)
+
+
+ifneq ($(t_crys), )
+$(molecule) $(mol_setings): | data
+	tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYTHON_LIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) 
+
+else
+$(molecule) $(mol_settings): | data 
+	$(PYTHON) $(PYTHON_LIB)/$(FILES) $(PREFIX) $(shape) $(radius) $(dist) $(theta) $(ratio) $(n_mol) $(density)
+endif
+
+
+$(last_restart): | $(FOLDERS) $(molecule) restarts
+	@echo Create $(last_restart)
+	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(CREATE_VARS) $(LAMMPS_FLAGS) < $(CREATE_IN) > $(LOG)
+
+#Equilibration run for molecule
+$(restart): | $(FOLDERS) $(last_restart)
+	@echo Equil $(restart) from $(last_restart)
+	@echo $(restart)
+	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(EQUIL_VARS) $(LAMMPS_FLAGS) < $(EQUIL_IN) > $(LOG)
+
+# Production run, has already been equilibrated
+lammps: $(LAMMPS_IN) | .make $(restart) 
+	@echo Production $(SAVE)
+	@echo $(restart)
+	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_VARS) $(LAMMPS_FLAGS) < $(LAMMPS_IN) > $(LOG)
+	@touch .make/lammps
+
+# Analysis of run, both static and dynamic quantities
+contact: lammps program #$(basename $(molecule)).csv  plot.settings
+	@echo analysis $(SAVE)/trj/out.lammpstrj
+	@$(BIN_PATH)/program -i trj/out.lammpstrj > contact.log
+	@touch .make/contact
+
+# Plots all the analysis
+plot: $(all_plots)
+	@touch .make/plot
+	
+plot-order: contact gnuplot.in | order
+	@for file in order/*; do\
+        gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot.in  &> $(LOG);\
+        gnuplot $(my_dir)/hist.in &> $(LOG);\
+    done
+	@touch .make/plot-order
+	@echo order
+
+plot-frame: contact frame.plot
+	@for file in trj_contact/*.dat; do\
+        gnuplot -e "filename='$${file%.*}'" $(my_dir)/frame.plot  &> $(LOG);\
+    done
+	@touch .make/plot-frame
+	@echo frame
+
+plot-angle: contact angle.plot
+	@for file in trj_contact/*.csv; do\
+        gnuplot -e "filename='$${file%.*}'" $(my_dir)/angle.plot  &> $(LOG);\
+    done
+	@touch .make/plot-angle
+	@echo angle
+
+plot-dynamic: contact dynamic.plot
+	@gnuplot $(my_dir)/dynamic.plot &> $(LOG)
+	@touch .make/plot-dynamic
+	@echo dynamic
+
+plot-short-order: contact short_order.plot
+	@gnuplot $(my_dir)/short_order.plot &> $(LOG)
+	@touch .make/plot-short-order
+	@echo short order
+
+$(basename $(molecule)).csv: $(molecule)
+	#$(BIN_PATH)/analysis -i ../data/$(basename $(molecule)).lammpstrj -o out -x box
+	#mv trj/frame.csv ../data/$(basename $(molecule)).csv
+
+density: contact
+	python $(PYTHON_LIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
+	@touch .make/density
+
+plot-props: lammps
+	python $(PYTHON_LIB)/makeplot.py logs/prod.log props.csv $(thermo)
+	gnuplot $(my_dir)/property.plot &> $(LOG)
+	@touch .make/plot-props
+	@echo props
+
+settings: $(VAR_MOLECULE) $(VAR_SYSTEM)
+	-rm -f settings
+	$(foreach v, $(vars), echo "$v = $($v)" >> settings;)
+
+present:$(PRESENT)
+
+$(PRESENT): plot density plot-props
+	@echo Collate Plots $(basename $(molecule))	
+	-rm -f mol_pres.tex
+	@python $(my_dir)/output/presentEach.py $(PREFIX)/$(SAVE) >> mol_pres.tex
+	@touch .make/present
+
+.make:
+	-mkdir .make
+
+data:
+	mkdir -p $(PREFIX)/data
+
+restarts:
+	mkdir -p $(PREFIX)/restarts 
+
+$(FOLDERS):
+	-$(MKDIR) -p $@
+
+.PHONY: clean-present
+clean-present:
+	-rm .make/present
+	-rm mol_pres.tex
+
+.PHONY: touch-lammps
+touch-lammps: | .make
+	touch .make/lammps
+
+.PHONY: clean
+clean:
+	-$(RM) -rf .make
+
+.PHONY: clean-all
+clean-all: clean-files clean-lammps clean clean-contact clean-plot clean-density clean-restart
+	
+.PHONY: clean-contact
+clean-contact:
+	rm -rf trj_contact stats order
+	rm -f .make/contact
+
+.PHONY: clean-density
+clean-density:
+	rm -f .make/density
+
+.PHONY: clean-plot
+clean-plot:
+	rm -f order/*.png
+	rm -f *.png
+	rm -f trj_contact/*.png
+	rm -f trj_contact/*.pdf
+	rm -f .make/plot*
+
+.PHONY: clean-files
+clean-files:
+	rm -rf ../data
+	rm -f .make/files
+
+.PHONY:clean-restart
+clean-restart:
+	rm -rf ../restarts
+
+.PHONY: clean-lammps
+clean-lammps:
+	$(foreach folder, $(FOLDERS), $(RM) -rf $(folder);)
+	$(RM) -f .make/lammps

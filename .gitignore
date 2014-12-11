@@ -1,0 +1,14 @@
+# No .o files
+*.o
+
+# Binary files
+bin/*
+
+# Xcode project
+*.xcodeproj
+
+# Other git files
+*/.git
+
+# DS_Store files
+.DS_Store
