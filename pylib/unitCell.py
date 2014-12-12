@@ -94,7 +94,7 @@ class cell:
         return s
 
     def __repr__(self):
-        xy = self.b/tan(self.theta)
+        xy = self.b*cos(self.theta)
         s = ""
         s += "0,0\n"
         s += "{a},0\n\n".format(a=self.a)
@@ -110,6 +110,12 @@ class cell:
                 #x = wrap(x,self.a)
                 s += "{x}, {y}, {size}\n".format(x=x,y=y,size=atom.getSize())
             s += "\n"
+        d = self.mol.dist
+        r = self.mol.radius
+        phi = self.mols[0].angle()
+        x,y = self.mols[0].atoms[0].getPos()
+        const = (1**2 + d**2 - r**2)/(2*d*1)
+        s += "{x}, {y}, 0.1\n".format(x=x+const*sin(phi),y=y+const*cos(phi))
         return s
 
     def rotation(self, pos, degree, n=1):

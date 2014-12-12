@@ -54,8 +54,6 @@ if __name__ == "__main__":
 
         phi = pi/2-phi
         conv = -(1**2 +d**2 - r**2)/(2*d)
-        x += conv/a*sin(phi)
-        #y += conv/b*sin(phi)
         
         
         create(a, b, theta, x, y, phi, s, crys, mols, path)
