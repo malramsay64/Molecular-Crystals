@@ -35,7 +35,7 @@ if __name__ == "__main__":
     mols = 2500
 
     if len(args) == 6 and len(line) == 7:
-        theta = pi- float(line[0])
+        theta = float(line[0])
         a = float(line[1])
         b = float(line[2])
         x = float(line[3])
@@ -51,23 +51,12 @@ if __name__ == "__main__":
 
         s = molecule.Snowman(r,d)
        
-        # Convert to my coordinates
-        ab = -b/tan(theta)
-        #a += ab
-        
-        #phi += theta
-        #phi = pi-phi
-        x = a*x + b*cos(theta)
-        y = b*sin(theta)
-       
 
+        phi = pi/2-phi
         conv = -(1**2 +d**2 - r**2)/(2*d)
-        x += conv*cos(phi)
-        y += conv*sin(phi)
+        x += conv/a*sin(phi)
+        #y += conv/b*sin(phi)
         
-        #phi += pi/2
-        #phi = phi*180/pi
-        #b *= sin(theta)
-        #ab = b*sin(theta)
-        create(a, b, theta, x/a, y/b, phi, s, crys, mols, path)
+        
+        create(a, b, theta, x, y, phi, s, crys, mols, path)
          

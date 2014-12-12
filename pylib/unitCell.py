@@ -23,17 +23,18 @@ class cell:
         self.crys = ""
 
     def addParticle(self,x,y,phi):
-        x *= self.a
-        y *= self.b
-        xy = abs(y/tan(self.theta))
-        x += xy
+        x *= self.a + y*self.b*cos(self.theta)
+        y *= self.b*sin(self.theta)
         m = copy(self.mol)
-        m.setAngle(phi)
+        m.setAngle(phi*180/pi)
         m.setPos(x,y)
         self.mols.append(m)
 
     def addMol(self, x, y, phi):
         self.addParticle(x,y,phi)
+
+    def getHeight(self):
+        return self.b*sin(self.theta)
 
     def getMol(self):
         return self.mol
@@ -98,11 +99,11 @@ class cell:
         s += "0,0\n"
         s += "{a},0\n\n".format(a=self.a)
         s += "0,0\n"
-        s += "{xy},{b}\n\n".format(xy=xy, b=self.b)
-        s += "{xy},{b}\n".format(xy=xy, b=self.b)
-        s += "{a},{b}\n\n".format(a=self.a+xy, b=self.b)
+        s += "{xy},{b}\n\n".format(xy=xy, b=self.getHeight())
+        s += "{xy},{b}\n".format(xy=xy, b=self.getHeight())
+        s += "{a},{b}\n\n".format(a=self.a+xy, b=self.getHeight())
         s += "{a},0\n".format(a=self.a)
-        s += "{a},{b}\n\n".format(a=self.a+xy, b=self.b)
+        s += "{a},{b}\n\n".format(a=self.a+xy, b=self.getHeight())
         for mol in self.mols:
             for atom in mol:
                 x,y = atom.getPos()
@@ -142,8 +143,8 @@ class p2(cell):
         self.mol = mol
         self.mols = []
         self.addMol(x,y,phi)
-        self.addMol(x,y,phi)
-        self.rotation(1,2,1)
+        #self.addMol(x,y,phi)
+        #self.rotation(1,2,1)
         self.crys = "p2"
 
 def lammpsFile(cell,path='.'):
