@@ -25,6 +25,11 @@ class cell:
     def addParticle(self,x,y,phi):
         x *= self.a + y*self.b*cos(self.theta)
         y *= self.b*sin(self.theta)
+        d = self.mol.dist
+        r = self.mol.radius
+        const = -(1**2 + d**2 - r**2)/(2*d*1)
+        x=x+const*cos(phi-pi/2)
+        y=y+const*sin(phi-pi/2)
         m = copy(self.mol)
         m.setAngle(phi*180/pi)
         m.setPos(x,y)
@@ -110,12 +115,15 @@ class cell:
                 #x = wrap(x,self.a)
                 s += "{x}, {y}, {size}\n".format(x=x,y=y,size=atom.getSize())
             s += "\n"
-        d = self.mol.dist
-        r = self.mol.radius
-        phi = self.mols[0].angle()
-        x,y = self.mols[0].atoms[0].getPos()
-        const = (1**2 + d**2 - r**2)/(2*d*1)
-        s += "{x}, {y}, 0.1\n".format(x=x+const*sin(phi),y=y+const*cos(phi))
+        
+        for mol in self.mols:
+            d = mol.dist
+            r = mol.radius
+            phi = mol.angle()
+            phi *= pi/180
+            x,y = mol.atoms[0].getPos()
+            const = (1**2 + d**2 - r**2)/(2*d*1)
+            s += "{x}, {y}, 0.1\n\n".format(x=x-const*cos(phi-pi/2),y=y+const*sin(phi-pi/2))
         return s
 
     def rotation(self, pos, degree, n=1):
@@ -149,8 +157,8 @@ class p2(cell):
         self.mol = mol
         self.mols = []
         self.addMol(x,y,phi)
-        #self.addMol(x,y,phi)
-        #self.rotation(1,2,1)
+        self.addMol(x,y,phi)
+        self.rotation(1,2,1)
         self.crys = "p2"
 
 def lammpsFile(cell,path='.'):
