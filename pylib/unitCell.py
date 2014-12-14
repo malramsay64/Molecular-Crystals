@@ -23,6 +23,7 @@ class cell:
         self.crys = ""
 
     def addParticle(self,x,y,phi):
+        #x *= self.a
         x *= self.a + y*self.b*cos(self.theta)
         y *= self.b*sin(self.theta)
         d = self.mol.dist
@@ -157,8 +158,8 @@ class p2(cell):
         self.mol = mol
         self.mols = []
         self.addMol(x,y,phi)
-        self.addMol(x,y,phi)
-        self.rotation(1,2,1)
+        self.addMol(1-x,1-y,phi+pi)
+        #self.rotation(1,2,1)
         self.crys = "p2"
 
 def lammpsFile(cell,path='.'):
