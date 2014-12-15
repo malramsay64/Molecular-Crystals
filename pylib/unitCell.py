@@ -23,7 +23,8 @@ class cell:
         self.crys = ""
 
     def addParticle(self,x,y,phi):
-        print x,y
+        x = x % 1
+        y = y % 1
         x = x*self.a + y*self.b*cos(self.theta)
         y = y*self.b*sin(self.theta)
         d = self.mol.dist
@@ -135,8 +136,8 @@ class p2gg(cell):
         self.mols = []
         self.addMol(x,y,phi)
         self.addMol(1-x,1-y,phi+pi)
-        self.addMol(0.5-x, 0.5-y, phi)
-        #self.addMol(0.5+x, 0.5-y, phi+180)
+        self.addMol(0.5+x, 0.5+1-y, pi-phi)
+        self.addMol(0.5-x, y-0.5, 2*pi-phi)
         self.crys = "p2gg"
 
 class p2(cell):

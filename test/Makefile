@@ -1,17 +1,25 @@
 
-
 N=36
-shape=Snowman-0.637556-1.637556-p2
+mol=Snowman-0.637556-1.0-p2
+#mol=Snowman-0.637556-1.637556-p2
+
+empty=
+space=$(empty) $(empty)
+shape = $(word 1, $(subst -,$(space),$(1)) )
+rad = $(word 2, $(subst -,$(space),$(1)) )
+dist = $(word 3, $(subst -,$(space),$(1)) )
+crys = $(word 4, $(subst -,$(space),$(1)) )
+
 
 all:
-	tail -2 ../crystals/$(shape).svg | head -1 | python ../pylib/createCells.py . 0 0.637556 1.637556 p2 > crys.dat
+	tail -2 ../crystals/$(mol).svg | head -1 | python ../pylib/createCells.py . 0 $(call rad, $(mol)) $(call dist, $(mol)) $(call crys, $(mol)) > crys.dat
 	gnuplot ../crys.plot
 
 grid:
-	tail -2 ../crystals/$(shape).svg | head -1 | python ../pylib/createCells.py . $N 0.637556 1 p2 > crys.dat
+	tail -2 ../crystals/$(mol).svg | head -1 | python ../pylib/createCells.py . $N $(call rad, $(mol)) $(call dist, $(mol)) $(call crys, $(mol)) > crys.dat
 	gnuplot ../crys.plot
 
 test:
-	tail -2 ../crystals/$(shape).svg | head -1 | python ../pylib/test.py . 0 0.637556 1 p2 > crys.dat
+	tail -2 ../crystals/$(mol).svg | head -1 | python ../pylib/test.py . $N $(call rad, $(mol)) $(call dist, $(mol)) $(call crys, $(mol)) > crys.dat
 	gnuplot ../crys.plot
 
