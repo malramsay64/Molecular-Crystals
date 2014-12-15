@@ -23,14 +23,11 @@ class cell:
         self.crys = ""
 
     def addParticle(self,x,y,phi):
-        #x *= self.a
-        x *= self.a + y*self.b*cos(self.theta)
-        y *= self.b*sin(self.theta)
+        print x,y
+        x = x*self.a + y*self.b*cos(self.theta)
+        y = y*self.b*sin(self.theta)
         d = self.mol.dist
         r = self.mol.radius
-        const = -(1**2 + d**2 - r**2)/(2*d*1)
-        x=x+const*cos(phi-pi/2)
-        y=y+const*sin(phi-pi/2)
         m = copy(self.mol)
         m.setAngle(phi*180/pi)
         m.setPos(x,y)
@@ -71,16 +68,12 @@ class cell:
             for j in xrange(ny):
                 for mol in base:
                     mnew = copy(mol)
-                    if theta != 0:
-                        mnew.translate(i*a+j*b*tan(pi/2-theta), j*b)
-                    else:
-                        mnew.translate(i*a, j*b)
+                    mnew.translate(i*a - j*b*sin(theta-pi/2), j*self.getHeight())
                     new.append(mnew)
 
         self.a = nx*a
         self.b = ny*b
         self.mols = new
-
 
     def __str__(self):
         mid = 1
@@ -89,8 +82,6 @@ class cell:
         for mol in self.getMols():
             for atom in mol:
                 x,y = atom.getPos()
-                # Wrap x coordinates
-                #x = wrap(x,self.a)
                 s += "{aid} {mid} {tid} {taid} {atype} {x} {y} {z}\n"\
                         .format(aid=aid, mid=mid, tid=1,\
                         taid=atom.getType(), atype=atom.getType(),\
@@ -113,7 +104,6 @@ class cell:
         for mol in self.mols:
             for atom in mol:
                 x,y = atom.getPos()
-                #x = wrap(x,self.a)
                 s += "{x}, {y}, {size}\n".format(x=x,y=y,size=atom.getSize())
             s += "\n"
         
@@ -129,7 +119,7 @@ class cell:
 
     def rotation(self, pos, degree, n=1):
         x,y = self.mols[pos].atoms[0].getPos()
-        xy = self.b/tan(self.theta)
+        xy = self.b*sin(self.theta)
         x = self.a - x + xy
         y = self.b - y
         self.mols[pos].rotate((360/degree)*n)
@@ -144,10 +134,9 @@ class p2gg(cell):
         self.mol = mol
         self.mols = []
         self.addMol(x,y,phi)
-        self.addMol(x,y,phi)
-        self.rotation(1,2,1)
-        self.addMol(0.5-x, 0.5+y, phi)
-        self.addMol(0.5+x, 0.5-y, phi+180)
+        self.addMol(1-x,1-y,phi+pi)
+        self.addMol(0.5-x, 0.5-y, phi)
+        #self.addMol(0.5+x, 0.5-y, phi+180)
         self.crys = "p2gg"
 
 class p2(cell):
