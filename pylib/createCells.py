@@ -51,21 +51,22 @@ if __name__ == "__main__":
 
         s = molecule.Snowman(r,d)
        
-        phi = pi-(phi+pi/2)
-        
+        phi = 2*pi - phi
+
         # convert to xy coordinates
         x = x*a + y*b*cos(theta)
         y = y*b*sin(theta)
         
         # Move center of particle
         const = (1**2 + d**2 - r**2)/(2*d*1)
-        x += -(const)*cos(phi-pi/2)
-        y += -(const)*sin(phi-pi/2)
+        x += -(const)*cos(phi)
+        y += -(const)*sin(phi)
         
         # Convert back to fractional coordinates
         x = x/a - y*(cos(theta)/(a*sin(theta)))
         y = y/(b*sin(theta))
         
-
+        #phi += pi/2 
+        phi = pi/2+phi
         create(a, b, theta, x, y, phi, s, crys, mols, path)
          

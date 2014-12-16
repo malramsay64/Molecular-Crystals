@@ -41,10 +41,10 @@ class cell:
         d = 1.0
         r = 0.7
         const = (1**2 + d**2 - r**2)/(2*d*1)
-        x = x - const*cos(self.phi)
-        y = y - const*sin(self.phi)
-        xi = xi - const*cos(self.phi+pi)
-        yi = yi - const*sin(self.phi+pi)
+        #x = x - const*cos(self.phi)
+        #y = y - const*sin(self.phi)
+        #xi = xi - const*cos(self.phi+pi)
+        #yi = yi - const*sin(self.phi+pi)
         #xi = a+b*cos(theta)-x
         #yi = b*sin(theta)-y
         
@@ -68,6 +68,8 @@ c = cell(3.9,3.183253,0.926517,0.205,0.1675,2*pi-2.5,4,4)
 
 # d =1 r = 0.637556
 c = cell(3.234679,2.675387,1.674524,0.772394,0.506326,2*pi-1.290112,4,4)
+
+c = cell(4.152241,2.000398,1.570796,0.864893,0.704416,0.618550,1,1)
 
 #c = cell(4,4,pi/3,0.2,0.2,0,4,4)
 

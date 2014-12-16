@@ -1,8 +1,8 @@
 
 N=36
 mol=Snowman-0.637556-1.0-p2gg
-#mol=Snowman-0.637556-1.637556-p2gg
-
+mol=Snowman-0.637556-1.637556-p2gg
+mol=Snowman-0.637556-1.0-pg
 empty=
 space=$(empty) $(empty)
 shape = $(word 1, $(subst -,$(space),$(1)) )

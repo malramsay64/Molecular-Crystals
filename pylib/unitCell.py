@@ -152,6 +152,18 @@ class p2(cell):
         #self.rotation(1,2,1)
         self.crys = "p2"
 
+class pg(cell):
+    def __init__(self, a, b, theta, x, y, phi, mol):
+        self.a = a
+        self.b = b
+        self.theta = theta
+        self.mol = mol
+        self.mols = []
+        self.addMol(x,y,pi-phi)
+        self.addMol(1-x,0.5+y,pi+phi)
+        self.crys = "pg"
+
+
 def lammpsFile(cell,path='.'):
     mol = cell.getMol()
     a,b,theta = cell.getShape()
