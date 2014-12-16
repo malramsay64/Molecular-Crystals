@@ -1,7 +1,7 @@
-set terminal png enhanced size 800,800
+set terminal png enhanced size 1600,1600
 
-set xrange [-1:]
-set yrange [-1:]
+set xrange [-0.5:]
+set yrange [-0.5:]
 
 set size ratio -1
 

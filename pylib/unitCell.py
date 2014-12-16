@@ -69,7 +69,7 @@ class cell:
             for j in xrange(ny):
                 for mol in base:
                     mnew = copy(mol)
-                    mnew.translate(i*a - j*b*sin(theta-pi/2), j*self.getHeight())
+                    mnew.translate(i*a + j*b*cos(theta), j*self.getHeight())
                     new.append(mnew)
 
         self.a = nx*a

@@ -63,7 +63,7 @@ if __name__ == "__main__":
         y += -(const)*sin(phi-pi/2)
         
         # Convert back to fractional coordinates
-        x = x/a - y*cos(theta)/(a*sin(theta))
+        x = x/a - y*(cos(theta)/(a*sin(theta)))
         y = y/(b*sin(theta))
         
 
