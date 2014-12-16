@@ -24,6 +24,7 @@ bin/*
 *.pdf
 *.dat
 *.csv
+*.out
 
 # LaTeX output
 output/.output

@@ -25,7 +25,6 @@ t_rad = $(word 2, $(subst -,$(space),$(1)) )
 t_dist = $(word 3, $(subst -,$(space),$(1)) )
 t_theta = $(word 4, $(subst -,$(space),$(1)) )
 
-
 GOAL=Makefile.run
 LOOP=Makefile.loop
 export
