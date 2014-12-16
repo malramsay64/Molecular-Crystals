@@ -14,4 +14,19 @@ bin/*
 .DS_Store
 
 # Python comiled files
-.pyc
+*.pyc
+
+# tmp files
+*.swp
+
+# Ouput files
+*.png
+*.pdf
+*.dat
+*.csv
+
+# LaTeX output
+output/.output
+
+# Include all in test
+!test/*

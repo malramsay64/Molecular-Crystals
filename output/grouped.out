@@ -1,6 +1,13 @@
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \centering
+\includegraphics[width=\mywidth]{{plots/Snowman-0.637556-1.0-pg}.png}
+\caption{Temperature Dependence}
+\end{figure}
+\end{minipage}
+\begin{minipage}{\textwidth}
+\begin{figure}[H]
+\centering
 \includegraphics[width=\mywidth]{{plots/Snowman-0.637556-1.637556-p2gg}.png}
 \caption{Temperature Dependence}
 \end{figure}
@@ -9,590 +16,366 @@
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/order/0000400071}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/order/0000400105}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/order/0000400075}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/order/0000400146}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.3$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/order/0000400115}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/order/0000400146}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/order/0000400119}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/order/0000400200}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/order/0000400169}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/order/0000400250}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 1.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/order/0000400122}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/order/0000400223}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 1.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/order/0000400129}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/order/0000400480}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/order/0000400121}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/order/0000400501}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 1.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/order/0000400123}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/order/0000400504}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/order/0000400111}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/order/0000400504}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 2.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/order/0000400124}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/order/0000400505}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.9$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/order/0000400122}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/order/0000400127}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/order/0000400465}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/order/0000400000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/order/0000400000}
 \caption{Pre minimisation}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/order/0000400125}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/order/0000400492}
 \caption{Post CG minimisation}
 \end{subfigure}
-\caption{Snowman: Temp$ = 3.05$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/order/0000400000}
-\caption{Pre minimisation}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/order/0000400251}
-\caption{Post CG minimisation}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.1$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/order/0000400000}
-\caption{Pre minimisation}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/order/0000400214}
-\caption{Post CG minimisation}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.15$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/order/0000400000}
-\caption{Pre minimisation}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/order/0000400503}
-\caption{Post CG minimisation}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/order/0000400000}
-\caption{Pre minimisation}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/order/0000400506}
-\caption{Post CG minimisation}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/order/0000400000}
-\caption{Pre minimisation}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/order/0000400507}
-\caption{Post CG minimisation}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/order/0000400000}
-\caption{Pre minimisation}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/order/0000400506}
-\caption{Post CG minimisation}
-\end{subfigure}
-\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/order/0000400000}
-\caption{Pre minimisation}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/order/0000400509}
-\caption{Post CG minimisation}
-\end{subfigure}
-\caption{Snowman: Temp$ = 4.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/order/0000400000}
-\caption{Pre minimisation}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/order/0000400506}
-\caption{Post CG minimisation}
-\end{subfigure}
-\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \section{Configuration}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/trj_contact/0000400071}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/trj_contact/0000400105}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/trj_contact/0000400075}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/trj_contact/0000400146}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.3$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/trj_contact/0000400115}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/trj_contact/0000400146}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/trj_contact/0000400119}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/trj_contact/0000400200}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/trj_contact/0000400169}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/trj_contact/0000400250}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 1.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/trj_contact/0000400122}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/trj_contact/0000400223}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 1.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/trj_contact/0000400129}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/trj_contact/0000400480}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/trj_contact/0000400121}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/trj_contact/0000400501}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 1.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/trj_contact/0000400123}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/trj_contact/0000400504}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/trj_contact/0000400111}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/trj_contact/0000400504}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 2.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/trj_contact/0000400124}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/trj_contact/0000400505}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.9$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/trj_contact/0000400122}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/trj_contact/0000400127}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/trj_contact/0000400465}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/trj_contact/0000000000}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/trj_contact/0000000000}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/trj_contact/0000400125}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/trj_contact/0000400492}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 3.05$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/trj_contact/0000000000}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/trj_contact/0000400251}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.1$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/trj_contact/0000000000}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/trj_contact/0000400214}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.15$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/trj_contact/0000000000}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/trj_contact/0000400503}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/trj_contact/0000000000}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/trj_contact/0000400506}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/trj_contact/0000000000}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/trj_contact/0000400507}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/trj_contact/0000000000}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/trj_contact/0000400506}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/trj_contact/0000000000}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/trj_contact/0000400509}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 4.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/trj_contact/0000000000}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/trj_contact/0000400506}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \section{Angle Distribution}
@@ -600,1055 +383,655 @@
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/trj_contact/0000400071-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/trj_contact/0000400105-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/trj_contact/0000400075-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/trj_contact/0000400146-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.3$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/trj_contact/0000400115-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/trj_contact/0000400146-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/trj_contact/0000400119-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/trj_contact/0000400200-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/trj_contact/0000400169-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/trj_contact/0000400250-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 1.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/trj_contact/0000400122-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/trj_contact/0000400223-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 1.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/trj_contact/0000400129-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/trj_contact/0000400480-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/trj_contact/0000400121-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/trj_contact/0000400501-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 1.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/trj_contact/0000400123-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/trj_contact/0000400504-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/trj_contact/0000400111-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/trj_contact/0000400504-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 2.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/trj_contact/0000400124-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/trj_contact/0000400505-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 2.9$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/trj_contact/0000400122-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/trj_contact/0000400127-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/trj_contact/0000400465-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\textwidth}
 \begin{figure}[H]
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/trj_contact/0000000000-angles}
 \caption{Initial Configuration}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/trj_contact/0000400125-angles}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/trj_contact/0000400492-angles}
 \caption{Final Configuration}
 \end{subfigure}
-\caption{Snowman: Temp$ = 3.05$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/trj_contact/0000400251-angles}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.1$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/trj_contact/0000400214-angles}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.15$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/trj_contact/0000400503-angles}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/trj_contact/0000400506-angles}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/trj_contact/0000400507-angles}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 3.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/trj_contact/0000400506-angles}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/trj_contact/0000400509-angles}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 4.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{\textwidth}
-\begin{figure}[H]
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/trj_contact/0000000000-angles}
-\caption{Initial Configuration}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/trj_contact/0000400506-angles}
-\caption{Final Configuration}
-\end{subfigure}
-\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \section{Short Range Ordering}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 0.3$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 1.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 1.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 2.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 1.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 2.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 2.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 2.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 2.9$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 3.05$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 3.1$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 3.15$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 3.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 3.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 3.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 4.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/short_order}
-\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/short_order}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \section{Mean Squared Displacement}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 0.3$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 1.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 1.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 2.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 1.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 2.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 2.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 2.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 2.9$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 3.05$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 3.1$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 3.15$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 3.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 3.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 3.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 4.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/msd}
-\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/msd}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \section{Rotational Relaxation}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 0.3$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 1.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 1.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 2.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 1.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 2.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 2.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 2.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 2.9$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 3.05$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 3.1$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 3.15$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 3.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 3.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 3.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 4.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/rotation}
-\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/rotation}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \section{Contact Number}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 0.3$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 1.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 1.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 2.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 1.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 2.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 2.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 2.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 2.9$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 3.05$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 3.1$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 3.15$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 3.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 3.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 3.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 4.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/histogram}
-\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/histogram}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \section{Properties}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.2-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.2-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.5-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.3-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 0.3$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-0.8-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.4-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.0-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.5-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.3-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 1.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.6-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-1.6-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 1.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-0.8-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.0-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.0-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.3-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 2.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-1.5-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 1.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.6-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 2.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.0-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.8-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 2.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-2.5-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 2.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-2.9-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 2.9$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-3.0-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.0-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-4.0-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.05-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 3.05$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.1-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 3.1$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.15-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 3.15$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.2-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 3.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.3-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 3.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-3.5-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 3.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.0-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-4.5-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 4.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{figure}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_rp/Snowman-5.0-0.637556-1.637556-p2gg/props}
-\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\includegraphics[width=\mywidth]{/Users/malcolm/scratch/make_d_1.0_pg/Snowman-5.0-0.637556-1.0-pg/props}
+\caption{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{figure}
 \end{minipage}
 \section{Data}
@@ -1664,13 +1047,13 @@ C4 Relaxation &  0
 \\
 Diffusion Constant &  0.0001
 \\
-Average bond fraction &  0.9940
+Average bond fraction &  0.9378
 \\
-Local Order &  1.0000
+Local Order &  0.3722
 \\
-Global Order &  1.0000
+Global Order &  0.5291
 \\
-Circle Order &  1.0000
+Circle Order &  0.0000
 \\
 contacts &  1.0000
 \\
@@ -1678,14 +1061,66 @@ neighbours &  0.6000
 \\
 pairing &  0.1667
 \\
-Density &  0.4183
+\end{tabular}
+\captionof{table}{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.0$, pg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+C1 Relaxation &  0
 \\
-Total Energy &  0.7788
+C2 Relaxation &  0
 \\
-Packing Fraction &  0.9241
+C3 Relaxation &  0
+\\
+C4 Relaxation &  0
+\\
+Diffusion Constant &  0.0004
+\\
+Average bond fraction &  0.9390
+\\
+Local Order &  0.3717
+\\
+Global Order &  0.5287
+\\
+Circle Order &  0.0000
+\\
+contacts &  1.0000
+\\
+neighbours &  0.6000
+\\
+pairing &  0.1667
 \\
 \end{tabular}
-\captionof{table}{Snowman: Temp$ = 0.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\captionof{table}{Snowman: Temp$ = 0.3$, $r = 0.637556$, $d = 1.0$, pg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+C1 Relaxation &  0
+\\
+C2 Relaxation &  0
+\\
+C3 Relaxation &  0
+\\
+C4 Relaxation &  0
+\\
+Diffusion Constant &  0.0007
+\\
+Average bond fraction &  0.9398
+\\
+Local Order &  0.3720
+\\
+Global Order &  0.5290
+\\
+Circle Order &  0.0000
+\\
+contacts &  1.0000
+\\
+neighbours &  0.6000
+\\
+pairing &  0.1667
+\\
+\end{tabular}
+\captionof{table}{Snowman: Temp$ = 0.4$, $r = 0.637556$, $d = 1.0$, pg}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{tabular}{L{4cm} S[table-format=3.4e2]}
@@ -1699,28 +1134,22 @@ C4 Relaxation &  0
 \\
 Diffusion Constant &  0.0012
 \\
-Average bond fraction &  0.9968
+Average bond fraction &  0.9406
 \\
-Local Order &  1.0000
+Local Order &  0.3719
 \\
-Global Order &  1.0000
+Global Order &  0.5289
 \\
-Circle Order &  0.9821
+Circle Order &  0.0000
 \\
-contacts &  0.9000
+contacts &  1.0000
 \\
-neighbours &  0.5000
+neighbours &  0.6000
 \\
-pairing &  0.1671
-\\
-Density &  0.4156
-\\
-Total Energy &  0.8923
-\\
-Packing Fraction &  0.9183
+pairing &  0.1667
 \\
 \end{tabular}
-\captionof{table}{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\captionof{table}{Snowman: Temp$ = 0.5$, $r = 0.637556$, $d = 1.0$, pg}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{tabular}{L{4cm} S[table-format=3.4e2]}
@@ -1734,48 +1163,13 @@ C4 Relaxation &  0
 \\
 Diffusion Constant &  0.0014
 \\
-Average bond fraction &  0.9998
+Average bond fraction &  0.9417
 \\
-Local Order &  1.0000
+Local Order &  0.3724
 \\
-Global Order &  1.0000
+Global Order &  0.5293
 \\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.4136
-\\
-Total Energy &  1.0429
-\\
-Packing Fraction &  0.9137
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0011
-\\
-Average bond fraction &  1.0020
-\\
-Local Order &  1.0000
-\\
-Global Order &  1.0000
-\\
-Circle Order &  1.0000
+Circle Order &  0.0000
 \\
 contacts &  1.0000
 \\
@@ -1783,14 +1177,14 @@ neighbours &  0.6000
 \\
 pairing &  0.1667
 \\
-Density &  0.4117
+Density &  0.4799
 \\
-Total Energy &  1.0941
+Total Energy &  0.6438
 \\
-Packing Fraction &  0.9096
+Packing Fraction &  0.9795
 \\
 \end{tabular}
-\captionof{table}{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\captionof{table}{Snowman: Temp$ = 0.6$, $r = 0.637556$, $d = 1.0$, pg}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{tabular}{L{4cm} S[table-format=3.4e2]}
@@ -1804,343 +1198,28 @@ C4 Relaxation &  0
 \\
 Diffusion Constant &  0.0019
 \\
-Average bond fraction &  1.0049
+Average bond fraction &  0.9436
 \\
-Local Order &  1.0000
+Local Order &  0.3734
 \\
-Global Order &  1.0000
+Global Order &  0.5282
 \\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.4095
-\\
-Total Energy &  1.2753
-\\
-Packing Fraction &  0.9046
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 1.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0028
-\\
-Average bond fraction &  1.0090
-\\
-Local Order &  1.0000
-\\
-Global Order &  1.0000
-\\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.4061
-\\
-Total Energy &  1.4028
-\\
-Packing Fraction &  0.8973
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 1.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0027
-\\
-Average bond fraction &  1.0132
-\\
-Local Order &  1.0000
-\\
-Global Order &  1.0000
-\\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.4028
-\\
-Total Energy &  1.5919
-\\
-Packing Fraction &  0.8899
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0054
-\\
-Average bond fraction &  1.0165
-\\
-Local Order &  1.0000
-\\
-Global Order &  1.0000
-\\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.4003
-\\
-Total Energy &  1.8201
-\\
-Packing Fraction &  0.8843
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 2.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0050
-\\
-Average bond fraction &  1.0211
-\\
-Local Order &  1.0000
-\\
-Global Order &  1.0000
-\\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.3968
-\\
-Total Energy &  2.0314
-\\
-Packing Fraction &  0.8767
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 2.6$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0054
-\\
-Average bond fraction &  1.0235
-\\
-Local Order &  1.0000
-\\
-Global Order &  1.0000
-\\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.3950
-\\
-Total Energy &  2.0312
-\\
-Packing Fraction &  0.8726
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 2.8$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0058
-\\
-Average bond fraction &  1.0244
-\\
-Local Order &  1.0000
-\\
-Global Order &  1.0000
-\\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.3942
-\\
-Total Energy &  2.1981
-\\
-Packing Fraction &  0.8710
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 2.9$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0079
-\\
-Average bond fraction &  1.0266
-\\
-Local Order &  1.0000
-\\
-Global Order &  1.0000
-\\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.3926
-\\
-Total Energy &  2.2137
-\\
-Packing Fraction &  0.8673
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0065
-\\
-Average bond fraction &  1.0270
-\\
-Local Order &  1.0000
-\\
-Global Order &  1.0000
-\\
-Circle Order &  1.0000
-\\
-contacts &  1.0000
-\\
-neighbours &  0.6000
-\\
-pairing &  0.1667
-\\
-Density &  0.3923
-\\
-Total Energy &  2.3006
-\\
-Packing Fraction &  0.8667
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 3.05$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.0133
-\\
-Average bond fraction &  1.0251
-\\
-Local Order &  0.9936
-\\
-Global Order &  0.9916
-\\
-Circle Order &  0.9613
+Circle Order &  0.0031
 \\
 contacts &  0.9000
 \\
-neighbours &  0.5000
+neighbours &  0.6000
 \\
-pairing &  0.1667
+pairing &  0.1664
 \\
-Density &  0.3931
+Density &  0.4778
 \\
-Total Energy &  2.3959
+Total Energy &  0.7627
 \\
-Packing Fraction &  0.8684
+Packing Fraction &  0.9753
 \\
 \end{tabular}
-\captionof{table}{Snowman: Temp$ = 3.1$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\captionof{table}{Snowman: Temp$ = 0.8$, $r = 0.637556$, $d = 1.0$, pg}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{tabular}{L{4cm} S[table-format=3.4e2]}
@@ -2150,240 +1229,234 @@ C2 Relaxation &  0
 \\
 C3 Relaxation &  0
 \\
-C4 Relaxation &  0
+C4 Relaxation &  0.659209
 \\
-Diffusion Constant &  0.0432
+Diffusion Constant &  0.0521
 \\
-Average bond fraction &  1.0263
+Average bond fraction &  0.9411
 \\
-Local Order &  0.9595
-\\
-Global Order &  0.9360
-\\
-Circle Order &  0.9345
-\\
-contacts &  0.9000
-\\
-neighbours &  0.5000
-\\
-pairing &  0.1658
-\\
-Density &  0.3918
-\\
-Total Energy &  2.2756
-\\
-Packing Fraction &  0.8657
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 3.15$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0
-\\
-C2 Relaxation &  0
-\\
-C3 Relaxation &  0
-\\
-C4 Relaxation &  0
-\\
-Diffusion Constant &  0.7415
-\\
-Average bond fraction &  1.0264
-\\
-Local Order &  0.7181
-\\
-Global Order &  0.5946
-\\
-Circle Order &  0.4924
-\\
-contacts &  0.9000
-\\
-neighbours &  0.5000
-\\
-pairing &  0.1597
-\\
-Density &  0.3821
-\\
-Total Energy &  2.5328
-\\
-Packing Fraction &  0.8443
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 3.2$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0.319596
-\\
-C2 Relaxation &  0.409482
-\\
-C3 Relaxation &  0.329583
-\\
-C4 Relaxation &  0.329583
-\\
-Diffusion Constant &  0.8117
-\\
-Average bond fraction &  1.0277
-\\
-Local Order &  0.5279
-\\
-Global Order &  0.5002
-\\
-Circle Order &  0.2057
-\\
-contacts &  0.8000
-\\
-neighbours &  0.5000
-\\
-pairing &  0.1545
-\\
-Density &  0.3765
-\\
-Total Energy &  2.5979
-\\
-Packing Fraction &  0.8318
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 3.3$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0.33957
-\\
-C2 Relaxation &  0.429456
-\\
-C3 Relaxation &  0.309608
-\\
-C4 Relaxation &  0.249684
-\\
-Diffusion Constant &  0.8029
-\\
-Average bond fraction &  1.0295
-\\
-Local Order &  0.5195
-\\
-Global Order &  0.5009
-\\
-Circle Order &  0.1690
-\\
-contacts &  0.8000
-\\
-neighbours &  0.5000
-\\
-pairing &  0.1540
-\\
-Density &  0.3739
-\\
-Total Energy &  2.7445
-\\
-Packing Fraction &  0.8260
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 3.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0.169785
-\\
-C2 Relaxation &  0.0798989
-\\
-C3 Relaxation &  0.169785
-\\
-C4 Relaxation &  0.0599242
-\\
-Diffusion Constant &  0.8316
-\\
-Average bond fraction &  1.0349
-\\
-Local Order &  0.5229
-\\
-Global Order &  0.5000
-\\
-Circle Order &  0.1524
-\\
-contacts &  0.8000
-\\
-neighbours &  0.5000
-\\
-pairing &  0.1525
-\\
-Density &  0.3683
-\\
-Total Energy &  3.0709
-\\
-Packing Fraction &  0.8137
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0.179771
-\\
-C2 Relaxation &  0.0499365
-\\
-C3 Relaxation &  0.179771
-\\
-C4 Relaxation &  0.0499365
-\\
-Diffusion Constant &  0.8087
-\\
-Average bond fraction &  1.0406
-\\
-Local Order &  0.5201
-\\
-Global Order &  0.5002
-\\
-Circle Order &  0.1220
-\\
-contacts &  0.8000
-\\
-neighbours &  0.5000
-\\
-pairing &  0.1510
-\\
-Density &  0.3626
-\\
-Total Energy &  3.5767
-\\
-Packing Fraction &  0.8011
-\\
-\end{tabular}
-\captionof{table}{Snowman: Temp$ = 4.5$, $r = 0.637556$, $d = 1.637556$, p2gg}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{tabular}{L{4cm} S[table-format=3.4e2]}
-C1 Relaxation &  0.169785
-\\
-C2 Relaxation &  0.0399495
-\\
-C3 Relaxation &  0.0898863
-\\
-C4 Relaxation &  0.0199747
-\\
-Diffusion Constant &  0.8361
-\\
-Average bond fraction &  1.0437
-\\
-Local Order &  0.5137
+Local Order &  0.4938
 \\
 Global Order &  0.5001
 \\
-Circle Order &  0.1260
+Circle Order &  0.1906
 \\
-contacts &  0.7000
+contacts &  0.9000
 \\
 neighbours &  0.5000
 \\
-pairing &  0.1506
-\\
-Density &  0.3589
-\\
-Total Energy &  3.9254
-\\
-Packing Fraction &  0.7929
+pairing &  0.1588
 \\
 \end{tabular}
-\captionof{table}{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.637556$, p2gg}
+\captionof{table}{Snowman: Temp$ = 1.0$, $r = 0.637556$, $d = 1.0$, pg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+C1 Relaxation &  0.249687
+\\
+C2 Relaxation &  0.169787
+\\
+C3 Relaxation &  0.209737
+\\
+C4 Relaxation &  0.1598
+\\
+Diffusion Constant &  0.1252
+\\
+Average bond fraction &  0.9463
+\\
+Local Order &  0.5033
+\\
+Global Order &  0.5008
+\\
+Circle Order &  0.1881
+\\
+contacts &  0.9000
+\\
+neighbours &  0.5000
+\\
+pairing &  0.1572
+\\
+Density &  0.4657
+\\
+Total Energy &  1.1372
+\\
+Packing Fraction &  0.9507
+\\
+\end{tabular}
+\captionof{table}{Snowman: Temp$ = 1.5$, $r = 0.637556$, $d = 1.0$, pg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+C1 Relaxation &  0.199748
+\\
+C2 Relaxation &  0.0798993
+\\
+C3 Relaxation &  0.199748
+\\
+C4 Relaxation &  0.119849
+\\
+Diffusion Constant &  0.7822
+\\
+Average bond fraction &  0.9479
+\\
+Local Order &  0.5187
+\\
+Global Order &  0.5000
+\\
+Circle Order &  0.1517
+\\
+contacts &  0.9000
+\\
+neighbours &  0.5000
+\\
+pairing &  0.1575
+\\
+Density &  0.4592
+\\
+Total Energy &  1.5637
+\\
+Packing Fraction &  0.9372
+\\
+\end{tabular}
+\captionof{table}{Snowman: Temp$ = 2.0$, $r = 0.637556$, $d = 1.0$, pg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+C1 Relaxation &  0.139824
+\\
+C2 Relaxation &  0.0798993
+\\
+C3 Relaxation &  0.0898867
+\\
+C4 Relaxation &  0.0599245
+\\
+Diffusion Constant &  0.8245
+\\
+Average bond fraction &  0.9529
+\\
+Local Order &  0.5104
+\\
+Global Order &  0.5002
+\\
+Circle Order &  0.1421
+\\
+contacts &  0.8000
+\\
+neighbours &  0.5000
+\\
+pairing &  0.1557
+\\
+Density &  0.4517
+\\
+Total Energy &  1.8485
+\\
+Packing Fraction &  0.9220
+\\
+\end{tabular}
+\captionof{table}{Snowman: Temp$ = 2.5$, $r = 0.637556$, $d = 1.0$, pg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+C1 Relaxation &  0.0998739
+\\
+C2 Relaxation &  0.0299622
+\\
+C3 Relaxation &  0.049937
+\\
+C4 Relaxation &  0.0299622
+\\
+Diffusion Constant &  0.8313
+\\
+Average bond fraction &  0.9562
+\\
+Local Order &  0.5163
+\\
+Global Order &  0.5008
+\\
+Circle Order &  0.1283
+\\
+contacts &  0.8000
+\\
+neighbours &  0.5000
+\\
+pairing &  0.1544
+\\
+Density &  0.4462
+\\
+Total Energy &  2.1872
+\\
+Packing Fraction &  0.9108
+\\
+\end{tabular}
+\captionof{table}{Snowman: Temp$ = 3.0$, $r = 0.637556$, $d = 1.0$, pg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+C1 Relaxation &  0.0599303
+\\
+C2 Relaxation &  0.0199768
+\\
+C3 Relaxation &  0.0499419
+\\
+C4 Relaxation &  0.0199768
+\\
+Diffusion Constant &  0.8125
+\\
+Average bond fraction &  0.9625
+\\
+Local Order &  0.5219
+\\
+Global Order &  0.5004
+\\
+Circle Order &  0.1131
+\\
+contacts &  0.8000
+\\
+neighbours &  0.5000
+\\
+pairing &  0.1526
+\\
+Density &  0.4349
+\\
+Total Energy &  2.9310
+\\
+Packing Fraction &  0.8878
+\\
+\end{tabular}
+\captionof{table}{Snowman: Temp$ = 4.0$, $r = 0.637556$, $d = 1.0$, pg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{L{4cm} S[table-format=3.4e2]}
+C1 Relaxation &  0.0499386
+\\
+C2 Relaxation &  0.00998772
+\\
+C3 Relaxation &  0.0599263
+\\
+C4 Relaxation &  0.0199754
+\\
+Diffusion Constant &  0.8331
+\\
+Average bond fraction &  0.9654
+\\
+Local Order &  0.5131
+\\
+Global Order &  0.5001
+\\
+Circle Order &  0.0858
+\\
+contacts &  0.8000
+\\
+neighbours &  0.5000
+\\
+pairing &  0.1504
+\\
+Density &  0.4246
+\\
+Total Energy &  3.7864
+\\
+Packing Fraction &  0.8666
+\\
+\end{tabular}
+\captionof{table}{Snowman: Temp$ = 5.0$, $r = 0.637556$, $d = 1.0$, pg}
 \end{minipage}

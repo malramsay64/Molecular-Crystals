@@ -6,12 +6,10 @@ t_dist = $(word 4, $(subst -,$(space),$(1)) )
 t_theta = $(word 5, $(subst -,$(space),$(1)) )
 
 FOLDERS=images trj trj_contact stats order logs
-VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX)
+VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_path)/lammps
 vars = shape radius dist theta temp
-all_plots = plot-order plot-frame plot-angle plot-dynamic plot-short-order
+all_plots = plot-order plot-frame plot-angle plot-dynamic plot-short-order plot-hist plot-props
 PRESENT=grouped individual
-
-include $(my_dir)/plot.settings
 
 shape := $(call t_shape, $(mol))
 radius := $(call t_rad, $(mol))
@@ -91,37 +89,47 @@ contact: lammps program #$(basename $(molecule)).csv  plot.settings
 plot: $(all_plots)
 	@touch .make/plot
 	
-plot-order: contact gnuplot.in | order
+plot-order: contact order.plot | order
 	@for file in order/*; do\
-        gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot.in  &> $(LOG);\
-        gnuplot $(my_dir)/hist.in &> $(LOG);\
+        gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/order.plot  &> $(LOG);\
     done
 	@touch .make/plot-order
 	@echo order
 
+plot-hist: contact hist.plot | order
+	gnuplot $(my_dir)/gnuplot/hist.plot &> $(LOG)
+	@touch .make/plot-hist
+	@echo hist
+
 plot-frame: contact frame.plot
 	@for file in trj_contact/*.dat; do\
-        gnuplot -e "filename='$${file%.*}'" $(my_dir)/frame.plot  &> $(LOG);\
+        gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/frame.plot  &> $(LOG);\
     done
 	@touch .make/plot-frame
 	@echo frame
 
 plot-angle: contact angle.plot
 	@for file in trj_contact/*.csv; do\
-        gnuplot -e "filename='$${file%.*}'" $(my_dir)/angle.plot  &> $(LOG);\
+        gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/angle.plot  &> $(LOG);\
     done
 	@touch .make/plot-angle
 	@echo angle
 
 plot-dynamic: contact dynamic.plot
-	@gnuplot $(my_dir)/dynamic.plot &> $(LOG)
+	@gnuplot $(my_dir)/gnuplot/dynamic.plot &> $(LOG)
 	@touch .make/plot-dynamic
 	@echo dynamic
 
 plot-short-order: contact short_order.plot
-	@gnuplot $(my_dir)/short_order.plot &> $(LOG)
+	@gnuplot $(my_dir)/gnuplot/short_order.plot &> $(LOG)
 	@touch .make/plot-short-order
 	@echo short order
+
+plot-props: lammps
+	python $(PYTHON_LIB)/makeplot.py logs/prod.log props.csv $(thermo)
+	gnuplot $(my_dir)/gnuplot/property.plot &> $(LOG)
+	@touch .make/plot-props
+	@echo props
 
 $(basename $(molecule)).csv: $(molecule)
 	#$(BIN_PATH)/analysis -i ../data/$(basename $(molecule)).lammpstrj -o out -x box
@@ -130,12 +138,6 @@ $(basename $(molecule)).csv: $(molecule)
 density: contact
 	python $(PYTHON_LIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
 	@touch .make/density
-
-plot-props: lammps
-	python $(PYTHON_LIB)/makeplot.py logs/prod.log props.csv $(thermo)
-	gnuplot $(my_dir)/property.plot &> $(LOG)
-	@touch .make/plot-props
-	@echo props
 
 settings: $(VAR_MOLECULE) $(VAR_SYSTEM)
 	-rm -f settings

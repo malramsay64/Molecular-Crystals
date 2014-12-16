@@ -3,12 +3,14 @@
 PRE=files data lammps
 TARGETS=contact plot density clean-all clean-contact clean-plot clean-lammps clean-files clean-density touch-lammps plot-props clean-present 
 PRESENT=grouped individual
-MODULES:=$(wildcard lib/*.cpp)
-MODULES:=$(MODULES:.cpp=.o)
-MODULES:=$(notdir $(MODULES))
+
 
 include settings
 include config
+
+MODULES:=$(wildcard $(LIB)/*.cpp)
+MODULES:=$(MODULES:.cpp=.o)
+MODULES:=$(notdir $(MODULES))
 
 ifeq ($(SYS_NAME), unix)
 	CXXFLAGS := $(CXXFLAGS) -pthread -Wl,--no-as-needed
@@ -51,14 +53,14 @@ endif
 
 SAVE = $(subst $(space),-,$(strip $(call t_shape, $1) $t $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1)))
 
-VPATH=.:$(BIN_PATH)
+VPATH=.:$(BIN_PATH):$(LIB)
 
 all: program
 
 collate:
 	python pylib/collate.py $(PREFIX)/$(strip $(mol))
 	$(eval fs = $(basename $(shell ls plots/*.csv)))
-	$(foreach f, $(fs), gnuplot -e 'filename="$f"' temp_dep.plot;)
+	$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
 
 $(mol): always | $(PREFIX)
 	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
@@ -68,16 +70,14 @@ $(TARGETS): program $(mol)
 $(PRE): $(mol)
 
 $(PRESENT): collate
-	cd output
-	pwd
 	python output/$@.py $(PREFIX) > output/$@.out
-	pdflatex --output-dir=output $@.tex #> $(LOG)
-	pdflatex --output-dir=output $@.tex #> $(LOG)
-	mv output/$@.pdf .
+	pdflatex --output-dir=output/.output output/$@.tex #> $(LOG)
+	pdflatex --output-dir=output/.output output/$@.tex #> $(LOG)
+	mv output/.output/$@.pdf .
 
 present: program $(mol) $(PRESENT)
 
-%.o : lib/%.cpp | $(BIN_PATH)
+%.o : %.cpp | $(BIN_PATH)
 	$(CXX) $(CXXFLAGS) -c $< -o $(BIN_PATH)/$@
 
 program: $(MODULES)
