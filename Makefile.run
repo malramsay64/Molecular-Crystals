@@ -77,7 +77,7 @@ lammps: $(LAMMPS_IN) | .make $(restart)
 	@echo Production $(SAVE)
 	@echo $(restart)
 	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_VARS) $(LAMMPS_FLAGS) < $(LAMMPS_IN) > $(LOG)
-	@touch .make/lammps
+	touch .make/lammps
 
 # Analysis of run, both static and dynamic quantities
 contact: lammps program #$(basename $(molecule)).csv  plot.settings

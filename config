@@ -14,10 +14,10 @@ LDFLAGS = -lm -lpthread
 
 # Lammps settings
 
-LAMMPS_IN=$(my_dir)/lammps/in.molecular
-EQUIL_IN=$(my_dir)/lammps/in.equil
-CREATE_IN=$(my_dir)/lammps/in.create
-CRYS_IN=$(my_dir)/lammps/in.crys
+LAMMPS_IN=$(my_dir)/lammps_in/in.molecular
+EQUIL_IN=$(my_dir)/lammps_in/in.equil
+CREATE_IN=$(my_dir)/lammps_in/in.create
+CRYS_IN=$(my_dir)/lammps_in/in.crys
 
 LAMMPS_VARS+=-v fname $(LAMMPS_IN)
 

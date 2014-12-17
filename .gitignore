@@ -4,6 +4,9 @@
 # Binary files
 bin/*
 
+# Ignore analysis
+analysis
+
 # Xcode project
 *.xcodeproj
 
