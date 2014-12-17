@@ -11,6 +11,7 @@ include config
 MODULES:=$(wildcard $(LIB)/*.cpp)
 MODULES:=$(MODULES:.cpp=.o)
 MODULES:=$(notdir $(MODULES))
+HEADERS:=$(MODULES:.o=.h)
 
 ifeq ($(SYS_NAME), unix)
 	CXXFLAGS := $(CXXFLAGS) -pthread -Wl,--no-as-needed

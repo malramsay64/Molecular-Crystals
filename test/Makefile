@@ -11,7 +11,15 @@ dist = $(word 3, $(subst -,$(space),$(1)) )
 crys = $(word 4, $(subst -,$(space),$(1)) )
 
 
-all: single
+all: cell
+
+cell: program
+	./program -i out.lammpstrj
+	cat cell.dat | sort -r -n -k 3 | head -n 6 > unit_cell.dat
+	gnuplot unit_cell.plot
+
+program:
+	$(MAKE) -C ..
 
 single:
 	tail -2 ../crystals/$(mol).svg | head -1 | python ../pylib/createCells.py . 0 $(call rad, $(mol)) $(call dist, $(mol)) $(call crys, $(mol)) > crys.dat
