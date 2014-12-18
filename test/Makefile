@@ -15,9 +15,10 @@ all: cell
 
 cell: program
 	./program -i out.lammpstrj
-	cat cell.dat | sort -r -n -k 3 | head -n 6 > unit_cell.dat
 	gnuplot unit_cell.plot
+	gnuplot -e "filename='trj_contact/0000000000'" ../gnuplot/frame.plot
 
+.PHONY: program
 program:
 	$(MAKE) -C ..
 

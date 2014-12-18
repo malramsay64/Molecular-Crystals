@@ -11,7 +11,8 @@ include config
 MODULES:=$(wildcard $(LIB)/*.cpp)
 MODULES:=$(MODULES:.cpp=.o)
 MODULES:=$(notdir $(MODULES))
-HEADERS:=$(MODULES:.o=.h)
+HEADERS:=$(wildcard $(LIB)/*.h)
+HEADERS:=$(notdir $(HEADERS))
 
 ifeq ($(SYS_NAME), unix)
 	CXXFLAGS := $(CXXFLAGS) -pthread -Wl,--no-as-needed
@@ -80,7 +81,7 @@ present: program $(mol) $(PRESENT)
 %.o : %.cpp | $(BIN_PATH)
 	$(CXX) $(CXXFLAGS) -c $< -o $(BIN_PATH)/$@
 
-program: $(MODULES)
+program: $(MODULES) $(HEADERS)
 	$(CXX) -o $(BIN_PATH)/program $(addprefix $(BIN_PATH)/, $(MODULES)) $(CXXFLAGS) $(LDFLAGS)
 	ln -sf $(BIN_PATH)/program test/program
 

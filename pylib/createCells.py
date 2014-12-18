@@ -23,7 +23,6 @@ def create(a, b, theta, x, y, phi, molecule, crys, mols=2500, path='.'):
         na = int(na)
         nb = int(nb)
         s.replicate(na, nb)
-    print repr(s)
     unitCell.cellFile(s, path)
     unitCell.molFile(s.getMol(), path, s.getCrys())
     unitCell.lammpsFile(s, path)
