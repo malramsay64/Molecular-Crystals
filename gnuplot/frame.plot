@@ -1,7 +1,7 @@
 #set terminal pdf enhanced
 set terminal png enhanced transparent truecolor size 1600,1600
-#set yrange[0:250]
-#set xrange[0:250]
+set yrange[-2:]
+set xrange[-2:]
 
 set size ratio -1
 #set size square
