@@ -50,13 +50,18 @@ mol := $(mol_s) $(mol_t)
 
 ifneq ($(strip crys),)
 	mol := $(foreach c, $(crys), $(addsuffix -$(c), $(mol)))
+	mol := $(foreach m, $(mol), $(if $(wildcard crystals/$m.svg), $m))
 endif
 
 SAVE = $(subst $(space),-,$(strip $(call t_shape, $1) $t $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1)))
 
 VPATH=.:$(BIN_PATH):$(LIB)
 
+##########################################################################################
+
+
 all: program
+	@echo $(mol)
 
 collate:
 	python pylib/collate.py $(PREFIX)/$(strip $(mol))
@@ -64,7 +69,7 @@ collate:
 	$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
 
 $(mol): always | $(PREFIX)
-	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+	$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 
 $(TARGETS): program $(mol)
 

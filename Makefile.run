@@ -50,6 +50,7 @@ test:
 
 # Create data files for molecule if not already generated
 files: $(molecule) $(mol_settings)
+	@echo $(SAVE)
 
 
 ifneq ($(t_crys), )
