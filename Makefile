@@ -4,7 +4,6 @@ PRE=files data lammps
 TARGETS=contact plot density clean-all clean-contact clean-plot clean-lammps clean-files clean-density touch-lammps plot-props clean-present 
 PRESENT=grouped individual
 
-
 include settings
 include config
 
@@ -29,6 +28,7 @@ t_theta = $(word 4, $(subst -,$(space),$(1)) )
 
 GOAL=Makefile.run
 LOOP=Makefile.loop
+
 export
 
 comp_dist = $(shell echo $(1:radius=$2) |bc)
@@ -57,11 +57,13 @@ SAVE = $(subst $(space),-,$(strip $(call t_shape, $1) $t $(call t_rad, $1) $(cal
 
 VPATH=.:$(BIN_PATH):$(LIB)
 
+distances = $(foreach m, $(mol), $(call t_dist, $m))
+export $(addprefix temp_, $(distances))
+
 ##########################################################################################
 
-
 all: program
-	@echo $(mol)
+	echo $(addprefix temp_, $(distances))
 
 collate:
 	python pylib/collate.py $(PREFIX)/$(strip $(mol))

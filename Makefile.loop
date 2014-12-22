@@ -9,6 +9,12 @@ shape := $(call t_shape, $(mol))
 radius := $(call t_rad, $(mol))
 dist := $(call t_dist, $(mol))
 theta := $(call t_theta, $(mol))
+
+# Temp range for each d
+ifdef temp_$(dist)
+	temp := $(temp_$(dist))
+endif
+
 save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(theta))), $(temp)) 
 save := $(addprefix $(strip $(shape))-, $(save1)) 
 

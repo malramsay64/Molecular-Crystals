@@ -4,9 +4,9 @@ include system
 #
 # Shape (Snowman|Trimer)
 shape=Snowman
-radius=0.637556 0.7
+radius=0.637556
 # (1+radius|1.0)
-dist=1.0
+dist=1.0 1+radius
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 crys = pg p2 p2gg
@@ -16,16 +16,24 @@ ratio=
 
 # Simulation Settings
 #
+# Number of steps
 steps = 400000
+# Print every <N> steps
 print = 4000
+#temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
+
 #temp = 5.0 4.0 3.0 2.0 1.5 1.0 0.8 0.6 0.4
 #temp = 0.75 0.77 0.8
-#temp = 0.2 0.3 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.77 0.8 0.85 0.9 1.0 1.5 2.0 2.5 3.0 4.0 5.0
+temp_1.0 = 0.2 0.3 0.4 0.5 0.6 0.65 0.7 0.72 0.75 0.77 0.8 0.85 0.9 1.0 2.0 3.0 5.0
 #temp = 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8
-#temp = 0.2 0.5 0.8 1.0 1.3 1.6 2.0 2.3 2.6 2.8 2.9 3.0 3.05 3.1 3.13 3.15 3.17 3.2 3.25 3.3 3.5 4.0 4.5 5.0
-temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
+temp_1.637556 = 0.2 0.5 0.8 1.0 1.5 2.0 2.5 3.0 3.05 3.1 3.13 3.15 3.17 3.2 3.3 3.5 4.0 5.0
+
+temp_123 = 123
+#temp = 0.2
+#temp_1.0 = 0.4
+
 pressure = 13.5
-n_mol = 225
+n_mol = 2500
 density = 0.015625
 # n >= 1
 equil_steps = 20000
@@ -44,7 +52,7 @@ thermo=TotEng PotEng Density Press Xy Pxx Pyy
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/make_rp
 else
-    PREFIX := $(HOME)/scratch/make_short_test
+    PREFIX := $(HOME)/scratch/make_all
 endif
 
 my_dir := $(HOME)/make
