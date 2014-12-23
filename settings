@@ -17,7 +17,7 @@ ratio=
 # Simulation Settings
 #
 # Number of steps
-steps = 400000
+steps = 4000000
 # Print every <N> steps
 print = 4000
 #temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
@@ -36,7 +36,7 @@ pressure = 13.5
 n_mol = 2500
 density = 0.015625
 # n >= 1
-equil_steps = 20000
+equil_steps = 200000
 
 # Plot Settings
 

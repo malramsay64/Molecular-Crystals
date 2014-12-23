@@ -63,40 +63,43 @@ export $(addprefix temp_, $(distances))
 ##########################################################################################
 
 all: program
-	echo $(addprefix temp_, $(distances))
 
 collate:
-	python pylib/collate.py $(PREFIX)/$(strip $(mol))
+	@echo Creating T-dependent plots
+	@python pylib/collate.py $(PREFIX)/$(strip $(mol))
 	$(eval fs = $(basename $(shell ls plots/*.csv)))
-	$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
+	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
 
 $(mol): always | $(PREFIX)
-	$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 
 $(TARGETS): program $(mol)
 
 $(PRE): $(mol)
 
 $(PRESENT): collate
-	python output/$@.py $(PREFIX) > output/$@.out
-	pdflatex --output-dir=output/.output output/$@.tex #> $(LOG)
-	pdflatex --output-dir=output/.output output/$@.tex #> $(LOG)
-	mv output/.output/$@.pdf .
+	Generating $@ output
+	@python output/$@.py $(PREFIX) > output/$@.out
+	@pdflatex --output-dir=output/.output output/$@.tex > $(LOG)
+	@pdflatex --output-dir=output/.output output/$@.tex > $(LOG)
+	@mv output/.output/$@.pdf .
 
 present: program $(mol) $(PRESENT)
 
 %.o : %.cpp | $(BIN_PATH)
-	$(CXX) $(CXXFLAGS) -c $< -o $(BIN_PATH)/$@
+	@echo o $<
+	@$(CXX) $(CXXFLAGS) -c $< -o $(BIN_PATH)/$@
 
 program: $(MODULES) $(HEADERS)
-	$(CXX) -o $(BIN_PATH)/program $(addprefix $(BIN_PATH)/, $(MODULES)) $(CXXFLAGS) $(LDFLAGS)
-	ln -sf $(BIN_PATH)/program test/program
+	@echo c++ $@
+	@$(CXX) -o $(BIN_PATH)/program $(addprefix $(BIN_PATH)/, $(MODULES)) $(CXXFLAGS) $(LDFLAGS)
+	@ln -sf $(BIN_PATH)/program test/program
 
 $(BIN_PATH):
-	mkdir -p $(BIN_PATH)
+	@mkdir -p $(BIN_PATH)
 
 $(PREFIX):
-	-mkdir $(PREFIX)
+	@-mkdir $(PREFIX)
 
 .PHONY: always
 always:
