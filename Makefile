@@ -66,7 +66,7 @@ all: program
 
 collate:
 	@echo Creating T-dependent plots
-	@python pylib/collate.py $(PREFIX)/$(strip $(mol))
+	@$(foreach m, $(mol), python pylib/collate.py $(PREFIX)/$(strip $(m));)
 	$(eval fs = $(basename $(shell ls plots/*.csv)))
 	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
 
@@ -78,10 +78,10 @@ $(TARGETS): program $(mol)
 $(PRE): $(mol)
 
 $(PRESENT): collate
-	Generating $@ output
+	@echo Generating $@ output
 	@python output/$@.py $(PREFIX) > output/$@.out
-	@pdflatex --output-dir=output/.output output/$@.tex > $(LOG)
-	@pdflatex --output-dir=output/.output output/$@.tex > $(LOG)
+	@pdflatex -draftmode -interaction=batchmode --output-dir=output/.output output/$@.tex #> $(LOG)
+	@pdflatex -interaction=batchmode --output-dir=output/.output output/$@.tex #> $(LOG)
 	@mv output/.output/$@.pdf .
 
 present: program $(mol) $(PRESENT)
