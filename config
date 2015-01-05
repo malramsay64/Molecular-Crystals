@@ -18,6 +18,7 @@ LAMMPS_IN=$(my_dir)/lammps_in/in.molecular
 EQUIL_IN=$(my_dir)/lammps_in/in.equil
 CREATE_IN=$(my_dir)/lammps_in/in.create
 CRYS_IN=$(my_dir)/lammps_in/in.crys
+BOUNDARY_IN=$(my_dir)/lammps_in/in.boundary
 
 LAMMPS_VARS+=-v fname $(LAMMPS_IN)
 
@@ -47,7 +48,7 @@ LAMMPS_VARS=$(LAMMPS_SYS_VARS) $(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL
 
 EQUIL_VARS=$(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL_VARS) -v steps $(equil_steps) 
 
-CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $$(prev_t) -v press $$(pressure) -v steps $(equil_steps)  
+CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $$(prev_t) -v press $$(pressure) -v steps $(equil_steps) -v boundary $(boundary)
 
 # MPI Settings
 

@@ -1,4 +1,6 @@
-# Using rigid molecules
+
+variable T delete
+variable T equal 3.5
 
 # Define molecule
 molecule    mymol ${the_path}/data/${molecule}
@@ -25,15 +27,21 @@ boundary p p p
 # Read in interaction parameters
 read_data   ${the_path}/data/${mol_settings}
 
-variable x_max equal lx + lx/2
-variable x_min equal lx/2
-variable ylen ly
-
-# Duplicate box
-replicate 2 1 1
+if "${boundary} == 1" then &
+    "variable x_min equal lx/4"&
+    "variable x_max equal 3*lx/4"&
+    "variable y_min equal 0"&
+    "variable y_max equal ly"
+if "${boundary} == 2" then &
+    "variable x_min equal 0"&
+    "variable x_max equal lx"&
+    "variable y_min equal ly/4"&
+    "variable y_max equal 3*ly/4"
 
 # Create region in middle
-region static block x_min x_max 0 ylen -0.5 0.5
+region middle block ${x_min} ${x_max} ${y_min} ${y_max} -0.5 0.5
+group static region middle
+group mobile subtract all static
 
 # Exclude bonded interactions for MD steps
 neigh_modify exclude molecule all
@@ -41,7 +49,7 @@ neigh_modify exclude molecule all
 # Give all atoms the property diameter
 fix 5 all property/atom d_diam
 set type 1 d_diam 2
-variable diam equal ${radius}*2 
+variable diam equal ${radius}*2
 if "${diam} != 2" then &
     "set type 2 d_diam ${diam}"
 compute diam all property/atom d_diam
@@ -55,22 +63,22 @@ log     ${my_path}/logs/create.log
 # Simulation parameters, bonds not able to move 
 fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
 fix 2 all enforce2d
-fix 3 static freeze 
+fix 3 static setforce 0.0 0.0 0.0
 
 # Dump configuration printevery steps. Image is dumped at beginning and end
-dump 2 all image ${steps} ${my_path}/*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
+dump 2 all image ${steps} ${my_path}/images/create_*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
 
 dump_modify 2 first yes
 dump_modify 2 pad 10
 
 # Give particles an initial velocity
-velocity all create $T 122
+velocity mobile create $T 122
 run 0
-velocity all scale $T
+velocity mobile scale $T
 
-timestep 1e-3
+#timestep 1e-3
 
-#run ${steps}
+run ${steps}
 
 #min_style cg
 

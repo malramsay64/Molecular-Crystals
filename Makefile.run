@@ -25,7 +25,11 @@ else
 endif
 
 ifneq ($(t_crys), )
+ifneq ($(boundary), )
+    CREATE_IN:=$(BOUNDARY_IN)
+else
     CREATE_IN:=$(CRYS_IN)
+endif
 endif
 
 SAVE:=$(mol)
@@ -52,12 +56,13 @@ test:
 files: $(molecule) $(mol_settings)
 	@echo $(SAVE)
 
-
+# Generate crystal from unit cell in svg file
 ifneq ($(t_crys), )
 $(molecule) $(mol_setings): | data
 	@echo Producing unit cell of $(base)
-	@tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYTHON_LIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) 
+	@tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYTHON_LIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys)
 
+# Create initial condition from a lattice with randomly oriented molecules
 else
 $(molecule) $(mol_settings): | data
 	@echo Producing input
@@ -67,7 +72,7 @@ endif
 
 $(last_restart): | $(FOLDERS) $(molecule) restarts
 	@echo Create $(last_restart)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(CREATE_VARS) $(LAMMPS_FLAGS) < $(CREATE_IN) > $(LOG)
+	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(CREATE_VARS) $(LAMMPS_FLAGS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
 $(restart): $(last_restart) | $(FOLDERS)
