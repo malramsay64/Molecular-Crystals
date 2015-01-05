@@ -21,7 +21,7 @@ def collate(dir, shape, f=0):
     return f
 
 if __name__ == "__main__":
-    print sys.argv[1]
+    #print sys.argv[1]
     if len(sys.argv) > 1:
         s = sys.argv[1].split("-")
         s.insert(1,"*")

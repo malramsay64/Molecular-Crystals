@@ -27,7 +27,7 @@ $(MAKECMDGOALS): $(save)
 
 $(save): always | $(dirs)
 	$(foreach t, $(temp), $(if $(filter $(call s_temp, $@), $t), $(eval prev_t=$(last_t)), $(eval last_t=$t)))
-	$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
+	@$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
 
 $(dirs):
 	-mkdir $@

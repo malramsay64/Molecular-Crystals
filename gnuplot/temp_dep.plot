@@ -1,10 +1,11 @@
-set terminal png enhanced truecolor size 1600,1600
+set terminal png enhanced truecolor size 1600,800
 
 set datafile separator ","
 set style fill solid
 set key autotitle columnhead
 #set logscale x
 #set xrange [2:4]
+set xtics 0.1
 
 set style line 5 pt 7 lw 3
 

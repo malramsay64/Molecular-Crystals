@@ -66,22 +66,23 @@ all: program
 	echo $(addprefix temp_, $(distances))
 
 collate:
-	python pylib/collate.py $(PREFIX)/$(strip $(mol))
+	@$(foreach m, $(mol), python pylib/collate.py $(PREFIX)/$(strip $(m));)
 	$(eval fs = $(basename $(shell ls plots/*.csv)))
-	$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
+	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
 
 $(mol): always | $(PREFIX)
-	$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 
 $(TARGETS): program $(mol)
 
 $(PRE): $(mol)
 
 $(PRESENT): collate
-	python output/$@.py $(PREFIX) > output/$@.out
-	pdflatex --output-dir=output/.output output/$@.tex #> $(LOG)
-	pdflatex --output-dir=output/.output output/$@.tex #> $(LOG)
-	mv output/.output/$@.pdf .
+	@echo $@
+	@python output/$@.py $(PREFIX) > output/$@.out
+	@pdflatex -draftmode -interaction=batchmode --output-dir=output/.output output/$@.tex #> $(LOG)
+	@pdflatex -interaction=batchmode --output-dir=output/.output output/$@.tex #> $(LOG)
+	@mv output/.output/$@.pdf .
 
 present: program $(mol) $(PRESENT)
 

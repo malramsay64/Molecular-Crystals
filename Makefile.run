@@ -137,7 +137,8 @@ $(basename $(molecule)).csv: $(molecule)
 	#mv trj/frame.csv ../data/$(basename $(molecule)).csv
 
 density: contact
-	python $(PYTHON_LIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
+	@echo Calculating density
+	@python $(PYTHON_LIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
 	@touch .make/density
 
 settings: $(VAR_MOLECULE) $(VAR_SYSTEM)
@@ -147,22 +148,22 @@ settings: $(VAR_MOLECULE) $(VAR_SYSTEM)
 present:$(PRESENT)
 
 $(PRESENT): plot density plot-props
-	@echo Collate Plots $(basename $(molecule))	
-	-rm -f mol_pres.tex
+	@echo plot $(shape) $(temp) $(radius) $(dist) $(theta)
+	@-rm -f mol_pres.tex
 	@python $(my_dir)/output/presentEach.py $(PREFIX)/$(SAVE) >> mol_pres.tex
 	@touch .make/present
 
 .make:
-	-mkdir .make
+	@-mkdir .make
 
 data:
-	mkdir -p $(PREFIX)/data
+	@mkdir -p $(PREFIX)/data
 
 restarts:
-	mkdir -p $(PREFIX)/restarts 
+	@mkdir -p $(PREFIX)/restarts 
 
 $(FOLDERS):
-	-$(MKDIR) -p $@
+	@-$(MKDIR) -p $@
 
 .PHONY: clean-present
 clean-present:
@@ -175,7 +176,7 @@ touch-lammps: | .make
 
 .PHONY: clean
 clean:
-	-$(RM) -rf .make
+	-rm -rf .make
 
 .PHONY: clean-all
 clean-all: clean-files clean-lammps clean clean-contact clean-plot clean-density clean-restart
@@ -209,4 +210,4 @@ clean-restart:
 .PHONY: clean-lammps
 clean-lammps:
 	$(foreach folder, $(FOLDERS), $(RM) -rf $(folder);)
-	$(RM) -f .make/lammps
+	rm -f .make/lammps
