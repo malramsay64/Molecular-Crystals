@@ -1,23 +1,24 @@
 include system
 
 # Molecule Settings
-#
+
 # Shape (Snowman|Trimer)
 shape=Snowman
+# (0,1]
 radius=0.637556
 # (1+radius|1.0)
 dist=1+radius
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 crys=p2gg
-# (1|2) 1->a 2->b
+# (1|2) 1->a direction 2->b drection
 boundary=1 2
 
 theta=
 ratio=
 
 # Simulation Settings
-#
+
 # Number of steps
 steps = 4000000
 # Print every <N> steps
@@ -25,16 +26,12 @@ print = 40000
 
 # Can set a temp for each d (temp_$d)
 #temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
-
 #temp = 5.0 4.0 3.0 2.0 1.5 1.0 0.8 0.6 0.4
-#temp = 0.75 0.77 0.8
 temp_1.0 = 0.2 0.3 0.4 0.5 0.6 0.65 0.7 0.72 0.75 0.77 0.8 0.85 0.87 0.9 0.95 1.0 1.05 1.1 1.2 1.5 2.0 3.0 5.0
-#temp = 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8
 temp_1.637556 = 0.2 0.5 0.8 1.0 1.5 2.0 2.5 2.8 2.85 2.9 2.93 2.95 2.97 3.0 3.05 3.1 3.13 3.15 3.17 3.2 3.3 3.5 4.0 5.0
-#temp = 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8
 
 pressure = 13.5
-n_mol = 360
+n_mol = 2500
 density = 0.015625
 # n >= 1
 equil_steps = 200000
@@ -46,7 +43,7 @@ reference=mol
 
 # Options are (Step|Temp|Pxx|Pyy|Pxy|TotEng|KinEng|PotEng|Enthalpy|Density|P|LX|Ly|Xy)
 # Need to update properties.plot when changing
-thermo=PotEng Density Press Xy Pxx Pyy
+thermo=PotEng TotEng Density Press Xy Pxx Pyy
 
 # Path variables
 ifeq ($(SYS_NAME), silica)
