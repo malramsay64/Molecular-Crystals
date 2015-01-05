@@ -14,7 +14,7 @@ import molecule
 from math import *
 import sys
 
-def create(a, b, theta, x, y, phi, molecule, crys, mols=2500, path='.'):
+def create(a, b, theta, x, y, phi, molecule, crys, mols=2500, path='.', boundary=0):
     s = crys(a,b,theta, x, y, phi, molecule)
     if mols:
         mols /= s.numMols()
@@ -22,10 +22,21 @@ def create(a, b, theta, x, y, phi, molecule, crys, mols=2500, path='.'):
         nb = mols/na
         na = int(na)
         nb = int(nb)
-        s.replicate(na, nb)
-    unitCell.cellFile(s, path)
+        print boundary, na*nb
+        if boundary == 1:
+            s.replicate(2*na, nb)
+            print 2*na*nb
+        elif boundary == 2:
+            s.replicate(na,2*nb)
+            print 2*na*nb
+        else:
+            s.replicate(na, nb)
+            print na*nb
+    filename = "{shape} {radius} {distance} {theta} {crys} {bound}".format(shape=molecule.getName(), radius=molecule.getRadius(), distance=molecule.getDist(), theta=molecule.getTheta(), crys=s.getCrys(), bound=boundary)
+    filename = "-".join([x for x in filename.split() if x])
+    unitCell.cellFile(s, path, filename)
     unitCell.molFile(s.getMol(), path, s.getCrys())
-    unitCell.lammpsFile(s, path)
+    unitCell.lammpsFile(s, path, filename)
 
 if __name__ == "__main__":
     args = sys.argv
@@ -33,39 +44,40 @@ if __name__ == "__main__":
     path = '.'
     mols = 2500
 
-    if len(args) == 6 and len(line) == 7:
-        theta = float(line[0])
-        a = float(line[1])
-        b = float(line[2])
-        x = float(line[3])
-        y = float(line[4])
-        phi = float(line[5])
-        m = float(line[6])
-        
-        path = args[1]
-        mols = int(args[2])
-        r = float(args[3])
-        d = float(args[4])
-        crys = getattr(unitCell,args[5])
+    theta = float(line[0])
+    a = float(line[1])
+    b = float(line[2])
+    x = float(line[3])
+    y = float(line[4])
+    phi = float(line[5])
+    m = float(line[6])
 
-        s = molecule.Snowman(r,d)
-       
-        phi = 2*pi - phi
+    path = args[1]
+    mols = int(args[2])
+    r = float(args[3])
+    d = float(args[4])
+    crys = getattr(unitCell,args[5])
+    try:
+        boundary = int(args[6])
+    except IndexError:
+        boundary = ''
 
-        # convert to xy coordinates
-        x = x*a + y*b*cos(theta)
-        y = y*b*sin(theta)
-        
-        # Move center of particle
-        const = (1**2 + d**2 - r**2)/(2*d*1)
-        x += -(const)*cos(phi)
-        y += -(const)*sin(phi)
-        
-        # Convert back to fractional coordinates
-        x = x/a - y*(cos(theta)/(a*sin(theta)))
-        y = y/(b*sin(theta))
-        
-        #phi += pi/2 
-        phi = pi/2+phi
-        create(a, b, theta, x, y, phi, s, crys, mols, path)
-         
+    s = molecule.Snowman(r,d)
+    phi = 2*pi - phi
+
+    # convert to xy coordinates
+    x = x*a + y*b*cos(theta)
+    y = y*b*sin(theta)
+
+    # Move center of particle
+    const = (1**2 + d**2 - r**2)/(2*d*1)
+    x += -(const)*cos(phi)
+    y += -(const)*sin(phi)
+
+    # Convert back to fractional coordinates
+    x = x/a - y*(cos(theta)/(a*sin(theta)))
+    y = y/(b*sin(theta))
+
+    # Convert phi to my orientation
+    phi = pi/2+phi
+    create(a, b, theta, x, y, phi, s, crys, mols, path, boundary)

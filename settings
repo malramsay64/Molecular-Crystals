@@ -9,8 +9,9 @@ radius=0.637556
 dist=1+radius
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
-crys = p2gg
-boundary = 2
+crys=p2gg
+# (1|2) 1->a 2->b
+boundary=1 2
 
 theta=
 ratio=
@@ -21,6 +22,8 @@ ratio=
 steps = 4000
 # Print every <N> steps
 print = 400
+
+# Can set a temp for each d (temp_$d)
 #temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
 
 temp = 2.8
@@ -35,7 +38,7 @@ temp = 2.8
 #temp_1.0 = 0.4
 
 pressure = 13.5
-n_mol = 2500
+n_mol = 360
 density = 0.015625
 # n >= 1
 equil_steps = 200000
