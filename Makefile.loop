@@ -3,19 +3,22 @@ t_shape = $(word 1, $(subst -,$(space),$(1)) )
 t_rad = $(word 2, $(subst -,$(space),$(1)) )
 t_dist = $(word 3, $(subst -,$(space),$(1)) )
 t_theta = $(word 4, $(subst -,$(space),$(1)) )
+t_bound = $(word 5, $(subst -,$(space),$(1)) )
 s_temp = $(word 2, $(subst -,$(space),$(1)) )
+
 
 shape := $(call t_shape, $(mol))
 radius := $(call t_rad, $(mol))
 dist := $(call t_dist, $(mol))
 theta := $(call t_theta, $(mol))
+bound := $(call t_bound, $(mol))
 
 # Temp range for each d
 ifdef temp_$(dist)
 	temp := $(temp_$(dist))
 endif
 
-save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(theta))), $(temp)) 
+save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(theta) $(bound))), $(temp)) 
 save := $(addprefix $(strip $(shape))-, $(save1)) 
 
 dirs:=$(addprefix $(PREFIX)/,$(save))

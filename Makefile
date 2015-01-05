@@ -1,7 +1,7 @@
 
 
-PRE=files data lammps
-TARGETS=contact plot density clean-all clean-contact clean-plot clean-lammps clean-files clean-density touch-lammps plot-props clean-present 
+PRE=files data lammps clean-files clean-lammps clean-plot clean-contact clean-all clean-present touch lammps clean-density
+TARGETS=contact plot density
 PRESENT=grouped individual
 
 include settings
@@ -25,6 +25,9 @@ t_shape = $(word 1, $(subst -,$(space),$(1)) )
 t_rad = $(word 2, $(subst -,$(space),$(1)) )
 t_dist = $(word 3, $(subst -,$(space),$(1)) )
 t_theta = $(word 4, $(subst -,$(space),$(1)) )
+t_crys = $(word 4, $(subst -,$(space),$(1)) )
+t_bound = $(word 5, $(subst -,$(space),$(1)) )
+
 
 GOAL=Makefile.run
 LOOP=Makefile.loop
@@ -48,12 +51,21 @@ mol_t := $(foreach rad, $(theta), $(addsuffix -$(rad), $(mol_t)))
 
 mol := $(mol_s) $(mol_t)
 
-ifneq ($(strip crys),)
-	mol := $(foreach c, $(crys), $(addsuffix -$(c), $(mol)))
-	mol := $(foreach m, $(mol), $(if $(wildcard crystals/$m.svg), $m))
+# Adding crystals for which there are unit cells
+ifneq ($(strip $(crys)),)
+    mol := $(foreach c, $(crys), $(addsuffix -$(c), $(mol)))
+    mol := $(foreach m, $(mol), $(if $(wildcard crystals/$m.svg), $m))
 endif
 
-SAVE = $(subst $(space),-,$(strip $(call t_shape, $1) $t $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1)))
+# Iterating through having a crystal liquid boundary
+ifneq ($(strip $(boundary)),)
+    mol := $(if $(boundary), $(foreach b, $(boundary), $(addsuffix -$(b), $(mol))), $(mol))
+    CREATE_VARS += -v boundary $$(bound)
+else
+    CREATE_VARS += -v boundary 0
+endif
+
+SAVE = $(subst $(space),-,$(strip $(call t_shape, $1) $t $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1) $(call t_bound, $1)))
 
 VPATH=.:$(BIN_PATH):$(LIB)
 
@@ -63,9 +75,10 @@ export $(addprefix temp_, $(distances))
 ##########################################################################################
 
 all: program
-	echo $(addprefix temp_, $(distances))
+@echo $(mol)
 
 collate:
+	@echo Creating T-dependent plots
 	@$(foreach m, $(mol), python pylib/collate.py $(PREFIX)/$(strip $(m));)
 	$(eval fs = $(basename $(shell ls plots/*.csv)))
 	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
@@ -87,23 +100,25 @@ $(PRESENT): collate
 present: program $(mol) $(PRESENT)
 
 %.o : %.cpp | $(BIN_PATH)
-	$(CXX) $(CXXFLAGS) -c $< -o $(BIN_PATH)/$@
+	@echo o $<
+	@$(CXX) $(CXXFLAGS) -c $< -o $(BIN_PATH)/$@
 
 program: $(MODULES) $(HEADERS)
-	$(CXX) -o $(BIN_PATH)/program $(addprefix $(BIN_PATH)/, $(MODULES)) $(CXXFLAGS) $(LDFLAGS)
-	ln -sf $(BIN_PATH)/program test/program
+	@echo c++ $@
+	@$(CXX) -o $(BIN_PATH)/program $(addprefix $(BIN_PATH)/, $(MODULES)) $(CXXFLAGS) $(LDFLAGS)
+	@ln -sf $(BIN_PATH)/program test/program
 
 $(BIN_PATH):
 	mkdir -p $(BIN_PATH)
 
 $(PREFIX):
-	-mkdir $(PREFIX)
+	mkdir $(PREFIX)
 
 .PHONY: always
 always:
 
 .PHONY: test
-test: $(mol) 
+test: $(mol)
 
 .PHONY:clean
 clean:

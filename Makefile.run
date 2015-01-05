@@ -4,9 +4,11 @@ t_temp = $(word 2, $(subst -,$(space),$(1)) )
 t_rad = $(word 3, $(subst -,$(space),$(1)) )
 t_dist = $(word 4, $(subst -,$(space),$(1)) )
 t_theta = $(word 5, $(subst -,$(space),$(1)) )
+t_crys = $(word 5, $(subst -,$(space),$(1)) )
+t_bound = $(word 6, $(subst -,$(space),$(1)) )
 
 FOLDERS=images trj trj_contact stats order logs
-VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_path)/lammps
+VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_path)/lammps:$(PY_LIB)
 vars = shape radius dist theta temp
 all_plots = plot-order plot-frame plot-angle plot-dynamic plot-short-order plot-hist plot-props
 PRESENT=grouped individual
@@ -16,6 +18,7 @@ radius := $(call t_rad, $(mol))
 dist := $(call t_dist, $(mol))
 theta := $(call t_theta, $(mol))
 temp := $(call t_temp, $(mol))
+bound := $(call t_bound, $(mol))
 
 ifeq ($(shape), Snowman)
     atoms := 2
@@ -25,20 +28,25 @@ else
 endif
 
 ifneq ($(t_crys), )
+ifneq ($(bound), )
+    CREATE_IN:=$(BOUNDARY_IN)
+else
     CREATE_IN:=$(CRYS_IN)
+    bound:=
+endif
 endif
 
 SAVE:=$(mol)
 
 # Filenames generated from properties
 ifeq ($(temp), $(prev_t))
-    last_restart=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(n_mol))).rt
+    last_restart=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(n_mol) $(bound))).rt
 else
-    last_restart=$(subst $(space),-,$(strip $(prev_t) $(shape) $(radius) $(dist) $(theta) $(n_mol))).rt
+    last_restart=$(subst $(space),-,$(strip $(prev_t) $(shape) $(radius) $(dist) $(theta) $(n_mol) $(bound))).rt
 endif
-restart=$(subst $(space),-,$(strip $(temp) $(shape) $(radius) $(dist) $(theta) $(n_mol))).rt
+restart=$(subst $(space),-,$(strip $(temp) $(shape) $(radius) $(dist) $(theta) $(n_mol) $(bound))).rt
 molecule=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta))).mol
-mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta))).dat
+mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(bound))).dat
 base=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta)))
 
 all:
@@ -46,39 +54,45 @@ all:
 
 .PHONY:test
 test:
-	@echo $(shape) $(radius) $(dist) $(theta) $(temp) $(prev_t) 
+	@echo $(bound)
+	@echo $(mol)
+	@echo $(SAVE)
+	@echo $(shape) $(radius) $(dist) $(theta) $(temp) $(prev_t)
 
 # Create data files for molecule if not already generated
-files: $(molecule) $(mol_settings)
+files: $(mol_settings)
 	@echo $(SAVE)
 
-
+# Generate crystal from unit cell in svg file
 ifneq ($(t_crys), )
-$(molecule) $(mol_setings): | data
-	tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYTHON_LIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) 
+$(mol_settings): | data
+	@echo Producing unit cell of $(base)
+	tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
 
+# Create initial condition from a lattice with randomly oriented molecules
 else
-$(molecule) $(mol_settings): | data 
-	$(PYTHON) $(PYTHON_LIB)/$(FILES) $(PREFIX) $(shape) $(radius) $(dist) $(theta) $(ratio) $(n_mol) $(density)
+$(mol_settings): | data
+	@echo Producing input
+	@$(PYTHON) $(PYLIB)/$(FILES) $(PREFIX) $(shape) $(radius) $(dist) $(theta) $(ratio) $(n_mol) $(density)
 endif
 
 
-$(last_restart): | $(FOLDERS) $(molecule) restarts
+$(last_restart): $(mol_settings) | $(FOLDERS) $(mol_settings) restarts
 	@echo Create $(last_restart)
 	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(CREATE_VARS) $(LAMMPS_FLAGS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
-$(restart): | $(FOLDERS) $(last_restart)
+$(restart): $(last_restart) | $(FOLDERS)
 	@echo Equil $(restart) from $(last_restart)
 	@echo $(restart)
-	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(EQUIL_VARS) $(LAMMPS_FLAGS) < $(EQUIL_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(EQUIL_VARS) $(LAMMPS_FLAGS) < $(EQUIL_IN) > $(LOG)
 
 # Production run, has already been equilibrated
-lammps: $(LAMMPS_IN) | .make $(restart) 
+lammps: $(LAMMPS_IN) $(restart) | .make
 	@echo Production $(SAVE)
 	@echo $(restart)
-	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_VARS) $(LAMMPS_FLAGS) < $(LAMMPS_IN) > $(LOG)
-	touch .make/lammps
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_VARS) $(LAMMPS_FLAGS) < $(LAMMPS_IN) > $(LOG)
+	@touch .make/lammps
 
 # Analysis of run, both static and dynamic quantities
 contact: lammps program #$(basename $(molecule)).csv  plot.settings
@@ -88,6 +102,7 @@ contact: lammps program #$(basename $(molecule)).csv  plot.settings
 
 # Plots all the analysis
 plot: $(all_plots)
+	@echo Generating Plots
 	@touch .make/plot
 	
 plot-order: contact order.plot | order
@@ -95,42 +110,35 @@ plot-order: contact order.plot | order
         gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/order.plot  &> $(LOG);\
     done
 	@touch .make/plot-order
-	@echo order
 
 plot-hist: contact hist.plot | order
 	gnuplot $(my_dir)/gnuplot/hist.plot &> $(LOG)
 	@touch .make/plot-hist
-	@echo hist
 
 plot-frame: contact frame.plot
 	@for file in trj_contact/*.dat; do\
         gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/frame.plot  &> $(LOG);\
     done
 	@touch .make/plot-frame
-	@echo frame
 
 plot-angle: contact angle.plot
 	@for file in trj_contact/*.csv; do\
         gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/angle.plot  &> $(LOG);\
     done
 	@touch .make/plot-angle
-	@echo angle
 
 plot-dynamic: contact dynamic.plot
 	@gnuplot $(my_dir)/gnuplot/dynamic.plot &> $(LOG)
 	@touch .make/plot-dynamic
-	@echo dynamic
 
 plot-short-order: contact short_order.plot
 	@gnuplot $(my_dir)/gnuplot/short_order.plot &> $(LOG)
 	@touch .make/plot-short-order
-	@echo short order
 
 plot-props: lammps
-	python $(PYTHON_LIB)/makeplot.py logs/prod.log props.csv $(thermo)
+	python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
 	gnuplot $(my_dir)/gnuplot/property.plot &> $(LOG)
 	@touch .make/plot-props
-	@echo props
 
 $(basename $(molecule)).csv: $(molecule)
 	#$(BIN_PATH)/analysis -i ../data/$(basename $(molecule)).lammpstrj -o out -x box
@@ -138,7 +146,7 @@ $(basename $(molecule)).csv: $(molecule)
 
 density: contact
 	@echo Calculating density
-	@python $(PYTHON_LIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
+	@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
 	@touch .make/density
 
 settings: $(VAR_MOLECULE) $(VAR_SYSTEM)
@@ -160,10 +168,15 @@ data:
 	@mkdir -p $(PREFIX)/data
 
 restarts:
-	@mkdir -p $(PREFIX)/restarts 
+	@mkdir -p $(PREFIX)/restarts
 
 $(FOLDERS):
 	@-$(MKDIR) -p $@
+=======
+	@mkdir -p $(PREFIX)/restarts
+
+$(FOLDERS):
+	@mkdir -p $@
 
 .PHONY: clean-present
 clean-present:
@@ -209,5 +222,5 @@ clean-restart:
 
 .PHONY: clean-lammps
 clean-lammps:
-	$(foreach folder, $(FOLDERS), $(RM) -rf $(folder);)
+	$(foreach folder, $(FOLDERS), rm -rf $(folder);)
 	rm -f .make/lammps
