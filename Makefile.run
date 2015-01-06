@@ -171,11 +171,6 @@ restarts:
 	@mkdir -p $(PREFIX)/restarts
 
 $(FOLDERS):
-	@-$(MKDIR) -p $@
-=======
-	@mkdir -p $(PREFIX)/restarts
-
-$(FOLDERS):
 	@mkdir -p $@
 
 .PHONY: clean-present
