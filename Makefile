@@ -1,6 +1,6 @@
 
 
-PRE=files data lammps clean-files clean-lammps clean-plot clean-contact clean-all clean-present touch lammps clean-density
+PRE=files data lammps clean-files clean-lammps clean-plot clean-contact clean-all clean-present touch-lammps clean-density
 TARGETS=contact plot density
 PRESENT=grouped individual
 
