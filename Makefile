@@ -1,5 +1,4 @@
 
-
 PRE=files data lammps clean-files clean-lammps clean-plot clean-contact clean-all clean-present touch-lammps clean-density
 TARGETS=contact plot density
 PRESENT=grouped individual
@@ -27,7 +26,6 @@ t_dist = $(word 3, $(subst -,$(space),$(1)) )
 t_theta = $(word 4, $(subst -,$(space),$(1)) )
 t_crys = $(word 4, $(subst -,$(space),$(1)) )
 t_bound = $(word 5, $(subst -,$(space),$(1)) )
-
 
 GOAL=Makefile.run
 LOOP=Makefile.loop
