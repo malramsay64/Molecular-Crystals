@@ -109,36 +109,36 @@ plot-order: contact order.plot | order
 	@for file in order/*; do\
         gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/order.plot  &> $(LOG);\
     done
-	@touch .make/plot-order
+	touch .make/plot-order
 
 plot-hist: contact hist.plot | order
 	gnuplot $(my_dir)/gnuplot/hist.plot &> $(LOG)
-	@touch .make/plot-hist
+	touch .make/plot-hist
 
 plot-frame: contact frame.plot
 	@for file in trj_contact/*.dat; do\
         gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/frame.plot  &> $(LOG);\
     done
-	@touch .make/plot-frame
+	touch .make/plot-frame
 
 plot-angle: contact angle.plot
 	@for file in trj_contact/*.csv; do\
         gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/angle.plot  &> $(LOG);\
     done
-	@touch .make/plot-angle
+	touch .make/plot-angle
 
 plot-dynamic: contact dynamic.plot
 	@gnuplot $(my_dir)/gnuplot/dynamic.plot &> $(LOG)
-	@touch .make/plot-dynamic
+	touch .make/plot-dynamic
 
 plot-short-order: contact short_order.plot
 	@gnuplot $(my_dir)/gnuplot/short_order.plot &> $(LOG)
-	@touch .make/plot-short-order
+	touch .make/plot-short-order
 
 plot-props: lammps
 	python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
 	gnuplot $(my_dir)/gnuplot/property.plot &> $(LOG)
-	@touch .make/plot-props
+	touch .make/plot-props
 
 $(basename $(molecule)).csv: $(molecule)
 	#$(BIN_PATH)/analysis -i ../data/$(basename $(molecule)).lammpstrj -o out -x box
