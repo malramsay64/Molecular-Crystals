@@ -7,15 +7,15 @@ shape=Snowman
 radius=0.637556
 # (1+radius|1.0)
 dist=1+radius
-crys = p2gg
+crys = p2gg p2
 
 theta=
 ratio=
 
 # Simulation Settings
 #
-steps = 400000
-print = 4000
+steps = 4000000
+print = 40000
 #temp = 5.0 4.0 3.0 2.0 1.5 1.0 0.8 0.6 0.4
 #temp = 0.2 0.3 0.4 0.5 0.6 0.8 1.0 1.5 2.0 2.5 3.0 4.0 5.0
 temp = 0.2 0.5 0.8 1.0 1.3 1.6 2.0 2.3 2.6 2.8 2.9 3.0 3.05 3.1 3.13 3.15 3.17 3.2 3.25 3.3 3.5 4.0 4.5 5.0
@@ -37,9 +37,9 @@ thermo=TotEng PotEng Density Press Xy Pxx Pyy
 
 # Path variables
 ifeq ($(SYS_NAME), silica)
-    PREFIX := /tmp3m/mram5995/make_rp
+    PREFIX := /tmp3m/mram5995/make_rp_1
 else
-    PREFIX := $(HOME)/scratch/make_rp
+    PREFIX := $(HOME)/scratch/make_rp_1
 endif
 
 ifeq ($(SYS_NAME), mac)
