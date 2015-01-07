@@ -19,7 +19,7 @@ crys=p2gg pg
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary=1 2
+boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
@@ -32,11 +32,11 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 8000000
+steps = 4000000
 # Print every <N> steps
 print = 4000
 # Number of steps in equilibration (n >= 1)
-equil_steps = 2000000
+equil_steps = 200000
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 
@@ -73,9 +73,9 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 ifeq ($(SYS_NAME), silica)
-    PREFIX := /tmp3m/mram5995/boundary
+    PREFIX := /tmp3m/mram5995/master
 else
-    PREFIX := $(HOME)/scratch/boundary
+    PREFIX := $(HOME)/scratch/master
 endif
 
 # Directory Makefile is located
