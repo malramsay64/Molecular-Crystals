@@ -4,6 +4,12 @@ include system
 BIN_PATH := $(my_dir)/bin/$(SYS_NAME)
 LIB:=$(my_dir)/analysis/lib
 
+empty=
+space=$(empty) $(empty)
+
+GOAL=Makefile.run
+LOOP=Makefile.loop
+
 LOG=out.log
 # C settings
 CC = gcc
@@ -11,6 +17,10 @@ CXX = g++
 CFLAGS = -O2 -std=c99
 CXXFLAGS := -Ofast -std=gnu++11
 LDFLAGS = -lm
+
+ifeq ($(SYS_NAME), unix)
+	CXXFLAGS := $(CXXFLAGS) -pthread -Wl,--no-as-needed
+endif
 
 # Lammps settings
 

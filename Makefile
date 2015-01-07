@@ -12,13 +12,6 @@ MODULES:=$(notdir $(MODULES))
 HEADERS:=$(wildcard $(LIB)/*.h)
 HEADERS:=$(notdir $(HEADERS))
 
-ifeq ($(SYS_NAME), unix)
-	CXXFLAGS := $(CXXFLAGS) -pthread -Wl,--no-as-needed
-endif
-
-empty=
-space=$(empty) $(empty)
-
 reverse = $(if $(wordlist 2,2,$(1)),$(call reverse,$(wordlist 2,$(words $(1)),$(1))) $(firstword $(1)),$(1))
 t_shape = $(word 1, $(subst -,$(space),$(1)) )
 t_rad = $(word 2, $(subst -,$(space),$(1)) )
@@ -27,8 +20,6 @@ t_theta = $(word 4, $(subst -,$(space),$(1)) )
 t_crys = $(word 4, $(subst -,$(space),$(1)) )
 t_bound = $(word 5, $(subst -,$(space),$(1)) )
 
-GOAL=Makefile.run
-LOOP=Makefile.loop
 
 export
 

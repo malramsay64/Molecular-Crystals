@@ -32,7 +32,7 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 4000000
+steps = 400000
 # Print every <N> steps
 print = 4000
 # Number of steps in equilibration (n >= 1)
