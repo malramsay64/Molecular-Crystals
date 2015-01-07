@@ -1,6 +1,6 @@
 
-variable T delete
-variable T equal 3.5
+
+variable Tm equal T+0.5
 
 # Define molecule
 molecule    mymol ${the_path}/data/${molecule}
@@ -61,7 +61,7 @@ thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density
 log     ${my_path}/logs/create.log
 
 # Simulation parameters, bonds not able to move 
-fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
+fix 1 all npt temp ${Tm} ${Tm} 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
 fix 2 all enforce2d
 fix 3 static setforce 0.0 0.0 0.0
 
@@ -72,9 +72,9 @@ dump_modify 2 first yes
 dump_modify 2 pad 10
 
 # Give particles an initial velocity
-velocity mobile create $T 122
+velocity mobile create ${Tm} 122
 run 0
-velocity mobile scale $T
+velocity mobile scale ${Tm}
 
 #timestep 1e-3
 

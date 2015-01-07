@@ -22,16 +22,12 @@ def create(a, b, theta, x, y, phi, molecule, crys, mols=2500, path='.', boundary
         nb = mols/na
         na = int(na)
         nb = int(nb)
-        print boundary, na*nb
         if boundary == 1:
             s.replicate(2*na, nb)
-            print 2*na*nb
         elif boundary == 2:
             s.replicate(na,2*nb)
-            print 2*na*nb
         else:
             s.replicate(na, nb)
-            print na*nb
     filename = "{shape} {radius} {distance} {theta} {crys} {bound}".format(shape=molecule.getName(), radius=molecule.getRadius(), distance=molecule.getDist(), theta=molecule.getTheta(), crys=s.getCrys(), bound=boundary)
     filename = "-".join([x for x in filename.split() if x])
     unitCell.cellFile(s, path, filename)

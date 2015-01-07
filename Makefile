@@ -20,7 +20,6 @@ t_theta = $(word 4, $(subst -,$(space),$(1)) )
 t_crys = $(word 4, $(subst -,$(space),$(1)) )
 t_bound = $(word 5, $(subst -,$(space),$(1)) )
 
-
 export
 
 comp_dist = $(shell echo $(1:radius=$2) |bc)
