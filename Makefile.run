@@ -30,6 +30,7 @@ endif
 ifneq ($(t_crys), )
 ifneq ($(bound), )
     CREATE_IN:=$(BOUNDARY_IN)
+    prev_t = 0.0
 else
     CREATE_IN:=$(CRYS_IN)
     bound:=
@@ -50,10 +51,12 @@ mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(bo
 base=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta)))
 
 all:
-	@echo $(VPATH)
 
 .PHONY:test
 test:
+	@echo $(PREFIX)
+	@echo $(my_dir)
+	@echo $(LAMMPS_IN)
 	@echo $(bound)
 	@echo $(mol)
 	@echo $(SAVE)
@@ -61,13 +64,12 @@ test:
 
 # Create data files for molecule if not already generated
 files: $(mol_settings)
-	@echo $(SAVE)
 
 # Generate crystal from unit cell in svg file
 ifneq ($(t_crys), )
 $(mol_settings): | data
 	@echo Producing unit cell of $(base)
-	tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
+	@tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
 
 # Create initial condition from a lattice with randomly oriented molecules
 else
@@ -79,7 +81,7 @@ endif
 
 $(last_restart): $(mol_settings) | $(FOLDERS) $(mol_settings) restarts
 	@echo Create $(last_restart)
-	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(CREATE_VARS) $(LAMMPS_FLAGS) < $(CREATE_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(CREATE_VARS) $(LAMMPS_FLAGS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
 $(restart): $(last_restart) | $(FOLDERS)
@@ -104,7 +106,7 @@ contact: lammps program #$(basename $(molecule)).csv  plot.settings
 plot: $(all_plots)
 	@echo Generating Plots
 	@touch .make/plot
-	
+
 plot-order: contact order.plot | order
 	@for file in order/*; do\
         gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/order.plot  &> $(LOG);\
@@ -112,7 +114,7 @@ plot-order: contact order.plot | order
 	@touch .make/plot-order
 
 plot-hist: contact hist.plot | order
-	gnuplot $(my_dir)/gnuplot/hist.plot &> $(LOG)
+	@gnuplot $(my_dir)/gnuplot/hist.plot &> $(LOG)
 	@touch .make/plot-hist
 
 plot-frame: contact frame.plot
@@ -136,8 +138,8 @@ plot-short-order: contact short_order.plot
 	@touch .make/plot-short-order
 
 plot-props: lammps
-	python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
-	gnuplot $(my_dir)/gnuplot/property.plot &> $(LOG)
+	@python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
+	@gnuplot $(my_dir)/gnuplot/property.plot &> $(LOG)
 	@touch .make/plot-props
 
 $(basename $(molecule)).csv: $(molecule)

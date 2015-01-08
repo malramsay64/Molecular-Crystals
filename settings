@@ -15,7 +15,7 @@ dist=1.0 1+radius
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=p2gg pg
+crys=pg p2gg p2
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
@@ -73,12 +73,11 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 ifeq ($(SYS_NAME), silica)
-    PREFIX := /tmp3m/mram5995/make_rp
+    PREFIX := /tmp3m/mram5995/melting
 else
     PREFIX := $(HOME)/scratch/melting
 endif
 
 # Directory Makefile is located
 my_dir := $(HOME)/make
-
 

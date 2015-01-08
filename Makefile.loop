@@ -1,3 +1,4 @@
+include vars.mak
 
 t_shape = $(word 1, $(subst -,$(space),$(1)) )
 t_rad = $(word 2, $(subst -,$(space),$(1)) )
@@ -25,6 +26,8 @@ dirs:=$(addprefix $(PREFIX)/,$(save))
 last_t:=$(word 1, $(temp))
 
 OPTIONS = --no-print-directory $(if $(filter $(MAKECMDGOALS), $(PRE)), -j 1)
+
+export
 
 $(MAKECMDGOALS): $(save)
 

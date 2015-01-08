@@ -15,19 +15,21 @@ def name(dir):
     crys = 0
     theta = 0
     if shape == "Snowman":
-        if len(dir.split("-")) == 5:
+        if len(d) == 5:
             shape, temp, radius, dist, crys = d
+        elif len(d) == 6:
+            shape, temp, radius, dist, crys, bound = d
         else:
             shape, temp, radius, dist = d
     elif shape == "Trimer":
         shape, temp, radius, dist, theta = d
-    else: 
+    else:
         print shape
     if theta:
         return r"Trimer: Temp $= {0}$, $r = {1}$, $d = {2}$, $\theta = {3}$".format(temp, radius, dist, theta)
     elif crys:
         return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$, {3}".format(temp, radius, dist, crys)
-    else:    
+    else:
         return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$".format(temp, radius, dist, crys)
 
 

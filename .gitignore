@@ -29,6 +29,11 @@ analysis
 *.csv
 *.out
 
+# PBS files
+*.mak
+nodes.txt
+*.out
+
 # LaTeX output
 output/.output
 
