@@ -1,0 +1,67 @@
+# Using rigid molecules
+
+# Define molecule
+molecule    mymol ${the_path}/data/${molecule}
+
+# Define units and dimensions
+dimension   2
+units       lj
+
+# Define type of atoms
+atom_style  template mymol
+
+# Define interaction potentials
+pair_style  lj/cut 2.5
+pair_modify shift yes
+
+if "${atoms} > 1" then &
+    "bond_style harmonic"
+
+if "${atoms} > 2" then &
+    "angle_style harmonic"
+
+# Read in interaction parameters
+read_data   ${the_path}/data/${mol_settings}
+
+# A density such that no particles overlap
+lattice sq 0.015625
+
+# Create atoms on the lattice within the simulation box
+create_atoms    0 box mol mymol 1
+
+# Give particles an initial velocity
+velocity all create $T 122
+
+# Exclude bonded interactions for MD steps
+neigh_modify exclude molecule all
+
+# Give all atoms the property diameter
+fix 5 all property/atom d_diam
+set type 1 d_diam 2
+variable diam equal ${radius}*2 
+if "${diam} != 2" then &
+    "set type 2 d_diam ${diam}"
+compute diam all property/atom d_diam
+
+# Thermodynamic output
+thermo          100
+thermo_style    custom step temp press etotal ke pe enthalpy density
+
+log     ${my_path}/logs/create.log
+
+# Simulation parameters, bonds not able to move 
+fix 1 all rigid/npt molecule temp $T $T 10 iso ${press} ${press} 10
+fix 2 all enforce2d
+
+# Dump configuration printevery steps. Image is dumped at beginning and end
+dump 2 all image ${steps} ${my_path}/*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
+
+dump_modify 2 first yes
+dump_modify 2 pad 10
+
+timestep 1e-3
+
+run ${steps}
+
+# Write restart before minimisation
+write_restart   ${the_path}/restarts/${last_restart}

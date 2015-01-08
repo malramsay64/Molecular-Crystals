@@ -1,0 +1,42 @@
+
+
+MAKEFILES
+---------
+
+COMMANDS
+
+
+DEFINING MOLECULES
+------------------
+
+SNOWMEN
+- Radius
+- Distance
+
+TRIMERS
+- Radius
+- Distance
+- Theta
+
+SCRIPTS
+
+
+RUNNING MD
+----------
+
+LAMMPS
+
+COOLING
+
+HEATING
+
+Defining Crystals
+
+
+ANALYSIS
+--------
+
+PROGRAM
+
+PLOTS
+

@@ -69,7 +69,7 @@ class cell:
             for j in xrange(ny):
                 for mol in base:
                     mnew = copy(mol)
-                    mnew.translate(i*a - j*b*sin(theta-pi/2), j*self.getHeight())
+                    mnew.translate(i*a + j*b*cos(theta), j*self.getHeight())
                     new.append(mnew)
 
         self.a = nx*a
@@ -152,7 +152,19 @@ class p2(cell):
         #self.rotation(1,2,1)
         self.crys = "p2"
 
-def lammpsFile(cell,path='.'):
+class pg(cell):
+    def __init__(self, a, b, theta, x, y, phi, mol):
+        self.a = a
+        self.b = b
+        self.theta = theta
+        self.mol = mol
+        self.mols = []
+        self.addMol(x,y,pi-phi)
+        self.addMol(1-x,0.5+y,pi+phi)
+        self.crys = "pg"
+
+
+def lammpsFile(cell,path='.', filename=""):
     mol = cell.getMol()
     a,b,theta = cell.getShape()
     xy = 0
@@ -179,10 +191,11 @@ def lammpsFile(cell,path='.'):
                     diam=2*atom.getSize(), x=x, y=y, z=0)
             atomID += 1
         molID += 1
-    if mol.getAngles():
-        filename="{shape}-{radius}-{dist}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
-    else:
-        filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
+    if not filename:
+        if mol.getAngles():
+            filename="{shape}-{radius}-{dist}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
+        else:
+            filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
     f = open('{path}/{filename}.lammpstrj'.format(path=path, filename=filename),'w')
     f.write(string)
     f.close()
@@ -192,7 +205,7 @@ def wrap(x, a):
     x = (atan2(sin(x),cos(x))+pi)*(a/(2*pi))
     return x
 
-def cellFile(cell,path='.'):
+def cellFile(cell,path='.', filename=""):
     mol = cell.getMol()
     a,b,theta = cell.getShape()
     string = ""
@@ -224,17 +237,18 @@ def cellFile(cell,path='.'):
     for t in mol.getAtomTypes():
         string += '{0} {strength} {dist}\n'.format(t.getType(), strength=1, dist=2*t.getSize())
     string += "\nAtoms\n"
-    if mol.getAngles():
-        filename="{shape}-{radius}-{dist}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
-    elif cell.getCrys():
-        filename="{shape}-{radius}-{dist}-{crys}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, crys=cell.getCrys())
-    else:
-        filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
+    if not filename:
+        if mol.getAngles():
+            filename="{shape}-{radius}-{dist}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
+        elif cell.getCrys():
+            filename="{shape}-{radius}-{dist}-{crys}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, crys=cell.getCrys())
+        else:
+            filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
     f = open('{path}/{filename}.dat'.format(path=path, filename=filename),'w')
     f.write(string)
     f.close()
 
-def molFile(molecule, path='.', crys = ""):
+def molFile(molecule, path='.', crys = "", filename=""):
     string = ''
     string += '# Defining the {0} molecule\n\n'.format(molecule.getName())
     string += '{0}  atoms\n'.format(molecule.numAtoms())
@@ -277,12 +291,13 @@ def molFile(molecule, path='.', crys = ""):
                     ' '.join(str(v) for v in molecule.get12(atom.getID())),\
                     ' '.join(str(v) for v in molecule.get13(atom.getID())))
     # Write to file
-    if molecule.getAngles():
-        filename="{shape}-{radius}-{dist}-{theta}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, theta=molecule.theta)
-    elif crys:
-        filename="{shape}-{radius}-{dist}-{crys}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, crys=crys)
-    else:
-        filename="{shape}-{radius}-{dist}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist)
+    if not filename:
+        if molecule.getAngles():
+            filename="{shape}-{radius}-{dist}-{theta}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, theta=molecule.theta)
+        elif crys:
+            filename="{shape}-{radius}-{dist}-{crys}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, crys=crys)
+        else:
+            filename="{shape}-{radius}-{dist}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist)
 
     f = open('{path}/{filename}.mol'.format(path=path,filename=filename), 'w')
     f.write(string)

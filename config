@@ -4,20 +4,31 @@ include system
 BIN_PATH := $(my_dir)/bin/$(SYS_NAME)
 LIB:=$(my_dir)/analysis/lib
 
+empty=
+space=$(empty) $(empty)
+
+GOAL=Makefile.run
+LOOP=Makefile.loop
+
 LOG=out.log
 # C settings
 CC = gcc
 CXX = g++
-CFLAGS = -O2 -std=c99 
-CXXFLAGS := -O2 -std=c++11 
-LDFLAGS = -lm -lpthread 
+CFLAGS = -O2 -std=c99
+CXXFLAGS := -Ofast -std=gnu++11
+LDFLAGS = -lm
+
+ifeq ($(SYS_NAME), unix)
+	CXXFLAGS := $(CXXFLAGS) -pthread -Wl,--no-as-needed
+endif
 
 # Lammps settings
 
-LAMMPS_IN=$(my_dir)/in.molecular
-EQUIL_IN=$(my_dir)/in.equil
-CREATE_IN=$(my_dir)/in.create
-CRYS_IN=$(my_dir)/in.crys
+LAMMPS_IN=$(my_dir)/lammps_in/in.molecular
+EQUIL_IN=$(my_dir)/lammps_in/in.equil
+CREATE_IN=$(my_dir)/lammps_in/in.create
+CRYS_IN=$(my_dir)/lammps_in/in.crys
+BOUNDARY_IN=$(my_dir)/lammps_in/in.boundary
 
 LAMMPS_VARS+=-v fname $(LAMMPS_IN)
 
@@ -47,7 +58,7 @@ LAMMPS_VARS=$(LAMMPS_SYS_VARS) $(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL
 
 EQUIL_VARS=$(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL_VARS) -v steps $(equil_steps) 
 
-CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $$(prev_t) -v press $$(pressure) -v steps $(equil_steps)  
+CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $$(prev_t) -v press $$(pressure) -v steps $(equil_steps)
 
 # MPI Settings
 
@@ -66,18 +77,10 @@ endif
 # Python settings
 
 PYTHON_FILES=molecule.py files.py
-PYTHON_LIB:=$(my_dir)/pylib
+PYLIB:=$(my_dir)/pylib
 FILES=files.py
 CRYS_FILE=createCells.py
 PYTHON=python
 
 # Variable Settings
 
-VAR_MOLECULE=mol.settings
-VAR_SYSTEM=system.settings
-
-# Shell settings
-
-MKDIR=mkdir
-TOUCH=touch
-RM=rm
