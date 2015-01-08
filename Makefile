@@ -6,25 +6,9 @@ PRESENT=grouped individual
 include settings
 include config
 
-MODULES:=$(wildcard $(LIB)/*.cpp)
-MODULES:=$(MODULES:.cpp=.o)
-MODULES:=$(notdir $(MODULES))
-HEADERS:=$(wildcard $(LIB)/*.h)
-HEADERS:=$(notdir $(HEADERS))
-
-reverse = $(if $(wordlist 2,2,$(1)),$(call reverse,$(wordlist 2,$(words $(1)),$(1))) $(firstword $(1)),$(1))
-t_shape = $(word 1, $(subst -,$(space),$(1)) )
-t_rad = $(word 2, $(subst -,$(space),$(1)) )
-t_dist = $(word 3, $(subst -,$(space),$(1)) )
-t_theta = $(word 4, $(subst -,$(space),$(1)) )
-t_crys = $(word 4, $(subst -,$(space),$(1)) )
-t_bound = $(word 5, $(subst -,$(space),$(1)) )
-
 export
 
-comp_dist = $(shell echo $(1:radius=$2) |bc)
-
-# Shape
+# Generating all shapes {{{
 mol := $(shape)
 # Radius
 mol := $(if $(radius), $(foreach rad, $(radius), $(addsuffix -$(rad), $(mol))), $(mol)) 
@@ -52,8 +36,7 @@ ifneq ($(strip $(boundary)),)
 else
     CREATE_VARS += -v boundary 0
 endif
-
-SAVE = $(subst $(space),-,$(strip $(call t_shape, $1) $t $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1) $(call t_bound, $1)))
+#}}}
 
 VPATH=.:$(BIN_PATH):$(LIB)
 
@@ -71,8 +54,22 @@ collate:
 	$(eval fs = $(basename $(shell ls plots/*.csv)))
 	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
 
-$(mol): always | $(PREFIX)
+$(mol): vars.mak always | $(PREFIX)
+ifeq ($(SYS_NAME), silica)
+	@qsub -N $@ -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
+else
 	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+endif
+
+vars.mak: always
+	@rm -f $@
+	@$(foreach V,\
+    $(sort $(.VARIABLES)),\
+    $(if\
+        $(filter-out environment% default automatic, $(origin $V)),\
+        echo '$V=$(value $V)' >> $@;\
+        )\
+    )
 
 $(TARGETS): program $(mol)
 
@@ -116,3 +113,5 @@ clean:
 delete:
 	-rm -r $(PREFIX)/*
 
+
+# vim:foldmethod=marker:foldlevel=0

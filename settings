@@ -15,11 +15,11 @@ dist=1.0 1+radius
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=p2gg pg
+crys=pg p2gg p2
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary=
+boundary=1 2
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
@@ -32,13 +32,13 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 400000
+steps = 4000
 # Print every <N> steps
-print = 4000
+print = 400
 # Number of steps in equilibration (n >= 1)
-equil_steps = 200000
+equil_steps = 2000
 # Number of molecules (won't be exact, tries to keep simulation square)
-n_mol = 2500
+n_mol = 360
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
@@ -46,8 +46,8 @@ n_mol = 2500
 #temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
 # Cooling run
 #temp = 5.0 4.0 3.0 2.0 1.5 1.0 0.8 0.6 0.4
-temp_1.0 = 0.70
-temp_1.637556 = 2.60
+temp_1.0 = 0.65 0.7
+temp_1.637556 = 2.50 2.60
 # MP Run
 #temp_1.0 = 0.2 0.3 0.4 0.5 0.6 0.65 0.7 0.72 0.75 0.77 0.8 0.85 0.87 0.9 0.95 1.0 1.05 1.1 1.2 1.5 2.0 3.0 5.0
 # MP Run
@@ -73,12 +73,11 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 ifeq ($(SYS_NAME), silica)
-    PREFIX := /tmp3m/mram5995/master
+    PREFIX := /tmp3m/mram5995/pbs
 else
-    PREFIX := $(HOME)/scratch/master
+    PREFIX := $(HOME)/scratch/pbs
 endif
 
 # Directory Makefile is located
 my_dir := $(HOME)/make
-
 

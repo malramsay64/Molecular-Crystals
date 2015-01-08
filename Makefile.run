@@ -30,10 +30,10 @@ endif
 ifneq ($(t_crys), )
 ifneq ($(bound), )
     CREATE_IN:=$(BOUNDARY_IN)
+    prev_t = 0.0
 else
     CREATE_IN:=$(CRYS_IN)
     bound:=
-    prev_t = $(temp)
 endif
 endif
 
@@ -54,6 +54,9 @@ all:
 
 .PHONY:test
 test:
+	@echo $(PREFIX)
+	@echo $(my_dir)
+	@echo $(LAMMPS_IN)
 	@echo $(bound)
 	@echo $(mol)
 	@echo $(SAVE)

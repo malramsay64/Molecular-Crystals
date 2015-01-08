@@ -1,6 +1,6 @@
 
 
-variable Tm equal T+0.5
+variable Tm equal $T+0.5
 
 # Define molecule
 molecule    mymol ${the_path}/data/${molecule}

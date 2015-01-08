@@ -1,8 +1,14 @@
+
+# Path Settings {{{
+
 include system
 
 #my_dir := $(dir $(word $(words $(MAKEFILE_LIST)), $(MAKEFILE_LIST)))
 BIN_PATH := $(my_dir)/bin/$(SYS_NAME)
 LIB:=$(my_dir)/analysis/lib
+
+# }}}
+# Variables {{{
 
 empty=
 space=$(empty) $(empty)
@@ -11,7 +17,29 @@ GOAL=Makefile.run
 LOOP=Makefile.loop
 
 LOG=out.log
-# C settings
+
+
+# }}}
+# Shape functions {{{
+
+
+reverse = $(if $(wordlist 2,2,$(1)),$(call reverse,$(wordlist 2,$(words $(1)),$(1))) $(firstword $(1)),$(1))
+
+comp_dist = $(shell echo $(1:radius=$2) |bc)
+
+SAVE = $(subst $(space),-,$(strip $(call t_shape, $1) $t $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1) $(call t_bound, $1)))
+
+t_shape = $(word 1, $(subst -,$(space),$(1)) )
+t_rad = $(word 2, $(subst -,$(space),$(1)) )
+t_dist = $(word 3, $(subst -,$(space),$(1)) )
+t_theta = $(word 4, $(subst -,$(space),$(1)) )
+t_crys = $(word 4, $(subst -,$(space),$(1)) )
+t_bound = $(word 5, $(subst -,$(space),$(1)) )
+
+
+
+# }}}
+# C settings {{{
 CC = gcc
 CXX = g++
 CFLAGS = -O2 -std=c99
@@ -22,7 +50,14 @@ ifeq ($(SYS_NAME), unix)
 	CXXFLAGS := $(CXXFLAGS) -pthread -Wl,--no-as-needed
 endif
 
-# Lammps settings
+MODULES:=$(wildcard $(LIB)/*.cpp)
+MODULES:=$(MODULES:.cpp=.o)
+MODULES:=$(notdir $(MODULES))
+HEADERS:=$(wildcard $(LIB)/*.h)
+HEADERS:=$(notdir $(HEADERS))
+
+#}}}
+# Lammps settings {{{
 
 LAMMPS_IN=$(my_dir)/lammps_in/in.molecular
 EQUIL_IN=$(my_dir)/lammps_in/in.equil
@@ -60,7 +95,8 @@ EQUIL_VARS=$(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL_VARS) -v steps $(eq
 
 CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $$(prev_t) -v press $$(pressure) -v steps $(equil_steps)
 
-# MPI Settings
+#}}}
+# MPI Settings {{{
 
 ifeq ($(SYS_NAME), mac)
 	MPI=mpirun -np 8
@@ -73,8 +109,8 @@ else
     endif
 endif
 
-
-# Python settings
+#}}}
+# Python settings {{{
 
 PYTHON_FILES=molecule.py files.py
 PYLIB:=$(my_dir)/pylib
@@ -82,5 +118,8 @@ FILES=files.py
 CRYS_FILE=createCells.py
 PYTHON=python
 
-# Variable Settings
+#}}}
+# Variable Settings {{{
 
+#}}}
+# vim:foldmethod=marker:foldlevel=0
