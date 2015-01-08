@@ -253,6 +253,18 @@ class Molecule:
             str += "{x} {y} {size}\n".format(x=x,y=y,size=atom.getSize())
         return str
 
+    def getDist(self):
+        return self.dist
+
+    def getRadius(self):
+        return self.radius
+
+    def getTheta(self):
+        try:
+            return self.theta
+        except AttributeError:
+            return ''
+
 class Snowman(Molecule):
     """Creates a snowman molecule with a single degree of freedom
        in the size of the second atom. The first atom has size 1 

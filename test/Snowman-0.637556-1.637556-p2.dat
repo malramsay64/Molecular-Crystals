@@ -1,0 +1,34 @@
+# Unit cell data for Snowman molecule
+
+4   atoms
+2   atom types
+1   extra bond per atom
+0   extra angle per atom
+
+0 4.058101     xlo xhi
+0 3.183253     ylo yhi
+0 0 0   xy xz yz
+
+
+Atoms
+
+1 1 1 1 1 2.04613115011 1.01654493106 0
+2 1 1 2 2 0.71540516218 0.0622085133334 0
+3 2 1 1 1 3.92390288317 1.52857033908 0
+4 2 1 2 2 5.25462887109 2.4829067568 0
+
+Bond Coeffs
+
+1 500 1.637556
+
+Masses
+
+1 1
+2 1
+
+Pair Coeffs
+
+1 1 2.0
+2 1 1.275112
+
+Atoms

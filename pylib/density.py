@@ -38,11 +38,10 @@ class thermo():
         for i in xrange(len(self.data[px])):
             f.write("{0},{1}\n".format(self.data[px][i],",".join([str(self.data[h][i]) for h in py])))
 
-        
 
 def area(r, dist):
     return math.pi*(1+r**2) - overlap(1, r, dist)
-    
+
 def area3(r, dist, theta):
     d2 = math.sqrt(2*dist**2 + 2*dist*math.cos(theta))
     return math.pi*(1+2*r**2) - 2*overlap(1,r,dist) - overlap(r,r,d2)
@@ -60,13 +59,12 @@ def overlap(r1,r2,d):
     sec2 = 0.5*theta2*r2**2
     quad = dist*height
     return sec1 + sec2 - quad
-         
 
 def coverage(r,dist,density):
     a = area(r, dist)
-    a /= 2 
+    a /= 2
     return density*a
-    
+
 def coverage3(r,dist,theta,density):
     a = area3(r,dist,theta)
     a /= 3
@@ -80,7 +78,7 @@ if __name__ == "__main__" :
         filename = '1.log'
     f = thermo(filename)
     print 'Density: {0:.4f}'.format(f.last('Density'))
-    print 'Total Energy: {0:.4f}'.format(f.last('TotEng'))
+    #print 'Total Energy: {0:.4f}'.format(f.last('TotEng'))
     if len(sys.argv) == 4:
         r = float(sys.argv[2])
         dist = float(sys.argv[3])
@@ -94,4 +92,3 @@ if __name__ == "__main__" :
         except ValueError:
             print 'Packing Fraction: {0:.4f}'.format(coverage(r, dist, float(f.last('Density'))))
     f.output('energy.csv', "TotEng") 
-    
