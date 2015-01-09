@@ -94,10 +94,10 @@ program: $(MODULES) $(HEADERS)
 	@ln -sf $(BIN_PATH)/program test/program
 
 $(BIN_PATH):
-	mkdir -p $(BIN_PATH)
+	@mkdir -p $(BIN_PATH)
 
 $(PREFIX):
-	mkdir $(PREFIX)
+	@mkdir $(PREFIX)
 
 .PHONY: always
 always:
