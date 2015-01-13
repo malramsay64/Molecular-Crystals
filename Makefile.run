@@ -30,13 +30,12 @@ endif
 ifneq ($(t_crys), )
 ifneq ($(bound), )
     CREATE_IN:=$(BOUNDARY_IN)
-    prev_t = 0.0
+	override prev_t := 0.0
 else
     CREATE_IN:=$(CRYS_IN)
     bound:=
 endif
 endif
-
 SAVE:=$(mol)
 
 # Filenames generated from properties
