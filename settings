@@ -1,6 +1,6 @@
 include system
 
-# Molecule Settings
+# Molecule Settings {{{
 # -----------------
 
 # Shape (Snowman|Trimer)
@@ -28,7 +28,8 @@ theta=
 # Size ratio of two small particles in trimer
 ratio=
 
-# Simulation Settings
+# }}}
+# Simulation Settings {{{
 # -------------------
 
 # Number of steps
@@ -46,8 +47,8 @@ n_mol = 2500
 #temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
 # Cooling run
 #temp = 5.0 4.0 3.0 2.0 1.5 1.0 0.8 0.6 0.4
-temp_1.0 = 0.65 0.67 0.70
-temp_1.637556 = 2.50 2.55 2.60
+temp_1.0 = 0.50 0.55 0.60 0.65 0.70
+temp_1.637556 = 2.40 2.45 2.48 2.50 2.52 2.55 2.60
 # MP Run
 #temp_1.0 = 0.2 0.3 0.4 0.5 0.6 0.65 0.7 0.72 0.75 0.77 0.8 0.85 0.87 0.9 0.95 1.0 1.05 1.1 1.2 1.5 2.0 3.0 5.0
 # MP Run
@@ -55,8 +56,8 @@ temp_1.637556 = 2.50 2.55 2.60
 
 pressure = 13.5
 density = 0.015625
-
-# Plot Settings
+# }}}
+# Plot Settings {{{
 # -------------
 
 # !!! Not currently used
@@ -67,18 +68,21 @@ reference=mol
 # Need to update gnuplot/properties.plot when changing
 thermo=PotEng TotEng Density Press Xy Pxx Pyy
 
-# Path variables
+# }}}
+# Path variables {{{
 # --------------
 
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 ifeq ($(SYS_NAME), silica)
-    PREFIX := /tmp3m/mram5995/boundary
+    PREFIX := /tmp3m/mram5995/crystallising
 else
-    PREFIX := $(HOME)/scratch/boundary
+    PREFIX := $(HOME)/scratch/crystallising
 endif
 
 # Directory Makefile is located
 my_dir := $(HOME)/make
 
+# }}}
 
+# vim:filetype=make:foldmethod=marker:foldlevel=0
