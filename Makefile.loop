@@ -36,7 +36,7 @@ $(save): always | $(dirs)
 	@$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
 
 $(dirs):
-	-mkdir $@
+	@-mkdir $@
 
 .PHONY:always
 always:
