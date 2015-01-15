@@ -187,6 +187,20 @@ def data(dir, dataDir, caption=0):
     print r"\captionof{{table}}{{{name}}}".format(name=caption)
     print r"\end{minipage}"
 
+def shortOrderHist(dir, plotDir, caption=0):
+    if not caption:
+        caption = name(dir)
+    pDir = plotDir.format(dir=dir)
+    plots = ["short_order_hist"]
+    print r"\begin{minipage}{0.5\textwidth}" 
+    print r"\begin{figure}[H]"
+    print r"\centering"
+    print r"\includegraphics[width=\mywidth]{{{0}}}".format(pDir+plots[-1])
+    print r"\caption{{{name}}}".format(name=caption)
+    print r"\end{figure}"
+    print r"\end{minipage}"
+
+
 def props(dir, plotDir, caption=0):
     if not caption:
         caption = name(dir)

@@ -16,7 +16,7 @@ imageext = ".jpg"
 prefix = sys.argv[1]
 dirs = glob.glob("{prefix}/*-*-*".format(prefix=prefix))
 
-plots = [(order, orderDir,"Order Parameter"), (discs, trjDir, "Configuration"), (angles, trjDir,"Angle Distribution"), (shortOrder, plotDir, "Short Range Ordering"), (msd, plotDir, "Mean Squared Displacement"), (rotation, plotDir, "Rotational Relaxation"), (histogram, plotDir, "Contact Number"), (props, plotDir, "Properties"), (data, plotDir, "Data")]
+plots = [(order, orderDir,"Order Parameter"), (discs, trjDir, "Configuration"), (angles, trjDir,"Angle Distribution"), (shortOrder, plotDir, "Short Range Ordering"), (msd, plotDir, "Mean Squared Displacement"), (rotation, plotDir, "Rotational Relaxation"), (histogram, plotDir, "Contact Number"), (props, plotDir, "Properties"), (data, plotDir, "Data"), (shortOrderHist, plotDir, "Short Order Histogram")]
 
 #print prefix
 print r"\section{{{}}}".format(name(prefix))

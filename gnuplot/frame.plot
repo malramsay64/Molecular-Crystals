@@ -1,5 +1,5 @@
 #set terminal pdf enhanced
-set terminal png enhanced transparent truecolor size 6400,6400
+set terminal png enhanced transparent truecolor size 3200,3200
 
 file = filename.'.dat'
 

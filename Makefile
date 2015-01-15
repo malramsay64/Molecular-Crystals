@@ -3,6 +3,8 @@ PRE=files data lammps clean-files clean-lammps clean-plot clean-contact clean-al
 TARGETS=contact plot density
 PRESENT=grouped individual
 
+latex-flags= --output-dir=output/.output -interaction=batchmode
+
 include settings
 include config
 
@@ -78,8 +80,8 @@ $(PRE): $(mol)
 $(PRESENT): collate
 	@echo $@
 	@python output/$@.py $(PREFIX) > output/$@.out
-	@pdflatex -draftmode -interaction=batchmode --output-dir=output/.output output/$@.tex #> $(LOG)
-	@pdflatex -interaction=batchmode --output-dir=output/.output output/$@.tex #> $(LOG)
+	@pdflatex -draftmode $(latex-flags) output/$@.tex
+	@pdflatex $(latex-flags) output/$@.tex
 	@mv output/.output/$@.pdf .
 
 present: program $(mol) $(PRESENT)

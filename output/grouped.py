@@ -22,7 +22,7 @@ imageext = ".jpg"
 
 unused = [(images, imageDir, "State")]
 
-plots = [(order, orderDir,"Order Parameter"), (discs, trjDir, "Configuration"), (angles, trjDir,"Angle Distribution"), (shortOrder, plotDir, "Short Range Ordering"), (msd, plotDir, "Mean Squared Displacement"), (rotation, plotDir, "Rotational Relaxation"), (histogram, plotDir, "Contact Number"), (props, plotDir, "Properties"), (data, plotDir, "Data")]
+plots = [(order, orderDir,"Order Parameter"), (discs, trjDir, "Configuration"), (angles, trjDir,"Angle Distribution"), (shortOrder, plotDir, "Short Range Ordering"), (msd, plotDir, "Mean Squared Displacement"), (rotation, plotDir, "Rotational Relaxation"), (histogram, plotDir, "Contact Number"), (props, plotDir, "Properties"), (data, plotDir, "Data"), (shortOrderHist, plotDir, "Short Order Histogram") ]
 
 dirs = glob.glob("{prefix}/*-*-*".format(prefix=prefix))
 dirs.sort()

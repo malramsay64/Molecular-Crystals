@@ -45,7 +45,7 @@ t_bound = $(word 5, $(subst -,$(space),$(1)) )
 CC = gcc
 CXX = g++
 CFLAGS = -O2 -std=c99
-CXXFLAGS := -Ofast -std=gnu++11
+CXXFLAGS := -Ofast -stdlib=libc++ -std=gnu++11
 LDFLAGS = -lm
 
 ifeq ($(SYS_NAME), unix)
