@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from create import *
+import create
 import os
 import glob
 import sys
@@ -12,26 +12,14 @@ else:
 
 theta = 0
 
-orderDir = "{dir}/order/"
-imageDir = "{dir}/images/"
-plotDir = "{dir}/"
-trjDir = "{dir}/trj_contact/"
-
-plotext = ".png"
-imageext = ".jpg"
-
-unused = [(images, imageDir, "State")]
-
-plots = [(order, orderDir,"Order Parameter"), (discs, trjDir, "Configuration"), (angles, trjDir,"Angle Distribution"), (shortOrder, plotDir, "Short Range Ordering"), (msd, plotDir, "Mean Squared Displacement"), (rotation, plotDir, "Rotational Relaxation"), (histogram, plotDir, "Contact Number"), (props, plotDir, "Properties"), (data, plotDir, "Data"), (shortOrderHist, plotDir, "Short Order Histogram") ]
-
 dirs = glob.glob("{prefix}/*-*-*".format(prefix=prefix))
 dirs.sort()
 
-collated("", "plots/", "Temperature Dependence") 
+create.collated("", "plots/", "Temperature Dependence") 
 
-for plot, itsDir, text in plots:
-    print r"\section{{{text}}}".format(text=text)
-    for dir in dirs:
+for filename, caption in create.plots:
+    print r"\section{{{text}}}".format(text=caption)
+    for d in dirs:
     # Find plots and images in folder
-        plot(dir, itsDir)
+        create.figure(d, filename)
 
