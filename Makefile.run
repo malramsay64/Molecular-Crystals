@@ -88,7 +88,7 @@ $(restart): $(last_restart) | $(FOLDERS)
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(EQUIL_VARS) $(LAMMPS_FLAGS) < $(EQUIL_IN) > $(LOG)
 
 # Production run, has already been equilibrated
-lammps: $(LAMMPS_IN) $(restart) | .make
+lammps: $(restart) | .make
 	@echo Production $(SAVE)
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_VARS) $(LAMMPS_FLAGS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
