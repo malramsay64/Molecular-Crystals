@@ -1,6 +1,6 @@
 
 PRE=files data lammps clean-files clean-lammps clean-plot clean-contact clean-all clean-present touch-lammps clean-density
-TARGETS=contact plot density
+TARGETS=contact plot density movie
 PRESENT=grouped individual
 
 latex-flags= --output-dir=output/.output -interaction=batchmode
