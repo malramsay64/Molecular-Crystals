@@ -39,10 +39,10 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 100000
+steps = 1000000
 
 # Print every <N> steps
-print = 1000
+print = 10000
 
 # Number of steps in equilibration (n >= 1)
 equil_steps = 200000
@@ -52,7 +52,7 @@ n_mol = 360
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp = 2.80
+temp = 3.5
 # Heating run
 #temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
 # Cooling run
