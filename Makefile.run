@@ -104,7 +104,6 @@ contact: lammps program #$(basename $(molecule)).csv  plot.settings
 	@touch .make/contact
 
 movie: contact
-	$(vmd) -e $(my_dir)/movie.tcl
 
 # Plots all the analysis
 plot: $(all_plots)

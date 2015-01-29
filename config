@@ -124,6 +124,8 @@ PYTHON=python
 # VMD Settings {{{
 vmd='/Applications/VMD.app/Contents/Resources/VMD.app/Contents/MacOS/VMD'
 
+vmd_in=$(my_path)/all_movies.tcl
+
 # }}}
 #Variable Settings {{{
 

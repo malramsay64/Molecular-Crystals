@@ -56,6 +56,9 @@ collate:
 	$(eval fs = $(basename $(shell ls plots/*.csv)))
 	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
 
+movie: $(mol)
+	@$(vmd) -e $(vmd_in) -args $(PREFIX)
+
 $(mol): vars.mak always | $(PREFIX)
 ifeq ($(SYS_NAME), silica)
 	@qsub -N $@ -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
