@@ -6,7 +6,7 @@ molecule    mymol ${the_path}/data/${molecule}
 read_restart ${the_path}/restarts/${last_restart}
 
 # Thermodynamic output
-thermo          100
+thermo          1000
 thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density lx ly xy
 
 log     ${my_path}/logs/equil.log

@@ -8,7 +8,7 @@ read_restart ${the_path}/restarts/${restart}
 reset_timestep  0
 
 # Thermodynamic output
-thermo          100
+thermo          1000
 thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density lx ly xy
 
 # log file name
