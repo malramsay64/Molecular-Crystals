@@ -52,7 +52,7 @@ n_mol = 1200
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp = 2.3 2.4 2.5 2.6
+temp = 2.1 2.2 2.3 2.4 2.5 2.6
 # Heating run
 #temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
 # Cooling run
@@ -76,13 +76,14 @@ density = 0.015625
 # Plot Settings {{{
 # -------------
 
-# !!! Not currently used
-# Options are (box|mol)
-reference=mol
-
 # Options are (Step|Temp|Pxx|Pyy|Pxy|TotEng|KinEng|PotEng|Enthalpy|Density|P|LX|Ly|Xy)
 # Need to update gnuplot/properties.plot when changing
 thermo=PotEng TotEng Density Press Xy Pxx Pyy
+
+# Ouput files to plot
+# (order|frame|angles|short_order|msd|rotations|contact|properties|short_hist|radial|values))
+# All
+#output = order frame angles short_order msd rotations contact properties short_hist radial values
 
 # }}}
 # Path variables {{{

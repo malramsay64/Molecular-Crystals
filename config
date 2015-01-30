@@ -124,7 +124,7 @@ PYTHON=python
 # VMD Settings {{{
 vmd='/Applications/VMD.app/Contents/Resources/VMD.app/Contents/MacOS/VMD'
 
-vmd_in=$(my_path)/all_movies.tcl
+vmd_in=$(my_dir)/all_movies.tcl
 
 # }}}
 #Variable Settings {{{
@@ -132,4 +132,4 @@ vmd_in=$(my_path)/all_movies.tcl
 #}}}
 #
 
-# vim:foldmethod=marker:foldlevel=0
+# vim:foldmethod=marker:foldlevel=0:filetype=make

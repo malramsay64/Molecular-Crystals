@@ -9,10 +9,12 @@ set files [glob $prefix/*-*-*]
 puts $files
 
 foreach f $files {
-
+    puts $f/trj/movie.lammpstrj
     mol new $f/trj/movie.lammpstrj
+    set fname [file tail $f]
+    puts $fname
 
-    mol rename [file tail $f]
+    mol rename top $fname
 
     mol modselect 0 top type 1
     mol modstyle 0 top VDW 0.8
