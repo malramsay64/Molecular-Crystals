@@ -48,6 +48,7 @@ export $(addprefix temp_, $(distances))
 ##########################################################################################
 
 all: program
+	echo $(SYS_NAME)
 
 collate: $(mol)
 	@echo Creating T-dependent plots

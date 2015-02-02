@@ -1,8 +1,7 @@
 # 
 
-
 # Path Settings {{{
-
+ 
 include system
 
 #my_dir := $(dir $(word $(words $(MAKEFILE_LIST)), $(MAKEFILE_LIST)))
@@ -69,14 +68,15 @@ BOUNDARY_IN=$(my_dir)/lammps_in/in.boundary
 
 LAMMPS_VARS+=-v fname $(LAMMPS_IN)
 
-ifeq ($(SYS_NAME), mac)
+
+ifeq ($(SYS_NAME), gaucho)
 	LAMMPS_PATH=
 	LAMMPS=lmp_mac_mpi
-	#LAMMPS_FLAGS=-sf gpu -pk gpu 1
-else 
-    ifeq ($(SYS_NAME), unix)
-	    LAMMPS_PATH=/home/malcolm/bin/
-	    LAMMPS=lmp_ubuntu
+	LAMMPS_FLAGS=
+else
+    ifeq ($(SYS_NAME), mac)
+	    LAMMPS_PATH=
+	    LAMMPS=lmp_mac_mpi
     else
 	    LAMMPS_PATH=
 	    LAMMPS=lmp_mpi
@@ -100,16 +100,7 @@ CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $$(prev_t) -v press $$(press
 #}}}
 # MPI Settings {{{
 
-ifeq ($(SYS_NAME), mac)
-	MPI=mpirun -np 8
-else 
-    ifeq ($(SYS_NAME), silica )
-	    MPI_PATH=
-	    MPI=mpirun -np 8
-    else
-	    MPI=mpirun -np 8
-    endif
-endif
+MPI=mpirun -np 8
 
 #}}}
 # Python settings {{{
@@ -130,6 +121,5 @@ vmd_in=$(my_dir)/all_movies.tcl
 #Variable Settings {{{
 
 #}}}
-#
 
 # vim:foldmethod=marker:foldlevel=0:filetype=make

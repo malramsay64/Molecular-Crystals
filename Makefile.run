@@ -84,17 +84,17 @@ endif
 
 $(last_restart): $(mol_settings) | $(FOLDERS) $(mol_settings) restarts
 	@echo Create $(last_restart)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(CREATE_VARS) $(LAMMPS_FLAGS) < $(CREATE_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
 $(restart): $(last_restart) | $(FOLDERS)
 	@echo Equil $(restart) from $(last_restart)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(EQUIL_VARS) $(LAMMPS_FLAGS) < $(EQUIL_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(EQUIL_VARS) < $(EQUIL_IN) > $(LOG)
 
 # Production run, has already been equilibrated
 lammps: $(restart) | .make
 	@echo Production $(SAVE)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_VARS) $(LAMMPS_FLAGS) < $(LAMMPS_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
 
 # Analysis of run, both static and dynamic quantities
