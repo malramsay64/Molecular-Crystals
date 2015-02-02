@@ -48,15 +48,19 @@ export $(addprefix temp_, $(distances))
 ##########################################################################################
 
 all: program
+	echo $(SYS_NAME)
 
-collate:
+collate: $(mol)
 	@echo Creating T-dependent plots
 	@-rm -f plots/*
 	@$(foreach m, $(mol), python pylib/collate.py $(PREFIX)/$(strip $(m));)
 	$(eval fs = $(basename $(shell ls plots/*.csv)))
 	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
 
-$(mol): vars.mak always | $(PREFIX)
+movie: $(mol)
+	@$(vmd) -e $(vmd_in) -args $(PREFIX)
+
+$(mol): program vars.mak always | $(PREFIX)
 ifeq ($(SYS_NAME), silica)
 	@qsub -N $@ -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
 else
@@ -73,11 +77,11 @@ vars.mak: always
         )\
     )
 
-$(TARGETS): program $(mol)
+$(TARGETS): $(mol)
 
 $(PRE): $(mol)
 
-$(PRESENT): collate
+$(PRESENT): program collate
 	@echo $@
 	@python output/$@.py $(PREFIX) > output/$@.out
 	@pdflatex -draftmode $(latex-flags) output/$@.tex

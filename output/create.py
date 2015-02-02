@@ -8,31 +8,8 @@ plotext = ".png"
 imageext = ".jpg"
 frameExt = ".png"
 
-def name(dir):
-    dir = os.path.basename(dir)
-    d = dir.split("-")
-    shape = d[0]
-    crys = 0
-    theta = 0
-    if shape == "Snowman":
-        if len(d) == 5:
-            shape, temp, radius, dist, crys = d
-        elif len(d) == 6:
-            shape, temp, radius, dist, crys, bound = d
-        else:
-            shape, temp, radius, dist = d
-    elif shape == "Trimer":
-        shape, temp, radius, dist, theta = d
-    else:
-        print shape
-    if theta:
-        return r"Trimer: Temp $= {0}$, $r = {1}$, $d = {2}$, $\theta = {3}$".format(temp, radius, dist, theta)
-    elif crys:
-        return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$, {3}".format(temp, radius, dist, crys)
-    else:
-        return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$".format(temp, radius, dist, crys)
 
-plots = [("order/*[0-9].png","Order Parameter"), ("trj_contact/*[0-9].png", "Configuration"), ("trj_contact/*-angles.png","Angle Distribution"), ("short_order.png", "Short Range Ordering"), ("msd.png", "Mean Squared Displacement"), ("rotation.png", "Rotational Relaxation"), ("histogram.png", "Contact Number"), ("props.png", "Properties"), ("short_order_hist.png", "Short Order Histogram"), ("contact.log", "Data")]
+plots = [("order/*[0-9].png","Order Parameter"), ("trj_contact/*[0-9].png", "Configuration"), ("trj_contact/*-angles.png","Angle Distribution"), ("short_order.png", "Short Range Ordering"), ("msd.png", "Mean Squared Displacement"), ("rotation.png", "Rotational Relaxation"), ("histogram.png", "Contact Number"), ("props.png", "Properties"), ("short_order_hist.png", "Short Order Histogram"), ("radial.png", "Radial Distribution"), ("contact.log", "Data")]
 
 def figure(prefix, filename, caption=0):
     if not caption:
@@ -59,7 +36,7 @@ def figure(prefix, filename, caption=0):
         print r"\end{tabular}"
         print r"\captionof{{table}}{{{name}}}".format(name=caption)
         print r"\end{minipage}"
-    else:
+    elif len(plots) == 1:
         print r"\begin{minipage}{0.5\textwidth}"
         print r"\begin{figure}[H]"
         print r"\centering"
@@ -82,3 +59,27 @@ def collated(dir, plotDir, caption):
         print r"\caption{{{name}}}".format(name=caption)
         print r"\end{figure}"
         print r"\end{minipage}"
+
+def name(dir):
+    dir = os.path.basename(dir)
+    d = dir.split("-")
+    shape = d[0]
+    crys = 0
+    theta = 0
+    if shape == "Snowman":
+        if len(d) == 5:
+            shape, temp, radius, dist, crys = d
+        elif len(d) == 6:
+            shape, temp, radius, dist, crys, bound = d
+        else:
+            shape, temp, radius, dist = d
+    elif shape == "Trimer":
+        shape, temp, radius, dist, theta = d
+    else:
+        print shape
+    if theta:
+        return r"Trimer: Temp $= {0}$, $r = {1}$, $d = {2}$, $\theta = {3}$".format(temp, radius, dist, theta)
+    elif crys:
+        return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$, {3}".format(temp, radius, dist, crys)
+    else:
+        return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$".format(temp, radius, dist, crys)
