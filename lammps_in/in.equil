@@ -30,10 +30,10 @@ dump_modify 2 first yes
 dump_modify 2 pad 10
 
 timestep 1e-3
-#run ${steps}
+run ${steps}
 
 timestep 0.005
-#run ${steps}
+run ${steps}
 
 # Write restart before minimisation
 write_restart   ${the_path}/restarts/${restart}

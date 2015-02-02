@@ -10,7 +10,7 @@ t_bound = $(word 6, $(subst -,$(space),$(1)) )
 FOLDERS=images trj trj_contact stats order logs
 VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_path)/lammps:$(PY_LIB)
 vars = shape radius dist theta temp
-all_plots = plot-order plot-frame plot-angle plot-dynamic plot-short-order plot-hist plot-props plot-short-order-hist
+all_plots = plot-order plot-frame plot-angle plot-dynamic plot-short-order plot-hist plot-props plot-short-order-hist plot-radial
 PRESENT=grouped individual
 
 shape := $(call t_shape, $(mol))
@@ -84,27 +84,26 @@ endif
 
 $(last_restart): $(mol_settings) | $(FOLDERS) $(mol_settings) restarts
 	@echo Create $(last_restart)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(CREATE_VARS) $(LAMMPS_FLAGS) < $(CREATE_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
 $(restart): $(last_restart) | $(FOLDERS)
 	@echo Equil $(restart) from $(last_restart)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(EQUIL_VARS) $(LAMMPS_FLAGS) < $(EQUIL_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(EQUIL_VARS) < $(EQUIL_IN) > $(LOG)
 
 # Production run, has already been equilibrated
 lammps: $(restart) | .make
 	@echo Production $(SAVE)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_VARS) $(LAMMPS_FLAGS) < $(LAMMPS_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
 
 # Analysis of run, both static and dynamic quantities
 contact: lammps program #$(basename $(molecule)).csv  plot.settings
 	@echo analysis $(SAVE)/trj/out.lammpstrj
-	@$(BIN_PATH)/program -i trj/out.lammpstrj -m > contact.log
+	@$(BIN_PATH)/program -i trj/out.lammpstrj -m -s 10 > contact.log
 	@touch .make/contact
 
 movie: contact
-	$(vmd) -e $(my_dir)/movie.tcl
 
 # Plots all the analysis
 plot: $(all_plots)
@@ -149,6 +148,10 @@ plot-props: lammps
 	@python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
 	@gnuplot $(my_dir)/gnuplot/property.plot &> $(LOG)
 	@touch .make/plot-props
+
+plot-radial: contact radial.plot
+	@gnuplot $(my_dir)/gnuplot/radial.plot &> $(LOG)
+	@touch .make/plot-radial
 
 density: contact
 	@echo Calculating density
