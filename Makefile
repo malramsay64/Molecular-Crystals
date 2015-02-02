@@ -97,7 +97,6 @@ present: program $(mol) $(PRESENT)
 program: $(MODULES) $(HEADERS)
 	@echo c++ $@
 	@$(CXX) -o $(BIN_PATH)/program $(addprefix $(BIN_PATH)/, $(MODULES)) $(CXXFLAGS) $(LDFLAGS)
-	@ln -sf $(BIN_PATH)/program test/program
 
 $(BIN_PATH):
 	@mkdir -p $(BIN_PATH)
