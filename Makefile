@@ -50,11 +50,11 @@ export $(addprefix temp_, $(distances))
 all: program
 	echo $(SYS_NAME)
 
-collate: $(mol)
+collate: $(mol) | $(PREFIX)/plots
 	@echo Creating T-dependent plots
-	@-rm -f plots/*
+	@-rm -f $(PREFIX)/plots/*
 	@$(foreach m, $(mol), python pylib/collate.py $(PREFIX)/$(strip $(m));)
-	$(eval fs = $(basename $(shell ls plots/*.csv)))
+	$(eval fs = $(basename $(shell ls $(PREFIX)/plots/*.csv)))
 	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
 
 movie: $(mol)
@@ -86,7 +86,8 @@ $(PRESENT): program collate
 	@python output/$@.py $(PREFIX) > output/$@.out
 	@pdflatex -draftmode $(latex-flags) output/$@.tex
 	@pdflatex $(latex-flags) output/$@.tex
-	@mv output/.output/$@.pdf .
+	@mv output/.output/$@.pdf $(PREFIX)/$@.pdf
+	@ln -s $(PREFIX)/$@.pdf $@.pdf
 
 present: program $(mol) $(PRESENT)
 
@@ -97,13 +98,15 @@ present: program $(mol) $(PRESENT)
 program: $(MODULES) $(HEADERS)
 	@echo c++ $@
 	@$(CXX) -o $(BIN_PATH)/program $(addprefix $(BIN_PATH)/, $(MODULES)) $(CXXFLAGS) $(LDFLAGS)
-	@ln -sf $(BIN_PATH)/program test/program
 
 $(BIN_PATH):
 	@mkdir -p $(BIN_PATH)
 
 $(PREFIX):
 	@mkdir $(PREFIX)
+
+$(PREFIX)/plots:
+	@mkdir $@
 
 .PHONY: always
 always:
