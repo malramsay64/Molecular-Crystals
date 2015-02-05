@@ -24,7 +24,7 @@ crys=p2gg
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary=1
+boundary=1 
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
@@ -39,7 +39,7 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 200000
+steps = 2000000
 
 # Print every <N> steps
 print = 1000
@@ -86,7 +86,8 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # Ouput files to plot
 # (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
 # All
-to_plot = order frame angle dynamic short-order hist props short-order-hist radial
+#to_plot = order frame angle dynamic short-order hist props short-order-hist radial
+to_plot = frame dynamic short-order hist short-order-hist radial
 
 # }}}
 # Path variables {{{

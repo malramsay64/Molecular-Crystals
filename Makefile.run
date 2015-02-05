@@ -76,7 +76,7 @@ endif
 
 $(last_restart): $(mol_settings) | $(FOLDERS) $(mol_settings) restarts
 	@echo Create $(last_restart)
-	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
 $(restart): $(last_restart) | $(FOLDERS)
@@ -98,7 +98,6 @@ contact: lammps program #$(basename $(molecule)).csv  plot.settings
 movie: contact
 
 status:
-
 
 density: contact
 	@echo Calculating density
