@@ -1,17 +1,9 @@
 
-t_shape = $(word 1, $(subst -,$(space),$(1)) )
-t_temp = $(word 2, $(subst -,$(space),$(1)) )
-t_rad = $(word 3, $(subst -,$(space),$(1)) )
-t_dist = $(word 4, $(subst -,$(space),$(1)) )
-t_theta = $(word 5, $(subst -,$(space),$(1)) )
-t_crys = $(word 5, $(subst -,$(space),$(1)) )
-t_bound = $(word 6, $(subst -,$(space),$(1)) )
+# Variable setup
 
-FOLDERS=images trj trj_contact stats order logs
+include $(my_dir)/vars.mak
+
 VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_path)/lammps:$(PY_LIB)
-vars = shape radius dist theta temp
-all_plots = plot-order plot-frame plot-angle plot-dynamic plot-short-order plot-hist plot-props plot-short-order-hist plot-radial
-PRESENT=grouped individual
 
 shape := $(call t_shape, $(mol))
 radius := $(call t_rad, $(mol))
@@ -19,6 +11,8 @@ dist := $(call t_dist, $(mol))
 theta := $(call t_theta, $(mol))
 temp := $(call t_temp, $(mol))
 bound := $(call t_bound, $(mol))
+
+to_plot:=$(addprefix plot-, $(to_plot))
 
 ifeq ($(shape), Snowman)
     atoms := 2
@@ -49,23 +43,21 @@ molecule=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta))).mol
 mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(bound))).dat
 base=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta)))
 
-
+# Equilibrate all boundaries from same initial state at 'T = 0.0'
 ifneq ($(bound), )
 	CREATE_VARS:=-v T $(temp) $(CREATE_VARS)
 endif
+
+
 
 all:
 
 .PHONY:test
 test:
-	@echo $(PREFIX)
-	@echo $(my_dir)
-	@echo $(LAMMPS_IN)
-	@echo $(bound)
-	@echo $(mol)
-	@echo $(SAVE)
-	@echo $(shape) $(radius) $(dist) $(theta) $(temp) $(prev_t)
-
+	@echo $(all_clean)
+	@echo $(shape)
+	@echo $(to_plot)
+	
 # Create data files for molecule if not already generated
 files: $(mol_settings)
 
@@ -84,7 +76,7 @@ endif
 
 $(last_restart): $(mol_settings) | $(FOLDERS) $(mol_settings) restarts
 	@echo Create $(last_restart)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
+	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
 $(restart): $(last_restart) | $(FOLDERS)
@@ -92,7 +84,7 @@ $(restart): $(last_restart) | $(FOLDERS)
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(EQUIL_VARS) < $(EQUIL_IN) > $(LOG)
 
 # Production run, has already been equilibrated
-lammps: $(restart) | .make
+lammps: | $(restart) .make
 	@echo Production $(SAVE)
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
@@ -105,8 +97,41 @@ contact: lammps program #$(basename $(molecule)).csv  plot.settings
 
 movie: contact
 
-# Plots all the analysis
-plot: $(all_plots)
+status:
+
+
+density: contact
+	@echo Calculating density
+	@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
+	@touch .make/density
+
+present:$(PRESENT)
+
+$(PRESENT): plot density plot-props
+	@-rm -f mol_pres.tex
+	@python $(my_dir)/output/presentEach.py $(PREFIX)/$(SAVE) >> mol_pres.tex
+	@touch .make/present
+
+.make:
+	@-mkdir .make
+
+data:
+	@mkdir -p $(PREFIX)/data
+
+restarts:
+	@mkdir -p $(PREFIX)/restarts
+
+$(FOLDERS):
+	@mkdir -p $@
+
+.PHONY: touch-lammps
+touch-lammps: | .make
+	touch .make/lammps
+
+# Plots {{{
+# ---------
+
+plot: $(to_plot)
 	@echo Generating Plots
 	@touch .make/plot
 
@@ -153,61 +178,31 @@ plot-radial: contact radial.plot
 	@gnuplot $(my_dir)/gnuplot/radial.plot &> $(LOG)
 	@touch .make/plot-radial
 
-density: contact
-	@echo Calculating density
-	@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
-	@touch .make/density
+#}}}
+# Clean functions {{{
 
-settings: $(VAR_MOLECULE) $(VAR_SYSTEM)
-	-rm -f settings
-	$(foreach v, $(vars), echo "$v = $($v)" >> settings;)
+.PHONY: clean-all $(all_clean)
+clean-all:$(all_clean)
 
-present:$(PRESENT)
+clean-files: clean-restart
+	rm -rf ../data
+	rm -f .make/files
 
-$(PRESENT): plot density plot-props
-	@-rm -f mol_pres.tex
-	@python $(my_dir)/output/presentEach.py $(PREFIX)/$(SAVE) >> mol_pres.tex
-	@touch .make/present
+clean-restart: clean-lammps
+	rm -rf ../restarts
 
-.make:
-	@-mkdir .make
+clean-lammps: clean-contact
+	rm -rf $(folder)
+	rm -f .make/lammps
 
-data:
-	@mkdir -p $(PREFIX)/data
-
-restarts:
-	@mkdir -p $(PREFIX)/restarts
-
-$(FOLDERS):
-	@mkdir -p $@
-
-.PHONY: clean-present
-clean-present:
-	-rm .make/present
-	-rm mol_pres.tex
-
-.PHONY: touch-lammps
-touch-lammps: | .make
-	touch .make/lammps
-
-.PHONY: clean
-clean:
-	-rm -rf .make
-
-.PHONY: clean-all
-clean-all: clean-files clean-lammps clean clean-contact clean-plot clean-density clean-restart
-	
-.PHONY: clean-contact
 clean-contact: clean-plot clean-density
 	rm -rf trj_contact stats order
 	rm -f *.csv *.log
 	rm -f .make/contact
 
-.PHONY: clean-density
 clean-density: clean-present
 	rm -f .make/density
 
-.PHONY: clean-plot
 clean-plot: clean-present
 	rm -f order/*.png
 	rm -f *.png
@@ -215,16 +210,9 @@ clean-plot: clean-present
 	rm -f trj_contact/*.pdf
 	rm -f .make/plot*
 
-.PHONY: clean-files
-clean-files: clean-restart
-	rm -rf ../data
-	rm -f .make/files
+clean-present:
+	-rm -f .make/present
+	-rm -f mol_pres.tex
 
-.PHONY:clean-restart
-clean-restart: clean-lammps
-	rm -rf ../restarts
-
-.PHONY: clean-lammps
-clean-lammps: clean-contact
-	$(foreach folder, $(FOLDERS), rm -rf $(folder);)
-	rm -f .make/lammps
+#}}}
+# vim:foldmethod=marker:foldlevel=0
