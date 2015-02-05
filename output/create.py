@@ -27,7 +27,7 @@ def figure(prefix, filename, caption=0):
             print r"\end{subfigure}"
         print r"\caption{{{name}}}".format(name=caption)
         print r"\end{figure}"
-    elif filename.endswith(".log"):
+    elif filename.endswith(".log") and len(plots) == 1:
         print r"\begin{minipage}{0.5\textwidth}"
         print r"\begin{tabular}{L{4cm} S[table-format=3.4e2]}"
         contact = open(plots[0]+".log", "rU")

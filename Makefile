@@ -1,5 +1,5 @@
 
-PRE=files data lammps clean-files clean-lammps clean-plot clean-contact clean-all clean-present touch-lammps clean-density
+PRE=files data lammps touch-lammps test $(all_clean)
 TARGETS=contact plot density movie
 PRESENT=grouped individual
 
@@ -17,7 +17,7 @@ mol := $(if $(radius), $(foreach rad, $(radius), $(addsuffix -$(rad), $(mol))), 
 # Distance
 mol := $(if $(dist), $(foreach rad, $(dist), $(addsuffix -$(rad), $(mol))), $(mol)) 
 # Computing Distance
-mol := $(foreach m, $(mol), $(m:$(call t_dist, $m)=$(call comp_dist, $(call t_dist, $m), $(call t_rad, $m))))
+mol := $(foreach m, $(mol), $(m:$(call p_dist, $m)=$(call comp_dist, $(call p_dist, $m), $(call p_rad, $m))))
 # Theta
 mol_s := $(filter Snowman%, $(mol))
 mol_t := $(filter Trimer%, $(mol))
@@ -34,7 +34,7 @@ endif
 # Iterating through having a crystal liquid boundary
 ifneq ($(strip $(boundary)),)
     mol := $(if $(boundary), $(foreach b, $(boundary), $(addsuffix -$(b), $(mol))), $(mol))
-    CREATE_VARS += -v boundary $$(bound)
+    CREATE_VARS += -v boundary $(bound)
 else
     CREATE_VARS += -v boundary 0
 endif
@@ -42,13 +42,12 @@ endif
 
 VPATH=.:$(BIN_PATH):$(LIB)
 
-distances = $(foreach m, $(mol), $(call t_dist, $m))
+distances = $(foreach m, $(mol), $(call p_dist, $m))
 export $(addprefix temp_, $(distances))
 
 ##########################################################################################
 
 all: program
-	echo $(SYS_NAME)
 
 collate: $(mol) | $(PREFIX)/plots
 	@echo Creating T-dependent plots
@@ -60,14 +59,14 @@ collate: $(mol) | $(PREFIX)/plots
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
 
-$(mol): program vars.mak always | $(PREFIX)
+$(mol): program vars.mak | $(PREFIX)
 ifeq ($(SYS_NAME), silica)
 	@qsub -N $@ -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
 else
 	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 endif
 
-vars.mak: always
+vars.mak:
 	@rm -f $@
 	@$(foreach V,\
     $(sort $(.VARIABLES)),\
@@ -86,6 +85,7 @@ $(PRESENT): program collate
 	@python output/$@.py $(PREFIX) > output/$@.out
 	@pdflatex -draftmode $(latex-flags) output/$@.tex
 	@pdflatex $(latex-flags) output/$@.tex
+	@rm -f $@.pdf
 	@mv output/.output/$@.pdf $(PREFIX)/$@.pdf
 	@rm -f $@.pdf
 	@ln -s $(PREFIX)/$@.pdf $@.pdf
@@ -93,11 +93,11 @@ $(PRESENT): program collate
 present: program $(mol) $(PRESENT)
 
 %.o : %.cpp | $(BIN_PATH)
-	@echo o $<
+	@echo CC $<
 	@$(CXX) $(CXXFLAGS) -c $< -o $(BIN_PATH)/$@
 
 program: $(MODULES) $(HEADERS)
-	@echo c++ $@
+	@echo CC $@
 	@$(CXX) -o $(BIN_PATH)/program $(addprefix $(BIN_PATH)/, $(MODULES)) $(CXXFLAGS) $(LDFLAGS)
 
 $(BIN_PATH):
@@ -109,17 +109,15 @@ $(PREFIX):
 $(PREFIX)/plots:
 	@mkdir $@
 
-.PHONY: always
-always:
 
-.PHONY: test
-test: $(mol)
+.PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE)
 
-.PHONY:clean
+#test: $(mol)
+#	@echo test
+
 clean:
 	-rm -r bin/*
 
-.PHONY: delete
 delete:
 	-rm -r $(PREFIX)/*
 
