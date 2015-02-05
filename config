@@ -60,11 +60,13 @@ HEADERS:=$(notdir $(HEADERS))
 #}}}
 # Lammps settings {{{
 
-LAMMPS_IN=$(my_dir)/lammps_in/in.molecular
-EQUIL_IN=$(my_dir)/lammps_in/in.equil
-CREATE_IN=$(my_dir)/lammps_in/in.create
-CRYS_IN=$(my_dir)/lammps_in/in.crys
-BOUNDARY_IN=$(my_dir)/lammps_in/in.boundary
+lammps_dir=$(my_dir)/lammps_in
+
+LAMMPS_IN=$(lammps_dir)/in.molecular
+EQUIL_IN=$(lammps_dir)/in.equil
+CREATE_IN=$(lammps_dir)/in.create
+CRYS_IN=$(lammps_dir)/in.crys
+BOUNDARY_IN=$(lammps_dir)/in.boundary
 
 LAMMPS_VARS+=-v fname $(LAMMPS_IN)
 
