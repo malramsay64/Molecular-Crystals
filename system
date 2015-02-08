@@ -9,7 +9,7 @@ else
 	ifeq ($(UNAME), Darwin)
     	SYS_NAME:=mac
 	else 
-    	ifeq ($(HOST), asaph-VirtualBox)
+    	ifeq ($(HOST), ortho)
         	SYS_NAME:=unix
     	else
         	SYS_NAME:=silica
