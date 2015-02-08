@@ -24,7 +24,7 @@ compute diam all property/atom d_diam
 # Simulation parameters, bonds not able to move 
 fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10
 fix 2 all enforce2d
-fix 3 all momentum 1 linear 1 1 0
+fix 3 all momentum 100 linear 1 1 0
 
 # Dump configuration printevery steps. Image is dumped at beginning and end
 dump 1 all custom ${printevery} ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
