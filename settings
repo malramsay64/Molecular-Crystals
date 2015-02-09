@@ -35,9 +35,9 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 80000
+steps = 8000000
 # Print every <N> steps
-print = 4000
+print = 80000
 # Number of steps in equilibration (n >= 1)
 equil_steps = 2000000
 # Number of molecules (won't be exact, tries to keep simulation square)
