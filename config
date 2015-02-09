@@ -55,7 +55,7 @@ CFLAGS = -O2 -std=c99
 CXXFLAGS := -Ofast -stdlib=libc++ -std=gnu++11
 LDFLAGS = -lm
 
-ifeq ($(SYS_NAME), unix)
+ifeq ($(SYS_NAME), ortho)
 	CXXFLAGS := -O3 -std=gnu++11 -pthread -Wl,--no-as-needed
 endif
 
@@ -85,15 +85,17 @@ ifeq ($(SYS_NAME), gaucho)
 	#LAMMPS=lmp_my_mac
 	LAMMPS=lmp_mac_mpi
 	LAMMPS_FLAGS=
+else ifeq ($(SYS_NAME), mac)
+	LAMMPS_PATH=
+	LAMMPS=lmp_mac_mpi
+else ifeq ($(SYS_NAME), ortho)
+	LAMMPS_PATH=
+	LAMMPS=lmp_ubuntu
 else
-    ifeq ($(SYS_NAME), mac)
-	    LAMMPS_PATH=
-	    LAMMPS=lmp_mac_mpi
-    else
-	    LAMMPS_PATH=
-	    LAMMPS=lmp_mpi
-    endif
+	LAMMPS=lmp_mpi
 endif
+#endif
+#endif
 
 LAMMPS_FILES=-v restart $(restart) -v my_path ./ -v the_path $(PREFIX) -v molecule $(molecule) -v mol_settings $(mol_settings) -v last_restart $(last_restart)
 
@@ -111,9 +113,11 @@ CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $(prev_t) -v press $(pressur
 
 #}}}
 # MPI Settings {{{
-ifeq ($(sys_name), gaucho)
+ifeq ($(SYS_NAME), gaucho)
 	#MPI=/opt/openmpi/bin/mpirun
 	MPI=mpirun -np 8
+else ifeq ($(SYS_NAME), ortho)
+	MPI=
 else
 	MPI=mpirun -np 8
 endif
