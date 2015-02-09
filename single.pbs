@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -j oe
+#PBS -l nodes=1:ppn=8
+#PBS -l walltime=240:00:00
+#PBS -l cput=1920:00:00
+##PBS -m abe
+#PBS -M malramsay64+silica@gmail.com
+
+source /etc/profile.d/modules.sh
+module load intel openmpi-intel
+
+cd "$PBS_O_WORKDIR"
+cat ${PBS_NODEFILE} > nodes.txt
+
+make -C $prefix -f $my_dir/Makefile.run $target mol=$mol prev_t=$prev_t my_dir=$my_dir
