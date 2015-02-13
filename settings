@@ -13,18 +13,18 @@ radius=0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1+radius
+dist=1+radius 1.0
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=p2gg
+crys=
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary=1 
+boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
@@ -39,27 +39,27 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 2000000
+steps = 20000
 
 # Print every <N> steps
 print = 1000
 
 # Number of steps in equilibration (n >= 1)
-equil_steps = 200000
+equil_steps = 20000
 
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 1200
 
 # Dependent on previous temps
-t_dep=false
+t_dep=true
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp = 2.1 2.2 2.3 2.4 2.5 2.6
+#temp = 2.1 2.2 2.3 2.4 2.5 2.6
 # Heating run
 #temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
 # Cooling run
-#temp = 5.0 4.0 3.0 2.0 1.5 1.0 0.8 0.6 0.4
+temp = 5.0 4.0 3.0 2.0 1.5 1.0 0.8 0.6 0.4
 #temp_1.0 = 0.50 0.55 0.60 0.65 0.70
 #temp_1.637556 = 2.40 2.45 2.48 2.50 2.52 2.55 2.60
 # MP Run
@@ -96,9 +96,9 @@ to_plot = frame dynamic short-order hist short-order-hist radial
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 ifeq ($(SYS_NAME), silica)
-    PREFIX := /tmp3m/mram5995/master
+    PREFIX := /tmp3m/mram5995/supercool
 else
-    PREFIX := $(HOME)/scratch/master
+    PREFIX := $(HOME)/scratch/supercool
 endif
 
 # Directory Makefile is located
