@@ -51,7 +51,7 @@ equil_steps = 200000
 n_mol = 1200
 
 # Dependent on previous temps
-t_dep=false
+t_dep=true
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>

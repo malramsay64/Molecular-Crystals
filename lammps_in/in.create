@@ -50,7 +50,7 @@ thermo_style    custom step temp press etotal ke pe enthalpy density
 log     ${my_path}/logs/create.log
 
 # Simulation parameters, bonds not able to move 
-fix 1 all rigid/npt molecule temp $T $T 10 iso ${press} ${press} 10
+fix 1 all npt temp $T $T 10 iso ${press} ${press} 10
 fix 2 all enforce2d
 
 # Dump configuration printevery steps. Image is dumped at beginning and end

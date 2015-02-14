@@ -50,6 +50,7 @@ ifneq ($(bound), )
 endif
 
 
+###################################################################
 
 all:
 
@@ -87,7 +88,7 @@ $(restart): $(last_restart) | $(FOLDERS)
 # Production run, has already been equilibrated
 lammps: | $(restart) .make
 	@echo Production $(SAVE)
-	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
 
 # Analysis of run, both static and dynamic quantities
