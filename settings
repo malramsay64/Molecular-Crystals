@@ -19,12 +19,12 @@ dist=1+radius
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=p2gg
+crys=
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary=1 
+boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
@@ -39,7 +39,7 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 2000000
+steps = 200000
 
 # Print every <N> steps
 print = 1000
@@ -55,11 +55,11 @@ t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp = 2.1 2.2 2.3 2.4 2.5 2.6
+#temp = 2.1 2.2 2.3 2.4 2.5 2.6
 # Heating run
 #temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
 # Cooling run
-#temp = 5.0 4.0 3.0 2.0 1.5 1.0 0.8 0.6 0.4
+temp = 5.0 3.0 2.0 1.5 1.2
 #temp_1.0 = 0.50 0.55 0.60 0.65 0.70
 #temp_1.637556 = 2.40 2.45 2.48 2.50 2.52 2.55 2.60
 # MP Run
