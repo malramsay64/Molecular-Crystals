@@ -12,4 +12,4 @@ module load intel openmpi-intel
 cd "$PBS_O_WORKDIR"
 cat ${PBS_NODEFILE} > nodes.txt
 
-make -f Makefile.loop $target mol=$mol
+make -C $prefix -f $my_dir/Makefile.run $target mol=$mol prev_t=$prev_t my_dir=$my_dir

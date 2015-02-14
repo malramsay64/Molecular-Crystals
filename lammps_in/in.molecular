@@ -8,7 +8,7 @@ read_restart ${the_path}/restarts/${restart}
 reset_timestep  0
 
 # Thermodynamic output
-thermo          100
+thermo          1000
 thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density lx ly xy
 
 # log file name
@@ -22,8 +22,9 @@ if "${diam} != 2" then &
 compute diam all property/atom d_diam
 
 # Simulation parameters, bonds not able to move 
-fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
+fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10
 fix 2 all enforce2d
+fix 3 all momentum 100 linear 1 1 0
 
 # Dump configuration printevery steps. Image is dumped at beginning and end
 dump 1 all custom ${printevery} ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
