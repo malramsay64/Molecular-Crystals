@@ -14,7 +14,7 @@ nd = "`awk -F, 'NR==2 {print NF;exit}' msd.csv`"
 
 set output "msd.png"
 
-plot for [i=2:nd] "msd.csv" using 1:i with linespoints ls 5 lc i-1 title 'MSD'
+plot for [i=2:nd] "msd.csv" using 1:i with linespoints ls 5 lc i-1
 
 # Rotations
 nc = "`awk -F, 'NR==1 {print NF;exit}' rotation.csv`"
