@@ -87,7 +87,7 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
 # All
 #to_plot = order frame angle dynamic short-order hist props short-order-hist radial
-to_plot = frame dynamic hist short-order-hist
+to_plot = frame dynamic hist short-order-hist radial
 
 # }}}
 # Path variables {{{
