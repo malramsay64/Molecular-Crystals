@@ -93,7 +93,7 @@ lammps: | $(restart) .make
 # Analysis of run, both static and dynamic quantities
 contact: lammps program #$(basename $(molecule)).csv  plot.settings
 	@echo analysis $(SAVE)/trj/out.lammpstrj
-	@$(BIN_PATH)/program -i trj/out.lammpstrj -m -s 10 > contact.log
+	@$(BIN_PATH)/program -i trj/out.lammpstrj $(contact_args) > contact.log
 	@touch .make/contact
 
 movie: contact
