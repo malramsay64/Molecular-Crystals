@@ -181,6 +181,10 @@ plot-radial: contact radial.plot
 	@gnuplot $(my_dir)/gnuplot/radial.plot &> $(LOG)
 	@touch .make/plot-radial
 
+plot-struct: contact struct.plot
+	@gnuplot $(my_dir)/gnuplot/struct.plot &> $(LOG)
+	@touch .make/plot-struct
+
 #}}}
 # Clean functions {{{
 
