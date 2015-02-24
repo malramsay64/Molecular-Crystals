@@ -110,7 +110,7 @@ density: contact
 
 present:$(PRESENT)
 
-$(PRESENT): plot density plot-props
+$(PRESENT): plot #density
 	@-rm -f mol_pres.tex
 	@python $(my_dir)/output/presentEach.py $(PREFIX)/$(SAVE) >> mol_pres.tex
 	@touch .make/present
@@ -145,7 +145,7 @@ plot-order: contact order.plot | order
 	@touch .make/plot-order
 
 plot-%: %.plot contact
-	@gnuplot -e "prefix='$(shell pwd)'" $(my_dir)/gnuplot/$<  &> $(LOG)
+	@gnuplot -e "prefix='$(shell pwd)'" $<  &> $(LOG)
 	@touch .make/$@
 
 plot-angle: contact angle.plot
