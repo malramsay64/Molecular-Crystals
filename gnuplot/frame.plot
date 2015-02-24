@@ -12,9 +12,11 @@ set style line 1 lt 1 lc -1 lw 2
 
 files = system('ls '.prefix.'/trj_contact/*.dat')
 
+tail(s) = sprintf('< tail -n +3 %s', s)
+
 do for [i=1:words(files)] {
 
-file = word(files,i)
+file = tail(word(files,i))
 
 set output system('f='.file.'; echo ${f%.dat}'.ext) 
 
