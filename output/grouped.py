@@ -16,6 +16,7 @@ dirs = glob.glob("{prefix}/*-*-*".format(prefix=prefix))
 dirs.sort()
 
 create.collated("", "{prefix}/plots/".format(prefix=prefix), "Temperature Dependence") 
+create.collated("", "plots/", "Temperature Dependence") 
 
 for filename, caption in create.plots:
     print r"\section{{{text}}}".format(text=caption)
