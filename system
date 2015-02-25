@@ -3,12 +3,13 @@
 UNAME := $(shell uname)
 HOST := $(shell hostname)
 
-ifeq ($(UNAME), Darwin)
-    SYS_NAME:=mac
+ifeq ($(HOST), gaucho.duckdns.org)
+	SYS_NAME:=gaucho
+else ifeq ($(HOST), ortho)
+	SYS_NAME:=ortho
+else ifeq ($(UNAME), Darwin)
+    	SYS_NAME:=mac
 else 
-    ifeq ($(HOST), asaph-VirtualBox)
-        SYS_NAME:=unix
-    else
-        SYS_NAME:=silica
-    endif
+	SYS_NAME:=silica
 endif
+# vim:filetype=make
