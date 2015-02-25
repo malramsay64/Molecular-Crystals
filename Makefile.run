@@ -110,7 +110,7 @@ density: contact
 
 present:$(PRESENT)
 
-$(PRESENT): plot density plot-props
+$(PRESENT): plot #density
 	@-rm -f mol_pres.tex
 	@python $(my_dir)/output/presentEach.py $(PREFIX)/$(SAVE) >> mol_pres.tex
 	@touch .make/present
@@ -144,15 +144,9 @@ plot-order: contact order.plot | order
     done
 	@touch .make/plot-order
 
-plot-hist: contact hist.plot | order
-	@gnuplot $(my_dir)/gnuplot/hist.plot &> $(LOG)
-	@touch .make/plot-hist
-
-plot-frame: contact frame.plot
-	@for file in trj_contact/*.dat; do\
-        gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/frame.plot  &> $(LOG);\
-    done
-	@touch .make/plot-frame
+plot-%: %.plot contact
+	@gnuplot -e "prefix='$(shell pwd)'" $<  &> $(LOG)
+	@touch .make/$@
 
 plot-angle: contact angle.plot
 	@for file in trj_contact/*.csv; do\
@@ -160,32 +154,12 @@ plot-angle: contact angle.plot
     done
 	@touch .make/plot-angle
 
-plot-short-order-hist: contact short_order_hist.plot
-	@gnuplot $(my_dir)/gnuplot/short_order_hist.plot &> $(LOG)
-	@touch .make/plot-short-order-hist
-
-plot-dynamic: contact dynamic.plot
-	@gnuplot $(my_dir)/gnuplot/dynamic.plot &> $(LOG)
-	@touch .make/plot-dynamic
-
-plot-short-order: contact short_order.plot
-	@gnuplot $(my_dir)/gnuplot/short_order.plot &> $(LOG)
-	@touch .make/plot-short-order
-
 plot-props: lammps
 	@python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
 	@gnuplot $(my_dir)/gnuplot/property.plot &> $(LOG)
 	@touch .make/plot-props
 
-plot-radial: contact radial.plot
-	@gnuplot $(my_dir)/gnuplot/radial.plot &> $(LOG)
-	@touch .make/plot-radial
-
-plot-struct: contact struct.plot
-	@gnuplot $(my_dir)/gnuplot/struct.plot &> $(LOG)
-	@touch .make/plot-struct
-
-#}}}
+# }}}
 # Clean functions {{{
 
 .PHONY: clean-all $(all_clean)
