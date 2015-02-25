@@ -51,10 +51,10 @@ all: program
 	@echo $(SYS_NAME)
 	@echo $(mol)
 
-collate: $(mol) $(addsuffix .csv, $(mol)) | $(PREFIX)/plots
+collate: $(addsuffix .csv, $(mol)) | $(PREFIX)/plots
 	@echo Created T-dependent plots
 
-%.csv:
+%.csv: %
 	@rm -f $(PREFIX)/plots/$@
 	@$(PYTHON) $(PYLIB)/collate.py $(PREFIX)/$(basename $(@))
 	@gnuplot -e 'filename="$(PREFIX)/plots/$(basename $@)"' gnuplot/temp_dep.plot
