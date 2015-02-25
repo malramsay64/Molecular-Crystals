@@ -1,20 +1,26 @@
-set terminal png enhanced truecolor size 1600,800
+ext = '.png'
+
+set terminal png enhanced
 
 set datafile separator ","
-set style fill solid
-set key autotitle columnhead
-#set logscale x
-#set xrange [2:4]
-set xtics 0.1
 
+set key off
+set logscale y
 set style line 5 pt 7 lw 3
 
-# Diffusion
 command = sprintf("awk -F, 'NR==2 {print NF;exit}' %s.csv", filename)
 nd = system(command)
-#nd = "`awk -F, 'NR==2 {print NF;exit}' temps.csv`"
-#nd = 2
+shape(s) = system(sprintf("echo %s | cut -d/ -f7-",s))
 
-set output filename.".png"
-plot for [i=2:nd] filename.".csv" using 1:i with linespoints ls 5 lc i-1
+do for [i=2:nd] {
 
+    command = sprintf("awk -F, 'NR==1 {print $%i;exit}' %s.csv", i, filename)
+    f = filename."_".system(command)
+
+    set title shape(filename)
+    set output f.ext
+    set xlabel "1/T"
+    set ylabel system(command)
+    plot filename.".csv" using (1/$1):i with linespoints ls 5 lc 1
+
+}

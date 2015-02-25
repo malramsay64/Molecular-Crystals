@@ -66,10 +66,10 @@ fix 2 all enforce2d
 fix 3 static setforce 0.0 0.0 0.0
 
 # Dump configuration printevery steps. Image is dumped at beginning and end
-dump 2 all image ${steps} ${my_path}/images/create_*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
+#dump 2 all image ${steps} ${my_path}/images/create_*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
 
-dump_modify 2 first yes
-dump_modify 2 pad 10
+#dump_modify 2 first yes
+#dump_modify 2 pad 10
 
 # Give particles an initial velocity
 velocity mobile create ${Tm} 122

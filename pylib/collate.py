@@ -16,7 +16,8 @@ def collate(prefix, dir, shape, f=0):
         contact = open('{dir}/contact.log'.format(dir=dir), 'r')
     f.write(T)
     for line in contact:
-        f.write("," + line.split(":")[1].strip())
+        if ':' in line:
+            f.write("," + line.split(":")[1].strip())
     f.write("\n")
     return f
 

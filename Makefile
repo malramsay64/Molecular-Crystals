@@ -45,6 +45,8 @@ VPATH=.:$(BIN_PATH):$(LIB)
 distances = $(foreach m, $(mol), $(call p_dist, $m))
 export $(addprefix temp_, $(distances))
 
+glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_rad, $1,) $(call p_dist, $1) $(call p_theta, $1) $(call p_bound $1)))
+
 ##########################################################################################
 
 all: program
@@ -56,8 +58,9 @@ collate: $(addsuffix .csv, $(mol)) | $(PREFIX)/plots
 
 %.csv: %
 	@rm -f $(PREFIX)/plots/$@
-	@$(PYTHON) $(PYLIB)/collate.py $(PREFIX)/$(basename $(@))
-	@gnuplot -e 'filename="$(PREFIX)/plots/$(basename $@)"' gnuplot/temp_dep.plot
+	@$(PYTHON) $(PYLIB)/collate.py $(PREFIX)/$<
+	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
+	@gnuplot -e 'prefix="$(PREFIX)/$(call glob_temps, $<)"' gnuplot/log_time.plot
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
@@ -117,7 +120,7 @@ $(PREFIX)/plots:
 	@mkdir $@
 
 
-.PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE)
+.PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE) clean-plot clean-collate
 
 #test: $(mol)
 #	@echo test
@@ -131,5 +134,7 @@ clean-collate:
 delete:
 	-rm -rf $(PREFIX)/*
 
+
+clean-plot: clean-collate $(mol)
 
 # vim:foldmethod=marker:foldlevel=0
