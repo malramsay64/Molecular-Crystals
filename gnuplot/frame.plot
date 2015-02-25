@@ -12,11 +12,11 @@ set style line 1 lt 1 lc -1 lw 2
 
 files = system('ls '.prefix.'/trj_contact/*.dat')
 
-tail(s) = sprintf('< tail -n +3 %s', s)
+#tail(s) = sprintf("< tail -n +3  %s", s)
 
 do for [i=1:words(files)] {
 
-file = tail(word(files,i))
+file = word(files,i)
 
 set output system('f='.file.'; echo ${f%.dat}'.ext) 
 
@@ -26,7 +26,7 @@ set yrange[-2:height+2]
 set xrange[-2:a+2]
 
 set object rectangle from -0,0 to a,height
-plot file using 1:2:3 with circles lc rgb 'black' ,\
-     file using 1:2:($3-0.05) with circles lc rgb '#4BAC6F' title "Configuration" ,\
-     file every :1 using 1:2  with line ls 1
+plot "< tail -n +3 ".file using 1:2:3 with circles lc rgb 'black' ,\
+     "< tail -n +3 ".file using 1:2:($3-0.05) with circles lc rgb '#4BAC6F' title "Configuration" ,\
+     "< tail -n +3 ".file every :1 using 1:2  with line ls 1
 }
