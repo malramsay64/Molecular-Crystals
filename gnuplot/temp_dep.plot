@@ -6,7 +6,9 @@ set datafile separator ","
 
 set key off
 set logscale y
+set format y "10^{%L}"
 set style line 5 pt 7 lw 3
+set title font ",14"
 
 command = sprintf("awk -F, 'NR==2 {print NF;exit}' %s.csv", filename)
 nd = system(command)

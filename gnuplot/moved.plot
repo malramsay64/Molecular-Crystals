@@ -1,12 +1,12 @@
 ext = '.png'
 
-set terminal png enhanced size 1600, 1200
+set terminal png enhanced transparent size 1600, 1200
 
 set size ratio -1
 
 set datafile separator " "
 set style line 1 linetype 1 linecolor 'red' linewidth 0.5
-
+set key off
 
 file = 'moved.dat'
 
@@ -19,5 +19,7 @@ set xrange[-2:a+2]
 set object rectangle from -0,0 to a,height
 
 set output "moved".ext
+set style fill transparent solid 1 noborder
 
-plot "< tail -n +2 moved.dat" using 1:2 with line linestyle 1
+plot "< tail -n +2 moved.dat" using 1:2 with line linestyle 1,\
+     "< tail -n +2 moved.dat" using 1:2:($3*2) with circles linecolor 'purple'
