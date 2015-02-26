@@ -9,7 +9,7 @@ imageext = ".jpg"
 frameExt = ".png"
 
 
-plots = [("order/*[0-9].png","Order Parameter"), ("trj_contact/*[0-9].png", "Configuration"), ("trj_contact/*-angles.png","Angle Distribution"), ("short_order.png", "Short Range Ordering"), ("msd.png", "Mean Squared Displacement"), ("rotation.png", "Rotational Relaxation"), ("histogram.png", "Contact Number"), ("props.png", "Properties"), ("short_order_hist.png", "Short Order Histogram"), ("radial.png", "Radial Distribution"), ("struct.png", "Structural Relaxation"), ("contact.log", "Data")]
+plots = [("order/*[0-9].png","Order Parameter"), ("trj_contact/*[0-9].png", "Configuration"), ("trj_contact/*-angles.png","Angle Distribution"), ("short_order.png", "Short Range Ordering"), ("msd.png", "Mean Squared Displacement"), ("rotation.png", "Rotational Relaxation"), ("histogram.png", "Contact Number"), ("props.png", "Properties"), ("short_order_hist.png", "Short Order Histogram"), ("radial.png", "Radial Distribution"), ("struct.png", "Structural Relaxation"), ("complot.png", "Centers of Mass"), ("moved.png", "Motion of Particles"), ("alpha.png", "Non Gaussian"), ("regio*.png", "Regional Relaxation"), ("contact.log", "Data")]
 
 def figure(prefix, filename, caption=0):
     if not caption:

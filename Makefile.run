@@ -4,7 +4,7 @@ include $(my_dir)/vars.mak
 
 include $(my_dir)/vars.mak
 
-VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_path)/lammps:$(PY_LIB)
+VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_dir)/lammps_in:$(PY_LIB)
 
 shape := $(call t_shape, $(mol))
 radius := $(call t_rad, $(mol))
@@ -56,9 +56,10 @@ all:
 
 .PHONY:test
 test:
-	@echo $(all_clean)
+	@echo $(SAVE)
 	@echo $(shape)
-	@echo $(to_plot)
+	@echo $(VPATH)
+	@echo $(FOLDERS)
 	
 # Create data files for molecule if not already generated
 files: $(mol_settings)
@@ -81,7 +82,7 @@ $(last_restart): $(mol_settings) | $(FOLDERS) $(mol_settings) restarts
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
-$(restart): $(last_restart) | $(FOLDERS)
+$(restart):# $(last_restart) | $(FOLDERS)
 	@echo Equil $(restart) from $(last_restart)
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(EQUIL_VARS) < $(EQUIL_IN) > $(LOG)
 
@@ -92,25 +93,25 @@ lammps: | $(restart) .make
 	@touch .make/lammps
 
 # Analysis of run, both static and dynamic quantities
-contact: lammps program #$(basename $(molecule)).csv  plot.settings
+contact: lammps program | $(FOLDERS)
 	@echo analysis $(SAVE)/trj/out.lammpstrj
 	@$(BIN_PATH)/program -i trj/out.lammpstrj $(contact_args) > contact.log
 	@touch .make/contact
 
 movie: contact
 
-collate: contact density
+collate: contact #density
 
 status:
 
 density: contact
 	@echo Calculating density
-	@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
+	#@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
 	@touch .make/density
 
 present:$(PRESENT)
 
-$(PRESENT): plot density plot-props
+$(PRESENT): plot #density
 	@-rm -f mol_pres.tex
 	@python $(my_dir)/output/presentEach.py $(PREFIX)/$(SAVE) >> mol_pres.tex
 	@touch .make/present
@@ -144,15 +145,9 @@ plot-order: contact order.plot | order
     done
 	@touch .make/plot-order
 
-plot-hist: contact hist.plot | order
-	@gnuplot $(my_dir)/gnuplot/hist.plot &> $(LOG)
-	@touch .make/plot-hist
-
-plot-frame: contact frame.plot
-	@for file in trj_contact/*.dat; do\
-        gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/frame.plot  &> $(LOG);\
-    done
-	@touch .make/plot-frame
+plot-%: %.plot contact
+	@gnuplot -e "prefix='$(shell pwd)'" $<  &> $(LOG)
+	@touch .make/$@
 
 plot-angle: contact angle.plot
 	@for file in trj_contact/*.csv; do\
@@ -160,32 +155,12 @@ plot-angle: contact angle.plot
     done
 	@touch .make/plot-angle
 
-plot-short-order-hist: contact short_order_hist.plot
-	@gnuplot $(my_dir)/gnuplot/short_order_hist.plot &> $(LOG)
-	@touch .make/plot-short-order-hist
-
-plot-dynamic: contact dynamic.plot
-	@gnuplot $(my_dir)/gnuplot/dynamic.plot &> $(LOG)
-	@touch .make/plot-dynamic
-
-plot-short-order: contact short_order.plot
-	@gnuplot $(my_dir)/gnuplot/short_order.plot &> $(LOG)
-	@touch .make/plot-short-order
-
 plot-props: lammps
 	@python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
 	@gnuplot $(my_dir)/gnuplot/property.plot &> $(LOG)
 	@touch .make/plot-props
 
-plot-radial: contact radial.plot
-	@gnuplot $(my_dir)/gnuplot/radial.plot &> $(LOG)
-	@touch .make/plot-radial
-
-plot-struct: contact struct.plot
-	@gnuplot $(my_dir)/gnuplot/struct.plot &> $(LOG)
-	@touch .make/plot-struct
-
-#}}}
+# }}}
 # Clean functions {{{
 
 .PHONY: clean-all $(all_clean)
@@ -203,8 +178,8 @@ clean-lammps: clean-contact
 	rm -f .make/lammps
 
 clean-contact: clean-plot clean-density
-	rm -rf trj_contact stats order
-	rm -f *.csv *.log
+	rm -rf trj_contact/* stats/* order/*
+	rm -f *.csv *.log *.dat
 	rm -f .make/contact
 
 clean-density: clean-present
