@@ -3,7 +3,7 @@ PRE=files data lammps touch-lammps test $(all_clean)
 TARGETS=contact plot density movie
 PRESENT=grouped individual
 
-latex-flags= --output-dir=output/.output #-interaction=batchmode
+latex-flags= --output-dir=output/.output -interaction=batchmode
 
 include settings
 include config
@@ -50,8 +50,6 @@ glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_rad, $1,)
 ##########################################################################################
 
 all: program
-	@echo $(SYS_NAME)
-	@echo $(mol)
 
 collate: $(addsuffix .csv, $(mol)) | $(PREFIX)/plots
 	@echo Created T-dependent plots

@@ -31,8 +31,8 @@ dump 1 all custom ${printevery} ${my_path}/trj/out.lammpstrj id mol type c_diam 
 #dump 2 all image ${steps} ${my_path}/images/*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
 
 dump_modify 1 first yes
-dump_modify 2 first yes
-#dump_modify 1 pad 10
+#dump_modify 2 first yes
+dump_modify 1 pad 10
 #dump_modify 2 pad 10
 
 if "$T == 5" then &
