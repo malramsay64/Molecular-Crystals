@@ -99,7 +99,7 @@ contact: lammps program #$(basename $(molecule)).csv  plot.settings
 
 movie: contact
 
-collate: contact density
+collate: contact #density
 
 status:
 
