@@ -9,7 +9,9 @@ imageext = ".jpg"
 frameExt = ".png"
 
 
-plots = [("order/*[0-9].png","Order Parameter"), ("trj_contact/*[0-9].png", "Configuration"), ("trj_contact/*-angles.png","Angle Distribution"), ("short_order.png", "Short Range Ordering"), ("msd.png", "Mean Squared Displacement"), ("rotation.png", "Rotational Relaxation"), ("histogram.png", "Contact Number"), ("props.png", "Properties"), ("short_order_hist.png", "Short Order Histogram"), ("radial.png", "Radial Distribution"), ("struct.png", "Structural Relaxation"), ("complot.png", "Centers of Mass"), ("moved.png", "Motion of Particles"), ("alpha.png", "Non Gaussian"), ("regio*.png", "Regional Relaxation"), ('hexatic_order.png', "Hexatic Ordering"), ("contact.log", "Data")]
+plot_dict = {"order":("order/*[0-9].png","Order Parameter"), "frame":("trj_contact/*[0-9].png", "Configuration"), "angle":("trj_contact/*-angles.png","Angle Distribution"), "short-order":("short_order.png", "Short Range Ordering"), "msd":("msd.png", "Mean Squared Displacement"), "rotation":("rotation.png", "Rotational Relaxation"), "hist":("histogram.png", "Contact Number"), "props":("props.png", "Properties"), "short-order-hist":("short_order_hist.png", "Short Order Histogram"), "radial":("radial.png", "Radial Distribution"), "struct":("struct.png", "Structural Relaxation"), "com":("complot.png", "Centers of Mass"), "moved":("moved.png", "Motion of Particles"), "alpha":("alpha.png", "Non Gaussian"), "regio":("regio*.png", "Regional Relaxation"), "hexatic":('hexatic_order.png', "Hexatic Ordering"), "data":("contact.log", "Data")}
+
+plots=plot_dict.values()
 
 def figure(prefix, filename, caption=0):
     if not caption:
@@ -83,3 +85,9 @@ def name(dir):
         return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$, {3}".format(temp, radius, dist, crys)
     else:
         return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$".format(temp, radius, dist, crys)
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        plot = sys.argv[1]
+        filename, coption = plot_dict.get(plot)
+        print figure("./", filename, caption)
