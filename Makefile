@@ -119,12 +119,12 @@ present: program $(mol) collate
 	@rm -f collate.pdf
 	@ln -s $(PREFIX)/collate.pdf collate.pdf
 
-all-contact: $(addsuffix /contact.log, $(shell ls -d $(PREFIX)/*-*-*))
+contact-all: $(addsuffix /contact.log, $(shell ls -d $(PREFIX)/*-*-*))
 
-%/contact.log: vars.mak
+%/contact.log: program vars.mak
 	@if [ -f $(@:%/contact.log=%/trj/out.lammpstrj) ] ;then $(MAKE) -C $(dir $@) -f $(my_dir)/$(GOAL) contact mol=$(@:$(PREFIX)/%/contact.log=%) ; fi
 
-clean-all-contact:
+clean-contact-all:
 	@$(foreach m, $(shell ls $(PREFIX)/*-*-*/trj/out.lammpstrj | cut -d/ -f6), \
         $(MAKE) -C $(PREFIX)/$m -f $(my_dir)/$(GOAL) clean-contact mol=$m;)
 
