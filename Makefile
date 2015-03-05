@@ -3,7 +3,7 @@ PRE=files data lammps touch-lammps test $(all_clean)
 TARGETS=contact plot density movie
 PRESENT=grouped individual
 
-latex-flags= --output-dir=output/.output -interaction=batchmode
+latex-flags= --output-dir=output/.output #-interaction=batchmode
 
 include settings
 include config
@@ -51,14 +51,31 @@ glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_rad, $1,)
 
 all: program
 
-collate: $(addsuffix .csv, $(mol)) | $(PREFIX)/plots
+collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
+	echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.tex
+	rm -f $(PREFIX)/latex/collate.tex
+	$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
+	@pdflatex -draftmode $(latex-flags) output/$@.tex
+	@pdflatex $(latex-flags) output/$@.tex
+	@mv output/.output/$@.pdf $(PREFIX)/$@.pdf
+	@rm -f $@.pdf
+	@ln -s $(PREFIX)/$@.pdf $@.pdf
 	@echo Created T-dependent plots
 
 %.csv: %
-	@rm -f $(PREFIX)/plots/$@
+	rm -f $(PREFIX)/plots/$@
 	@$(PYTHON) $(PYLIB)/collate.py $(PREFIX)/$<
 	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
 	@gnuplot -e 'prefix="$(PREFIX)/$(call glob_temps, $<)"' gnuplot/log_time.plot
+	@ rm -f $(PREFIX)/latex/$<.tex
+	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
+	python output/collate.py $(PREFIX) $< > output/collate.out
+
+%.tex: %
+	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
+	@ rm -f $(PREFIX)/latex/$@
+	python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
+	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
@@ -98,7 +115,8 @@ $(PRESENT): program collate
 	@rm -f $@.pdf
 	@ln -s $(PREFIX)/$@.pdf $@.pdf
 
-present: program $(mol) $(PRESENT)
+present: program $(mol) collate
+
 
 %.o : %.cpp | $(BIN_PATH)
 	@echo CC $<
@@ -126,8 +144,9 @@ $(PREFIX)/plots:
 clean:
 	-rm -rf bin/*
 
-clean-collate:
+clean-collate: $(mol)
 	-rm -rf $(PREFIX)/plots/*
+	rm -f $(PREFIX)/latex/*
 
 delete:
 	-rm -rf $(PREFIX)/*

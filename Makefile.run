@@ -4,7 +4,7 @@ include $(my_dir)/vars.mak
 
 include $(my_dir)/vars.mak
 
-VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_dir)/lammps_in:$(PY_LIB)
+VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_dir)/lammps_in:$(PY_LIB):latex
 
 shape := $(call t_shape, $(mol))
 radius := $(call t_rad, $(mol))
@@ -13,7 +13,7 @@ theta := $(call t_theta, $(mol))
 temp := $(call t_temp, $(mol))
 bound := $(call t_bound, $(mol))
 
-to_plot:=$(addprefix plot-, $(to_plot))
+#to_plot:=$(addprefix plot-, $(to_plot))
 
 ifeq ($(shape), Snowman)
     atoms := 2
@@ -100,7 +100,7 @@ contact: lammps program | $(FOLDERS)
 
 movie: contact
 
-collate: contact #density
+collate: contact
 
 status:
 
@@ -111,10 +111,15 @@ density: contact
 
 present:$(PRESENT)
 
-$(PRESENT): plot #density
+$(PRESENT): tex-files collate
 	@-rm -f mol_pres.tex
 	@python $(my_dir)/output/presentEach.py $(PREFIX)/$(SAVE) >> mol_pres.tex
 	@touch .make/present
+
+tex-files: $(addsuffix .tex, $(to_plot))
+
+%.tex: plot-% | latex
+	python $(my_dir)/output/create.py $(PREFIX)/$(SAVE) $(basename $@) > latex/$@
 
 .make:
 	@-mkdir .make
@@ -128,6 +133,9 @@ restarts:
 $(FOLDERS):
 	@mkdir -p $@
 
+latex:
+	@mkdir -p $@
+
 .PHONY: touch-lammps
 touch-lammps: | .make
 	touch .make/lammps
@@ -135,7 +143,7 @@ touch-lammps: | .make
 # Plots {{{
 # ---------
 
-plot: $(to_plot)
+plot: $(addprefix plot-, $(to_plot))
 	@echo Generating Plots
 	@touch .make/plot
 
@@ -185,12 +193,15 @@ clean-contact: clean-plot clean-density
 clean-density: clean-present
 	rm -f .make/density
 
-clean-plot: clean-present
+clean-plot: clean-collate
 	rm -f order/*.png
 	rm -f *.png
 	rm -f trj_contact/*.png
 	rm -f trj_contact/*.pdf
 	rm -f .make/plot*
+
+clean-collate: clean-present
+	rm -f latex/*
 
 clean-present:
 	-rm -f .make/present
