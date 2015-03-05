@@ -46,6 +46,7 @@ t_theta = $(word 5, $(subst -,$(space),$(1)) )
 t_crys = $(word 5, $(subst -,$(space),$(1)) )
 t_bound = $(word 6, $(subst -,$(space),$(1)) )
 
+wo_temp = $(subst $(space),-,$(strip $(call t_shape, $1) $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1) $(call t_bound, $1)))
 
 # }}}
 # C settings {{{

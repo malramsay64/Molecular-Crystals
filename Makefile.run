@@ -92,8 +92,9 @@ lammps: | $(restart) .make
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
 
+
 # Analysis of run, both static and dynamic quantities
-contact: lammps program | $(FOLDERS)
+contact: program | $(FOLDERS) trj/out.lammpstrj
 	@echo analysis $(SAVE)/trj/out.lammpstrj
 	@$(BIN_PATH)/program -i trj/out.lammpstrj $(contact_args) > contact.log
 	@touch .make/contact

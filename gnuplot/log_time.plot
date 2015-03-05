@@ -24,7 +24,7 @@ set datafile separator ","
 set style line 5 pointtype 7 linewidth 2 pointsize 0.5
 
 plot for [i=1:words(files)] word(files, i)."/msd.csv" using 1:2 with linespoints linestyle 5\
-     linecolor i title temp(word(files,i)), x
+     linecolor i title temp(word(files,i)), 0.0001*x linecolor 'black' title 'x'
 
 set output plot_dir.shape(word(files,1))."_rot_1".ext
 unset logscale y
