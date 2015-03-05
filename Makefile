@@ -115,7 +115,7 @@ $(PRESENT): program collate
 present: program $(mol) collate
 	@pdflatex -draftmode $(latex-flags) output/collate.tex
 	@pdflatex $(latex-flags) output/collate.tex
-	@mv output/.output/$@.pdf $(PREFIX)/collate.pdf
+	@mv output/.output/collate.pdf $(PREFIX)/collate.pdf
 	@rm -f collate.pdf
 	@ln -s $(PREFIX)/collate.pdf collate.pdf
 
