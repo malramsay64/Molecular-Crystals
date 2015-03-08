@@ -119,8 +119,8 @@ $(PRESENT): tex-files collate
 
 tex-files: $(addsuffix .tex, $(to_plot))
 
-%.tex: plot-% | latex
-	python $(my_dir)/output/create.py $(PREFIX)/$(SAVE) $(basename $@) > latex/$@
+%.tex: plot-% | my_latex
+	python $(my_dir)/output/create.py $(PREFIX)/$(SAVE) $(basename $@) > my_latex/$@
 
 .make:
 	@-mkdir .make
@@ -134,7 +134,7 @@ restarts:
 $(FOLDERS):
 	@mkdir -p $@
 
-latex:
+my_latex:
 	@mkdir -p $@
 
 .PHONY: touch-lammps
@@ -202,7 +202,7 @@ clean-plot: clean-collate
 	rm -f .make/plot*
 
 clean-collate: clean-present
-	rm -f latex/*
+	rm -f my_latex/*
 
 clean-present:
 	-rm -f .make/present

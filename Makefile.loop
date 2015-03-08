@@ -38,7 +38,7 @@ present: $(save) collate | latex
 	@$(foreach p, $(to_plot),\
     $(foreach s, $(save), rm -f $(PREFIX)/latex/$(mol)-$p.tex;))
 	@$(foreach p, $(to_plot),\
-    $(foreach s, $(save), cat $(PREFIX)/$s/latex/$p.tex >> $(PREFIX)/latex/$(mol)-$p.tex;))
+    $(foreach s, $(save), cat $(PREFIX)/$s/my_latex/$p.tex >> $(PREFIX)/latex/$(mol)-$p.tex;))
 
 collate: $(save)
 	@-rm -f $(PREFIX)/plots/$(mol).csv
@@ -49,7 +49,7 @@ collate: $(save)
 
 
 %.tex: $(save)
-	$(foreach s, $(save), $(shell cat $s/latex/$@ >> $(PREFIX)/latex/$(mol).tex))
+	$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))
 
 
 $(save): always | $(dirs)
