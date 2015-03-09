@@ -3,7 +3,7 @@ PRE=files data lammps touch-lammps test $(all_clean)
 TARGETS=contact plot density movie
 PRESENT=grouped individual
 
-latex-flags= --output-dir=output/.output -interaction=batchmode
+latex-flags= --output-dir=output/.output #-interaction=batchmode
 
 include settings
 include config
@@ -47,18 +47,32 @@ export $(addprefix temp_, $(distances))
 
 glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_rad, $1,) $(call p_dist, $1) $(call p_theta, $1) $(call p_bound $1)))
 
+get_mol = $(call wo_temp, $(word 5, $(subst /,$(space),$m)))
+
 ##########################################################################################
 
 all: program
 
-collate: $(addsuffix .csv, $(mol)) | $(PREFIX)/plots
-	@echo Created T-dependent plots
+collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
+	echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.tex
+	rm -f $(PREFIX)/latex/collate.tex
+	$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
 %.csv: %
-	@rm -f $(PREFIX)/plots/$@
+	rm -f $(PREFIX)/plots/$@
 	@$(PYTHON) $(PYLIB)/collate.py $(PREFIX)/$<
 	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
 	@gnuplot -e 'prefix="$(PREFIX)/$(call glob_temps, $<)"' gnuplot/log_time.plot
+	@ rm -f $(PREFIX)/latex/$<.tex
+	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
+	python output/collate.py $(PREFIX) $< > output/collate.out
+
+%.tex: %
+	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
+	@gnuplot -e 'prefix="$(PREFIX)/$(call glob_temps, $<)"' gnuplot/log_time.plot
+	@ rm -f $(PREFIX)/latex/$@
+	python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
+	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
@@ -98,7 +112,21 @@ $(PRESENT): program collate
 	@rm -f $@.pdf
 	@ln -s $(PREFIX)/$@.pdf $@.pdf
 
-present: program $(mol) $(PRESENT)
+present: program $(mol) collate
+	@pdflatex -draftmode $(latex-flags) output/collate.tex
+	@pdflatex $(latex-flags) output/collate.tex
+	@mv output/.output/collate.pdf $(PREFIX)/collate.pdf
+	@rm -f collate.pdf
+	@ln -s $(PREFIX)/collate.pdf collate.pdf
+
+contact-all: $(addsuffix /contact.log, $(shell ls -d $(PREFIX)/*-*-*))
+
+%/contact.log: program vars.mak
+	@if [ -f $(@:%/contact.log=%/trj/out.lammpstrj) ] ;then $(MAKE) -C $(dir $@) -f $(my_dir)/$(GOAL) contact mol=$(@:$(PREFIX)/%/contact.log=%) ; fi
+
+clean-contact-all:
+	@$(foreach m, $(shell ls $(PREFIX)/*-*-*/trj/out.lammpstrj | cut -d/ -f6), \
+        $(MAKE) -C $(PREFIX)/$m -f $(my_dir)/$(GOAL) clean-contact mol=$m;)
 
 %.o : %.cpp | $(BIN_PATH)
 	@echo CC $<
@@ -126,8 +154,9 @@ $(PREFIX)/plots:
 clean:
 	-rm -rf bin/*
 
-clean-collate:
+clean-collate: $(mol)
 	-rm -rf $(PREFIX)/plots/*
+	rm -f $(PREFIX)/latex/*
 
 delete:
 	-rm -rf $(PREFIX)/*

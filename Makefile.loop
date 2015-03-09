@@ -19,9 +19,38 @@ last_t:=$(word 1, $(temp))
 
 OPTIONS = --no-print-directory $(if $(filter $(MAKECMDGOALS), $(PRE)), -j 1)
 
+collate_command = echo $(call t_temp, $1),$$(cat $(PREFIX)/$1/contact.log | cut -d: -f$2 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) >> $(PREFIX)/plots/$(mol).csv
+collate_header = echo "t,"$$(cat $(PREFIX)/$1/contact.log | cut -d: -f1 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) >> $(PREFIX)/plots/$(mol).csv
+
+all_temps = $(notdir $(shell ls -d $(PREFIX)/$(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(theta) $(bound)))))
+
 export
 
-$(MAKECMDGOALS): $(save)
+$(PRE): $(save)
+
+clean-collate:$(save)
+
+$(TARGETS): $(save)
+
+$(PRESENT): $(save)
+
+present: $(save) collate | latex
+	@$(foreach p, $(to_plot),\
+    $(foreach s, $(save), rm -f $(PREFIX)/latex/$(mol)-$p.tex;))
+	@$(foreach p, $(to_plot),\
+    $(foreach s, $(save), cat $(PREFIX)/$s/my_latex/$p.tex >> $(PREFIX)/latex/$(mol)-$p.tex;))
+
+collate: $(save)
+	@-rm -f $(PREFIX)/plots/$(mol).csv
+	echo $(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(theta) $(bound)))
+	echo $(all_temps)
+	$(call collate_header,$(word 1, $(save)))
+	@$(foreach s, $(all_temps), $(call collate_command,$s, 2);)
+
+
+%.tex: $(save)
+	$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))
+
 
 $(save): always | $(dirs)
 	$(foreach t, $(temp), $(if $(filter $(call t_temp, $@), $t), $(eval prev_t=$(last_t)), $(eval last_t=$t)))
@@ -37,6 +66,9 @@ endif
 
 $(dirs):
 	@-mkdir $@
+
+latex:
+	@-mkdir -p $(PREFIX)/$@
 
 .PHONY: always
 always:

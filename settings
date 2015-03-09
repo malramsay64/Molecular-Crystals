@@ -95,10 +95,13 @@ to_plot = frame data
 
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
+
+d_name=crystallising
+
 ifeq ($(SYS_NAME), silica)
-    PREFIX := /tmp3m/mram5995/crystallising
+    PREFIX := /tmp3m/mram5995/$(d_name)
 else
-    PREFIX := $(HOME)/scratch/crystallising
+    PREFIX := $(HOME)/scratch/$(d_name)
 endif
 
 # Directory Makefile is located
