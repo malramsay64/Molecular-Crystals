@@ -3,7 +3,7 @@ PRE=files data lammps touch-lammps test $(all_clean)
 TARGETS=contact plot density movie
 PRESENT=grouped individual
 
-latex-flags= --output-dir=output/.output -interaction=batchmode
+latex-flags= --output-dir=output/.output #-interaction=batchmode
 
 include settings
 include config
@@ -45,17 +45,22 @@ VPATH=.:$(BIN_PATH):$(LIB)
 distances = $(foreach m, $(mol), $(call p_dist, $m))
 export $(addprefix temp_, $(distances))
 
+glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_rad, $1,) $(call p_dist, $1) $(call p_theta, $1) $(call p_bound $1)))
+
 ##########################################################################################
 
 all: program
-	echo $(SYS_NAME)
+	@echo $(SYS_NAME)
+	@echo $(mol)
 
-collate: $(mol) | $(PREFIX)/plots
-	@echo Creating T-dependent plots
-	@-rm -f $(PREFIX)/plots/*
-	@$(foreach m, $(mol), python pylib/collate.py $(PREFIX)/$(strip $(m));)
-	$(eval fs = $(basename $(shell ls $(PREFIX)/plots/*.csv)))
-	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
+collate: $(addsuffix .csv, $(mol)) | $(PREFIX)/plots
+	@echo Created T-dependent plots
+
+%.csv: %
+	@rm -f $(PREFIX)/plots/$@
+	@$(PYTHON) $(PYLIB)/collate.py $(PREFIX)/$<
+	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
+	@gnuplot -e 'prefix="$(PREFIX)/$(call glob_temps, $<)"' gnuplot/log_time.plot
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
@@ -115,16 +120,21 @@ $(PREFIX)/plots:
 	@mkdir $@
 
 
-.PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE)
+.PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE) clean-plot clean-collate
 
 #test: $(mol)
 #	@echo test
 
 clean:
-	-rm -r bin/*
+	-rm -rf bin/*
+
+clean-collate:
+	-rm -rf $(PREFIX)/plots/*
 
 delete:
-	-rm -r $(PREFIX)/*
+	-rm -rf $(PREFIX)/*
 
+
+clean-plot: clean-collate $(mol)
 
 # vim:foldmethod=marker:foldlevel=0
