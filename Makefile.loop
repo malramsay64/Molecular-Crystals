@@ -40,7 +40,7 @@ present: $(save) collate | latex
 	@$(foreach p, $(to_plot),\
     $(foreach s, $(save), cat $(PREFIX)/$s/my_latex/$p.tex >> $(PREFIX)/latex/$(mol)-$p.tex;))
 
-collate: $(save)
+collate: $(save) | plots
 	@-rm -f $(PREFIX)/plots/$(mol).csv
 	echo $(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(theta) $(bound)))
 	echo $(all_temps)
@@ -48,7 +48,7 @@ collate: $(save)
 	@$(foreach s, $(all_temps), $(call collate_command,$s, 2);)
 
 
-%.tex: $(save)
+%.tex: $(save) | latex
 	$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))
 
 
@@ -66,6 +66,9 @@ endif
 
 $(dirs):
 	@-mkdir $@
+
+plots:
+	@-mkdir -p $(PREFIX)/$@
 
 latex:
 	@-mkdir -p $(PREFIX)/$@

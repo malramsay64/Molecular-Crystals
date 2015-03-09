@@ -112,7 +112,7 @@ $(PRESENT): program collate
 	@rm -f $@.pdf
 	@ln -s $(PREFIX)/$@.pdf $@.pdf
 
-present: program $(mol) collate
+present: program $(mol) collate | output/.output
 	@pdflatex -draftmode $(latex-flags) output/collate.tex
 	@pdflatex $(latex-flags) output/collate.tex
 	@mv output/.output/collate.pdf $(PREFIX)/collate.pdf
@@ -161,6 +161,8 @@ clean-collate: $(mol)
 delete:
 	-rm -rf $(PREFIX)/*
 
+output/.output:
+	-mkdir $@
 
 clean-plot: clean-collate $(mol)
 
