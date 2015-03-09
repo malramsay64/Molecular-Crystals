@@ -30,7 +30,7 @@ fix 3 all momentum 100 linear 1 1 0
 dump 1 all custom 10 ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
 
 if "${printevery} == 0" then &
-    "variable p equal logfreq(1,100,100)" &
+    "variable p equal logfreq(1,99,100)" &
 else &
     "variable p equal ${printevery}"
 
@@ -40,7 +40,7 @@ dump_modify 1 every v_p
 
 dump_modify 1 first yes
 dump_modify 1 pad 10
-#dump_modify 2 pad 10
+
 if "$T == 5" then &
     "timestep 1e-3"
 timestep 1e-3

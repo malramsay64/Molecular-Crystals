@@ -13,7 +13,7 @@ radius=0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist= 1.0 1+radius
+dist= 1+radius
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
@@ -28,7 +28,7 @@ boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
-theta=120
+theta=
 
 # !!! Not Tested
 # Size ratio of two small particles in trimer
@@ -39,21 +39,21 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 4000000
-# Print every <N> steps
-print = 4000
+steps = 400000
+# Print every <N> steps, 0 produces logarithmic progression
+print = 0
 # Number of steps in equilibration (n >= 1)
 equil_steps = 200000
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 
 # Dependent on previous temps
-t_dep=true
+t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp_1.0 = 1.60
-temp_1.637556 = 1.80
+temp_1.0 = 3.50
+temp_1.637556 = 3.50
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -75,7 +75,7 @@ density = 0.015625
 # -s <n>    Step size - only every n frames and key frames (default 1)
 # -k <n>    Key frame rate - add key frame every n frames (default 100)
 
-contact_args=-s 100
+contact_args=
 # }}}
 # Plot Settings {{{
 # -------------
