@@ -24,12 +24,11 @@ crys=p2gg
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary=1
+boundary=1 2
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
 theta=
-
 # !!! Not Tested
 # Size ratio of two small particles in trimer
 ratio=
@@ -39,20 +38,23 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 4000000
+steps = 1000000000
+
 # Print every <N> steps
-print = 4000
+print = 500000
+
 # Number of steps in equilibration (n >= 1)
-equil_steps = 200000
+equil_steps = 100000000
+
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 
 # Dependent on previous temps
-t_dep=true
+t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp_1.637556 = 2.50
+temp=1.70 1.65
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -61,7 +63,6 @@ pressure = 13.5
 # Needs to be small enough such that no particles can overlap
 # Only important when generating high temperature state
 density = 0.015625
-
 # }}}
 # Analysis Settings {{{
 # ---------------------
@@ -71,12 +72,13 @@ density = 0.015625
 # -q        Include quenched configuration in anlysis (quench is last frame when using -f)
 # -m        Ouput movie
 # -d        Distance moved in quench (-q implied)
-# -s <n>    Step size - only every n frames and key frames (default 1)
+# -s <n>    Step size - only every n steps and key frames (default 1)
 # -k <n>    Key frame rate - add key frame every n frames (default 100)
 
-contact_args=-f
+contact_args=
+
 # }}}
-# Plot Settings {{{
+# Plot Settings {{{ 
 # -------------
 
 # Options are (Step|Temp|Pxx|Pyy|Pxy|TotEng|KinEng|PotEng|Enthalpy|Density|P|LX|Ly|Xy)
