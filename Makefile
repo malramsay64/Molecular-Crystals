@@ -54,24 +54,15 @@ get_mol = $(call wo_temp, $(word 5, $(subst /,$(space),$m)))
 all: program
 
 collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
-	echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.tex
-	rm -f $(PREFIX)/latex/collate.tex
-	$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
-
-%.csv: %
-	rm -f $(PREFIX)/plots/$@
-	@$(PYTHON) $(PYLIB)/collate.py $(PREFIX)/$<
-	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
-	@gnuplot -e 'prefix="$(PREFIX)/$(call glob_temps, $<)"' gnuplot/log_time.plot
-	@ rm -f $(PREFIX)/latex/$<.tex
-	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
-	python output/collate.py $(PREFIX) $< > output/collate.out
+	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.tex
+	@rm -f $(PREFIX)/latex/collate.tex
+	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
 %.tex: %
 	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
 	@gnuplot -e 'prefix="$(PREFIX)/$(call glob_temps, $<)"' gnuplot/log_time.plot
 	@ rm -f $(PREFIX)/latex/$@
-	python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
+	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
 
 movie: $(mol)
@@ -101,16 +92,6 @@ vars.mak:
 $(TARGETS): $(mol)
 
 $(PRE): $(mol)
-
-$(PRESENT): program collate
-	@echo $@
-	@python output/$@.py $(PREFIX) > output/$@.out
-	@pdflatex -draftmode $(latex-flags) output/$@.tex
-	@pdflatex $(latex-flags) output/$@.tex
-	@rm -f $@.pdf
-	@mv output/.output/$@.pdf $(PREFIX)/$@.pdf
-	@rm -f $@.pdf
-	@ln -s $(PREFIX)/$@.pdf $@.pdf
 
 present: program $(mol) collate
 	@pdflatex -draftmode $(latex-flags) output/collate.tex
