@@ -13,18 +13,18 @@ radius=0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1+radius 1.0
+dist=1+radius
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=
+crys=p2gg
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary=
+boundary=1
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
@@ -52,16 +52,7 @@ t_dep=true
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-#temp = 2.1 2.2 2.3 2.4 2.5 2.6
-# Heating run
-#temp = 0.2 0.4 0.5 0.6 1.0 1.5 2.0 3.0 5.0
-# Cooling run
-temp_1.0 = 1.00 0.90 0.85 0.80 0.75 0.70 0.68 0.65
-temp_1.637556 = 3.50 3.00 2.50 2.00 1.95 1.90
-# MP Run
-#temp_1.0 = 0.2 0.3 0.4 0.5 0.6 0.65 0.67 0.7 0.72 0.75 0.77 0.8 0.83 0.85 0.87 0.9 0.95 1.0 1.05 1.1 1.2 1.5 2.0 3.0 5.0
-# MP Run
-#temp_1.637556 = 0.2 0.5 0.8 1.0 1.5 2.0 2.5 2.8 2.83 2.85 2.87 2.9 2.93 2.95 3.0 3.05 3.1 3.2 3.3 3.5 4.0 5.0
+temp_1.637556 = 2.50
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -83,7 +74,7 @@ density = 0.015625
 # -s <n>    Step size - only every n frames and key frames (default 1)
 # -k <n>    Key frame rate - add key frame every n frames (default 100)
 
-contact_args=
+contact_args=-f
 # }}}
 # Plot Settings {{{
 # -------------
@@ -96,7 +87,7 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
 # All
 #to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct
-to_plot = alpha frame hist radial struct com
+to_plot = frame data
 
 # }}}
 # Path variables {{{
@@ -105,9 +96,9 @@ to_plot = alpha frame hist radial struct com
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 ifeq ($(SYS_NAME), silica)
-    PREFIX := /tmp3m/mram5995/supercool
+    PREFIX := /tmp3m/mram5995/crystallising
 else
-    PREFIX := $(HOME)/scratch/supercool
+    PREFIX := $(HOME)/scratch/crystallising
 endif
 
 # Directory Makefile is located
