@@ -55,7 +55,7 @@ endif
 all:
 
 .PHONY:test
-test:
+test: | $(FOLDERS) 
 	@echo $(SAVE)
 	@echo $(shape)
 	@echo $(VPATH)
@@ -77,17 +77,17 @@ $(mol_settings): | data
 	@$(PYTHON) $(PYLIB)/$(FILES) $(PREFIX) $(shape) $(radius) $(dist) $(theta) $(ratio) $(n_mol) $(density)
 endif
 
-$(last_restart): $(mol_settings) | $(FOLDERS) $(mol_settings) restarts
+$(last_restart): $(mol_settings) | $(FOLDERS) restarts
 	@echo Create $(last_restart)
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
-$(restart):# $(last_restart) | $(FOLDERS)
+$(restart): | $(last_restart) $(FOLDERS)
 	@echo Equil $(restart) from $(last_restart)
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(EQUIL_VARS) < $(EQUIL_IN) > $(LOG)
 
 # Production run, has already been equilibrated
-lammps: | $(restart) .make
+lammps: | $(restart) .make $(FOLDERS) 
 	@echo Production $(SAVE)
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
@@ -132,7 +132,7 @@ restarts:
 	@mkdir -p $(PREFIX)/restarts
 
 $(FOLDERS):
-	@mkdir -p $@
+	mkdir -p $@
 
 my_latex:
 	@mkdir -p $@

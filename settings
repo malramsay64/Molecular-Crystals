@@ -38,14 +38,11 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 1000000000
-
-# Print every <N> steps
-print = 500000
-
+steps = 8000000
+# Print every <N> steps, 0 produces logarithmic progression
+print = 0
 # Number of steps in equilibration (n >= 1)
-equil_steps = 100000000
-
+equil_steps = 2000000
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 
@@ -63,6 +60,7 @@ pressure = 13.5
 # Needs to be small enough such that no particles can overlap
 # Only important when generating high temperature state
 density = 0.015625
+
 # }}}
 # Analysis Settings {{{
 # ---------------------
@@ -72,7 +70,7 @@ density = 0.015625
 # -q        Include quenched configuration in anlysis (quench is last frame when using -f)
 # -m        Ouput movie
 # -d        Distance moved in quench (-q implied)
-# -s <n>    Step size - only every n steps and key frames (default 1)
+# -s <n>    Step size - only every n frames and key frames (default 1)
 # -k <n>    Key frame rate - add key frame every n frames (default 100)
 
 contact_args=

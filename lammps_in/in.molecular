@@ -27,13 +27,19 @@ fix 2 all enforce2d
 fix 3 all momentum 100 linear 1 1 0
 
 # Dump configuration printevery steps. Image is dumped at beginning and end
-dump 1 all custom ${printevery} ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
-#dump 2 all image ${steps} ${my_path}/images/*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
+dump 1 all custom 10 ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
+
+if "${printevery} == 0" then &
+    "variable p equal logfreq(1,99,100)" &
+else &
+    "variable p equal ${printevery}"
+
+dump_modify 1 every v_p
+
+#dump modify 1 every v_print_steps
 
 dump_modify 1 first yes
-#dump_modify 2 first yes
 dump_modify 1 pad 10
-#dump_modify 2 pad 10
 
 if "$T == 5" then &
     "timestep 1e-3"
