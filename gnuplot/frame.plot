@@ -3,6 +3,7 @@
 set terminal png enhanced transparent truecolor size 3200,3200
 
 ext = ".png"
+prefix ="./"
 
 set size ratio -1
 #set size square
