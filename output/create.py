@@ -31,7 +31,7 @@ def figure(prefix, filename, caption=0):
         print r"\end{figure}"
     elif filename.endswith(".log") and len(plots) == 1:
         print r"\begin{minipage}{0.5\textwidth}"
-        print r"\begin{tabular}{L{4cm} S[table-format=3.4e2]}"
+        print r"\begin{tabular}{L{4cm} S[table-format=1.5e2]}"
         contact = open(plots[0]+".log", "rU")
         for line in contact:
             print ' & '.join(line.split(':')), r"\\"
