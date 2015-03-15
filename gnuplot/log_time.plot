@@ -14,7 +14,8 @@ set ylabel "MSD"
 set format x "10^{%L}"
 set format y "10^{%L}"
 set title shape(word(files,1)) font ",14"
-set key top left
+set key outside right
+
 
 set logscale x
 set logscale y
