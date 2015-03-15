@@ -5,7 +5,7 @@ include system
 
 # Shape (Snowman|Trimer)
 # <<<LOOP>>>
-shape=Snowman
+shape=Snowman Trimer
 
 # Radius (0,1]
 # <<<LOOP>>>
@@ -13,22 +13,22 @@ radius=0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1+radius
+dist=1+radius 1.0
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=p2gg
+crys=
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary=1 2
+boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
-theta=
+theta= 120
 # !!! Not Tested
 # Size ratio of two small particles in trimer
 ratio=
@@ -51,7 +51,8 @@ t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp=1.70 1.65
+temp_1.0 = 0.75
+temp_1.637556 = 1.70
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -86,8 +87,8 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # Ouput files to plot
 # (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
 # All
-#to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct
-to_plot = frame data
+#to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct rot-diff
+to_plot = frame radial rot-diff
 
 # }}}
 # Path variables {{{
@@ -96,7 +97,7 @@ to_plot = frame data
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=crystallising
+d_name=supercool_log
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/$(d_name)
