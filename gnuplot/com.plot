@@ -8,6 +8,8 @@ height = system(sprintf("awk 'NR==1 {print  $2; exit}' %s", file))
 
 set yrange[-2:height+2]
 set xrange[-2:a+2]
+set pm3d
+set palette defined (0 "blue", 1 "green")
 
 set size ratio -1
 #set size square
@@ -16,6 +18,6 @@ set datafile separator " "
 set object rectangle from -0,0 to a,height
 set style fill transparent solid 1 noborder
 set style line 1 lt 1 lc -1 lw 2
-plot file using 1:2 with points lc 'black' pointsize 2 pointtype 7 title "Centers of Mass"
+plot file using 1:2:3 with points lc palette pointsize 2 pointtype 7 title "Centers of Mass"
 
 
