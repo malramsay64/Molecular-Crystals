@@ -30,7 +30,7 @@ fix 3 all momentum 100 linear 1 1 0
 dump 1 all custom 10 ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
 
 if "${printevery} == 0" then &
-    "variable p equal logfreq(1,99,100)" &
+    "variable p equal logfreq(10,500,1000)" &
 else &
     "variable p equal ${printevery}"
 
