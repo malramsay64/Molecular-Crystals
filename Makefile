@@ -54,7 +54,7 @@ get_mol = $(call wo_temp, $(word 5, $(subst /,$(space),$m)))
 all: program
 
 collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
-	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.tex
+	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.out
 	@rm -f $(PREFIX)/latex/collate.tex
 	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
