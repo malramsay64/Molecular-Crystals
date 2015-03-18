@@ -41,3 +41,6 @@ output/.output
 
 # Include all in test
 !test/*
+
+# Backup files
+*.back
