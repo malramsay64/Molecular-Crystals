@@ -5,7 +5,7 @@ include system
 
 # Shape (Snowman|Trimer)
 # <<<LOOP>>>
-shape=Snowman Trimer
+shape=Disc Snowman Trimer
 
 # Radius (0,1]
 # <<<LOOP>>>
@@ -13,7 +13,7 @@ radius=0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1+radius 1.0
+dist=1.0
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
@@ -38,11 +38,11 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 8000000
+steps = 80000
 # Print every <N> steps, 0 produces logarithmic progression
 print = 0
 # Number of steps in equilibration (n >= 1)
-equil_steps = 2000000
+equil_steps = 20000
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 
@@ -51,6 +51,7 @@ t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
+temp = 1.0
 temp_1.0 = 0.75
 temp_1.637556 = 1.70
 
@@ -97,7 +98,7 @@ to_plot = frame radial rot-diff
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=supercool_log
+d_name=disc
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/$(d_name)

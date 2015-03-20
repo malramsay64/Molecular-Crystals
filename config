@@ -104,13 +104,13 @@ LAMMPS_THERM_VARS= -v T $(temp) -v press $(pressure)
 
 LAMMPS_SYS_VARS=-v steps $(steps) -v printevery $(print) -v n_mol $(n_mol)
 
-LAMMPS_MOL_VARS=-v shape $(shape) -v atoms $(atoms) -v radius $(radius)
+LAMMPS_MOL_VARS=-v shape $(shape) -v atoms $(atoms)
 
 LAMMPS_VARS=$(LAMMPS_SYS_VARS) $(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL_VARS) -log logs/prod.log
 
 EQUIL_VARS=$(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL_VARS) -v steps $(equil_steps) -log logs/equil.log
 
-CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $(prev_t) -v press $(pressure) -v steps $(equil_steps) -log logs/create.log
+CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $(create_t) -v press $(pressure) -v steps $(equil_steps) -log logs/create.log
 
 #}}}
 # MPI Settings {{{
@@ -120,7 +120,7 @@ ifeq ($(SYS_NAME), gaucho)
 else ifeq ($(SYS_NAME), ortho)
 	MPI=
 else
-	MPI=mpirun -np 8
+	MPI=
 endif
 
 #}}}
