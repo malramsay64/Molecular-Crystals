@@ -4,7 +4,7 @@ include $(my_dir)/vars.mak
 
 include $(my_dir)/vars.mak
 
-VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_dir)/lammps_in:$(PY_LIB):latex
+VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_dir)/lammps_in:$(PYLIB):latex
 
 shape := $(call t_shape, $(mol))
 radius := $(call t_rad, $(mol))
@@ -58,6 +58,7 @@ else
 	LAMMPS_MOL_VARS += -v radius 1
 endif
 
+
 ###################################################################
 
 all:
@@ -65,6 +66,7 @@ all:
 .PHONY:test
 test: | $(FOLDERS) 
 	@echo $(restart)
+	@echo $(VPATH)
 
 # Create data files for molecule if not already generated
 files: $(mol_settings)
@@ -92,11 +94,17 @@ $(restart): | $(last_restart) $(FOLDERS)
 	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(EQUIL_VARS) < $(EQUIL_IN) > $(LOG)
 
 # Production run, has already been equilibrated
+ifeq ($(print), 0)
+lammps: steps.dat | $(restart) .make $(FOLDERS) 
+	@echo Production $(SAVE)
+	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
+	@touch .make/lammps
+else
 lammps: | $(restart) .make $(FOLDERS) 
 	@echo Production $(SAVE)
 	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
-
+endif
 
 # Analysis of run, both static and dynamic quantities
 contact: program | $(FOLDERS) trj/out.lammpstrj
@@ -126,6 +134,9 @@ tex-files: $(addsuffix .tex, $(to_plot))
 
 %.tex: plot-% | my_latex
 	python $(my_dir)/output/create.py $(PREFIX)/$(SAVE) $(basename $@) > my_latex/$@
+
+steps.dat: steps.py
+	@python $(PYLIB)/steps.py $(steps) > $@
 
 .make:
 	@-mkdir .make
