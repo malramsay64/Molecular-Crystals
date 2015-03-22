@@ -12,6 +12,7 @@ export
 
 # Generating all shapes {{{
 mol := $(shape)
+mol_d := $(filter Disc%, $(mol))
 # Radius
 mol := $(if $(radius), $(foreach rad, $(radius), $(addsuffix -$(rad), $(mol))), $(mol)) 
 # Distance
@@ -23,7 +24,7 @@ mol_s := $(filter Snowman%, $(mol))
 mol_t := $(filter Trimer%, $(mol))
 mol_t := $(foreach rad, $(theta), $(addsuffix -$(rad), $(mol_t)))
 
-mol := $(mol_s) $(mol_t)
+mol := $(mol_d) $(mol_s) $(mol_t)
 
 # Adding crystals for which there are unit cells
 ifneq ($(strip $(crys)),)
@@ -53,6 +54,10 @@ get_mol = $(call wo_temp, $(word 5, $(subst /,$(space),$m)))
 
 all: program
 
+test:
+	@echo $(mol)
+	@echo $(shape)
+
 collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.out
 	@rm -f $(PREFIX)/latex/collate.tex
@@ -68,7 +73,7 @@ collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
 
-$(mol): program vars.mak | $(PREFIX)
+$(mol): program vars.mak | $(PREFIX) $(PREFIX)/plots
 ifeq ($(SYS_NAME), silica)
 ifneq ($(t_dep), false)
 	@qsub -N $@ -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
@@ -101,7 +106,7 @@ present: program $(mol) collate | output/.output
 	@rm -f collate.pdf
 	@ln -s $(PREFIX)/collate.pdf collate.pdf
 
-contact-all: $(addsuffix /contact.log, $(shell ls -d $(PREFIX)/*-*-*))
+contact-all: $(addsuffix /contact.log, $(shell ls -d $(PREFIX)/*-*))
 
 %/contact.log: program vars.mak
 	@if [ -f $(@:%/contact.log=%/trj/out.lammpstrj) ] ;then $(MAKE) -C $(dir $@) -f $(my_dir)/$(GOAL) contact mol=$(@:$(PREFIX)/%/contact.log=%) ; fi

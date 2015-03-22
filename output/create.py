@@ -71,20 +71,21 @@ def name(dir):
     if shape == "Snowman":
         if len(d) == 5:
             shape, temp, radius, dist, crys = d
+            return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$, {3}".format(temp, radius, dist, crys)
         elif len(d) == 6:
             shape, temp, radius, dist, crys, bound = d
+            return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$, {3}".format(temp, radius, dist, crys)
         else:
             shape, temp, radius, dist = d
+            return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$".format(temp, radius, dist, crys)
     elif shape == "Trimer":
         shape, temp, radius, dist, theta = d
-    else:
-        print shape
-    if theta:
         return r"Trimer: Temp $= {0}$, $r = {1}$, $d = {2}$, $\theta = {3}$".format(temp, radius, dist, theta)
-    elif crys:
-        return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$, {3}".format(temp, radius, dist, crys)
     else:
-        return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$".format(temp, radius, dist, crys)
+        shape, temp = d
+        return r"Disc: Temp $= {0}$".format(temp)
+
+
 
 if __name__ == "__main__":
     if len(sys.argv) == 3:

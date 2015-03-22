@@ -25,7 +25,7 @@ do for [i=2:num_c] {
     set output f.ext
     set xlabel "1/T"
     set ylabel system(command)
-    plot contact.".csv" using (1/$1):i with linespoints ls 5 lc 1
+    plot contact.".csv" using (1/$1):i with linespoints ls 5 lc 1, x
 
 }
 
