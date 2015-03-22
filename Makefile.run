@@ -54,6 +54,7 @@ endif
 
 ifneq ($(shape), Disc)
 	LAMMPS_MOL_VARS += -v radius $(radius)
+	CREATE_VARS += -v radius $(radius)
 else
 	LAMMPS_MOL_VARS += -v radius 1
 endif
@@ -67,6 +68,8 @@ all:
 test: | $(FOLDERS) 
 	@echo $(restart)
 	@echo $(VPATH)
+	@echo $(LAMMPS_MOL_VARS)
+	@echo $(CREATE_VARS)
 
 # Create data files for molecule if not already generated
 files: $(mol_settings)
@@ -133,7 +136,7 @@ $(PRESENT): tex-files collate
 tex-files: $(addsuffix .tex, $(to_plot))
 
 %.tex: plot-% | my_latex
-	python $(my_dir)/output/create.py $(PREFIX)/$(SAVE) $(basename $@) > my_latex/$@
+	@python $(my_dir)/output/create.py $(PREFIX)/$(SAVE) $(basename $@) > my_latex/$@
 
 steps.dat: steps.py
 	@python $(PYLIB)/steps.py $(steps) > $@

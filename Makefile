@@ -3,7 +3,7 @@ PRE=files data lammps touch-lammps test $(all_clean)
 TARGETS=contact plot density movie
 PRESENT=grouped individual
 
-latex-flags= --output-dir=output/.output #-interaction=batchmode
+latex-flags= --output-dir=output/.output -interaction=batchmode
 
 include settings
 include config
@@ -46,7 +46,7 @@ VPATH=.:$(BIN_PATH):$(LIB)
 distances = $(foreach m, $(mol), $(call p_dist, $m))
 export $(addprefix temp_, $(distances))
 
-glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_rad, $1,) $(call p_dist, $1) $(call p_theta, $1) $(call p_bound $1)))
+glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_rad, $1,) $(call p_dist, $1) $(call p_theta, $1) $(call p_bound, $1)))
 
 get_mol = $(call wo_temp, $(word 5, $(subst /,$(space),$m)))
 
@@ -106,13 +106,13 @@ present: program $(mol) collate | output/.output
 	@rm -f collate.pdf
 	@ln -s $(PREFIX)/collate.pdf collate.pdf
 
-contact-all: $(addsuffix /contact.log, $(shell ls -d $(PREFIX)/*-*))
+contact-all: $(addsuffix /contact.log, $(wildcard $(PREFIX)/*-*))
 
 %/contact.log: program vars.mak
 	@if [ -f $(@:%/contact.log=%/trj/out.lammpstrj) ] ;then $(MAKE) -C $(dir $@) -f $(my_dir)/$(GOAL) contact mol=$(@:$(PREFIX)/%/contact.log=%) ; fi
 
 clean-contact-all:
-	@$(foreach m, $(shell ls $(PREFIX)/*-*-*/trj/out.lammpstrj | cut -d/ -f6), \
+	@$(foreach m, $(wildcard $(PREFIX)/*-*-*/trj/out.lammpstrj | cut -d/ -f6), \
         $(MAKE) -C $(PREFIX)/$m -f $(my_dir)/$(GOAL) clean-contact mol=$m;)
 
 %.o : %.cpp | $(BIN_PATH)
