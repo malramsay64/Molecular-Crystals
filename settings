@@ -98,7 +98,7 @@ to_plot = frame radial rot-diff
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=disc
+d_name=output
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/$(d_name)
