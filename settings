@@ -13,7 +13,7 @@ radius=0.5 0.6 0.637556 0.7 0.8 0.9 1.0
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1 1+0.2*r 1+0.4*r 1+0.6*r 1+0.8*r 1+r
+dist=1.0 1.0+0.2*radius 1.0+0.4*radius 1.0+0.6*radius 1+0.8*radius 1+radius
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
