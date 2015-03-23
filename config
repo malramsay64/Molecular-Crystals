@@ -56,7 +56,7 @@ CFLAGS = -O2 -std=c99
 CXXFLAGS := -Ofast -stdlib=libc++ -std=gnu++11
 LDFLAGS = -lm
 
-ifeq ($(SYS_NAME), ortho)
+ifeq ($(SYS_NAME), ubuntu)
 	CXXFLAGS := -O3 -std=gnu++11 -pthread -Wl,--no-as-needed
 endif
 
@@ -89,7 +89,7 @@ ifeq ($(SYS_NAME), gaucho)
 else ifeq ($(SYS_NAME), mac)
 	LAMMPS_PATH=
 	LAMMPS=lmp_mac_mpi
-else ifeq ($(SYS_NAME), ortho)
+else ifeq ($(SYS_NAME), ubuntu)
 	LAMMPS_PATH=
 	LAMMPS=lmp_ubuntu
 else
@@ -117,7 +117,7 @@ CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $(create_t) -v press $(press
 ifeq ($(SYS_NAME), gaucho)
 	#MPI=/opt/openmpi/bin/mpirun
 	MPI=mpirun -np 8
-else ifeq ($(SYS_NAME), ortho)
+else ifeq ($(SYS_NAME), ubuntu)
 	MPI=mpirun -np 4
 else
 	MPI= mpirun -np 8
