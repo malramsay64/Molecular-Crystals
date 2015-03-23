@@ -120,7 +120,7 @@ ifeq ($(SYS_NAME), gaucho)
 else ifeq ($(SYS_NAME), ortho)
 	MPI=mpirun -np 4
 else
-	MPI=
+	MPI= mpirun -np 8
 endif
 
 #}}}

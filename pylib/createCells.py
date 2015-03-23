@@ -40,23 +40,33 @@ if __name__ == "__main__":
     path = '.'
     mols = 2500
 
-    theta = float(line[0])
-    a = float(line[1])
-    b = float(line[2])
-    x = float(line[3])
-    y = float(line[4])
-    phi = float(line[5])
-    m = float(line[6])
 
     path = args[1]
     mols = int(args[2])
     r = float(args[3])
     d = float(args[4])
-    crys = getattr(unitCell,args[5])
+    wallpaper = args[5]
+    crys = getattr(unitCell,wallpaper)
     try:
         boundary = int(args[6])
     except IndexError:
         boundary = ''
+
+    theta = float(line[0])
+    a = float(line[1])
+    b = float(line[2])
+    
+    print wallpaper
+    if wallpaper not in ["p2mg"]:
+        x = float(line[3])
+        y = float(line[4])
+        phi = float(line[5])
+        m = float(line[6])
+    else:
+        y = float(line[3])
+        x = 0.25
+        phi = float(line[4])
+        m = float(line[5])
 
     s = molecule.Snowman(r,d)
     phi = 2*pi - phi

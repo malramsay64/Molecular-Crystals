@@ -26,7 +26,7 @@ OPTIONS = --no-print-directory $(if $(filter $(MAKECMDGOALS), $(PRE)), -j 1)
 collate_command = echo $(call t_temp, $1),$$(cat $(PREFIX)/$1/$@ | cut -d: -f$2 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) >> $(PREFIX)/plots/$(mol)-$(basename $@).csv
 collate_header = echo "t,"$$(cat $(PREFIX)/$1/$@ | cut -d: -f1 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) > $(PREFIX)/plots/$(mol)-$(basename $@).csv
 
-all_temps = $(notdir $(shell ls -d $(PREFIX)/$(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(theta) $(bound)))))
+all_temps = $(notdir $(wildcard $(PREFIX)/$(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(theta) $(bound)))))
 
 export
 
@@ -48,18 +48,16 @@ collate: contact.log order.log | plots
 
 order.log contact.log: $(save)
 	@-rm -f $(PREFIX)/plots/$(mol)-$(basename $@).csv
-	echo $(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(theta) $(bound)))
-	echo $(all_temps)
 	$(call collate_header,$(word 1, $(save)))
 	@$(foreach s, $(all_temps), $(call collate_command,$s, 2);)
 
 
 %.tex: $(save) | latex
-	$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))
+	@$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))
 
 
 $(save): always | $(dirs)
-	$(foreach t, $(temp), $(if $(filter $(call t_temp, $@), $t), $(eval prev_t=$(last_t)), $(eval last_t=$t)))
+	@$(foreach t, $(temp), $(if $(filter $(call t_temp, $@), $t), $(eval prev_t=$(last_t)), $(eval last_t=$t)))
 ifeq ($(SYS_NAME), silica)
 ifeq ($(t_dep), false)
 	@qsub -N $@ -o pbsout/$@.out single.pbs -vmol=$@,prev_t=$(prev_t),target=$(MAKECMDGOALS),prefix=$(PREFIX)/$@,my_dir=$(my_dir)

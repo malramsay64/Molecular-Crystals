@@ -27,6 +27,7 @@ if __name__ == "__main__":
         s = sys.argv[1].split("-")
         s.insert(1,"*")
         s = "-".join(s)
+        print s
         shape_dirs = sorted(glob.glob(s))
         f = 0
         for d in shape_dirs:
