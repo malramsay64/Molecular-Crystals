@@ -24,7 +24,7 @@ crys=p2gg pg
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary= 1 2
+boundary= 1
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
@@ -38,11 +38,11 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 8000000
+steps = 80000000
 # Print every <N> steps, 0 produces logarithmic progression
-print = 0
+print = 80000
 # Number of steps in equilibration (n >= 1)
-equil_steps = 2000000
+equil_steps = 8000000
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 
@@ -51,8 +51,8 @@ t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp_1.0 = 0.70
-temp_1.637556 = 1.90
+temp_1.0 = 0.90 0.85 0.80 0.75 0.72 0.70 0.68 0.65 0.6
+temp_1.637556 = 2.20 2.10 2.00 1.95 1.90 1.85 1.80 1.70 1.65
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -74,7 +74,7 @@ density = 0.015625
 # -s <n>    Step size - only every n frames and key frames (default 1)
 # -k <n>    Key frame rate - add key frame every n frames (default 100)
 
-contact_args=-k 20
+contact_args=-k 20 -t -r
 
 # }}}
 # Plot Settings {{{ 
@@ -88,7 +88,7 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
 # All
 #to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct rot-diff
-to_plot = frame radial
+to_plot = frame radial short-order-hist regio
 
 # }}}
 # Path variables {{{
@@ -97,7 +97,7 @@ to_plot = frame radial
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=crystallising
+d_name=crystallising_3
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/$(d_name)
