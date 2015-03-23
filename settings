@@ -24,7 +24,7 @@ crys=p2gg pg
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary= 1
+boundary= 1 2
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
@@ -38,7 +38,7 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 80000000
+steps = 160000000
 # Print every <N> steps, 0 produces logarithmic progression
 print = 80000
 # Number of steps in equilibration (n >= 1)
