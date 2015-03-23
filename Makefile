@@ -127,10 +127,10 @@ $(BIN_PATH):
 	@mkdir -p $(BIN_PATH)
 
 $(PREFIX):
-	@mkdir $(PREFIX)
+	@mkdir -p $(PREFIX)
 
 $(PREFIX)/plots:
-	@mkdir $@
+	@mkdir -p $@
 
 
 .PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE) clean-plot clean-collate
@@ -149,7 +149,7 @@ delete:
 	-rm -rf $(PREFIX)/*
 
 output/.output:
-	-mkdir $@
+	-mkdir -p $@
 
 clean-plot: clean-collate $(mol)
 
