@@ -106,7 +106,7 @@ present: program $(mol) collate | output/.output
 	@rm -f collate.pdf
 	@ln -s $(PREFIX)/collate.pdf collate.pdf
 
-contact-all: $(addsuffix /contact.log, $(shell ls -d $(PREFIX)/*-*))
+contact-all: $(addsuffix /contact.log, $(wildcard $(PREFIX)/*-*))
 
 %/contact.log: program vars.mak
 	@if [ -f $(@:%/contact.log=%/trj/out.lammpstrj) ] ;then $(MAKE) -C $(dir $@) -f $(my_dir)/$(GOAL) contact mol=$(@:$(PREFIX)/%/contact.log=%) ; fi

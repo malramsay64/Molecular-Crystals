@@ -5,7 +5,7 @@ include system
 
 # Shape (Snowman|Trimer)
 # <<<LOOP>>>
-shape=Snowman Disc
+shape=Snowman
 
 # Radius (0,1]
 # <<<LOOP>>>
@@ -39,11 +39,11 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 160000000
+steps = 1600000
 # Print every <N> steps
 print = 0
 # Number of steps in equilibration (n >= 1)
-equil_steps = 20000000
+equil_steps = 200000
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 
@@ -52,7 +52,7 @@ t_dep=true
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp = 3.50 3.00 2.50 2.00 1.80 1.60 1.40 1.20 1.00
+temp = 5.00 3.50 3.00 2.50 2.00 1.80 1.60 1.40 1.20 1.00
 temp_1.0 = 3.50 3.00 2.50 2.00 1.80 1.60 1.40 1.20 1.10 1.00 0.90 0.80 0.75 0.70 0.68 0.65 0.60
 temp_1.637556 = 3.50 3.00 2.50 2.00 1.90 1.80 1.75 1.70 1.68 1.65 1.62 1.60 1.55 1.50
 
@@ -76,7 +76,7 @@ density = 0.015625
 # -s <n>    Step size - only every n frames and key frames (default 1)
 # -k <n>    Key frame rate - add key frame every n frames (default 100)
 
-contact_args=
+contact_args=-f -k 100
 # }}}
 # Plot Settings {{{
 # -------------
@@ -98,7 +98,7 @@ to_plot = alpha frame hist radial struct com
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=supercool_log_2
+d_name=supercool_log_short_2
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp1w/mram5995/$(d_name)
@@ -107,7 +107,7 @@ else
 endif
 
 # Directory Makefile is located
-my_dir := $(HOME)/make_snowman
+my_dir := $(HOME)/make
 
 # }}}
 

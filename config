@@ -118,7 +118,7 @@ ifeq ($(SYS_NAME), gaucho)
 	#MPI=/opt/openmpi/bin/mpirun
 	MPI=mpirun -np 8
 else ifeq ($(SYS_NAME), ortho)
-	MPI=
+	MPI=mpirun -np 4
 else
 	MPI=
 endif
