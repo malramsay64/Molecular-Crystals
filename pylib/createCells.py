@@ -55,8 +55,7 @@ if __name__ == "__main__":
     theta = float(line[0])
     a = float(line[1])
     b = float(line[2])
-    
-    print wallpaper
+
     if wallpaper not in ["p2mg"]:
         x = float(line[3])
         y = float(line[4])

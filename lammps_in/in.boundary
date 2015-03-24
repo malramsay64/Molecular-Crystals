@@ -59,22 +59,36 @@ thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density
 
 log     ${my_path}/logs/create.log
 
+# Neighbours don't interact with lj potential
+neigh_modify exclude molecule all
+
 # Equilibration parameters
 fix 1 all npt temp ${Te} ${Te} 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
 fix 2 all enforce2d
 
 # Give particles an initial velocity
-velocity mobile create ${Tm} 122
+velocity all create ${Tm} 122
 run 0
-velocity mobile scale ${Tm}
+velocity all scale ${Tm}
 
 # Equilibrate crystal
 run ${steps}
 
+unfix 1
 # Simulation parameters, bonds not able to move 
-fix 1 all npt temp ${Tm} ${Tm} 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
-fix 2 all enforce2d
-fix 3 static setforce 0.0 0.0 0.0
+fix 3 mobile npt temp ${Tm} ${Tm} 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
+fix 4 static setforce 0.0 0.0 0.0
+
+
+velocity all zero linear
+velocity all zero angular
+
+velocity mobile create ${Tm} 1231212
+run 0
+velocity mobile scale ${Tm}
+
+
+dump d2 all image 10000 images/*.jpg type c_diam size 3200 2400
 
 # Create melted region
 run ${steps}
