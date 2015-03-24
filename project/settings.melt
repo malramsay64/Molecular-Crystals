@@ -19,16 +19,16 @@ dist=1+radius 1.0
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=p2gg pg p2mg
+crys=p2gg pg p2mg p2
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary= 1 2
+boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
-theta= 120
+theta=
 # !!! Not Tested
 # Size ratio of two small particles in trimer
 ratio=

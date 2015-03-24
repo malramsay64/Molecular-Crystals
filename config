@@ -83,7 +83,6 @@ LAMMPS_VARS+=-v fname $(LAMMPS_IN)
 
 ifeq ($(SYS_NAME), gaucho)
 	LAMMPS_PATH=
-	#LAMMPS=lmp_my_mac
 	LAMMPS=lmp_mac_mpi
 	LAMMPS_FLAGS=
 else ifeq ($(SYS_NAME), mac)
@@ -95,8 +94,6 @@ else ifeq ($(SYS_NAME), ubuntu)
 else
 	LAMMPS=lmp_mpi
 endif
-#endif
-#endif
 
 LAMMPS_FILES=-v restart $(restart) -v my_path ./ -v the_path $(PREFIX) -v molecule $(molecule) -v mol_settings $(mol_settings) -v last_restart $(last_restart)
 
@@ -115,7 +112,6 @@ CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $(create_t) -v press $(press
 #}}}
 # MPI Settings {{{
 ifeq ($(SYS_NAME), gaucho)
-	#MPI=/opt/openmpi/bin/mpirun
 	MPI=mpirun -np 8
 else ifeq ($(SYS_NAME), ubuntu)
 	MPI=mpirun -np 4

@@ -2,16 +2,16 @@
 # Determine system type
 UNAME := $(shell uname)
 HOST := $(shell hostname)
+OS := $(shell "lsb_release -i | cut -d$$'\t'  -f2")
+
 
 ifeq ($(HOST), gaucho.duckdns.org)
 	SYS_NAME:=gaucho
-else ifeq ($(HOST), ortho)
+else ifeq ($(OS), Ubuntu)
 	SYS_NAME:=ubuntu
 else ifeq ($(UNAME), Darwin)
-    	SYS_NAME:=mac
-else ifeq ($(HOST), meta)
-	SYS_NAME:=ubuntu
-else 
+	SYS_NAME:=mac
+else
 	SYS_NAME:=silica
 endif
 # vim:filetype=make
