@@ -1,20 +1,45 @@
-set terminal png enhanced truecolor size 1600,800
+ext = '.png'
+
+set terminal png enhanced
 
 set datafile separator ","
-set style fill solid
-set key autotitle columnhead
-#set logscale x
-#set xrange [2:4]
-set xtics 0.1
 
+set key off
+set logscale y
+set format y "10^{%L}"
 set style line 5 pt 7 lw 3
+set title font ",14"
 
-# Diffusion
-command = sprintf("awk -F, 'NR==2 {print NF;exit}' %s.csv", filename)
-nd = system(command)
-#nd = "`awk -F, 'NR==2 {print NF;exit}' temps.csv`"
-#nd = 2
+columns(f) = system(sprintf("awk -F, 'NR==1 {print NF;exit}' %s.csv", f))
+shape(s) = system(sprintf("echo %s | cut -d/ -f7-",s))
 
-set output filename.".png"
-plot for [i=2:nd] filename.".csv" using 1:i with linespoints ls 5 lc i-1
+contact = filename."-contact"
+num_c = columns(contact)
+
+do for [i=2:num_c] {
+
+    command = sprintf("awk -F, 'NR==1 {print $%i;exit}' %s.csv", i, contact)
+    f = contact."_".system(command)
+
+    set title shape(filename)
+    set output f.ext
+    set xlabel "1/T"
+    set ylabel system(command)
+    plot contact.".csv" using (1/$1):i with linespoints ls 5 lc 1, x
+
+}
+
+# Ordering
+
+ordering = filename."-order"
+num_o = columns(ordering)
+set output ordering.ext
+set nologscale y
+set format y "%g"
+set yrange [0:1]
+set key on autotitle columnhead
+set xlabel "T"
+set ylabel
+
+plot for [i=2:num_o] ordering.".csv" using 1:i with linespoints ls 5 lc i-1
 

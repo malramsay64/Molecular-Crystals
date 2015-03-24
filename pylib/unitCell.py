@@ -140,6 +140,28 @@ class p2gg(cell):
         self.addMol(0.5-x, y-0.5, 2*pi-phi)
         self.crys = "p2gg"
 
+class p2mg(cell):
+    def __init__(self, a, b, theta, x, y, phi, mol):
+        self.a = a
+        self.b = b
+        self.theta = theta
+        self.mol = mol
+        self.mols = []
+        self.addMol(x,y,phi)
+        self.addMol(1-x,1-y,phi+pi)
+        self.crys = "p2mg"
+
+class p1(cell):
+
+    def __init__(self, a, b, theta, x, y, phi, mol):
+        self.a = a
+        self.b = b
+        self.theta = theta
+        self.mol = mol
+        self.mols = []
+        self.addMol(x,y,phi)
+        self.crys = "p1"
+
 class p2(cell):
     def __init__(self, a, b, theta, x, y, phi, mol):
         self.a = a

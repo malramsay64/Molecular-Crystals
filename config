@@ -1,70 +1,130 @@
+# 
+
+# Path Settings {{{
+
 include system
 
 #my_dir := $(dir $(word $(words $(MAKEFILE_LIST)), $(MAKEFILE_LIST)))
 BIN_PATH := $(my_dir)/bin/$(SYS_NAME)
 LIB:=$(my_dir)/analysis/lib
 
+# }}}
+# Variables {{{
+
+empty=
+space=$(empty) $(empty)
+
+GOAL=Makefile.run
+LOOP=Makefile.loop
+
 LOG=out.log
-# C settings
+
+FOLDERS=images trj trj_contact stats order logs
+all_clean=clean-files clean-lammps clean-contact clean-plot clean-density clean-restart clean-present
+PRESENT=grouped individual
+
+# }}}
+# Shape functions {{{
+reverse = $(if $(wordlist 2,2,$(1)),$(call reverse,$(wordlist 2,$(words $(1)),$(1))) $(firstword $(1)),$(1))
+
+comp_dist = $(shell echo $(1:radius=$2) |bc)
+
+SAVE = $(subst $(space),-,$(strip $(call p_shape, $1) $t $(call p_rad, $1) $(call p_dist, $1) $(call p_theta, $1) $(call p_bound, $1)))
+
+p_shape = $(word 1, $(subst -,$(space),$(1)) )
+p_rad = $(word 2, $(subst -,$(space),$(1)) )
+p_dist = $(word 3, $(subst -,$(space),$(1)) )
+p_theta = $(word 4, $(subst -,$(space),$(1)) )
+p_crys = $(word 4, $(subst -,$(space),$(1)) )
+p_bound = $(word 5, $(subst -,$(space),$(1)) )
+
+t_shape = $(word 1, $(subst -,$(space),$(1)) )
+t_temp = $(word 2, $(subst -,$(space),$(1)) )
+t_rad = $(word 3, $(subst -,$(space),$(1)) )
+t_dist = $(word 4, $(subst -,$(space),$(1)) )
+t_theta = $(word 5, $(subst -,$(space),$(1)) )
+t_crys = $(word 5, $(subst -,$(space),$(1)) )
+t_bound = $(word 6, $(subst -,$(space),$(1)) )
+
+wo_temp = $(subst $(space),-,$(strip $(call t_shape, $1) $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1) $(call t_bound, $1)))
+
+# }}}
+# C settings {{{
 CC = gcc
 CXX = g++
 CFLAGS = -O2 -std=c99
-CXXFLAGS := -Ofast -std=gnu++11
+CXXFLAGS := -Ofast -stdlib=libc++ -std=gnu++11
 LDFLAGS = -lm
 
-# Lammps settings
+ifeq ($(SYS_NAME), ubuntu)
+	CXXFLAGS := -O3 -std=gnu++11 -pthread -Wl,--no-as-needed
+endif
 
-LAMMPS_IN=$(my_dir)/lammps_in/in.molecular
-EQUIL_IN=$(my_dir)/lammps_in/in.equil
-CREATE_IN=$(my_dir)/lammps_in/in.create
-CRYS_IN=$(my_dir)/lammps_in/in.crys
-BOUNDARY_IN=$(my_dir)/lammps_in/in.boundary
+MODULES:=$(wildcard $(LIB)/*.cpp)
+MODULES:=$(MODULES:.cpp=.o)
+MODULES:=$(notdir $(MODULES))
+HEADERS:=$(wildcard $(LIB)/*.h)
+HEADERS:=$(notdir $(HEADERS))
+
+#}}}
+# Lammps settings {{{
+
+lammps_dir=$(my_dir)/lammps_in
+
+LAMMPS_IN=$(lammps_dir)/in.molecular
+EQUIL_IN=$(lammps_dir)/in.equil
+CREATE_IN=$(lammps_dir)/in.create
+CRYS_IN=$(lammps_dir)/in.crys
+BOUNDARY_IN=$(lammps_dir)/in.boundary
 
 LAMMPS_VARS+=-v fname $(LAMMPS_IN)
 
-ifeq ($(SYS_NAME), mac)
+
+
+ifeq ($(SYS_NAME), gaucho)
+	LAMMPS_PATH=
+	#LAMMPS=lmp_my_mac
+	LAMMPS=lmp_mac_mpi
+	LAMMPS_FLAGS=
+else ifeq ($(SYS_NAME), mac)
 	LAMMPS_PATH=
 	LAMMPS=lmp_mac_mpi
-	#LAMMPS_FLAGS=-sf gpu -pk gpu 1
-else 
-    ifeq ($(SYS_NAME), unix)
-	    LAMMPS_PATH=/home/malcolm/bin/
-	    LAMMPS=lmp_ubuntu
-    else
-	    LAMMPS_PATH=
-	    LAMMPS=lmp_mpi
-    endif
+else ifeq ($(SYS_NAME), ubuntu)
+	LAMMPS_PATH=
+	LAMMPS=lmp_ubuntu
+else
+	LAMMPS=lmp_mpi
 endif
+#endif
+#endif
 
-LAMMPS_FILES=-v restart $$(restart) -v my_path ./ -v the_path $$(PREFIX) -v molecule $$(molecule) -v mol_settings $$(mol_settings) -v last_restart $$(last_restart)
+LAMMPS_FILES=-v restart $(restart) -v my_path ./ -v the_path $(PREFIX) -v molecule $(molecule) -v mol_settings $(mol_settings) -v last_restart $(last_restart)
 
-LAMMPS_THERM_VARS= -v T $$(temp) -v press $$(pressure)
+LAMMPS_THERM_VARS= -v T $(temp) -v press $(pressure)
 
-LAMMPS_SYS_VARS=-v steps $$(steps) -v printevery $$(print) -v n_mol $$(n_mol)
+LAMMPS_SYS_VARS=-v steps $(steps) -v printevery $(print) -v n_mol $(n_mol)
 
-LAMMPS_MOL_VARS=-v shape $$(shape) -v atoms $$(atoms) -v radius $$(radius)
+LAMMPS_MOL_VARS=-v shape $(shape) -v atoms $(atoms)
 
-LAMMPS_VARS=$(LAMMPS_SYS_VARS) $(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL_VARS)
+LAMMPS_VARS=$(LAMMPS_SYS_VARS) $(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL_VARS) -log logs/prod.log
 
-EQUIL_VARS=$(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL_VARS) -v steps $(equil_steps) 
+EQUIL_VARS=$(LAMMPS_FILES) $(LAMMPS_THERM_VARS) $(LAMMPS_MOL_VARS) -v steps $(equil_steps) -log logs/equil.log
 
-CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $$(prev_t) -v press $$(pressure) -v steps $(equil_steps)
+CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $(create_t) -v press $(pressure) -v steps $(equil_steps) -log logs/create.log
 
-# MPI Settings
-
-ifeq ($(SYS_NAME), mac)
+#}}}
+# MPI Settings {{{
+ifeq ($(SYS_NAME), gaucho)
+	#MPI=/opt/openmpi/bin/mpirun
 	MPI=mpirun -np 8
-else 
-    ifeq ($(SYS_NAME), silica )
-	    MPI_PATH=
-	    MPI=mpirun -np 8
-    else
-	    MPI=mpirun -np 8
-    endif
+else ifeq ($(SYS_NAME), ubuntu)
+	MPI=mpirun -np 4
+else
+	MPI= mpirun -np 8
 endif
 
-
-# Python settings
+#}}}
+# Python settings {{{
 
 PYTHON_FILES=molecule.py files.py
 PYLIB:=$(my_dir)/pylib
@@ -72,5 +132,12 @@ FILES=files.py
 CRYS_FILE=createCells.py
 PYTHON=python
 
-# Variable Settings
+#}}}
+# VMD Settings {{{
+vmd='/Applications/VMD.app/Contents/Resources/VMD.app/Contents/MacOS/VMD'
 
+vmd_in=$(my_dir)/all_movies.tcl
+
+# }}}
+
+# vim:foldmethod=marker:foldlevel=0:filetype=make

@@ -1,6 +1,7 @@
 
-variable T delete
-variable T equal 3.5
+
+variable Tm equal $T*1.5
+variable Te equal 0.4
 
 # Define molecule
 molecule    mymol ${the_path}/data/${molecule}
@@ -43,8 +44,6 @@ region middle block ${x_min} ${x_max} ${y_min} ${y_max} -0.5 0.5
 group static region middle
 group mobile subtract all static
 
-# Exclude bonded interactions for MD steps
-neigh_modify exclude molecule all
 
 # Give all atoms the property diameter
 fix 5 all property/atom d_diam
@@ -55,34 +54,31 @@ if "${diam} != 2" then &
 compute diam all property/atom d_diam
 
 # Thermodynamic output
-thermo          100
+thermo          1000
 thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density lx ly xy
 
 log     ${my_path}/logs/create.log
 
+# Equilibration parameters
+fix 1 all npt temp ${Te} ${Te} 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
+fix 2 all enforce2d
+
+# Give particles an initial velocity
+velocity mobile create ${Tm} 122
+run 0
+velocity mobile scale ${Tm}
+
+# Equilibrate crystal
+run ${steps}
+
 # Simulation parameters, bonds not able to move 
-fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
+fix 1 all npt temp ${Tm} ${Tm} 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
 fix 2 all enforce2d
 fix 3 static setforce 0.0 0.0 0.0
 
-# Dump configuration printevery steps. Image is dumped at beginning and end
-dump 2 all image ${steps} ${my_path}/images/create_*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
-
-dump_modify 2 first yes
-dump_modify 2 pad 10
-
-# Give particles an initial velocity
-velocity mobile create $T 122
-run 0
-velocity mobile scale $T
-
-#timestep 1e-3
-
+# Create melted region
 run ${steps}
 
-#min_style cg
-
-#minimize 1e-6 1e-8 1000 1000
 
 # Write restart before minimisation
 write_restart   ${the_path}/restarts/${last_restart}

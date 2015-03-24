@@ -1,55 +1,30 @@
 
-
-PRE=files data lammps clean-files clean-lammps clean-plot clean-contact clean-all clean-present touch-lammps clean-density
-TARGETS=contact plot density
+PRE=files data lammps touch-lammps test $(all_clean)
+TARGETS=contact plot density movie
 PRESENT=grouped individual
+
+latex-flags= --output-dir=output/.output -interaction=batchmode
 
 include settings
 include config
 
-MODULES:=$(wildcard $(LIB)/*.cpp)
-MODULES:=$(MODULES:.cpp=.o)
-MODULES:=$(notdir $(MODULES))
-HEADERS:=$(wildcard $(LIB)/*.h)
-HEADERS:=$(notdir $(HEADERS))
-
-ifeq ($(SYS_NAME), unix)
-	CXXFLAGS := $(CXXFLAGS) -pthread -Wl,--no-as-needed
-endif
-
-empty=
-space=$(empty) $(empty)
-
-reverse = $(if $(wordlist 2,2,$(1)),$(call reverse,$(wordlist 2,$(words $(1)),$(1))) $(firstword $(1)),$(1))
-t_shape = $(word 1, $(subst -,$(space),$(1)) )
-t_rad = $(word 2, $(subst -,$(space),$(1)) )
-t_dist = $(word 3, $(subst -,$(space),$(1)) )
-t_theta = $(word 4, $(subst -,$(space),$(1)) )
-t_crys = $(word 4, $(subst -,$(space),$(1)) )
-t_bound = $(word 5, $(subst -,$(space),$(1)) )
-
-
-GOAL=Makefile.run
-LOOP=Makefile.loop
-
 export
 
-comp_dist = $(shell echo $(1:radius=$2) |bc)
-
-# Shape
+# Generating all shapes {{{
 mol := $(shape)
+mol_d := $(filter Disc%, $(mol))
 # Radius
 mol := $(if $(radius), $(foreach rad, $(radius), $(addsuffix -$(rad), $(mol))), $(mol)) 
 # Distance
 mol := $(if $(dist), $(foreach rad, $(dist), $(addsuffix -$(rad), $(mol))), $(mol)) 
 # Computing Distance
-mol := $(foreach m, $(mol), $(m:$(call t_dist, $m)=$(call comp_dist, $(call t_dist, $m), $(call t_rad, $m))))
+mol := $(foreach m, $(mol), $(m:$(call p_dist, $m)=$(call comp_dist, $(call p_dist, $m), $(call p_rad, $m))))
 # Theta
 mol_s := $(filter Snowman%, $(mol))
 mol_t := $(filter Trimer%, $(mol))
 mol_t := $(foreach rad, $(theta), $(addsuffix -$(rad), $(mol_t)))
 
-mol := $(mol_s) $(mol_t)
+mol := $(mol_d) $(mol_s) $(mol_t)
 
 # Adding crystals for which there are unit cells
 ifneq ($(strip $(crys)),)
@@ -60,70 +35,122 @@ endif
 # Iterating through having a crystal liquid boundary
 ifneq ($(strip $(boundary)),)
     mol := $(if $(boundary), $(foreach b, $(boundary), $(addsuffix -$(b), $(mol))), $(mol))
-    CREATE_VARS += -v boundary $$(bound)
+    CREATE_VARS += -v boundary $(bound)
 else
     CREATE_VARS += -v boundary 0
 endif
-
-SAVE = $(subst $(space),-,$(strip $(call t_shape, $1) $t $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1) $(call t_bound, $1)))
+#}}}
 
 VPATH=.:$(BIN_PATH):$(LIB)
 
-distances = $(foreach m, $(mol), $(call t_dist, $m))
+distances = $(foreach m, $(mol), $(call p_dist, $m))
 export $(addprefix temp_, $(distances))
+
+glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_rad, $1,) $(call p_dist, $1) $(call p_theta, $1) $(call p_bound, $1)))
+
+get_mol = $(call wo_temp, $(word 5, $(subst /,$(space),$m)))
 
 ##########################################################################################
 
 all: program
 
-collate:
-	@echo Creating T-dependent plots
-	@$(foreach m, $(mol), python pylib/collate.py $(PREFIX)/$(strip $(m));)
-	$(eval fs = $(basename $(shell ls plots/*.csv)))
-	@$(foreach f, $(fs), gnuplot -e 'filename="$f"' gnuplot/temp_dep.plot;)
+test:
+	@echo $(mol)
+	@echo $(shape)
 
-$(mol): always | $(PREFIX)
+collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
+	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.out
+	@rm -f $(PREFIX)/latex/collate.tex
+	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
+
+%.tex: %
+	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
+	@gnuplot -e 'prefix="$(PREFIX)/$(call glob_temps, $<)"' gnuplot/log_time.plot
+	@echo "\section{$<}" > $(PREFIX)/latex/$@
+	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
+	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
+
+movie: $(mol)
+	@$(vmd) -e $(vmd_in) -args $(PREFIX)
+
+$(mol): program vars.mak | $(PREFIX) $(PREFIX)/plots
+ifeq ($(SYS_NAME), silica)
+ifneq ($(t_dep), false)
+	@qsub -N $@ -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
+else
 	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+endif
+else
+	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+endif
 
-$(TARGETS): program $(mol)
+vars.mak:
+	@rm -f $@
+	@$(foreach V,\
+    $(sort $(.VARIABLES)),\
+    $(if\
+        $(filter-out environment% default automatic, $(origin $V)),\
+        echo '$V=$(value $V)' >> $@;\
+        )\
+    )
+
+$(TARGETS): $(mol)
 
 $(PRE): $(mol)
 
-$(PRESENT): collate
-	@echo $@
-	@python output/$@.py $(PREFIX) > output/$@.out
-	@pdflatex -draftmode -interaction=batchmode --output-dir=output/.output output/$@.tex #> $(LOG)
-	@pdflatex -interaction=batchmode --output-dir=output/.output output/$@.tex #> $(LOG)
-	@mv output/.output/$@.pdf .
 
-present: program $(mol) $(PRESENT)
+present: program $(mol) collate | output/.output
+	@pdflatex -draftmode $(latex-flags) output/collate.tex
+	@pdflatex $(latex-flags) output/collate.tex
+	@mv output/.output/collate.pdf $(PREFIX)/collate.pdf
+	@rm -f collate.pdf
+	@ln -s $(PREFIX)/collate.pdf collate.pdf
+
+contact-all: $(addsuffix /contact.log, $(wildcard $(PREFIX)/*-*))
+
+%/contact.log: program vars.mak
+	@if [ -f $(@:%/contact.log=%/trj/out.lammpstrj) ] ;then $(MAKE) -C $(dir $@) -f $(my_dir)/$(GOAL) contact mol=$(@:$(PREFIX)/%/contact.log=%) ; fi
+
+clean-contact-all:
+	@$(foreach m, $(wildcard $(PREFIX)/*-*-*/trj/out.lammpstrj | cut -d/ -f6), \
+        $(MAKE) -C $(PREFIX)/$m -f $(my_dir)/$(GOAL) clean-contact mol=$m;)
 
 %.o : %.cpp | $(BIN_PATH)
-	@echo o $<
+	@echo CC $<
 	@$(CXX) $(CXXFLAGS) -c $< -o $(BIN_PATH)/$@
 
 program: $(MODULES) $(HEADERS)
-	@echo c++ $@
+	@echo CC $@
 	@$(CXX) -o $(BIN_PATH)/program $(addprefix $(BIN_PATH)/, $(MODULES)) $(CXXFLAGS) $(LDFLAGS)
-	@ln -sf $(BIN_PATH)/program test/program
 
 $(BIN_PATH):
-	mkdir -p $(BIN_PATH)
+	@mkdir -p $(BIN_PATH)
 
 $(PREFIX):
-	mkdir $(PREFIX)
+	@mkdir -p $(PREFIX)
 
-.PHONY: always
-always:
+$(PREFIX)/plots:
+	@mkdir -p $@
 
-.PHONY: test
-test: $(mol)
 
-.PHONY:clean
+.PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE) clean-plot clean-collate
+
+#test: $(mol)
+#	@echo test
+
 clean:
-	-rm -r bin/*
+	-rm -rf bin/*
 
-.PHONY: delete
+clean-collate: $(mol)
+	-rm -rf $(PREFIX)/plots/*
+	rm -f $(PREFIX)/latex/*
+
 delete:
-	-rm -r $(PREFIX)/*
+	-rm -rf $(PREFIX)/*
 
+output/.output:
+	-mkdir -p $@
+
+clean-plot: clean-collate $(mol)
+
+# vim:foldmethod=marker:foldlevel=0

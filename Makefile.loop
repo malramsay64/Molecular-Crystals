@@ -1,39 +1,81 @@
+include vars.mak
 
-t_shape = $(word 1, $(subst -,$(space),$(1)) )
-t_rad = $(word 2, $(subst -,$(space),$(1)) )
-t_dist = $(word 3, $(subst -,$(space),$(1)) )
-t_theta = $(word 4, $(subst -,$(space),$(1)) )
-t_bound = $(word 5, $(subst -,$(space),$(1)) )
-s_temp = $(word 2, $(subst -,$(space),$(1)) )
-
-
-shape := $(call t_shape, $(mol))
-radius := $(call t_rad, $(mol))
-dist := $(call t_dist, $(mol))
-theta := $(call t_theta, $(mol))
-bound := $(call t_bound, $(mol))
+shape := $(call p_shape, $(mol))
+radius := $(call p_rad, $(mol))
+dist := $(call p_dist, $(mol))
+theta := $(call p_theta, $(mol))
+bound := $(call p_bound, $(mol))
 
 # Temp range for each d
 ifdef temp_$(dist)
 	temp := $(temp_$(dist))
 endif
 
-save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(theta) $(bound))), $(temp)) 
-save := $(addprefix $(strip $(shape))-, $(save1)) 
+ifeq ($(shape), Disc)
+	save = $(addprefix $(strip $(shape))-,$(temp))
+else
+	save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(theta) $(bound))), $(temp)) 
+	save := $(addprefix $(strip $(shape))-, $(save1)) 
+endif
 
 dirs:=$(addprefix $(PREFIX)/,$(save))
 last_t:=$(word 1, $(temp))
 
 OPTIONS = --no-print-directory $(if $(filter $(MAKECMDGOALS), $(PRE)), -j 1)
 
-$(MAKECMDGOALS): $(save)
+collate_command = echo $(call t_temp, $1),$$(cat $(PREFIX)/$1/$@ | cut -d: -f$2 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) >> $(PREFIX)/plots/$(mol)-$(basename $@).csv
+collate_header = echo "t,"$$(cat $(PREFIX)/$1/$@ | cut -d: -f1 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) > $(PREFIX)/plots/$(mol)-$(basename $@).csv
+
+all_temps = $(notdir $(wildcard $(PREFIX)/$(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(theta) $(bound)))))
+
+export
+
+$(PRE): $(save)
+
+clean-collate:$(save)
+
+$(TARGETS): $(save)
+
+$(PRESENT): $(save)
+
+present: $(save) collate | latex
+	@$(foreach p, $(to_plot),\
+    $(foreach s, $(save), rm -f $(PREFIX)/latex/$(mol)-$p.tex;))
+	@$(foreach p, $(to_plot),\
+    $(foreach s, $(save), cat $(PREFIX)/$s/my_latex/$p.tex >> $(PREFIX)/latex/$(mol)-$p.tex;))
+
+collate: contact.log order.log | plots
+
+order.log contact.log: $(save)
+	@-rm -f $(PREFIX)/plots/$(mol)-$(basename $@).csv
+	$(call collate_header,$(word 1, $(save)))
+	@$(foreach s, $(all_temps), $(call collate_command,$s, 2);)
+
+
+%.tex: $(save) | latex
+	@$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))
+
 
 $(save): always | $(dirs)
-	$(foreach t, $(temp), $(if $(filter $(call s_temp, $@), $t), $(eval prev_t=$(last_t)), $(eval last_t=$t)))
+	@$(foreach t, $(temp), $(if $(filter $(call t_temp, $@), $t), $(eval prev_t=$(last_t)), $(eval last_t=$t)))
+ifeq ($(SYS_NAME), silica)
+ifeq ($(t_dep), false)
+	@qsub -N $@ -o pbsout/$@.out single.pbs -vmol=$@,prev_t=$(prev_t),target=$(MAKECMDGOALS),prefix=$(PREFIX)/$@,my_dir=$(my_dir)
+else
 	@$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
+endif
+else
+	@$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
+endif
 
 $(dirs):
-	-mkdir $@
+	@-mkdir $@
 
-.PHONY:always
+plots:
+	@-mkdir -p $(PREFIX)/$@
+
+latex:
+	@-mkdir -p $(PREFIX)/$@
+
+.PHONY: always
 always:

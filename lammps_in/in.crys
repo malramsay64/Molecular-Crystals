@@ -37,7 +37,7 @@ if "${diam} != 2" then &
 compute diam all property/atom d_diam
 
 # Thermodynamic output
-thermo          100
+thermo          1000
 thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density lx ly xy
 
 log     ${my_path}/logs/create.log
@@ -47,10 +47,10 @@ fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0
 fix 2 all enforce2d
 
 # Dump configuration printevery steps. Image is dumped at beginning and end
-dump 2 all image ${steps} ${my_path}/*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
+#dump 2 all image ${steps} ${my_path}/*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
 
-dump_modify 2 first yes
-dump_modify 2 pad 10
+#dump_modify 2 first yes
+#dump_modify 2 pad 10
 
 # Give particles an initial velocity
 velocity all create $T 122

@@ -29,8 +29,18 @@ analysis
 *.csv
 *.out
 
+# PBS files
+*.mak
+nodes.txt
+*.out
+
 # LaTeX output
 output/.output
+*.log
+*.aux
 
 # Include all in test
 !test/*
+
+# Backup files
+*.back

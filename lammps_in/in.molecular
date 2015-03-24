@@ -8,7 +8,7 @@ read_restart ${the_path}/restarts/${restart}
 reset_timestep  0
 
 # Thermodynamic output
-thermo          100
+thermo          1000
 thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density lx ly xy
 
 # log file name
@@ -22,17 +22,22 @@ if "${diam} != 2" then &
 compute diam all property/atom d_diam
 
 # Simulation parameters, bonds not able to move 
-fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
+fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10
 fix 2 all enforce2d
+fix 3 all momentum 100 linear 1 1 0
 
 # Dump configuration printevery steps. Image is dumped at beginning and end
-dump 1 all custom ${printevery} ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
-dump 2 all image ${steps} ${my_path}/images/*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
+dump 1 all custom ${steps} ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
 
+if "${printevery} == 0" then &
+    "variable f file ${my_path}/steps.dat"&
+    "variable p equal next(f)" &
+else &
+    "variable p equal stride(${printevery},${steps},${printevery})"
+
+dump_modify 1 every v_p
 dump_modify 1 first yes
-dump_modify 2 first yes
 dump_modify 1 pad 10
-dump_modify 2 pad 10
 
 if "$T == 5" then &
     "timestep 1e-3"
@@ -43,12 +48,10 @@ run ${steps}
 # Write restart before minimisation
 write_restart   ${the_path}/restarts/${restart}
 
-# Include bonded interctions for minimization
-neigh_modify include all
-
 min_style cg
 # CG minimization doesn't allow for rigid molecules, static bonds are
 # approximated with a strong harmonic potential.
 
+dump_modify 1 every 1000
 minimize 1e-6 1e-8 1000 1000
 
