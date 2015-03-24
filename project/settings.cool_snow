@@ -1,0 +1,115 @@
+include system
+
+# Molecule Settings {{{
+# -----------------
+
+# Shape (Snowman|Trimer)
+# <<<LOOP>>>
+shape=Snowman
+
+# Radius (0,1]
+# <<<LOOP>>>
+radius = 0.637556
+
+# Dist (1+radius|1.0)
+# <<<LOOP>>> <<<COMPUTE>>>
+dist=1+radius 1.0
+
+# Crystal unit cell
+# (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
+# the ./crystals directory
+# <<<LOOP>>>
+crys=
+
+# Solid liquid interface options (1|2)
+# 1 -> x axis, 2 -> y axis doubles number of molecules
+# <<<LOOP>>>
+boundary=
+
+# Angle in degrees (0,180]
+# <<<LOOP>>>
+theta=
+
+# !!! Not Tested
+# Size ratio of two small particles in trimer
+ratio=
+
+# }}}
+# Simulation Settings {{{
+# -------------------
+
+# Number of steps
+steps = 160000000
+# Print every <N> steps, 0 produces logarithmic progression
+print = 0
+# Number of steps in equilibration (n >= 1)
+equil_steps = 80000000
+# Number of molecules (won't be exact, tries to keep simulation square)
+n_mol = 2500
+
+# Dependent on previous temps
+t_dep=true
+
+# Can set a temp for each d (temp_$d)
+# <<<LOOP>>>
+temp_1.0 = 3.50 3.00 2.50 2.00 1.80 1.60 1.40 1.20 1.10 1.00 0.90 0.80 0.75 0.70 0.68 0.65 0.60
+temp_1.637556 = 3.50 3.00 2.50 2.00 1.90 1.80 1.75 1.70 1.68 1.65 1.62 1.60 1.55 1.50
+
+# Pressure - Leave constant temperature changes properties
+pressure = 13.5
+
+# Density of intitial high temperture state
+# Needs to be small enough such that no particles can overlap
+# Only important when generating high temperature state
+density = 0.015625
+
+# }}}
+# Analysis Settings {{{
+# ---------------------
+
+# Contact Arguments
+# -f        Fast - only first last and key frames
+# -q        Include quenched configuration in anlysis (quench is last frame when using -f)
+# -m        Ouput movie
+# -d        Distance moved in quench (-q implied)
+# -s <n>    Step size - only every n frames and key frames (default 1)
+# -k <n>    Key frame rate - add key frame every n frames (default 100)
+
+contact_args=-k 20
+
+# }}}
+# Plot Settings {{{ 
+# -------------
+
+# Options are (Step|Temp|Pxx|Pyy|Pxy|TotEng|KinEng|PotEng|Enthalpy|Density|P|LX|Ly|Xy)
+# Need to update gnuplot/properties.plot when changing
+thermo=PotEng TotEng Density Press Xy Pxx Pyy
+
+# Ouput files to plot
+# (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
+# All
+#to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct rot-diff
+to_plot = frame radial
+
+# }}}
+# Path variables {{{
+# --------------
+
+# Location of intermediate output files (scratch space)
+# Needs a lot (GBs) of space with fast access
+
+d_name=cool
+
+ifeq ($(SYS_NAME), silica)
+    PREFIX := /tmp3m/mram5995/$(d_name)
+	# Directory Makefile is located
+	my_dir := $(HOME)/make_$(d_name)
+else
+    PREFIX := $(HOME)/scratch/$(d_name)
+	my_dir := $(HOME)/make
+endif
+
+
+# }}}
+
+# vim:filetype=make:foldmethod=marker:foldlevel=0

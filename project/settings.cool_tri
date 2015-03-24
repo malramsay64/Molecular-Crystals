@@ -5,7 +5,7 @@ include system
 
 # Shape (Snowman|Trimer)
 # <<<LOOP>>>
-shape=Snowman
+shape=Trimer
 
 # Radius (0,1]
 # <<<LOOP>>>
@@ -13,18 +13,18 @@ radius = 0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1+radius 1.0
+dist= 1.0
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=p2gg pg p2mg
+crys=
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary= 1 2
+boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
@@ -40,9 +40,9 @@ ratio=
 # Number of steps
 steps = 160000000
 # Print every <N> steps, 0 produces logarithmic progression
-print = 160000
+print = 0
 # Number of steps in equilibration (n >= 1)
-equil_steps = 8000000
+equil_steps = 80000000
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 
@@ -51,8 +51,7 @@ t_dep=true
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp_1.0 = 0.60 0.65 0.70 0.75 0.80 0.85 0.90
-temp_1.637556 = 1.60 1.70 1.80 1.85 1.90 1.95 2.00 2.10 2.20
+temp_1.0 = 3.50 3.00 2.50 2.00 1.80 1.60 1.50 1.40 1.35 1.30 1.25 1.20 1.15 1.10 1.05 1.00
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -74,7 +73,7 @@ density = 0.015625
 # -s <n>    Step size - only every n frames and key frames (default 1)
 # -k <n>    Key frame rate - add key frame every n frames (default 100)
 
-contact_args=-k 20 -t
+contact_args=-k 20 
 
 # }}}
 # Plot Settings {{{ 
@@ -88,7 +87,7 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
 # All
 #to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct rot-diff
-to_plot = frame radial short-order-hist
+to_plot = frame radial
 
 # }}}
 # Path variables {{{
@@ -97,16 +96,17 @@ to_plot = frame radial short-order-hist
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=melting
+d_name=cool_tri
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/$(d_name)
+	# Directory Makefile is located
+	my_dir := $(HOME)/make_$(d_name)
 else
     PREFIX := $(HOME)/scratch/$(d_name)
+	my_dir := $(HOME)/make
 endif
 
-# Directory Makefile is located
-my_dir := $(HOME)/make_melting
 
 # }}}
 

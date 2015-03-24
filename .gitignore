@@ -44,3 +44,6 @@ output/.output
 
 # Backup files
 *.back
+
+# Settings
+settings
