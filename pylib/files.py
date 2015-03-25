@@ -72,7 +72,7 @@ def dataFile(mol):
         string += 'Bond Coeffs\n\n'
         a,b,d = mol.getBonds()[0]
         string += '{bondID} {coeff} {dist}\n'.format(\
-                bondID=1, coeff=500, dist=d)
+                bondID=1, coeff=5000, dist=d)
     if mol.getAngles():
         string += '\nAngle Coeffs\n\n'
         a,b,c,theta = mol.getAngles()[0]
