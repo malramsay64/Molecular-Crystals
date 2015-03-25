@@ -9,14 +9,14 @@ imageext = ".jpg"
 frameExt = ".png"
 
 
-plot_dict = {"order":("order/*[0-9].png","Order Parameter"), "frame":("trj_contact/*[0-9].png", "Configuration"), "angle":("trj_contact/*-angles.png","Angle Distribution"), "short-order":("short_order.png", "Short Range Ordering"), "msd":("msd.png", "Mean Squared Displacement"), "rotation":("rotation.png", "Rotational Relaxation"), "hist":("histogram.png", "Contact Number"), "props":("props.png", "Properties"), "short-order-hist":("short_order_hist.png", "Short Order Histogram"), "radial":("radial.png", "Radial Distribution"), "struct":("struct.png", "Structural Relaxation"), "com":("complot.png", "Centers of Mass"), "moved":("moved.png", "Motion of Particles"), "alpha":("alpha.png", "Non Gaussian"), "regio":("regio*.png", "Regional Relaxation"), "hexatic":('hexatic_order.png', "Hexatic Ordering"), "data":("contact.log", "Data"), "rot-diff":("rot_diff.png", "Rotation vs Diffusion")}
+plot_dict = {"order":("order/*[0-9].png","Order Parameter"), "frame":("trj_contact/*[0-9].png", "Configuration"), "angle":("trj_contact/*-angles.png","Angle Distribution"), "short-order":("short_order.png", "Short Range Ordering"), "msd":("msd.png", "Mean Squared Displacement"), "rotation":("rotation.png", "Rotational Relaxation"), "hist":("histogram.png", "Contact Number"), "props":("props.png", "Properties"), "short-order-hist":("short_order_hist.png", "Short Order Histogram"), "radial":("radial.png", "Radial Distribution"), "struct":("struct.png", "Structural Relaxation"), "com":("complot.png", "Centers of Mass"), "moved":("moved.png", "Motion of Particles"), "alpha":("alpha.png", "Non Gaussian"), "regio":("regio*.png", "Regional Relaxation"), "hexatic":('hexatic_order.png', "Hexatic Ordering"), "table":("contact.log", "Data"), "rot-diff":("rot_diff.png", "Rotation vs Diffusion")}
 
 plots=plot_dict.values()
 
 def figure(prefix, filename, caption=0):
     if not caption:
         caption = name(prefix)
-    filename = "{dir}/".format(dir=prefix)+filename
+    filename = "{dir}/myplot/".format(dir=prefix)+filename
     plots = [os.path.splitext(file)[0] for file in glob.glob(filename)]
     plots.sort()
     if len(plots) > 1:
