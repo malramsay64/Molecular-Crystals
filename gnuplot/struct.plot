@@ -1,21 +1,18 @@
-set terminal png enhanced truecolor size 800,800
+set terminal png enhanced truecolor
 
-set datafile separator ","
-set style fill solid
+ext = '.png'
+plot_dir = 'myplot/'
+
 set key autotitle columnhead
 set logscale x
-#set xrange [1:10]
-
 set yrange [0:1.1]
 set y2range [0:1.1]
-
 set style line 5 pt 7 lw 3
+set style fill solid
 
-# Diffusion
-nd = "`awk -F, 'NR==2 {print NF;exit}' struct.csv`"
-#nd = 2
-
-set output "struct.png"
+nd = system("awk -F, 'NR==2 {print NF;exit}' struct.csv")
+set datafile separator ","
+set output plot_dir."struct".ext
 
 plot "struct.csv" using 1:2 with linespoints ls 5 lc 1 axes x1y1,\
     "struct.csv" using 1:3 with linespoints ls 5 lc 2 axes x1y2

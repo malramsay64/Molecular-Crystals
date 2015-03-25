@@ -19,16 +19,16 @@ dist=1+radius 1.0
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=p2gg pg p2mg
+crys=
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
 # <<<LOOP>>>
-boundary= 1 2
+boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
-theta= 120
+theta=
 # !!! Not Tested
 # Size ratio of two small particles in trimer
 ratio=
@@ -38,11 +38,11 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 160000000
+steps = 160000
 # Print every <N> steps, 0 produces logarithmic progression
-print = 160000
+print = 160
 # Number of steps in equilibration (n >= 1)
-equil_steps = 8000000
+equil_steps = 80000
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 
@@ -51,8 +51,9 @@ t_dep=true
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp_1.0 = 
-temp_1.637556 = 1.60 1.70 1.80 1.85 1.90 1.95 2.00 2.10 2.20
+temp = 3.50 2.50 1.50 1.00 0.50
+#temp_1.0 = 
+#temp_1.637556 = 1.60 1.70 1.80 1.85 1.90 1.95 2.00 2.10 2.20
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -72,9 +73,11 @@ density = 0.015625
 # -m        Ouput movie
 # -d        Distance moved in quench (-q implied)
 # -s <n>    Step size - only every n frames and key frames (default 1)
-# -k <n>    Key frame rate - add key frame every n frames (default 100)
+# -k <n>    Key frame rate - add key frame every n frames (default 20)
+# -r        Regio data, regional relaxation data
+# -t        Time dependent neighbour data, takes far longer to compute
 
-contact_args=-k 20 -t
+contact_args= -t
 
 # }}}
 # Plot Settings {{{ 
@@ -85,9 +88,9 @@ contact_args=-k 20 -t
 thermo=PotEng TotEng Density Press Xy Pxx Pyy
 
 # Ouput files to plot
-# (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
-# All
-#to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct rot-diff
+# (alpha | angle | com | crys | data | frame | hexatic | hist | moved | msd | order |
+#  property | radial | regio | rotations | rot-diff | short-order-hist | short-order | struct)
+
 to_plot = frame radial short-order-hist
 
 # }}}

@@ -1,13 +1,14 @@
-set terminal png size 800,800
+set terminal png
 
-nc = "`awk -F, 'NR==2 {print NF; exit}' short_order_hist.csv`" + 0
+ext = '.png'
+plot_dir = 'myplot/'
 
-set datafile separator ","
 
-set yrange[0:1]
-
-set output 'short_order_hist.png'
 set key autotitle columnhead
+set yrange [0:1]
 
-plot for [COL=2:nc:1] 'short_order_hist.csv' using 1:($2/(sum [c=2:nc] column(c))) \
-    title columnheader(COL)
+set output plot_dir.'short-order-hist'.ext
+set datafile separator ","
+nc = system("awk -F, 'NR==2 {print NF; exit}' short_order_hist.csv")
+
+plot for [i=2:nc] "short_order_hist.csv" using 1:(column(i)/(sum [j=2:nc+0] column(j))) title columnhead(i) 

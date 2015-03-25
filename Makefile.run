@@ -110,10 +110,16 @@ lammps: | $(restart) .make $(FOLDERS)
 endif
 
 # Analysis of run, both static and dynamic quantities
-contact: program | $(FOLDERS) trj/out.lammpstrj
+contact: program props.csv | $(FOLDERS) trj/out.lammpstrj
 	@echo analysis $(SAVE)/trj/out.lammpstrj
 	@$(BIN_PATH)/program -i trj/out.lammpstrj $(contact_args) > contact.log
 	@touch .make/contact
+
+trj/out.lammpstrj: lammps
+
+props.csv: | trj/out.lammpstrj
+	@python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
+
 
 movie: contact
 
@@ -153,6 +159,9 @@ restarts:
 $(FOLDERS):
 	@mkdir -p $@
 
+$(to_plot):
+	@mkdir -p $(PREFIX)/plots/$@
+
 my_latex:
 	@mkdir -p $@
 
@@ -163,30 +172,16 @@ touch-lammps: | .make
 # Plots {{{
 # ---------
 
-plot: $(addprefix plot-, $(to_plot))
+plot: $(addprefix copy-, $(to_plot))
 	@echo Generating Plots
 	@touch .make/plot
 
-plot-order: contact order.plot | order
-	@for file in order/*.csv; do\
-        gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/order.plot  &> $(LOG);\
-    done
-	@touch .make/plot-order
+copy-%: plot-% | %
+	@$(foreach f, $(wildcard myplot/$(subst plot-,,$<)*), cp $f ../plots/$(subst plot-,,$<)/$(notdir $(shell pwd))-$(notdir $f); )
 
-plot-%: %.plot contact
-	@gnuplot -e "prefix='$(shell pwd)'" $<  &> $(LOG)
+plot-%: %.plot contact | %
+	@gnuplot -e "prefix='$(shell pwd)'" $<  #&> $(LOG)
 	@touch .make/$@
-
-plot-angle: contact angle.plot
-	@for file in trj_contact/*.csv; do\
-        gnuplot -e "filename='$${file%.*}'" $(my_dir)/gnuplot/angle.plot  &> $(LOG);\
-    done
-	@touch .make/plot-angle
-
-plot-props: lammps
-	@python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
-	@gnuplot $(my_dir)/gnuplot/property.plot &> $(LOG)
-	@touch .make/plot-props
 
 # }}}
 # Clean functions {{{
@@ -219,6 +214,7 @@ clean-plot: clean-collate
 	rm -f trj_contact/*.png
 	rm -f trj_contact/*.pdf
 	rm -f .make/plot*
+	rm -f myplot/*
 
 clean-collate: clean-present
 	rm -f my_latex/*
