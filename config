@@ -19,7 +19,7 @@ LOOP=Makefile.loop
 
 LOG=out.log
 
-FOLDERS=images trj trj_contact stats order logs
+FOLDERS=images trj trj_contact stats order logs myplot
 all_clean=clean-files clean-lammps clean-contact clean-plot clean-density clean-restart clean-present
 PRESENT=grouped individual
 
@@ -81,11 +81,7 @@ LAMMPS_VARS+=-v fname $(LAMMPS_IN)
 
 
 
-ifeq ($(SYS_NAME), gaucho)
-	LAMMPS_PATH=
-	LAMMPS=lmp_mac_mpi
-	LAMMPS_FLAGS=
-else ifeq ($(SYS_NAME), mac)
+ifeq ($(SYS_NAME), mac)
 	LAMMPS_PATH=
 	LAMMPS=lmp_mac_mpi
 else ifeq ($(SYS_NAME), ubuntu)
@@ -111,9 +107,7 @@ CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $(create_t) -v press $(press
 
 #}}}
 # MPI Settings {{{
-ifeq ($(SYS_NAME), gaucho)
-	MPI=mpirun -np 8
-else ifeq ($(SYS_NAME), ubuntu)
+ifeq ($(SYS_NAME), ubuntu)
 	MPI=mpirun -np 4
 else
 	MPI= mpirun -np 8
