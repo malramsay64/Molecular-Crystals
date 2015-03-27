@@ -11,11 +11,17 @@ ifdef temp_$(dist)
 	temp := $(temp_$(dist))
 endif
 
+
 ifeq ($(shape), Disc)
 	save = $(addprefix $(strip $(shape))-,$(temp))
 else
 	save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(theta) $(bound))), $(temp)) 
 	save := $(addprefix $(strip $(shape))-, $(save1)) 
+endif
+
+ifneq ($(dimers), )
+	temp :=
+	save := $(mol)
 endif
 
 dirs:=$(addprefix $(PREFIX)/,$(save))
@@ -54,7 +60,6 @@ order.log contact.log: $(save)
 
 %.tex: $(save) | latex
 	@$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))
-
 
 $(save): always | $(dirs)
 	@$(foreach t, $(temp), $(if $(filter $(call t_temp, $@), $t), $(eval prev_t=$(last_t)), $(eval last_t=$t)))

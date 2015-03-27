@@ -76,6 +76,7 @@ EQUIL_IN=$(lammps_dir)/in.equil
 CREATE_IN=$(lammps_dir)/in.create
 CRYS_IN=$(lammps_dir)/in.crys
 BOUNDARY_IN=$(lammps_dir)/in.boundary
+DIMER_IN=$(lammps_dir)/in.dimer
 
 LAMMPS_VARS+=-v fname $(LAMMPS_IN)
 
@@ -120,6 +121,7 @@ PYTHON_FILES=molecule.py files.py
 PYLIB:=$(my_dir)/pylib
 FILES=files.py
 CRYS_FILE=createCells.py
+CREATE_DIMERS=dimer.py
 PYTHON=python
 
 #}}}

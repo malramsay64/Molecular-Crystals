@@ -6,12 +6,19 @@ include $(my_dir)/vars.mak
 
 VPATH=.:$(my_dir):$(BIN_PATH):./.make:$(LIB):$(PREFIX)/restarts:$(PREFIX)/data:$(PREFIX):$(my_dir)/gnuplot:$(my_dir)/lammps_in:$(PYLIB):latex
 
-shape := $(call t_shape, $(mol))
-radius := $(call t_rad, $(mol))
-dist := $(call t_dist, $(mol))
-theta := $(call t_theta, $(mol))
-temp := $(call t_temp, $(mol))
-bound := $(call t_bound, $(mol))
+ifneq ($(dimers), )
+	shape := $(call p_shape, $(mol))
+	radius := $(call p_rad, $(mol))
+	dist := $(call p_dist, $(mol))
+	theta := $(call p_theta, $(mol))
+else 
+	shape := $(call t_shape, $(mol))
+	radius := $(call t_rad, $(mol))
+	dist := $(call t_dist, $(mol))
+	theta := $(call t_theta, $(mol))
+	temp := $(call t_temp, $(mol))
+	bound := $(call t_bound, $(mol))
+endif
 
 #to_plot:=$(addprefix plot-, $(to_plot))
 create_t = 5.0
@@ -80,6 +87,12 @@ $(mol_settings): | data
 	@echo Producing unit cell of $(base)
 	@tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
 
+# Generate Dimers
+else ifneq ($(dimers), )
+$(mol_settings): | data
+	@echo Producing dimers of $(base)
+	@python $(PYLIB)/$(CREATE_DIMERS) $(PREFIX)/data $(subst -,$(space),$(mol))
+
 # Create initial condition from a lattice with randomly oriented molecules
 else
 $(mol_settings): | data
@@ -102,6 +115,13 @@ lammps: steps.dat | $(restart) .make $(FOLDERS)
 	@echo Production $(SAVE)
 	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
+
+else ifneq ($(dimers),)
+lammps: $(mol_settings) | .make $(FOLDERS)
+	@echo Minimising dimers $(SAVE)
+	@$(foreach d, $(dimers), $(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) -v dimer $d -v mymol $(mol) -log logs/$d.log < $(DIMER_IN) > $(LOG);)
+	@touch .make/lammps
+
 else
 lammps: | $(restart) .make $(FOLDERS) 
 	@echo Production $(SAVE)
