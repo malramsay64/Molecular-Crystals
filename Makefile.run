@@ -133,9 +133,12 @@ endif
 contact: program props.csv | $(FOLDERS) trj/out.lammpstrj
 	@echo analysis $(SAVE)/trj/out.lammpstrj
 	@$(BIN_PATH)/program -i trj/out.lammpstrj $(contact_args) > contact.log
+	@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> order.log
 	@touch .make/contact
 
-trj/out.lammpstrj: lammps
+trj/out.lammpstrj:
+	touch $@
+	
 
 props.csv: | trj/out.lammpstrj
 	@python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)
@@ -143,13 +146,13 @@ props.csv: | trj/out.lammpstrj
 
 movie: contact
 
-collate: contact
+collate: tex-files contact
 
 status:
 
 density: contact
 	@echo Calculating density
-	#@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
+	@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> contact.log
 	@touch .make/density
 
 present:$(PRESENT)

@@ -16,6 +16,7 @@ set output plot_dir."moved".ext
 set size ratio -1
 set key off
 set style line 1 linetype 1 linecolor 'black' linewidth 2
+set style arrow 1 head filled size screen 0.02,5,90 ls 1
 set style fill transparent solid 1 noborder
 unset xtics
 unset ytics
@@ -31,5 +32,5 @@ set object rectangle from -0,0 to a,height
 
 set terminal term_type enhanced size term_size,(term_size/(a+0.))*height
 
-plot infile every ::1:1:1 using 1:2:(1):(abs($3)**0.5) with circles linecolor palette,\
-     infile every :::1 using 1:2 with line linestyle 1
+plot infile every :::1 using ($1+$3):($2+$4):(1):(abs($5)**0.5) with circles linecolor palette,\
+     infile every :::1 using 1:2:3:4 with vectors arrowstyle 1
