@@ -1,5 +1,4 @@
 
-
 variable Tm equal $T*1.5
 variable Te equal 0.4
 
@@ -87,12 +86,8 @@ velocity mobile create ${Tm} 1231212
 run 0
 velocity mobile scale ${Tm}
 
-
-dump d2 all image 10000 images/*.jpg type c_diam size 3200 2400
-
 # Create melted region
 run ${steps}
-
 
 # Write restart before minimisation
 write_restart   ${the_path}/restarts/${last_restart}
