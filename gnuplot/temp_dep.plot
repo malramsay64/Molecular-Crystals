@@ -25,7 +25,7 @@ do for [i=2:num_c] {
     set output f.ext
     set xlabel "1/T"
     set ylabel system(command)
-    plot contact.".csv" using (1/$1):i with linespoints ls 5 lc 1, x
+    plot contact.".csv" using (1/$1):i with linespoints ls 5 lc 1
 
 }
 
@@ -38,8 +38,21 @@ set nologscale y
 set format y "%g"
 set yrange [0:1]
 set key on autotitle columnhead
-set xlabel "T"
+set xlabel "1/T"
 set ylabel
 
-plot for [i=2:num_o] ordering.".csv" using 1:i with linespoints ls 5 lc i-1
+plot for [i=2:num_o] ordering.".csv" using (1/$1):i with linespoints ls 5 lc i-1
 
+# Combination Functions
+
+set output contact."-t1.t2".ext
+unset yrange
+
+plot contact.".csv" using (1/$1):($2/$3) with linespoints ls 5 lc 1 title 't1/t2'
+
+
+set output contact."-t.D".ext
+
+
+plot contact.".csv" using (1/$1):($2*$5) with linespoints ls 5 lc 1 title "t1.D",\
+    contact.".csv" using (1/$1):($3*$5) with linespoints ls 5 lc 2 title "t2.D"

@@ -1,5 +1,3 @@
-# Using rigid molecules
-
 # Define molecule
 molecule    mymol ${the_path}/data/${molecule}
 
@@ -52,12 +50,6 @@ log     ${my_path}/logs/create.log
 # Simulation parameters, bonds not able to move 
 fix 1 all npt temp $T $T 10 iso ${press} ${press} 10
 fix 2 all enforce2d
-
-# Dump configuration printevery steps. Image is dumped at beginning and end
-#dump 2 all image ${steps} ${my_path}/*.jpg  type c_diam size 2048 2048 box yes 1e-3 zoom 1.5
-
-#dump_modify 2 first yes
-#dump_modify 2 pad 10
 
 timestep 1e-3
 

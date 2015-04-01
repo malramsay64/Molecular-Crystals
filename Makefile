@@ -65,7 +65,7 @@ collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 
 %.tex: %
 	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
-	@gnuplot -e 'prefix="$(PREFIX)/$(call glob_temps, $<)"' gnuplot/log_time.plot
+	gnuplot -e 'prefix="$(PREFIX)/"; molecule="$<"' gnuplot/log_time.plot
 	@echo "\section{$<}" > $(PREFIX)/latex/$@
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
@@ -112,8 +112,8 @@ contact-all: $(addsuffix /contact.log, $(wildcard $(PREFIX)/*-*))
 	@if [ -f $(@:%/contact.log=%/trj/out.lammpstrj) ] ;then $(MAKE) -C $(dir $@) -f $(my_dir)/$(GOAL) contact mol=$(@:$(PREFIX)/%/contact.log=%) ; fi
 
 clean-contact-all:
-	@$(foreach m, $(wildcard $(PREFIX)/*-*-*/trj/out.lammpstrj | cut -d/ -f6), \
-        $(MAKE) -C $(PREFIX)/$m -f $(my_dir)/$(GOAL) clean-contact mol=$m;)
+	@$(foreach m, $(wildcard $(PREFIX)/*-* | cut -d/ -f6), \
+        $(MAKE) -C $m -f $(my_dir)/$(GOAL) clean-contact mol=$m;)
 
 %.o : %.cpp | $(BIN_PATH)
 	@echo CC $<
@@ -142,8 +142,8 @@ clean:
 	-rm -rf bin/*
 
 clean-collate: $(mol)
-	-rm -rf $(PREFIX)/plots/*
-	rm -f $(PREFIX)/latex/*
+	-rm -f $(PREFIX)/plots/*
+	rm -f $(PREFIX)/latex/$<.tex
 
 delete:
 	-rm -rf $(PREFIX)/*
