@@ -22,7 +22,7 @@ all: wallpaper
 iso: $(mol)
 
 Snowman-%: wallpaper | $(PREFIX)/Snowman-%
-	(cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 anyu all $(call p_dist, $@) $(call p_rad, $@)>out.log)
+	cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 anyu all $(call p_dist, $@) $(call p_rad, $@) > out.log
 
 $(PREFIX)/%:
 	mkdir -p $@
@@ -32,3 +32,6 @@ wallpaper: $(MODULES)
 
 %.o: %.c | $(BIN_PATH)
 	$(CC) $(CFLAGS) -c $< -o $(BIN_PATH)/$@
+
+clean:
+	rm $(BIN_PATH)/*
