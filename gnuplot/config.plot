@@ -15,7 +15,7 @@ else {
     }
 }
 ext = ".".term_type
-font_size = 12*scaling
+font_size = 10*scaling
 
 if (!exists("plot_dir")) plot_dir = 'myplot/'
 if (!exists("prefix")) prefix = './'

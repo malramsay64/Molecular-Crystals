@@ -4,7 +4,7 @@ UNAME := $(shell uname)
 HOST := $(shell hostname)
 
 ifeq ($(UNAME), Linux)
-	OS := $(shell "lsb_release -i | cut -d$$'\t'  -f2")
+	OS := $(shell lsb_release -i | cut  -f2)
 endif
 
 ifeq ($(UNAME), Darwin)

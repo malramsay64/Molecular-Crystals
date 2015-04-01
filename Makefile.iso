@@ -3,7 +3,7 @@ include settings
 include config
 
 mol := $(shape)
-mol_s := $(filter Snowman%, $(mol))
+mol := $(filter Snowman%, $(mol))
 # Radii
 mol := $(if $(radius), $(foreach rad, $(radius), $(addsuffix -$(rad), $(mol))), $(mol))
 # Distance
@@ -17,8 +17,7 @@ MODULES:=$(wildcard isopointal/*.c)
 MODULES:=$(MODULES:.c=.o)
 MODULES:=$(notdir $(MODULES))
 
-all:
-	@echo $(mol)
+all: wallpaper
 
 iso: $(mol)
 

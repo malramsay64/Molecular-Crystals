@@ -34,16 +34,16 @@ void print_group_definitions() {
     for (wk=0; wk<wallpapergroups[wg].num_wyckoffs; wk++) { 
       printf("wyckoff site: %c\n", wallpapergroups[wg].wyckoffs[wk].letter);
       for (mp=0; mp<wallpapergroups[wg].wyckoffs[wk].multiplicity;mp++) {
-	printf("x_new = %1.f*x_old + %1.f*y_old + %4.2f\n", 
-	       wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[0][0],
-	       wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[0][1],
-	       wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[0][2]
-	       );
-	printf("y_new = %1.f*x_old + %1.f*y_old + %4.2f\n",
-	       wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[1][0],
-	       wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[1][1],
-	       wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[1][2]
-	       );
+    printf("x_new = %1.f*x_old + %1.f*y_old + %4.2f\n", 
+           wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[0][0],
+           wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[0][1],
+           wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[0][2]
+           );
+    printf("y_new = %1.f*x_old + %1.f*y_old + %4.2f\n",
+           wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[1][0],
+           wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[1][1],
+           wallpapergroups[wg].wyckoffs[wk].image[mp].coord_coeffs[1][2]
+           );
       }
       printf("\n");
     }
@@ -52,17 +52,15 @@ void print_group_definitions() {
 }
 
 int factorial(int n) {
-  if((n==0)||(n==1))
-    return(1);
-  else
-    return(n*factorial(n-1));
+    int total = 1;
+    for (int i=2; i<=n; i++){
+        total *= i;
+    }
+    return total;
 }
 
 int power( int b , int p) {
-  if( p > 1 )
-    return b * power( b , p-1 );
-  else
-    return b;
+  return pow(b,p);
 }
 
 int enumerate(int OS[][MAXNUMOCCSITES], int maxcombinations, int n_comb, int os, int bag_i, int combination_bag[], int bag_size) {
@@ -76,8 +74,8 @@ int enumerate(int OS[][MAXNUMOCCSITES], int maxcombinations, int n_comb, int os,
       if ((i!=bag_i)&&(combination_bag[i]==combination_bag[i-1])) continue;
       new = enumerate(OS, maxcombinations, n_comb+count, os+1, i+1, combination_bag, bag_size);
       for (j=0; j<new; j++) { 
-	OS[n_comb+j+count][os]=combination_bag[i];
-	//printf("saving [%d][%d]=%d (new %d, count %d)\n", n_comb+j+count, os, i, new, count);
+    OS[n_comb+j+count][os]=combination_bag[i];
+    //printf("saving [%d][%d]=%d (new %d, count %d)\n", n_comb+j+count, os, i, new, count);
       }
       count+=new;
     }
@@ -91,8 +89,8 @@ double area(struct shapetype *shape) {
   double areasum=0.0;
   for (i=0; i<SHAPE_RESOLUTION; i++) {
     // old   areasum += 0.5*pow(0.5*(shape->r[i]+shape->r[(i+1)%SHAPE_RESOLUTION]),2.0)*(2.0*M_PI/SHAPE_RESOLUTION);
-	// the following is the exact triangle area
-	areasum += 0.5*(shape->r[i])*(shape->r[(i+1)%SHAPE_RESOLUTION])*sin(2.0*M_PI/SHAPE_RESOLUTION);
+    // the following is the exact triangle area
+    areasum += 0.5*(shape->r[i])*(shape->r[(i+1)%SHAPE_RESOLUTION])*sin(2.0*M_PI/SHAPE_RESOLUTION);
   }
   //printf("area %f\n", areasum);
   return areasum;
@@ -172,16 +170,16 @@ bool indirect_clash(struct shapetype *shape_a, struct shapetype *shape_b, double
   for (ib = 0; ib<=SHAPE_RESOLUTION; ib++) {
     if (ib!=SHAPE_RESOLUTION) {
       if (flip_b == 0) {
-	xb_tab[ib] = centraldist - shape_b->r[ib] * cos(-angle_b + ib*2.0*M_PI/SHAPE_RESOLUTION);
-	yb_tab[ib] = shape_b->r[ib] * sin(angle_b - ib*2.0*M_PI/SHAPE_RESOLUTION);
+    xb_tab[ib] = centraldist - shape_b->r[ib] * cos(-angle_b + ib*2.0*M_PI/SHAPE_RESOLUTION);
+    yb_tab[ib] = shape_b->r[ib] * sin(angle_b - ib*2.0*M_PI/SHAPE_RESOLUTION);
       } else {
-	xb_tab[ib] = centraldist - shape_b->r[ib] * cos(angle_b - ib*2.0*M_PI/SHAPE_RESOLUTION);
-	yb_tab[ib] = shape_b->r[ib] * sin(-angle_b + ib*2.0*M_PI/SHAPE_RESOLUTION);
+    xb_tab[ib] = centraldist - shape_b->r[ib] * cos(angle_b - ib*2.0*M_PI/SHAPE_RESOLUTION);
+    yb_tab[ib] = shape_b->r[ib] * sin(-angle_b + ib*2.0*M_PI/SHAPE_RESOLUTION);
       }
     } else {
       /* in case one shape is basically inside the other */
-	xb_tab[ib] = centraldist;
-	yb_tab[ib] = 0.0;
+    xb_tab[ib] = centraldist;
+    yb_tab[ib] = 0.0;
     }
     // compute what distance ib is from the center of particle a
     distsq_ib_a = (yb_tab[ib])*(yb_tab[ib]) + (xb_tab[ib])*(xb_tab[ib]);
@@ -349,10 +347,10 @@ bool clash_polygon(struct shapetype *shape_a, struct shapetype *shape_b, struct 
     img_fcoords_b[0] = fcoords_b[0]+1.0*cellimgx;
 
     for (cellimgy=-3; cellimgy<=3; cellimgy++) { 
-	  
+      
       if ((rep_a[0]==rep_b[0]) && (rep_a[1]==rep_b[1]) && (cellimgx==0) && (cellimgy==0)) {
-	//printf("discard checking for clashes of self with self\n");
-	continue;
+    //printf("discard checking for clashes of self with self\n");
+    continue;
       }
 
       img_fcoords_b[1] = fcoords_b[1]+1.0*cellimgy;
@@ -364,10 +362,10 @@ bool clash_polygon(struct shapetype *shape_a, struct shapetype *shape_b, struct 
 
 
       if (pair_clash(shape_a, shape_b, coords_a, coords_b, orient_a, orient_b, rotation_a, rotation_b, flip_a, flip_b, tests)) {
-	//printf("cellsides %f %f\n", *cellsides[0], *cellsides[1]);
-	//printf("fcoords    _a %f %f , orient_a %f, rotation_a %d, flip_a %d\n", fcoords_a[0], fcoords_a[1], orient_a, rotation_a, flip_a );
-	//printf("img_fcoords_b %f %f , orient_b %f, rotation_b %d, flip_b %d\n", img_fcoords_b[0], img_fcoords_b[1], orient_b, rotation_b, flip_b );
-	return 1;
+    //printf("cellsides %f %f\n", *cellsides[0], *cellsides[1]);
+    //printf("fcoords    _a %f %f , orient_a %f, rotation_a %d, flip_a %d\n", fcoords_a[0], fcoords_a[1], orient_a, rotation_a, flip_a );
+    //printf("img_fcoords_b %f %f , orient_b %f, rotation_b %d, flip_b %d\n", img_fcoords_b[0], img_fcoords_b[1], orient_b, rotation_b, flip_b );
+    return 1;
       }
 
       //printf("clash ratios %f %f %d %d [%f %f] [%f %f]\n", min_clash_ratio, clash_ratio, cellimgx, cellimgy, fcoords_a[0], fcoords_a[1], img_fcoords_b[0], img_fcoords_b[1]);
@@ -414,56 +412,56 @@ double packing_fraction(struct shapetype *shape, struct wallpaper_group_type gro
       //min_clashratio = 9999.999;
       
       for (r=0; r<countreplicas; r++) {
-	// this line is new on 2012-12-03. It means we only check one replica of a shape against the other replicas (copies in the same cell, either from the multiplicity of the same occupied site or at other occupied sites and their multiplicities) when that replica is the 'first' (m=0) of its occupied site. If there is no clash from one replica to the others, then there won't be a clash between replicas on the same occupied site.
-	if (replicaindex[r][1]==0) {
-	  //if (1) {
-	  for (s=0; s<countreplicas; s++) {
-	    // s begins at double_count, which starts at 0. this is to avoid doubling up when checking pairs. the first time we take a shape, double_count is 0 so we check it for clashes against every replica. we then add 1 to double_count. we continue (without checking clashes) until we find a replica on a new occupied site, at which point m=0. we then check this replica against all replicas EXCEPT the original replica we checked when double_count was 0, as this pairing has already been checked for clashes.
-	    if (tests==0) {
-	      currclash = clash_polygon(shape,shape,group,cellsides,cellangles,occupiedsites,sitevariables,replicaindex[r],replicaindex[s],flips,tests);
-	      if (currclash) {
-		printf("found a clash when initialising\n");
-		//exit(1);
-		return -1.0;
-	      }
-	      /*clashratio = clash_spokes(shape,shape,group,cellsides,cellangles,occupiedsites,sitevariables,replicaindex[r],replicaindex[s],flips);
-	      if (clashratio<1.0-EPS) {
-		currclash=1;
-		if ((WARNINGS)&&(clashratio<0.4)) {
-		  printf("replica %d (%d, %d) and %d (%d, %d) clash ratio = %f cell %f %f\n", r, replicaindex[r][0], replicaindex[r][1], s, replicaindex[s][0], replicaindex[s][1], clashratio, *cellsides[0], *cellsides[1]);
-		}
-	      }
-	      min_clashratio = MIN(clashratio, min_clashratio);*/
+    // this line is new on 2012-12-03. It means we only check one replica of a shape against the other replicas (copies in the same cell, either from the multiplicity of the same occupied site or at other occupied sites and their multiplicities) when that replica is the 'first' (m=0) of its occupied site. If there is no clash from one replica to the others, then there won't be a clash between replicas on the same occupied site.
+    if (replicaindex[r][1]==0) {
+      //if (1) {
+      for (s=0; s<countreplicas; s++) {
+        // s begins at double_count, which starts at 0. this is to avoid doubling up when checking pairs. the first time we take a shape, double_count is 0 so we check it for clashes against every replica. we then add 1 to double_count. we continue (without checking clashes) until we find a replica on a new occupied site, at which point m=0. we then check this replica against all replicas EXCEPT the original replica we checked when double_count was 0, as this pairing has already been checked for clashes.
+        if (tests==0) {
+          currclash = clash_polygon(shape,shape,group,cellsides,cellangles,occupiedsites,sitevariables,replicaindex[r],replicaindex[s],flips,tests);
+          if (currclash) {
+        printf("found a clash when initialising\n");
+        //exit(1);
+        return -1.0;
+          }
+          /*clashratio = clash_spokes(shape,shape,group,cellsides,cellangles,occupiedsites,sitevariables,replicaindex[r],replicaindex[s],flips);
+          if (clashratio<1.0-EPS) {
+        currclash=1;
+        if ((WARNINGS)&&(clashratio<0.4)) {
+          printf("replica %d (%d, %d) and %d (%d, %d) clash ratio = %f cell %f %f\n", r, replicaindex[r][0], replicaindex[r][1], s, replicaindex[s][0], replicaindex[s][1], clashratio, *cellsides[0], *cellsides[1]);
+        }
+          }
+          min_clashratio = MIN(clashratio, min_clashratio);*/
 
 
 
-	    } else {
-	      currclash = clash_polygon(shape,shape,group,cellsides,cellangles,occupiedsites,sitevariables,replicaindex[r],replicaindex[s],flips,tests);
-	      if (currclash) {
-		/* if we have found any clash, and we are not in the initial phases (tests>0), then there's no need to search through for any more. exit the two for loops and the while loop immediately. also, flag there has been a clash so we can reject the move that caused it */
-		*clash_rejection=1;
-		//printf("clash rejection\n");
-	      }
-	    }
-	    if (*clash_rejection==1) break;
-	  }
-	}
-	if (*clash_rejection==1) break;
+        } else {
+          currclash = clash_polygon(shape,shape,group,cellsides,cellangles,occupiedsites,sitevariables,replicaindex[r],replicaindex[s],flips,tests);
+          if (currclash) {
+        /* if we have found any clash, and we are not in the initial phases (tests>0), then there's no need to search through for any more. exit the two for loops and the while loop immediately. also, flag there has been a clash so we can reject the move that caused it */
+        *clash_rejection=1;
+        //printf("clash rejection\n");
+          }
+        }
+        if (*clash_rejection==1) break;
+      }
+    }
+    if (*clash_rejection==1) break;
       }
       
       //printf("minclash %f\n", min_clashratio);
       
       //if ((min_clashratio<1.0)&&(tests==0)) {
-	/* if there is a clash, we rescale the cell to avoid the clash only if we have just begun, i.e. before the first step. otherwise, i.e. if there is a clash after any step, we don't rescale the cell */
-	/**cellsides[0] /= min_clashratio;
-	*cellsides[0] = MIN(*cellsides[0], 99.0);
-	if (cellsides[1]!=cellsides[0]) { 
-	  *cellsides[1] /= min_clashratio;
-	  *cellsides[1] = MIN(*cellsides[1], 99.0);
-	  }*/
-	
-	/* I HAVE NOT YET TAKEN CARE TO ENSURE THE CELL SIDES STAY WITHIN THEIR PROSCRIBED RANGE DURING THIS STEP 
-	   FOR NOW, a VERY QUICK AND DIRTY VERSION OF THIS IS IMPLEMENTED IN THE ABOVE - hardcoded 99.0*/
+    /* if there is a clash, we rescale the cell to avoid the clash only if we have just begun, i.e. before the first step. otherwise, i.e. if there is a clash after any step, we don't rescale the cell */
+    /**cellsides[0] /= min_clashratio;
+    *cellsides[0] = MIN(*cellsides[0], 99.0);
+    if (cellsides[1]!=cellsides[0]) { 
+      *cellsides[1] /= min_clashratio;
+      *cellsides[1] = MIN(*cellsides[1], 99.0);
+      }*/
+    
+    /* I HAVE NOT YET TAKEN CARE TO ENSURE THE CELL SIDES STAY WITHIN THEIR PROSCRIBED RANGE DURING THIS STEP 
+       FOR NOW, a VERY QUICK AND DIRTY VERSION OF THIS IS IMPLEMENTED IN THE ABOVE - hardcoded 99.0*/
       //} // else Don't compress at all... allow the MC to do that 
     }
   } /* else printf("no need to check for clash, just reloading best structure\n"); */
@@ -575,39 +573,39 @@ int initialize_structure_in_group(struct shapetype *shape, struct wallpaper_grou
       countvar++;
     } 
       
-	/*choose the orientation of the zeroth image of this particle */ /* This could also be done within the Wyckoff position SITEROTATION parameter?... */
-	if (group.wyckoffs[occupiedsites[os]].sitemirrors) {
-	  if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror0) {
-		basis[countvar]=0.0;
-	  } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror90) {
-		basis[countvar]= M_PI/2.0;
-	  } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror45) {
-		basis[countvar]= 3.0*M_PI/4.0; /*not sure why I need this and the next one the wrong way around... but it works */
-	  } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror135) {
-		basis[countvar]= M_PI/4.0;
-	  } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror30) {
-		basis[countvar]= M_PI/6.0;
-	  } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror60) {
-		basis[countvar]= M_PI/3.0;
-	  } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror330) {
-		basis[countvar]= 11.0*M_PI/6.0;
-	  } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror300) {
-		basis[countvar]= 5.0*M_PI/3.0;
-	  }
-	  basis_range[countvar][0] = basis[countvar];
-	  basis_range[countvar][1] = basis[countvar];
-	  basis_fixed[countvar] = 2; /*this is a different kind of fixed ... we can rotate by certain angles, as long as we match the sitemirrors */
-	  sitevariables[os][2]=&basis[countvar]; 
-	} else {
-	  basis[countvar]=Fluke()*2.0*M_PI;
-	  basis_range[countvar][0] = 0.0;
-	  basis_range[countvar][1] = 2.0*M_PI;
-	  basis_fixed[countvar] = 0; /* TO DO: new type of fixing - periodic in 2Pi */
-	  sitevariables[os][2]=&basis[countvar];
-	  printf("site offset-angle is variable[%d] %f\n", os, *sitevariables[os][2]);
-	}
-	countvar++;
-	/* not always variable, but part of the basis, so should be included?? */
+    /*choose the orientation of the zeroth image of this particle */ /* This could also be done within the Wyckoff position SITEROTATION parameter?... */
+    if (group.wyckoffs[occupiedsites[os]].sitemirrors) {
+      if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror0) {
+        basis[countvar]=0.0;
+      } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror90) {
+        basis[countvar]= M_PI/2.0;
+      } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror45) {
+        basis[countvar]= 3.0*M_PI/4.0; /*not sure why I need this and the next one the wrong way around... but it works */
+      } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror135) {
+        basis[countvar]= M_PI/4.0;
+      } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror30) {
+        basis[countvar]= M_PI/6.0;
+      } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror60) {
+        basis[countvar]= M_PI/3.0;
+      } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror330) {
+        basis[countvar]= 11.0*M_PI/6.0;
+      } else if (group.wyckoffs[occupiedsites[os]].image[0].sitemirror300) {
+        basis[countvar]= 5.0*M_PI/3.0;
+      }
+      basis_range[countvar][0] = basis[countvar];
+      basis_range[countvar][1] = basis[countvar];
+      basis_fixed[countvar] = 2; /*this is a different kind of fixed ... we can rotate by certain angles, as long as we match the sitemirrors */
+      sitevariables[os][2]=&basis[countvar]; 
+    } else {
+      basis[countvar]=Fluke()*2.0*M_PI;
+      basis_range[countvar][0] = 0.0;
+      basis_range[countvar][1] = 2.0*M_PI;
+      basis_fixed[countvar] = 0; /* TO DO: new type of fixing - periodic in 2Pi */
+      sitevariables[os][2]=&basis[countvar];
+      printf("site offset-angle is variable[%d] %f\n", os, *sitevariables[os][2]);
+    }
+    countvar++;
+    /* not always variable, but part of the basis, so should be included?? */
   }
   
   printf("replicas %d variables %d os ", countreplicas, countvar);
@@ -629,25 +627,25 @@ int initialize_structure_in_group(struct shapetype *shape, struct wallpaper_grou
       char line [ 1024 ]; /* doesn't matter that the really long lines don't fit in one array?*/
       
       while ( fgets ( line, sizeof line, fp ) != NULL ) /* read a line */
-	{
-	  if ((strncmp(line, "<!--Copyright: Toby Hudson",26)==0)) {
-	    printf("found copyright line, next line is data\n");
-	    for (i=0; i<countvar; i++) {
-	      if ((fscanf(fp, "%lf ", &basis[i]))==EOF) {
-		fprintf(stderr, "ERROR: reload format incorrect\n");
-		exit(1);
-	      }
-	    }
-	    for (i=0; i<numoccsites; i++) {
-	      if ((fscanf(fp, "%d ", &flips_int))==EOF) {
-		fprintf(stderr, "ERROR: reload format incorrect\n");
-		exit(1);		      
-	      }
-	      flips[i] = flips_int;
-	    }
-	    printf("existing structure loaded - cold quench only\n");
-	  }
-	}
+    {
+      if ((strncmp(line, "<!--Copyright: Toby Hudson",26)==0)) {
+        printf("found copyright line, next line is data\n");
+        for (i=0; i<countvar; i++) {
+          if ((fscanf(fp, "%lf ", &basis[i]))==EOF) {
+        fprintf(stderr, "ERROR: reload format incorrect\n");
+        exit(1);
+          }
+        }
+        for (i=0; i<numoccsites; i++) {
+          if ((fscanf(fp, "%d ", &flips_int))==EOF) {
+        fprintf(stderr, "ERROR: reload format incorrect\n");
+        exit(1);              
+          }
+          flips[i] = flips_int;
+        }
+        printf("existing structure loaded - cold quench only\n");
+      }
+    }
       fclose(fp);
     } else {
       *isfile=0;
@@ -731,7 +729,7 @@ void uniform_best_packing_in_isopointal_group(struct shapetype *shape, struct wa
       checkfile=0;
 
       if (isfile==1) {
-	kT_start=kT_finish*10.0;
+    kT_start=kT_finish*10.0;
       }
 
       phi = packing_fraction(shape, group, cellsides, cellangles, occupiedsites, sitevariables, flips, tests, &clash_rejection);
@@ -753,15 +751,15 @@ void uniform_best_packing_in_isopointal_group(struct shapetype *shape, struct wa
       //if (tests%100==0) vary_index=0; /* only occasionally allow the cell angle to change */
       
       while (basis_fixed[vary_index]==1) {
-	/* search until a variable basis is found */
-	vary_index = rand()%basis_size; 
+    /* search until a variable basis is found */
+    vary_index = rand()%basis_size; 
       }
       
       if ((tests%100)&&(ALLOWFLIPS)) {
-	flip_site = rand()%numoccsites;
-	flips[flip_site] ^= 1;
+    flip_site = rand()%numoccsites;
+    flips[flip_site] ^= 1;
       } else {
-	flip_site = -1;
+    flip_site = -1;
       }
       
       old_value = basis[vary_index];
@@ -771,45 +769,45 @@ void uniform_best_packing_in_isopointal_group(struct shapetype *shape, struct wa
       old_phi = phi;
       
       if (basis_fixed[vary_index]==0) { 
-	if (basis_range[vary_index][1]<3.0) {
-	  /* This is a regular structural parameter (non cell-side) which can be varied within its given range */
-	  //basis[vary_index] = old_value *(1.0 + max_step_size*(Fluke()-0.5));
-	  basis[vary_index] = old_value + max_step_size*(basis_range[vary_index][1]-basis_range[vary_index][0])*(Fluke()-0.5);
-	  //printf("A kT = %g, phi=%f %d %f, (%f, %f) theta=%f\n", kT, phi, vary_index, old_value, basis_range[vary_index][0], basis_range[vary_index][1], *cellangles[0]);
-	} else {
-	  /* This is a cell side.  Since these have a direct effect on the packing fraction, make their step size in proportion to kT */
-	  basis[vary_index] = old_value *(1.0 + MIN(3.0*kT,0.1)*(Fluke()-0.5));		
-	  //printf("C kT = %g, phi=%f %d %f, (%f, %f) new side=%f\n", kT, phi, vary_index, old_value, basis_range[vary_index][0], basis_range[vary_index][1], basis[vary_index]);
-	}
-	
-	if (basis[vary_index]<basis_range[vary_index][0]) {
-	  basis[vary_index]=basis_range[vary_index][0];
-	} else if (basis[vary_index]>basis_range[vary_index][1]) {
-	  basis[vary_index]=basis_range[vary_index][1];
-	}
-	
-	if (vary_index==0) {
-	  /* this is the cell angle. stretch cell sides so that the total area is preserved (to prevent runaway angle collapse) */
-	  *cellsides[0] = old_cell0 * sqrt(sin(old_value)/sin(basis[0]));
-	  *cellsides[1] = old_cell1 * sqrt(sin(old_value)/sin(basis[0]));
-	}
-	
+    if (basis_range[vary_index][1]<3.0) {
+      /* This is a regular structural parameter (non cell-side) which can be varied within its given range */
+      //basis[vary_index] = old_value *(1.0 + max_step_size*(Fluke()-0.5));
+      basis[vary_index] = old_value + max_step_size*(basis_range[vary_index][1]-basis_range[vary_index][0])*(Fluke()-0.5);
+      //printf("A kT = %g, phi=%f %d %f, (%f, %f) theta=%f\n", kT, phi, vary_index, old_value, basis_range[vary_index][0], basis_range[vary_index][1], *cellangles[0]);
+    } else {
+      /* This is a cell side.  Since these have a direct effect on the packing fraction, make their step size in proportion to kT */
+      basis[vary_index] = old_value *(1.0 + MIN(3.0*kT,0.1)*(Fluke()-0.5));        
+      //printf("C kT = %g, phi=%f %d %f, (%f, %f) new side=%f\n", kT, phi, vary_index, old_value, basis_range[vary_index][0], basis_range[vary_index][1], basis[vary_index]);
+    }
+    
+    if (basis[vary_index]<basis_range[vary_index][0]) {
+      basis[vary_index]=basis_range[vary_index][0];
+    } else if (basis[vary_index]>basis_range[vary_index][1]) {
+      basis[vary_index]=basis_range[vary_index][1];
+    }
+    
+    if (vary_index==0) {
+      /* this is the cell angle. stretch cell sides so that the total area is preserved (to prevent runaway angle collapse) */
+      *cellsides[0] = old_cell0 * sqrt(sin(old_value)/sin(basis[0]));
+      *cellsides[1] = old_cell1 * sqrt(sin(old_value)/sin(basis[0]));
+    }
+    
       } else {
-	/* basis_fixed[vary_index]==2 which means it's a particle orientation which must vary in a quantized manner to ensure site mirrors still lie on symmetry mirror planes */
-	
-	if ((shape->mirrors%2==0) && (Fluke()<0.5)) {
-	  /* turn it 90 degrees to switch the x and y mirror planes */
-	  if (basis[vary_index]<M_PI*3.0/4.0) 
-	    basis[vary_index] += M_PI/(double)shape->mirrors;
-	  else
-	    basis[vary_index] -= M_PI/(double)shape->mirrors;
-	} else {
-	  /* turn it 180 degrees so that all mirror planes are preserved (just reversed) */
-	  if (basis[vary_index]<M_PI) 
-	    basis[vary_index] += M_PI;
-	  else
-	    basis[vary_index] -= M_PI;
-	} 
+    /* basis_fixed[vary_index]==2 which means it's a particle orientation which must vary in a quantized manner to ensure site mirrors still lie on symmetry mirror planes */
+    
+    if ((shape->mirrors%2==0) && (Fluke()<0.5)) {
+      /* turn it 90 degrees to switch the x and y mirror planes */
+      if (basis[vary_index]<M_PI*3.0/4.0) 
+        basis[vary_index] += M_PI/(double)shape->mirrors;
+      else
+        basis[vary_index] -= M_PI/(double)shape->mirrors;
+    } else {
+      /* turn it 180 degrees so that all mirror planes are preserved (just reversed) */
+      if (basis[vary_index]<M_PI) 
+        basis[vary_index] += M_PI;
+      else
+        basis[vary_index] -= M_PI;
+    } 
       }
       
       tests++; /* increase tests here so that when calculate packing fraction on first test, tests=1 */
@@ -817,44 +815,44 @@ void uniform_best_packing_in_isopointal_group(struct shapetype *shape, struct wa
       phi = packing_fraction(shape, group, cellsides, cellangles, occupiedsites, sitevariables, flips, tests, &clash_rejection);
       
       if ((clash_rejection==1) || (Fluke()>exp(((1.0/old_phi-1.0/phi)/kT) + countreplicas*log(old_phi/phi)))) {
-	// if (phi<old_phi) {
-	/* some probability of rejecting move if packing fraction decreased, or definitely reject it if it caused a clash */
-	rejections++;
-	basis[vary_index] = old_value;
-	*cellsides[0] = old_cell0;
-	*cellsides[1] = old_cell1;
-	if (flip_site != -1) flips[flip_site]^=1;
-	phi = old_phi;
-	/*
-	if (clash_rejection!=1) {
-	  printf("######not a clash rejection, return to old values\n");
-	}
-	if (clash_rejection==1) {
-	  printf("############################a clash rejection, return to old values\n");
-	}
-	*/
+    // if (phi<old_phi) {
+    /* some probability of rejecting move if packing fraction decreased, or definitely reject it if it caused a clash */
+    rejections++;
+    basis[vary_index] = old_value;
+    *cellsides[0] = old_cell0;
+    *cellsides[1] = old_cell1;
+    if (flip_site != -1) flips[flip_site]^=1;
+    phi = old_phi;
+    /*
+    if (clash_rejection!=1) {
+      printf("######not a clash rejection, return to old values\n");
+    }
+    if (clash_rejection==1) {
+      printf("############################a clash rejection, return to old values\n");
+    }
+    */
       }
 
       if (phi > max_phi) {
-	/* best packing seen yet ... save data */
-	for (i=0; i<basis_size; i++) {
-	  best_basis[i] = basis[i];
-	}
-	for (i=0; i<numoccsites; i++) {
-	  best_flips[i] = flips[i];
-	} 
-	max_phi = phi;
+    /* best packing seen yet ... save data */
+    for (i=0; i<basis_size; i++) {
+      best_basis[i] = basis[i];
+    }
+    for (i=0; i<numoccsites; i++) {
+      best_flips[i] = flips[i];
+    } 
+    max_phi = phi;
       } 
       
       if (phi > max_phi_in_cycle) {
-	/* best packing seen yet in current cycle ... save data */
-	for (i=0; i<basis_size; i++) {
-	  best_basis_in_cycle[i][cycle] = basis[i];
-	}
-	for (i=0; i<numoccsites; i++) {
-	  best_flips_in_cycle[i][cycle] = flips[i];
-	} 
-	max_phi_in_cycle = phi;
+    /* best packing seen yet in current cycle ... save data */
+    for (i=0; i<basis_size; i++) {
+      best_basis_in_cycle[i][cycle] = basis[i];
+    }
+    for (i=0; i<numoccsites; i++) {
+      best_flips_in_cycle[i][cycle] = flips[i];
+    } 
+    max_phi_in_cycle = phi;
       }
       
       if (tests%500==0) printf("cycle %d of %d, step %ld of %d, kT=%g, packing %f, angle %f, b/a=%f, rejection %f percent\n", cycle+1, CYCLES, tests, MAXSTEPS, kT, phi, *cellangles[0]*180.0/M_PI, (*cellsides[1])/(*cellsides[0]), (100.0*rejections)/tests); 
@@ -922,19 +920,19 @@ void uniform_best_packing_in_isopointal_group(struct shapetype *shape, struct wa
     if (POLYGON_REP==1) {
       fprintf(fp, "<polygon points=\"");
       for (i=0; i<SHAPE_RESOLUTION; i++) {
-	fprintf(fp, "%f,%f ", (image_scale*shape->r[i]-0.5)*cos(i*2.0*M_PI/SHAPE_RESOLUTION),  (image_scale*shape->r[i]-0.5)*sin(i*2.0*M_PI/SHAPE_RESOLUTION));
+    fprintf(fp, "%f,%f ", (image_scale*shape->r[i]-0.5)*cos(i*2.0*M_PI/SHAPE_RESOLUTION),  (image_scale*shape->r[i]-0.5)*sin(i*2.0*M_PI/SHAPE_RESOLUTION));
       }
       fprintf(fp, "\" style=\"stroke:#000000;stroke-width:1\"/>\n");
     } else if (POLYGON_REP==2) {
       fprintf(fp, "<polygon points=\"");
       for (i=0; i<SHAPE_RESOLUTION; i++) {
-	fprintf(fp, "%f,%f ", image_scale*shape->r[i]*cos(i*2.0*M_PI/SHAPE_RESOLUTION),  image_scale*shape->r[i]*sin(i*2.0*M_PI/SHAPE_RESOLUTION));
+    fprintf(fp, "%f,%f ", image_scale*shape->r[i]*cos(i*2.0*M_PI/SHAPE_RESOLUTION),  image_scale*shape->r[i]*sin(i*2.0*M_PI/SHAPE_RESOLUTION));
       }
       fprintf(fp, "\" style=\"stroke:#000000;stroke-width:0\"/>\n");
     } else {
       /* draw radial lines */
       for (i=0; i<SHAPE_RESOLUTION; i++) {
-	fprintf(fp, "<line x1=\"0\" y1=\"0\" x2=\"%f\" y2=\"%f\" stroke=\"purple\" stroke-width=\"1\" />\n", image_scale*shape->r[i]*cos(i*2.0*M_PI/SHAPE_RESOLUTION),  image_scale*shape->r[i]*sin(i*2.0*M_PI/SHAPE_RESOLUTION));
+    fprintf(fp, "<line x1=\"0\" y1=\"0\" x2=\"%f\" y2=\"%f\" stroke=\"purple\" stroke-width=\"1\" />\n", image_scale*shape->r[i]*cos(i*2.0*M_PI/SHAPE_RESOLUTION),  image_scale*shape->r[i]*sin(i*2.0*M_PI/SHAPE_RESOLUTION));
       }    
     }
     if (AXES_SHOWN) { 
@@ -948,45 +946,45 @@ void uniform_best_packing_in_isopointal_group(struct shapetype *shape, struct wa
     fprintf(fp, "</defs>\n");
     for (cell_img_x=0; cell_img_x<3; cell_img_x++) {
       for (cell_img_y=0; cell_img_y<3; cell_img_y++) {
-	fcoords[0] = 1.0*cell_img_x;
-	fcoords[1] = 1.0*cell_img_y;
-	realcoords(fcoords, coords, cellsides, cellangles);
-	if (cell_img_x==1 && cell_img_y==1) 
-	  fprintf(fp, "<use xlink:href=\"#cell\" transform=\"translate(%f,%f) scale(1)\" style=\"fill:grey\"/>\n", origin_translate_x+image_scale*coords[0], origin_translate_y+image_scale*coords[1]);
-	else
-	  fprintf(fp, "<use xlink:href=\"#cell\" transform=\"translate(%f,%f) scale(1)\" style=\"fill:white\"/>\n", origin_translate_x+image_scale*coords[0], origin_translate_y+image_scale*coords[1]);
+    fcoords[0] = 1.0*cell_img_x;
+    fcoords[1] = 1.0*cell_img_y;
+    realcoords(fcoords, coords, cellsides, cellangles);
+    if (cell_img_x==1 && cell_img_y==1) 
+      fprintf(fp, "<use xlink:href=\"#cell\" transform=\"translate(%f,%f) scale(1)\" style=\"fill:grey\"/>\n", origin_translate_x+image_scale*coords[0], origin_translate_y+image_scale*coords[1]);
+    else
+      fprintf(fp, "<use xlink:href=\"#cell\" transform=\"translate(%f,%f) scale(1)\" style=\"fill:white\"/>\n", origin_translate_x+image_scale*coords[0], origin_translate_y+image_scale*coords[1]);
       }
     }
     for (os=0; os<numoccsites; os++) {
       for (m=0; m<group.wyckoffs[occupiedsites[os]].multiplicity; m++) {
-	fractcoords(group.wyckoffs[occupiedsites[os]].image[m].coord_coeffs, sitevariables[os], fcoords);
-	for (cell_img_x=0; cell_img_x<3; cell_img_x++) {
-	  for (cell_img_y=0; cell_img_y<3; cell_img_y++) {
-	    fcoords[0] += 1.0*cell_img_x;
-	    fcoords[1] += 1.0*cell_img_y;
-	    realcoords(fcoords, coords, cellsides, cellangles);
-	    fcoords[0] -= 1.0*cell_img_x;
-	    fcoords[1] -= 1.0*cell_img_y;
-	    fprintf(fp, "<use xlink:href=\"#shape\" transform=\"translate(%f,%f) rotate(%f, 0, 0) scale(%f %f)\" style=\"fill:", 
-		    origin_translate_x+image_scale*coords[0], 
-		    origin_translate_y+image_scale*coords[1], 
-		    -((group.wyckoffs[occupiedsites[os]].image[m].flipped^flips[os])*(-2)+1)*(*sitevariables[os][2]*180.0/M_PI)-group.wyckoffs[occupiedsites[os]].image[m].rotation_offset*360.0/SHAPE_RESOLUTION, 
-		    shape_scale, 
-		    ((group.wyckoffs[occupiedsites[os]].image[m].flipped^flips[os])*(-2)+1)*shape_scale
-		    );	
-	    if (strcmp(shape->name, "heart")==0) {
-	      fprintf(fp,"rgb(%d,%d,%d)", 256,  (int)(0.2*256*(os+1)),  (int)(0.2*256*(os+1)));
-	    } else {
-	      if (cell_img_x==1 && cell_img_y==1) {
-		fprintf(fp,"rgb(%d,%d,%d)", (int)(0.1*256/(os+1)),  (int)(0.3*256/(os+1)),  (int)(0.6*256/(os+1)));
-	      } else {
-		fprintf(fp,"rgb(%d,%d,%d)", (int)(0.1*256/(os+1)),  (int)(0.6*256/(os+1)),  (int)(0.3*256/(os+1)));
-	      }
-	    }
-	    fprintf(fp, "\"/>\n");
-	    
-	  }
-	}
+    fractcoords(group.wyckoffs[occupiedsites[os]].image[m].coord_coeffs, sitevariables[os], fcoords);
+    for (cell_img_x=0; cell_img_x<3; cell_img_x++) {
+      for (cell_img_y=0; cell_img_y<3; cell_img_y++) {
+        fcoords[0] += 1.0*cell_img_x;
+        fcoords[1] += 1.0*cell_img_y;
+        realcoords(fcoords, coords, cellsides, cellangles);
+        fcoords[0] -= 1.0*cell_img_x;
+        fcoords[1] -= 1.0*cell_img_y;
+        fprintf(fp, "<use xlink:href=\"#shape\" transform=\"translate(%f,%f) rotate(%f, 0, 0) scale(%f %f)\" style=\"fill:", 
+            origin_translate_x+image_scale*coords[0], 
+            origin_translate_y+image_scale*coords[1], 
+            -((group.wyckoffs[occupiedsites[os]].image[m].flipped^flips[os])*(-2)+1)*(*sitevariables[os][2]*180.0/M_PI)-group.wyckoffs[occupiedsites[os]].image[m].rotation_offset*360.0/SHAPE_RESOLUTION, 
+            shape_scale, 
+            ((group.wyckoffs[occupiedsites[os]].image[m].flipped^flips[os])*(-2)+1)*shape_scale
+            );    
+        if (strcmp(shape->name, "heart")==0) {
+          fprintf(fp,"rgb(%d,%d,%d)", 256,  (int)(0.2*256*(os+1)),  (int)(0.2*256*(os+1)));
+        } else {
+          if (cell_img_x==1 && cell_img_y==1) {
+        fprintf(fp,"rgb(%d,%d,%d)", (int)(0.1*256/(os+1)),  (int)(0.3*256/(os+1)),  (int)(0.6*256/(os+1)));
+          } else {
+        fprintf(fp,"rgb(%d,%d,%d)", (int)(0.1*256/(os+1)),  (int)(0.6*256/(os+1)),  (int)(0.3*256/(os+1)));
+          }
+        }
+        fprintf(fp, "\"/>\n");
+        
+      }
+    }
       }
     }
     fprintf(fp, "</svg>\n");
@@ -1020,11 +1018,11 @@ void uniform_best_packing_in_group(struct shapetype *shape, struct wallpaper_gro
   // at the moment only tests rotations & mirrors... that's all?
   for (wk=0; wk<group.num_wyckoffs; wk++) {
     if ((shape->rotsym%group.wyckoffs[wk].siterotations==0)&&
-	((group.wyckoffs[wk].sitemirrors==0)||((shape->mirrors%group.wyckoffs[wk].sitemirrors==0)&&(shape->mirrors!=0)))) {
+    ((group.wyckoffs[wk].sitemirrors==0)||((shape->mirrors%group.wyckoffs[wk].sitemirrors==0)&&(shape->mirrors!=0)))) {
       if (group.wyckoffs[wk].somevariability) {
-	printf("site %c is valid and variable\n", group.wyckoffs[wk].letter);
+    printf("site %c is valid and variable\n", group.wyckoffs[wk].letter);
       } else {
-	printf("site %c is valid\n", group.wyckoffs[wk].letter);
+    printf("site %c is valid\n", group.wyckoffs[wk].letter);
       }
       validsite[wk] = 1;
     } else {
@@ -1041,15 +1039,15 @@ void uniform_best_packing_in_group(struct shapetype *shape, struct wallpaper_gro
     if (validsite[wk]) {
       numvalid++;
       if (group.wyckoffs[wk].somevariability) {
-	for (os=0; os<numoccsites; os++) {
-	  combination_bag[curr_bag] = wk;
-	  curr_bag++;
-	}
-	numvalid_and_variable++;
+    for (os=0; os<numoccsites; os++) {
+      combination_bag[curr_bag] = wk;
+      curr_bag++;
+    }
+    numvalid_and_variable++;
       } else {
-	/* since not variable, only add one option to the bag for this */
-	  combination_bag[curr_bag] = wk;
-	  curr_bag++;	
+    /* since not variable, only add one option to the bag for this */
+      combination_bag[curr_bag] = wk;
+      curr_bag++;    
       }
     }
   }
@@ -1061,8 +1059,8 @@ void uniform_best_packing_in_group(struct shapetype *shape, struct wallpaper_gro
   maxcombinations = factorial(n*a+v)/(factorial(n)*factorial(n*a+v-n));
 
   if (n*a+v > 12) {
-	// factorial fails
-	maxcombinations = 2000;
+    // factorial fails
+    maxcombinations = 2000;
   }
 
   printf("estimate: there should be less than %d ways of filling %d sites with choices from %d variable wyckoffs and %d non-variable wyckoffs \n", maxcombinations, n, a, v);
@@ -1188,27 +1186,27 @@ int main (int argc, char *argv[]) {
   if (strcmp(argv[2], "fourier")==0) {
     for (dd=0; dd<2; dd++) {
       for (ff=0; ff<FOURIER_TERMS; ff++) {
-	fcoeff[dd][ff] = atof(argv[4+FOURIER_TERMS*dd+ff]);
+    fcoeff[dd][ff] = atof(argv[4+FOURIER_TERMS*dd+ff]);
       }
     }
     define_fourier(&fourier, fcoeff);
     chosen_shape = &fourier;
   } else if (strcmp(argv[2], "ceri")==0) {
     for (dd=0; dd<2; dd++) {
-	  cradii[dd] = atof(argv[4+dd]);
-	}
+      cradii[dd] = atof(argv[4+dd]);
+    }
     define_ceri(&ceri, cradii);
     chosen_shape = &ceri;
   } else if (strcmp(argv[2], "peter")==0) {
     for (dd=0; dd<2; dd++) {
-	  cradii[dd] = atof(argv[4+dd]);
-	}
+      cradii[dd] = atof(argv[4+dd]);
+    }
     define_peter(&peter, cradii);
     chosen_shape = &peter;
   } else if (strcmp(argv[2], "anyu")==0) {
     for (dd=0; dd<2; dd++) {
-	  cradii[dd] = atof(argv[4+dd]);
-	}
+      cradii[dd] = atof(argv[4+dd]);
+    }
     define_anyu(&anyu, cradii);
     chosen_shape = &anyu;
   } else if (strcmp(argv[2], "circle")==0) {
@@ -1396,135 +1394,135 @@ int main (int argc, char *argv[]) {
 
 
   if (do_all == 1) { //all
-	for (study_wallpaper_group=0; study_wallpaper_group<17; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
+    for (study_wallpaper_group=0; study_wallpaper_group<17; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
   } else if (do_all == 2) {  //DAN: best5 - p1, p2, pg, p2mg, p2gg
-	for (study_wallpaper_group=0; study_wallpaper_group<2; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=3; study_wallpaper_group<4; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=6; study_wallpaper_group<8; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
+    for (study_wallpaper_group=0; study_wallpaper_group<2; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=3; study_wallpaper_group<4; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=6; study_wallpaper_group<8; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
   } else if (do_all == 3) {  //DAN: best8 - p1, p2, pg, cm, p2mg, p2gg, p3, p31m
-	for (study_wallpaper_group=0; study_wallpaper_group<2; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=3; study_wallpaper_group<5; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=6; study_wallpaper_group<8; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=12; study_wallpaper_group<13; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=14; study_wallpaper_group<15; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
+    for (study_wallpaper_group=0; study_wallpaper_group<2; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=3; study_wallpaper_group<5; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=6; study_wallpaper_group<8; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=12; study_wallpaper_group<13; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=14; study_wallpaper_group<15; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
   } else if (do_all == 4) {  //DAN: chiral5 - p1, p2, p3, p4, p6
-	for (study_wallpaper_group=0; study_wallpaper_group<2; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=9; study_wallpaper_group<10; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=12; study_wallpaper_group<13; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=15; study_wallpaper_group<16; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
+    for (study_wallpaper_group=0; study_wallpaper_group<2; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=9; study_wallpaper_group<10; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=12; study_wallpaper_group<13; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=15; study_wallpaper_group<16; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
   } else if (do_all == 5) {  //DAN: worst9 - pm, p2mm, c2mm, p4, p4mm, p4gm, p3m1, p6, p6mm
-	for (study_wallpaper_group=2; study_wallpaper_group<3; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=5; study_wallpaper_group<6; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=8; study_wallpaper_group<12; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=13; study_wallpaper_group<14; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=15; study_wallpaper_group<17; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
+    for (study_wallpaper_group=2; study_wallpaper_group<3; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=5; study_wallpaper_group<6; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=8; study_wallpaper_group<12; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=13; study_wallpaper_group<14; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=15; study_wallpaper_group<17; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
   } else if (do_all == 6) {  //DAN: chiral10 - p1, p2, pg, cm, p2mg, p2gg, p4, p3, p31m, p6
-	for (study_wallpaper_group=0; study_wallpaper_group<2; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=3; study_wallpaper_group<5; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=6; study_wallpaper_group<8; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=9; study_wallpaper_group<10; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=12; study_wallpaper_group<13; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=14; study_wallpaper_group<16; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
+    for (study_wallpaper_group=0; study_wallpaper_group<2; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=3; study_wallpaper_group<5; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=6; study_wallpaper_group<8; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=9; study_wallpaper_group<10; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=12; study_wallpaper_group<13; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=14; study_wallpaper_group<16; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
   } else if (do_all == 7) {  //DAN: worst7 - pm, p2mm, c2mm, p4mm, p4gm, p3m1, p6mm
-	for (study_wallpaper_group=2; study_wallpaper_group<3; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=5; study_wallpaper_group<6; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=8; study_wallpaper_group<9; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=10; study_wallpaper_group<12; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=13; study_wallpaper_group<14; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
-	for (study_wallpaper_group=16; study_wallpaper_group<17; study_wallpaper_group++) {
-	  printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	  uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
-	}
+    for (study_wallpaper_group=2; study_wallpaper_group<3; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=5; study_wallpaper_group<6; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=8; study_wallpaper_group<9; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=10; study_wallpaper_group<12; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=13; study_wallpaper_group<14; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
+    for (study_wallpaper_group=16; study_wallpaper_group<17; study_wallpaper_group++) {
+      printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
+      uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    }
   } else {
     printf("find the best packing of %s in group %s with %d sites occupied\n", chosen_shape->name, wallpapergroups[study_wallpaper_group].label, numoccsites);
-	uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
+    uniform_best_packing_in_group(chosen_shape, wallpapergroups[study_wallpaper_group]); 
   }
 
   //printf("number of mirrors = %d\n", chosen_shape->mirrors);

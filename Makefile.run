@@ -133,7 +133,7 @@ endif
 contact: program props.csv | $(FOLDERS) trj/out.lammpstrj
 	@echo analysis $(SAVE)/trj/out.lammpstrj
 	@$(BIN_PATH)/program -i trj/out.lammpstrj $(contact_args) > contact.log
-	@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> order.log
+	python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> order.log
 	@touch .make/contact
 
 trj/out.lammpstrj:
