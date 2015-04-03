@@ -21,7 +21,7 @@ dist=1.00 1+0.20*radius 1+0.40*radius 1+0.60*radius 1+0.80*radius 1.00+radius
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=
+crys= p2 p2gg p2mg pg p3 
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
@@ -49,11 +49,11 @@ equil_steps = 8000000
 n_mol = 2500
 
 # Dependent on previous temps
-t_dep=true
+t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp = 5.0 3.0 2.5 2.0 1.5 1.0 0.8 0.4
+temp = 0.4
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -106,7 +106,7 @@ term_type = png
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=pack
+d_name=pack_crys
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/$(d_name)

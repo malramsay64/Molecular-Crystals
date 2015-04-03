@@ -7,7 +7,7 @@ include system
 
 # Shape (Snowman|Trimer)
 # <<<LOOP>>>
-shape=Snowman Trimer
+shape=Trimer
 
 # Radius (0,1]
 # <<<LOOP>>>
@@ -15,7 +15,7 @@ radius = 0.5 0.6 0.637556 0.7 0.8 0.9 1.0
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1.00 1+0.20*radius 1+0.40*radius 1+0.60*radius 1+0.80*radius 1.00+radius
+dist=1.00 1.00+radius
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
@@ -30,7 +30,7 @@ boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
-theta=
+theta= 80 100 120 145 180
 # !!! Not Tested
 # Size ratio of two small particles in trimer
 ratio=
@@ -106,7 +106,7 @@ term_type = png
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=pack
+d_name=pack_tri
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/$(d_name)
