@@ -56,7 +56,7 @@ collate: contact.log order.log | plots
 
 order.log contact.log: $(save)
 	@-rm -f $(PREFIX)/plots/$(mol)-$(basename $@).csv
-	$(call collate_header,$(word 1, $(save)))
+	@$(call collate_header,$(word 1, $(save)))
 	@$(foreach s, $(all_temps), $(call collate_command,$s, 2);)
 
 plot: $(addprefix plot-,$(collate_plots))
@@ -65,8 +65,8 @@ plot: $(addprefix plot-,$(collate_plots))
 
 plot-dynamics:
 
-plot-%: %.plot $(save)
-	@gnuplot -e 'prefix="$(PREFIX)/"; molecule="$(mol)"; term_type="png"' $< &> out.log
+plot-%: %.plot $(save) collate
+	@gnuplot -e 'prefix="$(PREFIX)/"; molecule="$(mol)"; term_type="$(term_type)"' $< &> out.log
 
 %.tex: $(save) | latex
 	@$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))

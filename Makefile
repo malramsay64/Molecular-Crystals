@@ -70,9 +70,10 @@ collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
 
+plot-order:
 
 plot-dynamics: %.plot | $(PREFIX)/plots
-	gnuplot -e 'prefix="$(PREFIX)/"; term_type="png"' gnuplot/$<
+	gnuplot -e 'prefix="$(PREFIX)/"; term_type="$(term_type)"' gnuplot/$<
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
