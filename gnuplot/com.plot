@@ -30,6 +30,7 @@ set output plot_dir."com".ext
 set datafile separator " "
 set terminal term_type size term_size,(term_size/a)*height
 
+
 plot infile using 1:2:3 with points lc palette pointsize 0.5 pointtype 7 title "Centers of Mass"
 
 

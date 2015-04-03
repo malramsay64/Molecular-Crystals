@@ -36,6 +36,8 @@ all_temps = $(notdir $(wildcard $(PREFIX)/$(subst $(space),-,$(strip $(shape) * 
 
 export
 
+VPATH := .:gnuplot:$(BIN_PATH)
+
 $(PRE): $(save)
 
 clean-collate:$(save)
@@ -57,6 +59,14 @@ order.log contact.log: $(save)
 	$(call collate_header,$(word 1, $(save)))
 	@$(foreach s, $(all_temps), $(call collate_command,$s, 2);)
 
+plot: $(addprefix plot-,$(collate_plots))
+	@echo loop
+	@echo $<
+
+plot-dynamics:
+
+plot-%: %.plot $(save)
+	@gnuplot -e 'prefix="$(PREFIX)/"; molecule="$(mol)"; term_type="png"' $< &> out.log
 
 %.tex: $(save) | latex
 	@$(foreach s, $(save), $(shell cat $s/my_latex/$@ >> $(PREFIX)/latex/$(mol).tex))

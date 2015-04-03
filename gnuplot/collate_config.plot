@@ -3,12 +3,18 @@
 if (!exists("term_type")) term_type = 'pdf'
 if (term_type eq 'pdf'){
     term_size = 5
+    term_y = 3
     scaling = 1
-else if (term_type eq 'png'){
-    term_size = 640
-    scaling = 4
+}
+else {
+    if (term_type eq 'png'){
+        term_size = 640
+        term_y = 480
+        scaling = 4
+    }
 }
 ext = ".".term_type
+font_size = sprintf("%i",10*scaling)
 
 if (!exists("plot_dir")) plot_dir = 'plots/'
 if (!exists("prefix")) prefix = './'

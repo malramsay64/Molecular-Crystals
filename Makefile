@@ -63,12 +63,16 @@ collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@rm -f $(PREFIX)/latex/collate.tex
 	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
-%.tex: %
-	@gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
-	gnuplot -e 'prefix="$(PREFIX)/"; molecule="$<"' gnuplot/log_time.plot
+%.tex: % $(addprefix plot-, $(collate_plots))
+	#gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
+	#gnuplot -e 'prefix="$(PREFIX)/"; molecule="$<"' gnuplot/log_time.plot
 	@echo "\section{$<}" > $(PREFIX)/latex/$@
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
+
+
+plot-dynamics: %.plot | $(PREFIX)/plots
+	gnuplot -e 'prefix="$(PREFIX)/"; term_type="png"' gnuplot/$<
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
