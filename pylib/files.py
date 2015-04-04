@@ -60,6 +60,7 @@ def molFile(molecule):
     f.write(string)
     f.close()
 
+
 def dataFile(mol):
     string = ''
     string += '#Atom data for {} molecule\n\n'.format(mol.getName())
@@ -95,6 +96,7 @@ def dataFile(mol):
     f.write(string)
     f.close()
 
+
 if __name__=='__main__':
     args = sys.argv
     nargs = len(args)
@@ -115,6 +117,10 @@ if __name__=='__main__':
             n_mol = int(args[-2])
         dataFile(mol)
         molFile(mol)
+        f = open('{PATH}/{filename}-mol.dat'.format(PATH=PATH,filename=mol.getFilename()),'w')
+        f.write(str(mol))
+        f.close()
+        
 
 
 

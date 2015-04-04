@@ -16,3 +16,6 @@ set output plot_dir."struct".ext
 
 plot "struct.csv" using 1:2 with linespoints ls 5 lc 1 axes x1y1,\
     "struct.csv" using 1:3 with linespoints ls 5 lc 2 axes x1y2
+
+set output plot_dir."struct".ext
+plot "struct.csv" using 1:3 with linespoints ls 5 lc 1 axes x1y1,\

@@ -18,9 +18,10 @@ set pm3d map
 #set contour base
 set view map
 unset colorbox
+unset xtics
+unset ytics
+
 f = prefix.'radial2d.dat'
-f_abs = prefix.'radial2d_abs.dat'
-f_rel = prefix.'radial2d_rel.dat'
 
 max_col(n) = system('cat '.f.' | cut -d" " -f'.n.' | uniq | grep [0-9] | sort | tail -n1')
 max_6 = max_col(6)
@@ -35,8 +36,6 @@ set tmargin at screen 0.9;
 set output prefix.plot_dir.'radial2d_abs'.ext
 splot f every :::1 using 3:4:(sqrt($5)) with pm3d
 
-unset xtics
-unset ytics
 set output prefix.plot_dir.'radial2d_rel'.ext
 set multiplot
 set origin 0,0
