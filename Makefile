@@ -64,8 +64,6 @@ collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
 %.tex: % $(addprefix plot-, $(collate_plots))
-	#gnuplot -e 'filename="$(PREFIX)/plots/$<"' gnuplot/temp_dep.plot
-	#gnuplot -e 'prefix="$(PREFIX)/"; molecule="$<"' gnuplot/log_time.plot
 	@echo "\section{$<}" > $(PREFIX)/latex/$@
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
@@ -73,7 +71,7 @@ collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 plot-order:
 
 plot-dynamics: %.plot | $(PREFIX)/plots
-	gnuplot -e 'prefix="$(PREFIX)/"; term_type="$(term_type)"' gnuplot/$<
+	@gnuplot -e 'prefix="$(PREFIX)/"; term_type="$(term_type)"' gnuplot/$<
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
@@ -148,7 +146,7 @@ clean:
 
 clean-collate: $(mol)
 	-rm -f $(PREFIX)/plots/*
-	rm -f $(PREFIX)/latex/$<.tex
+	-rm -f $(PREFIX)/latex/$<.tex
 
 delete:
 	-rm -rf $(PREFIX)/*
@@ -157,5 +155,6 @@ output/.output:
 	-mkdir -p $@
 
 clean-plot: clean-collate $(mol)
+	rm -r $(PREFIX)/plots/*
 
 # vim:foldmethod=marker:foldlevel=0

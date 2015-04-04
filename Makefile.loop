@@ -46,7 +46,7 @@ $(TARGETS): $(save)
 
 $(PRESENT): $(save)
 
-present: $(save) collate | latex
+present: $(save) collate plot | latex
 	@$(foreach p, $(to_plot),\
     $(foreach s, $(save), rm -f $(PREFIX)/latex/$(mol)-$p.tex;))
 	@$(foreach p, $(to_plot),\
@@ -60,8 +60,6 @@ order.log contact.log: $(save)
 	@$(foreach s, $(all_temps), $(call collate_command,$s, 2);)
 
 plot: $(addprefix plot-,$(collate_plots))
-	@echo loop
-	@echo $<
 
 plot-dynamics:
 

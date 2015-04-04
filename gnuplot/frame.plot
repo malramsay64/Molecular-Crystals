@@ -1,14 +1,4 @@
-
-term_type = 'pdf'
-if (term_type eq 'pdf'){
-    term_size = 5
-}
-else {
-    term_size = 640
-}
-ext = ".".term_type
-prefix ="./"
-plot_dir = 'myplot/'
+load '~/make/gnuplot/config.plot'
 
 set size ratio -1
 set datafile separator " "
@@ -39,13 +29,15 @@ do for [i=1:words(files)] {
     set yrange[-2:height+2]
     set xrange[-2:a+2]
 
-    set terminal term_type enhanced size term_size, (term_size/(a+0.))*height
+    set terminal term_type enhanced size term_size, ceil(term_size/(a+0.))*height
 
     set object rectangle from -0,0 to a,height
 
     plot infile every :::1 using 1:2:3 with circles lc rgb 'black',\
-         infile every :::1 using 1:2:($3-0.05):($7==2||$7==3||$7==4?(mod($4,pi)):(-1)) \
+         infile every :::1 using 1:2:($3-0.05):(mod($4,pi)) \
                 with circles lc palette title "Configuration",\
          infile every :1::1 using 1:2 with line ls 1
 
+         # If statement for only colouring those with appropriate neighbours
+         #infile every :::1 using 1:2:($3-0.05):($7==2||$7==3||$7==4?(mod($4,pi)):(-1)) 
 }

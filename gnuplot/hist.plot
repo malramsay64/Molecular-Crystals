@@ -1,10 +1,9 @@
-set terminal png
+load '~/make/gnuplot/config.plot'
 
-ext ='.png'
-plot_dir = 'myplot/'
+set terminal term_type
 
 set style data histogram
-set style histogram cluster gap 1
+set style histogram cluster gap 0.5
 set style fill solid border -1
 set key on
 set yrange [0:1]
