@@ -138,7 +138,6 @@ contact: program props.csv | $(FOLDERS) trj/out.lammpstrj
 
 trj/out.lammpstrj:
 	touch $@
-	
 
 props.csv: | trj/out.lammpstrj
 	@python $(PYLIB)/makeplot.py logs/prod.log props.csv $(thermo)

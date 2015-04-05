@@ -9,8 +9,7 @@ include settings
 include config
 
 export
-
-# Generating all shapes {{{
+# Generat ing all shapes {{{
 mol := $(shape)
 mol_d := $(filter Disc%, $(mol))
 # Radius
@@ -41,7 +40,7 @@ else
 endif
 #}}}
 
-VPATH=.:$(BIN_PATH):$(LIB)
+VPATH=.:$(BIN_PATH):$(LIB):gnuplot
 
 distances = $(foreach m, $(mol), $(call p_dist, $m))
 export $(addprefix temp_, $(distances))
@@ -63,15 +62,17 @@ collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@rm -f $(PREFIX)/latex/collate.tex
 	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
-%.tex: % $(addprefix plot-, $(collate_plots))
+%.tex: % plot-dynamics
 	@echo "\section{$<}" > $(PREFIX)/latex/$@
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
 
-plot-order:
-
-plot-dynamics: %.plot | $(PREFIX)/plots
-	@gnuplot -e 'prefix="$(PREFIX)/"; term_type="$(term_type)"' gnuplot/$<
+ifeq ($(dynamics), true)
+plot-dynamics: dynamics.plot $(mol) | $(PREFIX)/plots
+	@gnuplot -e 'prefix="$(PREFIX)/"; term_type="$(term_type)"' $<
+else
+plot-dynamics: dynamics.plot
+endif
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)

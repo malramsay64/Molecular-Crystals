@@ -1,14 +1,6 @@
 
-term_type = 'pdf'
-if (term_type eq 'pdf'){
-    term_size = 5
-}
-else {
-    term_size = 640
-}
+load '~/make/gnuplot/config.plot'
 
-ext = '.'.term_type
-plot_dir = 'myplot/'
 infile = 'moved.dat'
 set datafile separator " "
 set output plot_dir."moved".ext
