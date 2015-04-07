@@ -33,5 +33,8 @@ wallpaper: $(MODULES)
 %.o: %.c | $(BIN_PATH)
 	$(CC) $(CFLAGS) -c $< -o $(BIN_PATH)/$@
 
+collate:
+	bash best.sh $(PREFIX)
+
 clean:
 	rm $(BIN_PATH)/*

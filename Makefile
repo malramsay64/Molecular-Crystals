@@ -62,7 +62,7 @@ collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@rm -f $(PREFIX)/latex/collate.tex
 	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
-%.tex: % plot-dynamics
+%.tex: % plot-dynamics | $(PREFIX)/latex
 	@echo "\section{$<}" > $(PREFIX)/latex/$@
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
@@ -102,7 +102,6 @@ $(TARGETS): $(mol)
 
 $(PRE): $(mol)
 
-
 present: program $(mol) collate | output/.output
 	@pdflatex -draftmode $(latex-flags) output/collate.tex
 	@pdflatex $(latex-flags) output/collate.tex
@@ -136,6 +135,8 @@ $(PREFIX):
 $(PREFIX)/plots:
 	@mkdir -p $@
 
+$(PREFIX)latex:
+	@mkdir -p $@
 
 .PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE) clean-plot clean-collate
 
