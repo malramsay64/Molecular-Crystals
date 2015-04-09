@@ -1,6 +1,7 @@
 include system
 
 # Settings for nucleation to occur for the d=1 snowman so that I can make a movie out of it
+# settings.nucleate
 
 # Molecule Settings {{{
 # -----------------

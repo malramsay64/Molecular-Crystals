@@ -1,5 +1,8 @@
 include system
 
+# Dimer settings
+# settings.dimer
+
 # Molecule Settings {{{
 # -----------------
 
