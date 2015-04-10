@@ -57,10 +57,26 @@ class cell:
 
     def getCrys(self):
         return self.crys
-    
+
     def getA(self):
         return self.a
-    
+
+    def getB(self):
+        return self.b
+
+    def getTheta(self):
+        return self.theta
+
+    def to_fractional(self,x,y):
+        x = x/self.getA() - y*(cos(self.getTheta())/(self.getA()*sin(self.getTheta())))
+        y = y/self.getB()*sin(self.getTheta())
+        return x,y
+
+    def to_cartesian(self,x,y):
+        x = x*self.getA() + y*sef.getB()*cos(self.getTheta())
+        y = y*self.getB()*sin(self.getTheta())
+        return x,y
+
     def replicate(self, nx=1, ny=1):
         base = self.getMols()
         new = []
@@ -107,7 +123,7 @@ class cell:
                 x,y = atom.getPos()
                 s += "{x}, {y}, {size}\n".format(x=x,y=y,size=atom.getSize())
             s += "\n"
-        
+
         for mol in self.mols:
             d = mol.dist
             r = mol.radius
@@ -192,15 +208,15 @@ class p3(cell):
         self.theta = theta
         self.mol = mol
         self.mols = []
-        x = x%1
-        y = y%1
-        d = sqrt(x**2+y**2)
-        rot = atan2(x, y)
-        print phi
-        phi = phi+pi/2
-        self.addMol(d*sin(rot),d*cos(rot),phi)
-        self.addMol(1-d*sin(rot+2*pi/3),1+d*cos(rot+2*pi/3),phi+2*pi/3)
-        self.addMol(1-d*sin(rot+4*pi/3),d*cos(rot+4*pi/3),phi+4*pi/3)
+        xc,yc = self.to_cartesian(x,y)
+        d = sqrt(xc**2 + yc**2)
+        rot = atan2(xc, yc)
+        x1,y1 = self.to_fractional(d*sin(rot), d*cos(rot)) 
+        self.addMol(x1,y1,phi)
+        x2,y2 = self.to_fractional(d*sin(rot+2*pi/3), d*cos(rot+2*pi/3)) 
+        self.addMol(x2,y2,phi)
+        x3,y3 = self.to_fractional(d*sin(rot+4*pi/3), d*cos(rot+4*pi/3)) 
+        self.addMol(x3,y3,phi)
         self.crys ="p3"
 
 def lammpsFile(cell,path='.', filename=""):
