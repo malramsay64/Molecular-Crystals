@@ -23,8 +23,8 @@ class cell:
         self.crys = ""
 
     def addParticle(self,x,y,phi):
-        x = x % 1
-        y = y % 1
+        x = x%1
+        y = y%1
         x = x*self.a + y*self.b*cos(self.theta)
         y = y*self.b*sin(self.theta)
         d = self.mol.dist
@@ -185,6 +185,23 @@ class pg(cell):
         self.addMol(1-x,0.5+y,pi+phi)
         self.crys = "pg"
 
+class p3(cell):
+    def __init__(self, a, b, theta, x, y, phi, mol):
+        self.a = a
+        self.b = b
+        self.theta = theta
+        self.mol = mol
+        self.mols = []
+        x = x%1
+        y = y%1
+        d = sqrt(x**2+y**2)
+        rot = atan2(x, y)
+        print phi
+        phi = phi+pi/2
+        self.addMol(d*sin(rot),d*cos(rot),phi)
+        self.addMol(1-d*sin(rot+2*pi/3),1+d*cos(rot+2*pi/3),phi+2*pi/3)
+        self.addMol(1-d*sin(rot+4*pi/3),d*cos(rot+4*pi/3),phi+4*pi/3)
+        self.crys ="p3"
 
 def lammpsFile(cell,path='.', filename=""):
     mol = cell.getMol()

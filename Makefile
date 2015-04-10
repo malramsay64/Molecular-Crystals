@@ -57,12 +57,12 @@ test:
 	@echo $(mol)
 	@echo $(shape)
 
-collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
+collate: $(mol) $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.out
 	@rm -f $(PREFIX)/latex/collate.tex
 	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
-%.tex: % plot-dynamics | $(PREFIX)/latex
+%.tex: % plot-dynamics $(mol) | $(PREFIX)/latex
 	@echo "\section{$<}" > $(PREFIX)/latex/$@
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
@@ -82,10 +82,10 @@ ifeq ($(SYS_NAME), silica)
 ifneq ($(t_dep), false)
 	@qsub -N $@ -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
 else
-	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+	$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 endif
 else
-	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+	$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 endif
 
 vars.mak:

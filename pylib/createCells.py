@@ -60,11 +60,17 @@ if __name__ == "__main__":
     a = float(line[1])
     b = float(line[2])
 
-    if wallpaper not in ["p2mg"]:
+    if wallpaper not in ["p2mg", "p3"]:
         x = float(line[3])
         y = float(line[4])
         phi = float(line[5])
         m = float(line[6])
+    elif wallpaper in ["p3"]:
+        b = float(line[1])
+        x = float(line[2])
+        y = float(line[3])
+        phi = float(line[4])
+        m = float(line[5])
     else:
         y = float(line[3])
         x = 0.25
