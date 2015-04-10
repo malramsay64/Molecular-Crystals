@@ -29,7 +29,7 @@ do for [i=1:words(files)] {
     set yrange[-2:height+2]
     set xrange[-2:a+2]
 
-    set terminal term_type enhanced size term_size, ceil(term_size/(a+0.))*height
+    set terminal term_type enhanced size term_size, term_size/(a+0.)*height
 
     set object rectangle from -0,0 to a,height
 
