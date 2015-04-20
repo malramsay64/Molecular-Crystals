@@ -71,12 +71,7 @@ endif
 
 all:
 
-.PHONY:test
-test: | $(FOLDERS) 
-	@echo $(restart)
-	@echo $(VPATH)
-	@echo $(LAMMPS_MOL_VARS)
-	@echo $(CREATE_VARS)
+test:
 
 # Create data files for molecule if not already generated
 files: $(mol_settings)
