@@ -14,19 +14,25 @@ from copy import deepcopy as copy
 from math import *
 
 class cell:
-    def __init__(self, a, b, theta, molecule):
+
+    def __init__(self, a, b, theta, molpos, mol, crys):
         self.a = a
         self.b = b
-        self.theta = theta*pi/180
-        self.mol = molecule
+        self.theta = theta
+        self.mol = mol
+        self.crys = crys
         self.mols = []
-        self.crys = ""
+        index = 0
+        while index < len(molpos):
+            x,y,phi = [float(i) for i in molpos[index:index+3]]
+            const = (1*1 + mol.getDist()*mol.getDist() - mol.getRadius()*mol.getRadius())/(2*mol.getDist()*1)
+            x += -(const)*cos(phi)
+            y += -(const)*sin(phi)
+            phi += pi/2
+            self.addMol(x, y, phi)
+            index += 3
 
     def addParticle(self,x,y,phi):
-        x = x%1
-        y = y%1
-        x = x*self.a + y*self.b*cos(self.theta)
-        y = y*self.b*sin(self.theta)
         d = self.mol.dist
         r = self.mol.radius
         m = copy(self.mol)
@@ -142,89 +148,11 @@ class cell:
         self.mols[pos].rotate((360/degree)*n)
         self.mols[pos].setPos(x,y)
 
-class p2gg(cell):
-
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,phi)
-        self.addMol(1-x,1-y,phi+pi)
-        self.addMol(0.5+x, 0.5+1-y, pi-phi)
-        self.addMol(0.5-x, y-0.5, 2*pi-phi)
-        self.crys = "p2gg"
-
-class p2mg(cell):
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,phi)
-        self.addMol(1-x,1-y,phi+pi)
-        self.crys = "p2mg"
-
-class p1(cell):
-
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,phi)
-        self.crys = "p1"
-
-class p2(cell):
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,phi)
-        self.addMol(1-x,1-y,phi+pi)
-        #self.rotation(1,2,1)
-        self.crys = "p2"
-
-class pg(cell):
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,pi-phi)
-        self.addMol(1-x,0.5+y,pi+phi)
-        self.crys = "pg"
-
-class p3(cell):
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        xc,yc = self.to_cartesian(x,y)
-        d = sqrt(xc**2 + yc**2)
-        rot = atan2(xc, yc)
-        x1,y1 = self.to_fractional(d*sin(rot), d*cos(rot)) 
-        self.addMol(x1,y1,phi)
-        x2,y2 = self.to_fractional(d*sin(rot+2*pi/3), d*cos(rot+2*pi/3)) 
-        self.addMol(x2,y2,phi)
-        x3,y3 = self.to_fractional(d*sin(rot+4*pi/3), d*cos(rot+4*pi/3)) 
-        self.addMol(x3,y3,phi)
-        self.crys ="p3"
-
 def lammpsFile(cell,path='.', filename=""):
     mol = cell.getMol()
     a,b,theta = cell.getShape()
     xy = 0
-    if theta != 0:
-        xy = b*tan(pi/2-theta)
+    xy = b*tan(pi/2-theta)
     string = ""
     string += "ITEM: TIMESTEP\n"
     string += "0\n"
@@ -240,7 +168,7 @@ def lammpsFile(cell,path='.', filename=""):
     for m in cell.getMols():
         for atom in m:
             x,y = atom.getPos()
-            x = wrap(x, cell.getA())
+            #x = wrap(x, cell.getA())
             string += "{id} {molID} {type} {diam} {x} {y} {z}\n".format(\
                     id=atomID, molID=molID, type=atom.getType(),\
                     diam=2*atom.getSize(), x=x, y=y, z=0)
