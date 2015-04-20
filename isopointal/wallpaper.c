@@ -1018,14 +1018,25 @@ double packing_fraction(struct shapetype *shape, struct wallpaper_group_type gro
                 for (i=0; i<numoccsites; i++) {
                     fprintf(fp, "%d ", flips[i]);
                 }
-                fprintf(fp, "\ncell %f %f angle %6.2f packing %f (max %f) rejection (%f\%%) ", *cellsides[0], *cellsides[1], *cellangles[0]*180.0/M_PI, phi, max_phi, (100.0*rejections)/tests);
-                fprintf(fp, "-->\n");
-                fclose(fp);
+                for (os=0; os<numoccsites; os++) {
+                    for (m=0; m<group.wyckoffs[occupiedsites[os]].multiplicity; m++) {
+                        fractcoords(group.wyckoffs[occupiedsites[os]].image[m].coord_coeffs, sitevariables[os], fcoords);
+                        realcoords(fcoords, coords, cellsides, cellangles);
+                        fprintf(fp,"%f %f %f %f %f %f\n",
+                                *cellsides[0], *cellsides[1], *cellangles[0]*180/M_PI,
+                                coords[0], coords[1],\
+                                -((group.wyckoffs[occupiedsites[os]].image[m].flipped^flips[os])*(-2)+1)*(*sitevariables[os][2]*180.0/M_PI)-group.wyckoffs[occupiedsites[os]].image[m].rotation_offset*360.0/SHAPE_RESOLUTION 
+                               );
+                    }
+                }
+                    fprintf(fp, "\ncell %f %f angle %6.2f packing %f (max %f) rejection (%f\%%) ", *cellsides[0], *cellsides[1], *cellangles[0]*180.0/M_PI, phi, max_phi, (100.0*rejections)/tests);
+                    fprintf(fp, "-->\n");
+                    fclose(fp);
+                }
             }
-        }
 
 
-        void uniform_best_packing_in_group(struct shapetype *shape, struct wallpaper_group_type group) {
+            void uniform_best_packing_in_group(struct shapetype *shape, struct wallpaper_group_type group) {
             bool validsite[group.num_wyckoffs];
             int numvalid=0, numvalid_and_variable=0;
             int wk, os;
