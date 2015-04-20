@@ -13,9 +13,7 @@ mol := $(foreach m, $(mol), $(m:$(call p_dist, $m)=$(call comp_dist, $(call p_di
 
 VPATH:=.:$(BIN_PATH):isopointal
 
-MODULES:=$(wildcard isopointal/*.c)
-MODULES:=$(MODULES:.c=.o)
-MODULES:=$(notdir $(MODULES))
+MODULES:=shapes.o fluke.o groups.o wallpaper.o
 
 all: wallpaper
 
