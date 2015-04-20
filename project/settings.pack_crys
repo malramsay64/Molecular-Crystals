@@ -1,6 +1,7 @@
 include system
 
 # Inherent structure packing
+# settings.pack_crys
 
 # Molecule Settings {{{
 # -----------------

@@ -85,7 +85,7 @@ files: $(mol_settings)
 ifneq ($(t_crys), )
 $(mol_settings): | data
 	@echo Producing unit cell of $(base)
-	@tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
+	tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
 
 # Generate Dimers
 else ifneq ($(dimers), )
@@ -133,7 +133,7 @@ endif
 contact: program props.csv | $(FOLDERS) trj/out.lammpstrj
 	@echo analysis $(SAVE)/trj/out.lammpstrj
 	@$(BIN_PATH)/program -i trj/out.lammpstrj $(contact_args) > contact.log
-	python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> order.log
+	@python $(PYLIB)/density.py logs/prod.log $(radius) $(dist) $(theta) >> order.log
 	@touch .make/contact
 
 trj/out.lammpstrj:
@@ -181,8 +181,6 @@ restarts:
 $(FOLDERS):
 	@mkdir -p $@
 
-$(to_plot):
-	@mkdir -p $(PREFIX)/plots/$@
 
 my_latex:
 	@mkdir -p $@
@@ -199,11 +197,14 @@ plot: $(addprefix copy-, $(to_plot))
 	@touch .make/plot
 
 copy-%: plot-% | %
-	@$(foreach f, $(wildcard myplot/$(subst plot-,,$<)*), cp $f ../plots/$(subst plot-,,$<)/$(notdir $(shell pwd))-$(notdir $f); )
+	$(foreach f, $(wildcard myplot/$(subst plot-,,$<)*), cp $f ../plots/$(subst plot-,,$<)/$(notdir $(shell pwd))-$(notdir $f); )
 
 plot-%: %.plot contact | %
 	@gnuplot -e "prefix='$(shell pwd)/'; term_type='$(term_type)'" $<  #&> $(LOG)
 	@touch .make/$@
+
+$(to_plot):
+	@mkdir -p $(PREFIX)/plots/$@
 
 # }}}
 # Clean functions {{{
