@@ -20,7 +20,11 @@ all: wallpaper
 iso: $(mol)
 
 Snowman-%: wallpaper | $(PREFIX)/Snowman-%
+ifeq ($(SYS_NAME), silica)
+	@qsub -N $@-iso -o pbsout/$@.out iso.pbs -vmol=$@,PREFIX=$(PREFIX),BIN_PATH=$(BIN_PATH),dist=$(call p_dist, $(mol)),rad=$(call p_rad, $(mol))
+else
 	cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 anyu all $(call p_dist, $@) $(call p_rad, $@) > out.log
+endif
 
 $(PREFIX)/%:
 	mkdir -p $@
@@ -28,7 +32,7 @@ $(PREFIX)/%:
 wallpaper: $(MODULES)
 	$(CC) -o $(BIN_PATH)/$@ $(addprefix $(BIN_PATH)/, $(MODULES)) $(CFLAGS) $(LDFLAGS)
 
-%.o: %.c | $(BIN_PATH)
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $(BIN_PATH)/$@
 
 collate:
