@@ -95,7 +95,7 @@ to_plot = frame short-order-hist com
 
 # Collate, Plots which take data from a number of temperatures or molecules
 # ( order | temp_dep | dynamics )
-collate_plots = order dynamics temp_dep
+collate_plots = order dynamics collate-msd collate-rot collate-struct
 
 # Output filetype
 # ( png | pdf )

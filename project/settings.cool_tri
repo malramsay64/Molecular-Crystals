@@ -90,7 +90,7 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
 # All
 #to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct rot-diff
-to_plot = frame radial radial2d hist
+to_plot = frame radial radial2d hist moved
 
 # Collate, Plots which take data from a number of temperatures or molecules
 # ( order | temp_dep | dynamics )
