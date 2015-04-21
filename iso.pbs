@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -j oe
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=240:00:00
+#PBS -l cput=240:00:00
+##PBS -m abe
+#PBS -M malramsay64+silica@gmail.com
+
+source /etc/profile.d/modules.sh
+module load intel openmpi-intel
+
+cd "$PBS_O_WORKDIR"
+cat ${PBS_NODEFILE} > nodes.txt
+
+cd $PREFIX/$mol; $BIN_PATH/wallpaper 1 anyu all $dist $rad > out.log

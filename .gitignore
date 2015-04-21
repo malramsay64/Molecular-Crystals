@@ -7,6 +7,9 @@ bin/*
 # Ignore analysis
 analysis
 
+# Ignore isopointal clone
+isopointal
+
 # Xcode project
 *.xcodeproj
 
