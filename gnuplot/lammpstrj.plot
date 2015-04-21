@@ -9,7 +9,6 @@ set pm3d
 set palette file '~/make/gnuplot/husl.dat' using 1:2:3:4
 set key off
 unset colorbox
-unset border
 unset xtics
 unset ytics
 
@@ -30,6 +29,7 @@ do for [i=1:words(files)] {
     set yrange[-8:height+8]
     set xrange[-8:a+8]
     set size ratio -1
+    unset border
     print a
     print height
     set terminal term_type enhanced size term_size, term_size/(a+0.)*height
