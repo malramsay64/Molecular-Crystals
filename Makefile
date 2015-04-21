@@ -61,12 +61,12 @@ all: program
 
 test:
 
-collate: $(mol) $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
+collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.out
 	@rm -f $(PREFIX)/latex/collate.tex
 	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
-%.tex: % plot-dynamics $(mol) | $(PREFIX)/latex
+%.tex: % plot-dynamics
 	@echo "\section{$<}" > $(PREFIX)/latex/$@
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
