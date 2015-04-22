@@ -23,6 +23,7 @@ dist=1.00 1+0.20*radius 1+0.40*radius 1+0.60*radius 1+0.80*radius 1.00+radius
 # the ./crystals directory
 # <<<LOOP>>>
 crys= p2 p2gg p2mg pg p3 
+crys_dir=t
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
