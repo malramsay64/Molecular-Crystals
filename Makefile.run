@@ -80,7 +80,7 @@ files: $(mol_settings)
 ifneq ($(t_crys), )
 $(mol_settings): | data
 	@echo Producing unit cell of $(base)
-	tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
+	tail -2 $(call crys_dir,$(base))/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
 
 # Generate Dimers
 else ifneq ($(dimers), )

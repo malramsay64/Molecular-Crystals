@@ -28,7 +28,7 @@ mol := $(mol_d) $(mol_s) $(mol_t)
 ifneq ($(crys_dir),)
 	crys_dir = $(PREFIX)/../pack_iso/$(subst $(space),-,$(call p_shape,$1) $(call p_rad,$1) $(call p_dist,$1))
 else
-	crys_dir = crystals
+	crys_dir = $(my_dir)/crystals
 endif
 
 # Adding crystals for which there are unit cells
