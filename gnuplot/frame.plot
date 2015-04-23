@@ -6,7 +6,7 @@ set style fill transparent solid 1 noborder
 set style line 1 lt 1 lc -1 lw 1
 
 set pm3d
-set palette file '~/make/gnuplot/husl.dat' using 1:2:3:4
+set palette file '~/make/gnuplot/husl.dat' every ::1 using 1:2:3:4
 set key off
 unset colorbox
 unset border
