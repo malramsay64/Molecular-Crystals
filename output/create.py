@@ -10,18 +10,18 @@ frameExt = ".png"
 
 
 plot_dict = {\
-        "order":("order/*[0-9].*","Order Parameter"),\
-        "frame":("trj_contact/*[0-9].*", "Configuration"),\
-        "angle":("trj_contact/*-angles.*","Angle Distribution"),\
+        "order":("*[0-9].*","Order Parameter"),\
+        "frame":("frame-*", "Configuration"),\
+        "angle":("*-angles.*","Angle Distribution"),\
         "short-order":("short_order.*", "Short Range Ordering"),\
         "msd":("msd.*", "Mean Squared Displacement"),\
         "rotation":("rotation.*", "Rotational Relaxation"),\
-        "hist":("histogram.*", "Contact Number"),\
+        "hist":("hist.*", "Contact Number"),\
         "props":("props.*", "Properties"),\
-        "short-order-hist":("short_order_hist.*", "Short Order Histogram"),\
+        "short-order-hist":("short-order-hist.*", "Short Order Histogram"),\
         "radial":("radial.*", "Radial Distribution"),\
         "struct":("struct.*", "Structural Relaxation"),\
-        "com":("complot.*", "Centers of Mass"),\
+        "com":("com.*", "Centers of Mass"),\
         "moved":("moved.*", "Motion of Particles"),\
         "alpha":("alpha.*", "Non Gaussian"),\
         "regio":("regio*.*", "Regional Relaxation"),\
