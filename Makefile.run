@@ -33,9 +33,9 @@ else ifeq ($(shape), Disc)
 endif
 
 ifneq ($(t_crys), )
+	override prev_t := 0.0
 ifneq ($(bound), )
     CREATE_IN:=$(BOUNDARY_IN)
-	override prev_t := 0.0
 else
     CREATE_IN:=$(CRYS_IN)
     bound:=
@@ -55,7 +55,7 @@ mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(bo
 base=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta)))
 
 # Equilibrate all boundaries from same initial state at 'T = 0.0'
-ifneq ($(bound), )
+ifneq ($(t_crys), )
 	CREATE_VARS:=-v T $(temp) $(CREATE_VARS)
 endif
 
