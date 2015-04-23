@@ -28,8 +28,9 @@ def create(a, b, theta, molpos, molecule, crys, mols=2500, path='.', boundary=0)
             s.replicate(na,2*nb)
         else:
             s.replicate(na, nb)
-    filename = "{shape} {radius} {distance} {theta} {crys} {bound}".format(shape=molecule.getName(), radius=molecule.getRadius(), distance=molecule.getDist(), theta=molecule.getTheta(), crys=s.getCrys(), bound=boundary)
+    filename = "{shape} {radius} {distance:.2f} {theta} {crys} {bound}".format(shape=molecule.getName(), radius=molecule.getRadius(), distance=molecule.getDist(), theta=molecule.getTheta(), crys=s.getCrys(), bound=boundary)
     filename = "-".join([x for x in filename.split() if x])
+    print filename
     unitCell.cellFile(s, path, filename)
     unitCell.molFile(s.getMol(), path, s.getCrys())
     unitCell.lammpsFile(s, path, filename)
@@ -56,7 +57,6 @@ if __name__ == "__main__":
         boundary = ''
     s = molecule.Snowman(r,d)
     
-    print len(line)
     if len(line) % 3 == 0 and len(line) > 0:
         a = float(line[0])
         b = float(line[1])

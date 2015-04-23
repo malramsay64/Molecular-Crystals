@@ -97,7 +97,7 @@ endif
 
 $(last_restart): $(mol_settings) | $(FOLDERS) restarts
 	@echo Create $(last_restart)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
+	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
 $(restart): | $(last_restart) $(FOLDERS)
@@ -120,7 +120,7 @@ lammps: $(mol_settings) | .make $(FOLDERS)
 else
 lammps: | $(restart) .make $(FOLDERS) 
 	@echo Production $(SAVE)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
+	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
 endif
 
