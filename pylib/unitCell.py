@@ -222,9 +222,9 @@ def cellFile(cell,path='.', filename=""):
     string += "\nAtoms\n"
     if not filename:
         if mol.getAngles():
-            filename="{shape}-{radius}-{dist}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
+            filename="{shape}-{radius}-{dist:.2f}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
         elif cell.getCrys():
-            filename="{shape}-{radius}-{dist}-{crys}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, crys=cell.getCrys())
+            filename="{shape}-{radius}-{dist:.2f}-{crys}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, crys=cell.getCrys())
         else:
             filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
     f = open('{path}/{filename}.dat'.format(path=path, filename=filename),'w')
@@ -278,7 +278,7 @@ def molFile(molecule, path='.', crys = "", filename=""):
         if molecule.getAngles():
             filename="{shape}-{radius}-{dist}-{theta}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, theta=molecule.theta)
         elif crys:
-            filename="{shape}-{radius}-{dist}-{crys}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, crys=crys)
+            filename="{shape}-{radius}-{dist:.2f}-{crys}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, crys=crys)
         else:
             filename="{shape}-{radius}-{dist}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist)
 
