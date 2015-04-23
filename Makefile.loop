@@ -73,10 +73,10 @@ ifeq ($(SYS_NAME), silica)
 ifeq ($(t_dep), false)
 	@qsub -N $@ -o pbsout/$@.out single.pbs -vmol=$@,prev_t=$(prev_t),target=$(MAKECMDGOALS),prefix=$(PREFIX)/$@,my_dir=$(my_dir)
 else
-	$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
+	@$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
 endif
 else
-	$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
+	@$(MAKE) $(OPTIONS) -C $(PREFIX)/$@ -f $(my_dir)/$(GOAL) $(MAKECMDGOALS) mol=$@ prev_t=$(prev_t)
 endif
 
 $(dirs):

@@ -82,17 +82,17 @@ movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
 
 iso:
-	$(MAKE) -f Makefile.iso iso
+	@$(MAKE) -f Makefile.iso iso
 
 $(mol): program vars.mak | $(PREFIX) $(PREFIX)/plots
 ifeq ($(SYS_NAME), silica)
 ifneq ($(t_dep), false)
 	@qsub -N $@ -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
 else
-	$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 endif
 else
-	$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 endif
 
 vars.mak:

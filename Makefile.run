@@ -80,7 +80,7 @@ files: $(mol_settings)
 ifneq ($(t_crys), )
 $(mol_settings): | data
 	@echo Producing unit cell of $(base)
-	tail -2 $(call crys_dir,$(base))/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
+	@tail -2 $(call crys_dir,$(base))/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
 
 # Generate Dimers
 else ifneq ($(dimers), )
@@ -97,7 +97,7 @@ endif
 
 $(last_restart): $(mol_settings) | $(FOLDERS) restarts
 	@echo Create $(last_restart)
-	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
 $(restart): | $(last_restart) $(FOLDERS)
@@ -120,7 +120,7 @@ lammps: $(mol_settings) | .make $(FOLDERS)
 else
 lammps: | $(restart) .make $(FOLDERS) 
 	@echo Production $(SAVE)
-	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
+	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) < $(LAMMPS_IN) > $(LOG)
 	@touch .make/lammps
 endif
 
@@ -192,7 +192,7 @@ plot: $(addprefix copy-, $(to_plot))
 	@touch .make/plot
 
 copy-%: plot-% | %
-	$(foreach f, $(wildcard myplot/$(subst plot-,,$<)*), cp $f ../plots/$(subst plot-,,$<)/$(notdir $(shell pwd))-$(notdir $f); )
+	@$(foreach f, $(wildcard myplot/$(subst plot-,,$<)*), cp $f ../plots/$(subst plot-,,$<)/$(notdir $(shell pwd))-$(notdir $f); )
 
 plot-%: %.plot contact | %
 	@gnuplot -e "prefix='$(shell pwd)/'; term_type='$(term_type)'" $<  #&> $(LOG)
