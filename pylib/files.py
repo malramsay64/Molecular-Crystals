@@ -50,12 +50,7 @@ def molFile(molecule):
                     ' '.join(str(v) for v in molecule.get12(atom.getID())),\
                     ' '.join(str(v) for v in molecule.get13(atom.getID())))
     # Write to file
-    if molecule.getName() == "Trimer":
-        filename="{shape}-{radius}-{dist}-{theta}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, theta=molecule.theta)
-    elif molecule.getName() == "Snowman":
-        filename="{shape}-{radius}-{dist}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist)
-    elif molecule.getName() == "Disc":
-        filename="{shape}".format(shape=molecule.getName())
+    filename=mol.getFilename()
     f = open('{PATH}/{filename}.mol'.format(PATH=PATH,filename=filename), 'w')
     f.write(string)
     f.close()
@@ -85,12 +80,7 @@ def dataFile(mol):
     string += '\nPair Coeffs\n\n'
     for t in mol.getAtomTypes():
         string += '{0} {strength} {dist}\n'.format(t.getType(), strength=1, dist=2*t.getSize())
-    if mol.getName() == "Trimer":
-        filename="{shape}-{radius}-{dist}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
-    elif mol.getName() == "Snowman":
-        filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
-    elif mol.getName() == "Disc":
-        filename="{shape}".format(shape=mol.getName())
+    filename=mol.getFilename()
 
     f = open('{PATH}/{filename}.dat'.format(PATH=PATH,filename=filename),'w')
     f.write(string)

@@ -33,9 +33,9 @@ else ifeq ($(shape), Disc)
 endif
 
 ifneq ($(t_crys), )
+	override prev_t := 0.0
 ifneq ($(bound), )
     CREATE_IN:=$(BOUNDARY_IN)
-	override prev_t := 0.0
 else
     CREATE_IN:=$(CRYS_IN)
     bound:=
@@ -55,7 +55,7 @@ mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(bo
 base=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta)))
 
 # Equilibrate all boundaries from same initial state at 'T = 0.0'
-ifneq ($(bound), )
+ifneq ($(t_crys), )
 	CREATE_VARS:=-v T $(temp) $(CREATE_VARS)
 endif
 
@@ -71,12 +71,7 @@ endif
 
 all:
 
-.PHONY:test
-test: | $(FOLDERS) 
-	@echo $(restart)
-	@echo $(VPATH)
-	@echo $(LAMMPS_MOL_VARS)
-	@echo $(CREATE_VARS)
+test:
 
 # Create data files for molecule if not already generated
 files: $(mol_settings)
@@ -85,7 +80,7 @@ files: $(mol_settings)
 ifneq ($(t_crys), )
 $(mol_settings): | data
 	@echo Producing unit cell of $(base)
-	@tail -2 $(my_dir)/crystals/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
+	@tail -2 $(call crys_dir,$(base))/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
 
 # Generate Dimers
 else ifneq ($(dimers), )

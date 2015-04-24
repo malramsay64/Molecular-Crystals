@@ -6,7 +6,7 @@ set style fill transparent solid 1 noborder
 set style line 1 lt 1 lc -1 lw 1
 
 set pm3d
-set palette file '~/make/gnuplot/husl.dat' using 1:2:3:4
+set palette file '~/make/gnuplot/husl.dat' every ::1 using 1:2:3:4
 set key off
 unset colorbox
 unset border
@@ -29,7 +29,7 @@ do for [i=1:words(files)] {
     set yrange[-2:height+2]
     set xrange[-2:a+2]
 
-    set terminal term_type enhanced size term_size, ceil(term_size/(a+0.))*height
+    set terminal term_type enhanced size term_size, term_size/(a+0.)*height
 
     set object rectangle from -0,0 to a,height
 

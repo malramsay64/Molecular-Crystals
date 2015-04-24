@@ -14,8 +14,8 @@ import molecule
 from math import *
 import sys
 
-def create(a, b, theta, x, y, phi, molecule, crys, mols=2500, path='.', boundary=0):
-    s = crys(a,b,theta, x, y, phi, molecule)
+def create(a, b, theta, molpos, molecule, crys, mols=2500, path='.', boundary=0):
+    s = unitCell.cell(a,b,theta, molpos, molecule, crys)
     if mols:
         mols /= s.numMols()
         na = sqrt(mols*b/a)
@@ -28,8 +28,12 @@ def create(a, b, theta, x, y, phi, molecule, crys, mols=2500, path='.', boundary
             s.replicate(na,2*nb)
         else:
             s.replicate(na, nb)
-    filename = "{shape} {radius} {distance} {theta} {crys} {bound}".format(shape=molecule.getName(), radius=molecule.getRadius(), distance=molecule.getDist(), theta=molecule.getTheta(), crys=s.getCrys(), bound=boundary)
-    filename = "-".join([x for x in filename.split() if x])
+    filename = molecule.getFilename()
+    if s.getCrys():
+        filename+="-"+s.getCrys()
+    if boundary:
+        filename+="-"+boundary
+    print filename
     unitCell.cellFile(s, path, filename)
     unitCell.molFile(s.getMol(), path, s.getCrys())
     unitCell.lammpsFile(s, path, filename)
@@ -47,46 +51,18 @@ if __name__ == "__main__":
 
     path = args[1]
     mols = int(args[2])
-    r = float(args[3])
-    d = float(args[4])
-    wallpaper = args[5]
-    crys = getattr(unitCell,wallpaper)
+    r = args[3]
+    d = args[4]
+    crys = args[5]
     try:
         boundary = int(args[6])
     except IndexError:
         boundary = ''
-
-    theta = float(line[0])
-    a = float(line[1])
-    b = float(line[2])
-
-    if wallpaper not in ["p2mg"]:
-        x = float(line[3])
-        y = float(line[4])
-        phi = float(line[5])
-        m = float(line[6])
-    else:
-        y = float(line[3])
-        x = 0.25
-        phi = float(line[4])
-        m = float(line[5])
-
     s = molecule.Snowman(r,d)
-    phi = 2*pi - phi
-
-    # convert to xy coordinates
-    x = x*a + y*b*cos(theta)
-    y = y*b*sin(theta)
-
-    # Move center of particle
-    const = (1**2 + d**2 - r**2)/(2*d*1)
-    x += -(const)*cos(phi)
-    y += -(const)*sin(phi)
-
-    # Convert back to fractional coordinates
-    x = x/a - y*(cos(theta)/(a*sin(theta)))
-    y = y/(b*sin(theta))
-
-    # Convert phi to my orientation
-    phi = pi/2+phi
-    create(a, b, theta, x, y, phi, s, crys, mols, path, boundary)
+    
+    if len(line) % 3 == 0 and len(line) > 0:
+        a = float(line[0])
+        b = float(line[1])
+        theta = float(line[2])
+        molpos = line[3:]
+        create(a, b, theta, molpos, s, crys, mols, path, boundary)

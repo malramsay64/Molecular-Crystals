@@ -51,11 +51,11 @@ equil_steps = 100000000
 n_mol = 2500
 
 # Dependent on previous temps
-t_dep=true
+t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp_1.0 = 0.70
+temp_1.0 = 0.68 0.70 0.72
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -95,7 +95,7 @@ to_plot = frame short-order-hist com
 
 # Collate, Plots which take data from a number of temperatures or molecules
 # ( order | temp_dep | dynamics )
-collate_plots = order dynamics temp_dep
+collate_plots = order dynamics collate-msd collate-rot collate-struct
 
 # Output filetype
 # ( png | pdf )

@@ -2,9 +2,9 @@
 
 function pack_index {
     count=2;
-    IFS=' ' read -a array <<< "$1"
+    temp=$(tail -1 $1)
+    IFS=' ' read -a array <<< "$temp"
     for i in "${array[@]}"; do
-        echo $i
         [[ $i == "packing" ]] && echo $count && break
         ((++count))
     done
@@ -15,7 +15,7 @@ function wallpaper {
 }
 
 function packing {
-    echo $(tail -1 $1 | cut -c 45-52)
+    echo $(tail -1 $1 | sed 's/  / /g' | cut -d' ' -f$(pack_index $1))
 }
 
 function letter {
@@ -37,12 +37,14 @@ function best {
 }
 
 function rename {
-    IFS=',' read -a array <<< "$(best $1)"
+    temp=$(best $1)
+    IFS=',' read -a array <<< "$temp"
     for i in "${array[@]}"; do
         IFS=' ' read -a wall <<< "$i"
         cp $(ls $1/solution*${wall[0]}_${wall[2]}*) $1/$(basename $1)-${wall[0]}.svg
     done
 }
+
 
 prefix=$1
 for f in $(find $prefix/*-* -maxdepth 0 -type d); do

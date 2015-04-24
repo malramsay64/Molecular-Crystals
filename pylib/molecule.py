@@ -255,16 +255,28 @@ class Molecule:
 
 
     def getDist(self):
+        return float(self.dist)
+
+    def getStrDist(self):
         return self.dist
 
     def getRadius(self):
+        return float(self.radius)
+
+    def getStrRadius(self):
         return self.radius
 
     def getTheta(self):
         try:
-            return self.theta
+            return float(self.theta)
         except AttributeError:
             return ''
+
+    def getStrTheta(self):
+        return self.theta
+
+    def filename(self):
+        return "{shape}-{radius}".format(shape=mol.getName(), radius=mol.radius)
 
 class Snowman(Molecule):
     """Creates a snowman molecule with a single degree of freedom
@@ -292,7 +304,7 @@ class Snowman(Molecule):
         return math.pi*(sum([a.size()**2 for a in self]))
 
     def getFilename(self):
-        return "{shape}-{radius}-{dist}".format(shape=self.getName(), radius=self.getRadius(), dist=self.getDist())
+        return "{shape}-{radius}-{dist}".format(shape=self.getName(), radius=self.getStrRadius(), dist=self.getStrDist())
 
 class Trimer(Molecule):
     """ Creates a trimer with 2 degrees of freedom. The first atom
@@ -333,7 +345,7 @@ class Trimer(Molecule):
         return math.pi*([ d[-1]**2 for d in self.getBonds()])
 
     def getFilename(self):
-        return "{shape}-{radius}-{dist}-{theta}".format(shape=self.getName(), radius=self.getRadius(), dist=self.getDist(), theta=self.getTheta())
+        return "{shape}-{radius}-{dist}-{theta}".format(shape=self.getName(), radius=self.getStrRadius(), dist=self.getStrDist(), theta=self.getStrTheta())
 
 
 class Disc(Molecule):

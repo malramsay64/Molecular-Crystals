@@ -14,19 +14,25 @@ from copy import deepcopy as copy
 from math import *
 
 class cell:
-    def __init__(self, a, b, theta, molecule):
+
+    def __init__(self, a, b, theta, molpos, mol, crys):
         self.a = a
         self.b = b
-        self.theta = theta*pi/180
-        self.mol = molecule
+        self.theta = theta
+        self.mol = mol
+        self.crys = crys
         self.mols = []
-        self.crys = ""
+        index = 0
+        while index < len(molpos):
+            x,y,phi = [float(i) for i in molpos[index:index+3]]
+            const = (1*1 + mol.getDist()*mol.getDist() - mol.getRadius()*mol.getRadius())/(2*mol.getDist()*1)
+            x += -(const)*cos(phi)
+            y += -(const)*sin(phi)
+            phi += pi/2
+            self.addMol(x, y, phi)
+            index += 3
 
     def addParticle(self,x,y,phi):
-        x = x % 1
-        y = y % 1
-        x = x*self.a + y*self.b*cos(self.theta)
-        y = y*self.b*sin(self.theta)
         d = self.mol.dist
         r = self.mol.radius
         m = copy(self.mol)
@@ -57,10 +63,26 @@ class cell:
 
     def getCrys(self):
         return self.crys
-    
+
     def getA(self):
         return self.a
-    
+
+    def getB(self):
+        return self.b
+
+    def getTheta(self):
+        return self.theta
+
+    def to_fractional(self,x,y):
+        x = x/self.getA() - y*(cos(self.getTheta())/(self.getA()*sin(self.getTheta())))
+        y = y/self.getB()*sin(self.getTheta())
+        return x,y
+
+    def to_cartesian(self,x,y):
+        x = x*self.getA() + y*sef.getB()*cos(self.getTheta())
+        y = y*self.getB()*sin(self.getTheta())
+        return x,y
+
     def replicate(self, nx=1, ny=1):
         base = self.getMols()
         new = []
@@ -107,7 +129,7 @@ class cell:
                 x,y = atom.getPos()
                 s += "{x}, {y}, {size}\n".format(x=x,y=y,size=atom.getSize())
             s += "\n"
-        
+
         for mol in self.mols:
             d = mol.dist
             r = mol.radius
@@ -126,80 +148,22 @@ class cell:
         self.mols[pos].rotate((360/degree)*n)
         self.mols[pos].setPos(x,y)
 
-class p2gg(cell):
-
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,phi)
-        self.addMol(1-x,1-y,phi+pi)
-        self.addMol(0.5+x, 0.5+1-y, pi-phi)
-        self.addMol(0.5-x, y-0.5, 2*pi-phi)
-        self.crys = "p2gg"
-
-class p2mg(cell):
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,phi)
-        self.addMol(1-x,1-y,phi+pi)
-        self.crys = "p2mg"
-
-class p1(cell):
-
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,phi)
-        self.crys = "p1"
-
-class p2(cell):
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,phi)
-        self.addMol(1-x,1-y,phi+pi)
-        #self.rotation(1,2,1)
-        self.crys = "p2"
-
-class pg(cell):
-    def __init__(self, a, b, theta, x, y, phi, mol):
-        self.a = a
-        self.b = b
-        self.theta = theta
-        self.mol = mol
-        self.mols = []
-        self.addMol(x,y,pi-phi)
-        self.addMol(1-x,0.5+y,pi+phi)
-        self.crys = "pg"
-
-
 def lammpsFile(cell,path='.', filename=""):
     mol = cell.getMol()
     a,b,theta = cell.getShape()
     xy = 0
-    if theta != 0:
-        xy = b*tan(pi/2-theta)
+    xy = b*tan(pi/2-theta)
     string = ""
     string += "ITEM: TIMESTEP\n"
     string += "0\n"
     string += "ITEM: NUMBER OF ATOMS\n"
     string += "{}\n".format(cell.numAtoms())
     string += "ITEM: BOX BOUNDS\n"
-    string += "{xmin} {xmax} {xy}\n".format(xmin=0, xmax=a+xy, xy=xy)
-    string += "{ymin} {ymax} {yz}\n".format(ymin=0, ymax=b, yz=0)
+    if xy < 0:
+        string += "{xmin} {xmax} {xy}\n".format(xmin=xy, xmax=a, xy=xy)
+    else:
+        string += "{xmin} {xmax} {xy}\n".format(xmin=0, xmax=a+xy, xy=xy)
+    string += "{ymin} {ymax} {yz}\n".format(ymin=0, ymax=cell.getHeight(), yz=0)
     string += "{zmin} {zmax} {zx}\n".format(zmin=-0.5, zmax=0.5, zx=0)
     string += "ITEM: ATOMS\n"
     atomID = 1
@@ -207,17 +171,14 @@ def lammpsFile(cell,path='.', filename=""):
     for m in cell.getMols():
         for atom in m:
             x,y = atom.getPos()
-            x = wrap(x, cell.getA())
+            #x = wrap(x, cell.getA())
             string += "{id} {molID} {type} {diam} {x} {y} {z}\n".format(\
                     id=atomID, molID=molID, type=atom.getType(),\
                     diam=2*atom.getSize(), x=x, y=y, z=0)
             atomID += 1
         molID += 1
     if not filename:
-        if mol.getAngles():
-            filename="{shape}-{radius}-{dist}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
-        else:
-            filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
+        mol.getFilename()
     f = open('{path}/{filename}.lammpstrj'.format(path=path, filename=filename),'w')
     f.write(string)
     f.close()
@@ -260,12 +221,9 @@ def cellFile(cell,path='.', filename=""):
         string += '{0} {strength} {dist}\n'.format(t.getType(), strength=1, dist=2*t.getSize())
     string += "\nAtoms\n"
     if not filename:
-        if mol.getAngles():
-            filename="{shape}-{radius}-{dist}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
-        elif cell.getCrys():
-            filename="{shape}-{radius}-{dist}-{crys}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, crys=cell.getCrys())
-        else:
-            filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
+        filename=mol.getFilename()
+        if cell.getCrys():
+            filename+="-"+cell.getCrys()
     f = open('{path}/{filename}.dat'.format(path=path, filename=filename),'w')
     f.write(string)
     f.close()
@@ -314,12 +272,9 @@ def molFile(molecule, path='.', crys = "", filename=""):
                     ' '.join(str(v) for v in molecule.get13(atom.getID())))
     # Write to file
     if not filename:
-        if molecule.getAngles():
-            filename="{shape}-{radius}-{dist}-{theta}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, theta=molecule.theta)
-        elif crys:
-            filename="{shape}-{radius}-{dist}-{crys}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, crys=crys)
-        else:
-            filename="{shape}-{radius}-{dist}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist)
+        filename=molecule.getFilename()
+        if crys:
+            filename+="-"+crys
 
     f = open('{path}/{filename}.mol'.format(path=path,filename=filename), 'w')
     f.write(string)

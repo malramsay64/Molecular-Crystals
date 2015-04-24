@@ -6,7 +6,7 @@ set encoding utf8
 set xlabel "Timestep"
 set ylabel "MSD"
 set format x "10^{%L}"
-set format x "10^{%L}"
+set format y "10^{%L}"
 set logscale x
 set logscale y
 set key outside right

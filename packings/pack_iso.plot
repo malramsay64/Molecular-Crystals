@@ -24,5 +24,5 @@ set xlabel 'Radius'
 d = '1.0 1+0.2r 1+0.4r 1+0.6r 1+0.8r 1+r'
 
 set output 'radius-iso'.ext
-plot for [i=1:words(d)] 'Snowman-iso.dat' using 1:3 with linespoints linestyle 1 lc i title word(d,i), 0.9069 lc grey title 'Circle'
+plot for [i=1:words(d)] 'Snowman-iso.dat' every 6::i-1 using 1:3 with linespoints linestyle 1 lc i title word(d,i), 0.9069 lc grey title 'Circle'
 

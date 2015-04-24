@@ -27,7 +27,7 @@ def my_dist(steps, num, freq):
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         num_key = 100
-        num_freq = 20
+        num_freq = 40
         steps = int(sys.argv[1])
     if len(sys.argv) == 4:
         steps, num_key, num_freq = [ int(n) for n in sys.argv[1:] ]

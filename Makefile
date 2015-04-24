@@ -25,10 +25,16 @@ mol_t := $(foreach rad, $(theta), $(addsuffix -$(rad), $(mol_t)))
 
 mol := $(mol_d) $(mol_s) $(mol_t)
 
+ifneq ($(crys_dir),)
+	crys_dir = $(PREFIX)/../pack_iso/$(subst $(space),-,$(call p_shape,$1) $(call p_rad,$1) $(call p_dist,$1))
+else
+	crys_dir = $(my_dir)/crystals
+endif
+
 # Adding crystals for which there are unit cells
 ifneq ($(strip $(crys)),)
     mol := $(foreach c, $(crys), $(addsuffix -$(c), $(mol)))
-    mol := $(foreach m, $(mol), $(if $(wildcard crystals/$m.svg), $m))
+    mol := $(foreach m, $(mol), $(if $(wildcard $(call crys_dir,$m)/$m.svg), $m))
 endif
 
 # Iterating through having a crystal liquid boundary
@@ -45,7 +51,7 @@ VPATH=.:$(BIN_PATH):$(LIB):gnuplot
 distances = $(foreach m, $(mol), $(call p_dist, $m))
 export $(addprefix temp_, $(distances))
 
-glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_rad, $1,) $(call p_dist, $1) $(call p_theta, $1) $(call p_bound, $1)))
+glob_temps = $(subst $(space),-,$(strip $(call p_shape, $1) * $(call p_radius, $1) $(call p_dist, $1) $(call p_theta, $1) $(call p_bound, $1)))
 
 get_mol = $(call wo_temp, $(word 5, $(subst /,$(space),$m)))
 
@@ -54,15 +60,13 @@ get_mol = $(call wo_temp, $(word 5, $(subst /,$(space),$m)))
 all: program
 
 test:
-	@echo $(mol)
-	@echo $(shape)
 
 collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.out
 	@rm -f $(PREFIX)/latex/collate.tex
 	@$(foreach m, $(mol), cat $(PREFIX)/latex/$m.tex >> $(PREFIX)/latex/collate.tex; )
 
-%.tex: % plot-dynamics | $(PREFIX)/latex
+%.tex: % plot-dynamics
 	@echo "\section{$<}" > $(PREFIX)/latex/$@
 	@python output/collate.py $(PREFIX) $< >> $(PREFIX)/latex/$<.tex
 	@$(foreach p, $(to_plot), cat $(PREFIX)/latex/$<-$(p).tex >> $(PREFIX)/latex/$<.tex; )
@@ -76,6 +80,9 @@ endif
 
 movie: $(mol)
 	@$(vmd) -e $(vmd_in) -args $(PREFIX)
+
+iso:
+	@$(MAKE) -f Makefile.iso iso
 
 $(mol): program vars.mak | $(PREFIX) $(PREFIX)/plots
 ifeq ($(SYS_NAME), silica)
