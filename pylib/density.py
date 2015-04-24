@@ -18,7 +18,7 @@ class thermo():
                 if len(self.data) == 0:
                     [self.data.append([prop]) for prop in l.split()]
                 l = f.readline()
-                while not l.startswith('Loop'):
+                while l and not l.startswith('Loop'):
                     d = l.split()
                     for i in xrange(len(d)):
                         self.data[i].append(float(d[i]))
