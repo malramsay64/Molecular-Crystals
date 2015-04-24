@@ -41,7 +41,7 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 160000000
+steps = 320000000
 # Print every <N> steps, 0 produces logarithmic progression
 print = 160000
 # Number of steps in equilibration (n >= 1)
@@ -54,8 +54,8 @@ t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp_1.0 = 0.60 0.65 0.70 0.75 0.80 0.85 0.90
-temp_1.637556 = 1.60 1.70 1.80 1.85 1.90 1.95 2.00 2.10 2.20
+temp_1.0 = 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85
+temp_1.637556 = 1.50 1.55 1.60 1.70 1.80 1.85 1.90 1.95 2.00 2.10
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
