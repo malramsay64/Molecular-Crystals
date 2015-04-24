@@ -175,10 +175,7 @@ def lammpsFile(cell,path='.', filename=""):
             atomID += 1
         molID += 1
     if not filename:
-        if mol.getAngles():
-            filename="{shape}-{radius}-{dist}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
-        else:
-            filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
+        mol.getFilename()
     f = open('{path}/{filename}.lammpstrj'.format(path=path, filename=filename),'w')
     f.write(string)
     f.close()
@@ -221,12 +218,9 @@ def cellFile(cell,path='.', filename=""):
         string += '{0} {strength} {dist}\n'.format(t.getType(), strength=1, dist=2*t.getSize())
     string += "\nAtoms\n"
     if not filename:
-        if mol.getAngles():
-            filename="{shape}-{radius}-{dist:.2f}-{theta}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, theta=mol.theta)
-        elif cell.getCrys():
-            filename="{shape}-{radius}-{dist:.2f}-{crys}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist, crys=cell.getCrys())
-        else:
-            filename="{shape}-{radius}-{dist}".format(shape=mol.getName(),radius=mol.radius, dist=mol.dist)
+        filename=mol.getFilename()
+        if cell.getCrys():
+            filename+="-"+cell.getCrys()
     f = open('{path}/{filename}.dat'.format(path=path, filename=filename),'w')
     f.write(string)
     f.close()
@@ -275,12 +269,9 @@ def molFile(molecule, path='.', crys = "", filename=""):
                     ' '.join(str(v) for v in molecule.get13(atom.getID())))
     # Write to file
     if not filename:
-        if molecule.getAngles():
-            filename="{shape}-{radius}-{dist}-{theta}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, theta=molecule.theta)
-        elif crys:
-            filename="{shape}-{radius}-{dist:.2f}-{crys}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist, crys=crys)
-        else:
-            filename="{shape}-{radius}-{dist}".format(shape=molecule.getName(),radius=molecule.radius, dist=molecule.dist)
+        filename=molecule.getFilename()
+        if crys:
+            filename+="-"+crys
 
     f = open('{path}/{filename}.mol'.format(path=path,filename=filename), 'w')
     f.write(string)

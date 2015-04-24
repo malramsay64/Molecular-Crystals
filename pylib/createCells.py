@@ -28,8 +28,11 @@ def create(a, b, theta, molpos, molecule, crys, mols=2500, path='.', boundary=0)
             s.replicate(na,2*nb)
         else:
             s.replicate(na, nb)
-    filename = "{shape} {radius} {distance:.2f} {theta} {crys} {bound}".format(shape=molecule.getName(), radius=molecule.getRadius(), distance=molecule.getDist(), theta=molecule.getTheta(), crys=s.getCrys(), bound=boundary)
-    filename = "-".join([x for x in filename.split() if x])
+    filename = molecule.getFilename()
+    if s.getCrys():
+        filename+="-"+s.getCrys()
+    if boundary:
+        filename+="-"+boundary
     print filename
     unitCell.cellFile(s, path, filename)
     unitCell.molFile(s.getMol(), path, s.getCrys())
@@ -48,8 +51,8 @@ if __name__ == "__main__":
 
     path = args[1]
     mols = int(args[2])
-    r = float(args[3])
-    d = float(args[4])
+    r = args[3]
+    d = args[4]
     crys = args[5]
     try:
         boundary = int(args[6])
