@@ -82,6 +82,24 @@ def collated(prefix, filename, caption):
         print r"\end{figure}"
         print r"\end{minipage}"
 
+def collatedEx(prefix, filename, caption, exclude):
+    if not caption:
+        caption = name(prefix)
+    filename = "{dir}/".format(dir=prefix)+filename
+    plots = [os.path.splitext(file)[0] for file in glob.glob(filename)]
+    plots.sort()
+    for plot in plots:
+        for x in exclude:
+            if x in plot:
+                break
+        print r"\begin{minipage}{0.5\textwidth}" 
+        print r"\begin{figure}[H]"
+        print r"\centering"
+        print r"\includegraphics[width=\mywidth]{{{{{0}}}{ext}}}".format(plot, ext=plotext)
+        print r"\caption{{{name}}}".format(name=caption)
+        print r"\end{figure}"
+        print r"\end{minipage}"
+
 def name(dir):
     dir = os.path.basename(dir)
     d = dir.split("-")

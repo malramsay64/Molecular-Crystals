@@ -5,8 +5,11 @@ import os
 import glob
 import sys
 
-if len(sys.argv) == 3:
+if len(sys.argv) >= 3:
     prefix = sys.argv[1]
     mol = sys.argv[2]
-
-    create.collated("{prefix}/plots/".format(prefix=prefix), mol+"*.png", "Temperature Dependence")
+    if len(sys.argv) > 3:
+        exclude=sys.argv[3:]
+        create.collatedEx("{prefix}/plots/".format(prefix=prefix), mol+"*.png", "Temperature Dependence", exclude)
+    else:
+        create.collated("{prefix}/plots/".format(prefix=prefix), mol+"*.png", "Temperature Dependence")
