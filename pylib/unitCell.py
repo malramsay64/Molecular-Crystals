@@ -159,8 +159,11 @@ def lammpsFile(cell,path='.', filename=""):
     string += "ITEM: NUMBER OF ATOMS\n"
     string += "{}\n".format(cell.numAtoms())
     string += "ITEM: BOX BOUNDS\n"
-    string += "{xmin} {xmax} {xy}\n".format(xmin=0, xmax=a+xy, xy=xy)
-    string += "{ymin} {ymax} {yz}\n".format(ymin=0, ymax=b, yz=0)
+    if xy < 0:
+        string += "{xmin} {xmax} {xy}\n".format(xmin=xy, xmax=a, xy=xy)
+    else:
+        string += "{xmin} {xmax} {xy}\n".format(xmin=0, xmax=a+xy, xy=xy)
+    string += "{ymin} {ymax} {yz}\n".format(ymin=0, ymax=cell.getHeight(), yz=0)
     string += "{zmin} {zmax} {zx}\n".format(zmin=-0.5, zmax=0.5, zx=0)
     string += "ITEM: ATOMS\n"
     atomID = 1
