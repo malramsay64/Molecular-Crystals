@@ -41,20 +41,20 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 32000000
+steps = 0
 # Print every <N> steps, 0 produces logarithmic progression
-print = 32000
+print = 0
 # Number of steps in equilibration (n >= 1)
-equil_steps = 8000000
+equil_steps = 1
 # Number of molecules (won't be exact, tries to keep simulation square)
-n_mol = 2500
+n_mol = 0
 
 # Dependent on previous temps
-t_dep=true
+t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp = 5.0 3.0 2.5 2.0 1.5 1.0 0.8 0.4
+temp = 0.4
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
