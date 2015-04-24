@@ -100,7 +100,7 @@ collate_plots = order dynamics collate-msd collate-rot collate-struct
 
 # Output filetype
 # ( png | pdf )
-term_type = png
+term_type = pdf
 
 # }}}
 # Path variables {{{

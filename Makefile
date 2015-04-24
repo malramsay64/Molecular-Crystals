@@ -31,6 +31,10 @@ else
 	crys_dir = $(my_dir)/crystals
 endif
 
+ifeq ($(findstring dynamics, $(collate_plots)),dynamics)
+	dynamics=true
+endif
+
 # Adding crystals for which there are unit cells
 ifneq ($(strip $(crys)),)
     mol := $(foreach c, $(crys), $(addsuffix -$(c), $(mol)))
