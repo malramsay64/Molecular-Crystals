@@ -9,15 +9,32 @@ include settings
 include config
 
 export
-# Generat ing all shapes {{{
+# Generating all shapes {{{
 mol := $(shape)
 mol_d := $(filter Disc%, $(mol))
 # Radius
 mol := $(if $(radius), $(foreach rad, $(radius), $(addsuffix -$(rad), $(mol))), $(mol)) 
+
 # Distance
-mol := $(if $(dist), $(foreach rad, $(dist), $(addsuffix -$(rad), $(mol))), $(mol)) 
+ifneq ($(dist_tri),)
+	mol_s := $(filter Snowman%, $(mol))
+	mol_t := $(filter Trimer%, $(mol))
+	mol_s := $(if $(dist), $(foreach d, $(dist), $(addsuffix -$(d), $(mol_s))), $(mol_s)) 
+	mol_t := $(if $(dist), $(foreach d, $(dist_tri), $(addsuffix -$(d), $(mol_t))), $(mol_t)) 
+	mol := $(mol_s) $(mol_t)
+else
+	mol := $(if $(dist), $(foreach rad, $(dist), $(addsuffix -$(rad), $(mol))), $(mol)) 
+endif
+
+
+ifneq ($(dist_tri),)
+	mol_t2 := $(foreach d, $(dist_tri), $(foreach m, $(mol_t), $(if $(filter $(call p_dist, $m), $d), $m)))
+endif
+mol := $(mol_s) $(mol_t2)
+
 # Computing Distance
 mol := $(foreach m, $(mol), $(m:$(call p_dist, $m)=$(call comp_dist, $(call p_dist, $m), $(call p_rad, $m))))
+
 # Theta
 mol_s := $(filter Snowman%, $(mol))
 mol_t := $(filter Trimer%, $(mol))
@@ -48,6 +65,7 @@ ifneq ($(strip $(boundary)),)
 else
     CREATE_VARS += -v boundary 0
 endif
+
 #}}}
 
 VPATH=.:$(BIN_PATH):$(LIB):gnuplot
