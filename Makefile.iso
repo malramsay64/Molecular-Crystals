@@ -7,9 +7,19 @@ mol := $(filter Snowman%, $(mol))
 # Radii
 mol := $(if $(radius), $(foreach rad, $(radius), $(addsuffix -$(rad), $(mol))), $(mol))
 # Distance
-mol := $(if $(dist), $(foreach rad, $(dist), $(addsuffix -$(rad), $(mol))), $(mol))
+ifneq ($(dist_tri),)
+	mol_s := $(filter Snowman%, $(mol))
+	mol_t := $(filter Trimer%, $(mol))
+	mol_s := $(if $(dist), $(foreach d, $(dist), $(addsuffix -$(d), $(mol_s))), $(mol_s)) 
+	mol_t := $(if $(dist), $(foreach d, $(dist_tri), $(addsuffix -$(d), $(mol_t))), $(mol_t)) 
+	mol := $(mol_s) $(mol_t)
+else
+	mol := $(if $(dist), $(foreach rad, $(dist), $(addsuffix -$(rad), $(mol))), $(mol)) 
+endif
+
 # Calc Distance
 mol := $(foreach m, $(mol), $(m:$(call p_dist, $m)=$(call comp_dist, $(call p_dist, $m), $(call p_rad, $m))))
+
 
 VPATH:=.:$(BIN_PATH):isopointal
 
@@ -23,8 +33,16 @@ Snowman-%: wallpaper | $(PREFIX)/Snowman-%
 ifeq ($(SYS_NAME), silica)
 	@qsub -N $@-iso -o pbsout/$@.out iso.pbs -vmol=$@,PREFIX=$(PREFIX),BIN_PATH=$(BIN_PATH),dist=$(call p_dist, $@),rad=$(call p_rad, $@)
 else
-	cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 anyu all $(call p_dist, $@) $(call p_rad, $@) > out.log
+	cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 dimer all $(call p_dist, $@) $(call p_rad, $@) > out.log
 endif
+
+Trimer-%: wallpaper | $(PREFIX)/Trimer-%
+ifeq ($(SYS_NAME), silica)
+	@qsub -N $@-iso -o pbsout/$@.out iso.pbs -vmol=$@,PREFIX=$(PREFIX),BIN_PATH=$(BIN_PATH),theta=$(call p_theta, $@),rad=$(call p_rad, $@)
+else
+	cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 dimer all $(call p_dist, $@) $(call p_theta, $@) > out.log
+endif
+
 
 $(PREFIX)/%:
 	mkdir -p $@
