@@ -211,7 +211,7 @@ def cellFile(cell,path='.', filename=""):
     string += '{}   extra bond per atom\n'.format(mol.maxBondCount())
     string += '{}   extra angle per atom\n\n'.format(mol.maxAngleCount())
     string += '0 {xdim}     xlo xhi\n'.format(xdim=a)
-    string += '-1 {ydim}     ylo yhi\n'.format(ydim=cell.getHeight()-1)
+    string += '0 {ydim}     ylo yhi\n'.format(ydim=cell.getHeight())
     string += '{xy} {xz} {yz}   xy xz yz\n\n'.format(xy=0,xz=0,yz=0)
     string += '\nAtoms\n\n'
     string += str(cell)
