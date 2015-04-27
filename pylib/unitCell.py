@@ -103,6 +103,9 @@ class cell:
         aid = 1
         s = ""
         for mol in self.getMols():
+            mx,my = mol.COM()
+            mx2,my2 = wrap(mx,my,self.getA(),self.getHeight(),self.getB()*cos(self.getTheta()))
+            mol.translate(mx2-mx,my2-my)
             for atom in mol:
                 x,y = atom.getPos()
                 s += "{aid} {mid} {tid} {taid} {atype} {x} {y} {z}\n"\
@@ -127,6 +130,7 @@ class cell:
         for mol in self.mols:
             for atom in mol:
                 x,y = atom.getPos()
+                x,y = wrap(x,y,self.getA(),self.getHeight(),xy)
                 s += "{x}, {y}, {size}\n".format(x=x,y=y,size=atom.getSize())
             s += "\n"
 
@@ -171,7 +175,7 @@ def lammpsFile(cell,path='.', filename=""):
     for m in cell.getMols():
         for atom in m:
             x,y = atom.getPos()
-            #x = wrap(x, cell.getA())
+            x,y = wrap(x,y,cell.getA(),cell.getHeight(), xy)
             string += "{id} {molID} {type} {diam} {x} {y} {z}\n".format(\
                     id=atomID, molID=molID, type=atom.getType(),\
                     diam=2*atom.getSize(), x=x, y=y, z=0)
@@ -183,10 +187,19 @@ def lammpsFile(cell,path='.', filename=""):
     f.write(string)
     f.close()
 
-def wrap(x, a):
-    x = 2*pi*x/a
-    x = (atan2(sin(x),cos(x))+pi)*(a/(2*pi))
-    return x
+
+def wrap(x,y,a,height,xy):
+    while y > height:
+        y -= height
+        x -= xy
+    while y < 0:
+        y += height
+        x += xy
+    while x > a:
+        x -= a
+    while x < 0:
+        x += a
+    return x,y
 
 def cellFile(cell,path='.', filename=""):
     mol = cell.getMol()
@@ -198,9 +211,8 @@ def cellFile(cell,path='.', filename=""):
     string += '{}   extra bond per atom\n'.format(mol.maxBondCount())
     string += '{}   extra angle per atom\n\n'.format(mol.maxAngleCount())
     string += '0 {xdim}     xlo xhi\n'.format(xdim=a)
-    string += '0 {ydim}     ylo yhi\n'.format(ydim=b)
+    string += '0 {ydim}     ylo yhi\n'.format(ydim=cell.getHeight())
     string += '{xy} {xz} {yz}   xy xz yz\n\n'.format(xy=0,xz=0,yz=0)
-    
     string += '\nAtoms\n\n'
     string += str(cell)
     if mol.getBonds():

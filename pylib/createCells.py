@@ -33,7 +33,6 @@ def create(a, b, theta, molpos, molecule, crys, mols=2500, path='.', boundary=0)
         filename+="-"+s.getCrys()
     if boundary:
         filename+="-"+boundary
-    print filename
     unitCell.cellFile(s, path, filename)
     unitCell.molFile(s.getMol(), path, s.getCrys())
     unitCell.lammpsFile(s, path, filename)
