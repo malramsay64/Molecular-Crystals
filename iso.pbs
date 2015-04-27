@@ -12,4 +12,8 @@ module load intel openmpi-intel
 cd "$PBS_O_WORKDIR"
 cat ${PBS_NODEFILE} > nodes.txt
 
-cd $PREFIX/$mol; $BIN_PATH/wallpaper 1 anyu all $dist $rad > out.log
+if [[ -z $dist ]] ; then 
+    cd $PREFIX/$mol; $BIN_PATH/wallpaper 1 dimer all $dist $rad > out.log
+else if [[ -z $theta ]]; then
+    cd $PREFIX/$mol; $BIN_PATH/wallpaper 1 trimer all $rad $theta > out.log
+fi
