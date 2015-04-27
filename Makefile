@@ -23,14 +23,8 @@ ifneq ($(dist_tri),)
 	mol_t := $(if $(dist), $(foreach d, $(dist_tri), $(addsuffix -$(d), $(mol_t))), $(mol_t)) 
 	mol := $(mol_s) $(mol_t)
 else
-	mol := $(if $(dist), $(foreach rad, $(dist), $(addsuffix -$(rad), $(mol))), $(mol)) 
+	mol := $(if $(dist), $(foreach d, $(dist), $(addsuffix -$(d), $(mol))), $(mol)) 
 endif
-
-
-ifneq ($(dist_tri),)
-	mol_t2 := $(foreach d, $(dist_tri), $(foreach m, $(mol_t), $(if $(filter $(call p_dist, $m), $d), $m)))
-endif
-mol := $(mol_s) $(mol_t2)
 
 # Computing Distance
 mol := $(foreach m, $(mol), $(m:$(call p_dist, $m)=$(call comp_dist, $(call p_dist, $m), $(call p_rad, $m))))

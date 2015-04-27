@@ -163,6 +163,7 @@ def lammpsFile(cell,path='.', filename=""):
     string += "ITEM: NUMBER OF ATOMS\n"
     string += "{}\n".format(cell.numAtoms())
     string += "ITEM: BOX BOUNDS\n"
+    xy = 0
     if xy < 0:
         string += "{xmin} {xmax} {xy}\n".format(xmin=xy, xmax=a, xy=xy)
     else:
