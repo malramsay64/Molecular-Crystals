@@ -55,7 +55,7 @@ t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp_1.0 = 0.68 0.70 0.72
+temp_1.0 = 0.68 0.70 0.72 0.75
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
