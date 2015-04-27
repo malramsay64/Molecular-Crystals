@@ -106,13 +106,15 @@ class cell:
             mx,my = mol.COM()
             mx2,my2 = wrap(mx,my,self.getA(),self.getHeight(),self.getB()*cos(self.getTheta()))
             mol.translate(mx2-mx,my2-my)
+            taid = 1
             for atom in mol:
                 x,y = atom.getPos()
                 s += "{aid} {mid} {tid} {taid} {atype} {x} {y} {z}\n"\
                         .format(aid=aid, mid=mid, tid=1,\
-                        taid=atom.getType(), atype=atom.getType(),\
+                        taid=taid, atype=atom.getType(),\
                         x=x, y=y, z = 0)
                 aid += 1
+                taid += 1
             mid += 1
         return s
 
@@ -174,9 +176,12 @@ def lammpsFile(cell,path='.', filename=""):
     atomID = 1
     molID = 1
     for m in cell.getMols():
+        #mx,my = m.COM()
+        #mx2,my2 = wrap(mx,my,self.getA(),self.getHeight(),self.getB()*cos(self.getTheta()))
+        #mol.translate(mx2-mx,my2-my)
         for atom in m:
             x,y = atom.getPos()
-            x,y = wrap(x,y,cell.getA(),cell.getHeight(), xy)
+            #x,y = wrap(x,y,cell.getA(),cell.getHeight(), xy)
             string += "{id} {molID} {type} {diam} {x} {y} {z}\n".format(\
                     id=atomID, molID=molID, type=atom.getType(),\
                     diam=2*atom.getSize(), x=x, y=y, z=0)
@@ -220,7 +225,7 @@ def cellFile(cell,path='.', filename=""):
         string += '\nBond Coeffs\n\n'
         a,b,d = mol.getBonds()[0]
         string += '{bondID} {coeff} {dist}\n'.format(\
-                bondID=1, coeff=500, dist=d)
+                bondID=1, coeff=5000, dist=d)
     if mol.getAngles():
         string += '\nAngle Coeffs\n\n'
         a,b,c,theta = mol.getAngles()[0]
@@ -232,7 +237,6 @@ def cellFile(cell,path='.', filename=""):
     string += '\nPair Coeffs\n\n'
     for t in mol.getAtomTypes():
         string += '{0} {strength} {dist}\n'.format(t.getType(), strength=1, dist=2*t.getSize())
-    string += "\nAtoms\n"
     if not filename:
         filename=mol.getFilename()
         if cell.getCrys():

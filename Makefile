@@ -15,6 +15,8 @@ mol_d := $(filter Disc%, $(mol))
 # Radius
 mol := $(if $(radius), $(foreach rad, $(radius), $(addsuffix -$(rad), $(mol))), $(mol)) 
 
+mol_1 := $(mol)
+
 # Distance
 ifneq ($(dist_tri),)
 	mol_s := $(filter Snowman%, $(mol))
@@ -26,6 +28,8 @@ else
 	mol := $(if $(dist), $(foreach d, $(dist), $(addsuffix -$(d), $(mol))), $(mol)) 
 endif
 
+mol_2 := $(mol)
+
 # Computing Distance
 mol := $(foreach m, $(mol), $(m:$(call p_dist, $m)=$(call comp_dist, $(call p_dist, $m), $(call p_rad, $m))))
 
@@ -36,15 +40,15 @@ mol_t := $(foreach rad, $(theta), $(addsuffix -$(rad), $(mol_t)))
 
 mol := $(mol_d) $(mol_s) $(mol_t)
 
+mol_3 := $(mol)
+
 ifneq ($(crys_dir),)
 	crys_dir = $(PREFIX)/../pack_iso/$(subst $(space),-,$(call p_shape,$1) $(call p_rad,$1) $(call p_dist,$1))
 else
 	crys_dir = $(my_dir)/crystals
 endif
 
-ifeq ($(findstring dynamics, $(collate_plots)),dynamics)
-	dynamics=true
-endif
+mol_4 := $(mol)
 
 # Adding crystals for which there are unit cells
 ifneq ($(strip $(crys)),)
@@ -62,6 +66,10 @@ endif
 
 #}}}
 
+ifeq ($(findstring dynamics, $(collate_plots)),dynamics)
+	dynamics=true
+endif
+
 VPATH=.:$(BIN_PATH):$(LIB):gnuplot
 
 distances = $(foreach m, $(mol), $(call p_dist, $m))
@@ -76,6 +84,12 @@ get_mol = $(call wo_temp, $(word 5, $(subst /,$(space),$m)))
 all: program
 
 test:
+	@echo $(mol)
+	@echo $(mol_1)
+	@echo $(mol_2)
+	@echo $(mol_3)
+	@echo $(mol_4)
+	@echo $(crys_dir)
 
 collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.out

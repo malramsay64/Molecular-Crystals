@@ -19,7 +19,7 @@ if "${diam} != 2" then &
 compute diam all property/atom d_diam
 
 # Simulation parameters, bonds not able to move 
-fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
+fix 1 all npt temp $T $T 10 iso ${press} ${press} 10
 fix 2 all enforce2d
 fix 3 all momentum 100 linear 1 1 0
 

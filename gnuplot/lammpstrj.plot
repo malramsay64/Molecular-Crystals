@@ -37,6 +37,7 @@ do for [i=1:words(files)] {
     set object rectangle from -0,0 to a,height
     atoms = system("awk 'NR==4 {print $1; exit}' ".infile)
     print 'Atoms: '.atoms
-    plot "< awk 'NR>9 {print $0} NR==9+".atoms." {exit}' ".infile using ($5):6:($4/2) with circles lc rgb my_green
+    plot "< awk 'NR>9 {print $0} NR==9+".atoms." {exit}' ".infile using ($5):6:($4/2) with circles lc rgb 'black',\
+        "< awk 'NR>9 {print $0} NR==9+".atoms." {exit}' ".infile using ($5):6:($4/2 - 0.05) with circles lc rgb my_green
 
 }

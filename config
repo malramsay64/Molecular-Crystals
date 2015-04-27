@@ -109,7 +109,7 @@ CREATE_VARS=$(LAMMPS_FILES) $(LAMMPS_MOL_VARS) -v T $(create_t) -v press $(press
 #}}}
 # MPI Settings {{{
 ifeq ($(SYS_NAME), ubuntu)
-	MPI=mpirun -np 1
+	MPI=mpirun -np 4
 else
 	MPI= mpirun -np 8
 endif
