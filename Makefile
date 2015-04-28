@@ -188,7 +188,7 @@ clean:
 
 clean-collate: $(mol)
 	-rm -f $(PREFIX)/plots/*
-	-rm -f $(PREFIX)/latex/$<.tex
+	-rm -f $(PREFIX)/latex/*.tex
 
 delete:
 	-rm -rf $(PREFIX)/*
