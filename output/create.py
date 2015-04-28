@@ -44,7 +44,7 @@ def figure(prefix, filename, caption=0):
         for plot in plots:
             print r"\begin{subfigure}{0.5\textwidth}"
             print r"\centering"
-            print r"\includegraphics[width=\mywidth]{{{{{0}}}{ext}}}".format(plot, ext=plotext)
+            print r"\includegraphics[width=\mywidth]{{{{{{{0}}}}}}}".format(plot)
             print r"\caption{{{0}}}".format(os.path.basename(plot).split("_")[-1])
             print r"\end{subfigure}"
         print r"\caption{{{name}}}".format(name=caption)
@@ -62,7 +62,7 @@ def figure(prefix, filename, caption=0):
         print r"\begin{minipage}{0.5\textwidth}"
         print r"\begin{figure}[H]"
         print r"\centering"
-        print r"\includegraphics[width=\mywidth]{{{{{0}}}{ext}}}".format(plots[0],ext=plotext)
+        print r"\includegraphics[width=\mywidth]{{{{{{{0}}}}}}}".format(plots[0])
         print r"\caption{{{name}}}".format(name=caption)
         print r"\end{figure}"
         print r"\end{minipage}"
@@ -77,7 +77,7 @@ def collated(prefix, filename, caption):
         print r"\begin{minipage}{0.5\textwidth}" 
         print r"\begin{figure}[H]"
         print r"\centering"
-        print r"\includegraphics[width=\mywidth]{{{{{0}}}{ext}}}".format(plot, ext=plotext)
+        print r"\includegraphics[width=\mywidth]{{{{{{{0}}}}}}}".format(plot)
         print r"\caption{{{name}}}".format(name=caption)
         print r"\end{figure}"
         print r"\end{minipage}"
@@ -95,7 +95,7 @@ def collatedEx(prefix, filename, caption, exclude):
         print r"\begin{minipage}{0.5\textwidth}" 
         print r"\begin{figure}[H]"
         print r"\centering"
-        print r"\includegraphics[width=\mywidth]{{{{{0}}}{ext}}}".format(plot, ext=plotext)
+        print r"\includegraphics[width=\mywidth]{{{{{{{0}}}}}}}".format(plot)
         print r"\caption{{{name}}}".format(name=caption)
         print r"\end{figure}"
         print r"\end{minipage}"
