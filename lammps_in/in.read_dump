@@ -1,0 +1,44 @@
+# Define molecule
+molecule    mymol ${the_path}/data/${molecule}
+
+# Define units and dimensions
+dimension   2
+units       lj
+
+# Define type of atoms
+atom_style  template mymol
+
+# Define interaction potentials
+pair_style  lj/cut 2.5
+pair_modify shift yes
+
+if "${atoms} > 1" then &
+    "bond_style harmonic"
+
+if "${atoms} > 2" then &
+    "angle_style harmonic"
+
+boundary p p p
+
+# Read in interaction parameters
+read_data   ${the_path}/data/${mol_settings}
+
+read_dump trj/out.lammpstrj ${steps} x y  box yes purge yes add yes replace no trim no
+
+# Exclude bonded interactions for MD steps
+neigh_modify exclude molecule all
+
+# Give all atoms the property diameter
+fix 5 all property/atom d_diam
+set type 1 d_diam 2
+variable diam equal ${radius}*2 
+if "${diam} != 2" then &
+    "set type 2 d_diam ${diam}"
+compute diam all property/atom d_diam
+
+# Thermodynamic output
+velocity all create $T 122
+run 0
+velocity all scale $T
+
+write_restart   ${the_path}/restarts/${last_restart}
