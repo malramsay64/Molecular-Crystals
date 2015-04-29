@@ -53,8 +53,10 @@ mol_4 := $(mol)
 # Adding crystals for which there are unit cells
 ifneq ($(strip $(crys)),)
     mol := $(foreach c, $(crys), $(addsuffix -$(c), $(mol)))
-    mol := $(foreach m, $(mol), $(if $(call crys_dir,$m)/$m.svg, $m))
+    mol := $(foreach m, $(mol), $(if $(wildcard $(call crys_dir,$m)/$m.svg), $m))
 endif
+
+mol_5 := $(mol)
 
 # Iterating through having a crystal liquid boundary
 ifneq ($(strip $(boundary)),)
@@ -89,11 +91,8 @@ test:
 	@echo $(mol_2)
 	@echo $(mol_3)
 	@echo $(mol_4)
-	@echo $(call crys_dir, $(word 3, $(mol)))
 	@echo $(theta)
-	@echo $(word 3, $(mol))
-	@echo $(call p_theta, $(word 3, $(mol)))
-	@echo $(filter Trimer%, $(word 3, $(mol)))
+	@echo $(crys_dir)
 
 collate: $(addsuffix .tex, $(mol)) | $(PREFIX)/plots
 	@echo \\input{$(PREFIX)/latex/collate.tex} > output/prefix.out

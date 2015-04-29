@@ -83,6 +83,7 @@ endif
 all:
 
 test:
+	@echo $(mol)
 
 # Create data files for molecule if not already generated
 files: $(mol_settings)
