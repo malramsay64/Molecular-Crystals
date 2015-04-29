@@ -48,6 +48,7 @@ $(PRE): $(save)
 clean-collate:$(save)
 
 $(TARGETS): $(save)
+	@echo $@
 
 $(PRESENT): $(save)
 

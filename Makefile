@@ -128,7 +128,7 @@ else
 	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 endif
 else
-	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
+	$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 endif
 
 vars.mak:
