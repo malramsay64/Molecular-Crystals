@@ -25,10 +25,13 @@ class cell:
         index = 0
         while index < len(molpos):
             x,y,phi = [float(i) for i in molpos[index:index+3]]
-            const = (1*1 + mol.getDist()*mol.getDist() - mol.getRadius()*mol.getRadius())/(2*mol.getDist()*1)
-            x += -(const)*cos(phi)
-            y += -(const)*sin(phi)
-            phi += pi/2
+            if mol.getName() == "Snowman":
+                const = (1*1 + mol.getDist()*mol.getDist() - mol.getRadius()*mol.getRadius())/(2*mol.getDist()*1)
+                x += -(const)*cos(phi)
+                y += -(const)*sin(phi)
+                phi += pi/2
+            if mol.getName() == "Trimer":
+                phi += pi
             self.addMol(x, y, phi)
             index += 3
 

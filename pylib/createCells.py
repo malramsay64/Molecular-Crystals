@@ -21,7 +21,9 @@ def create(a, b, theta, molpos, molecule, crys, mols=2500, path='.', boundary=0)
         na = sqrt(mols*b/a)
         nb = mols/na
         na = int(na)
+        na += na % 2
         nb = int(nb)
+        nb += nb % 2
         if boundary == 1:
             s.replicate(2*na, nb)
         elif boundary == 2:
@@ -50,15 +52,26 @@ if __name__ == "__main__":
 
     path = args[1]
     mols = int(args[2])
-    r = args[3]
-    d = args[4]
-    crys = args[5]
-    try:
-        boundary = int(args[6])
-    except IndexError:
-        boundary = ''
-    s = molecule.Snowman(r,d)
-    
+    shape = args[3]
+    r = args[4]
+    d = args[5]
+    m = getattr(molecule, shape)
+    if shape == "Trimer":
+        theta = args[6]
+        crys = args[7]
+        try:
+            boundary = int(args[8])
+        except IndexError:
+            boundary = ''
+        s = m(r,d,theta)
+    elif shape == "Snowman":
+        crys = args[6]
+        try:
+            boundary = int(args[7])
+        except IndexError:
+            boundary = ''
+        s = m(r,d)
+
     if len(line) % 3 == 0 and len(line) > 0:
         a = float(line[0])
         b = float(line[1])

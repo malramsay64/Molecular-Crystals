@@ -34,7 +34,7 @@ SAVE = $(subst $(space),-,$(strip $(call p_shape, $1) $t $(call p_rad, $1) $(cal
 p_shape = $(word 1, $(subst -,$(space),$(1)) )
 p_rad = $(word 2, $(subst -,$(space),$(1)) )
 p_dist = $(word 3, $(subst -,$(space),$(1)) )
-p_theta = $(word 4, $(subst -,$(space),$(1)) )
+p_theta = $(if $(filter Trimer%, $1), $(word 4, $(subst -,$(space),$(1))))
 p_crys = $(word 4, $(subst -,$(space),$(1)) )
 p_bound = $(word 5, $(subst -,$(space),$(1)) )
 
@@ -42,9 +42,11 @@ t_shape = $(word 1, $(subst -,$(space),$(1)) )
 t_temp = $(word 2, $(subst -,$(space),$(1)) )
 t_rad = $(word 3, $(subst -,$(space),$(1)) )
 t_dist = $(word 4, $(subst -,$(space),$(1)) )
-t_theta = $(word 5, $(subst -,$(space),$(1)) )
+t_theta = $(if $(filter Trimer%, $1), $(word 5, $(subst -,$(space),$(1))))
 t_crys = $(word 5, $(subst -,$(space),$(1)) )
+t_tri_crys = $(word 6, $(subst -,$(space),$(1)) )
 t_bound = $(word 6, $(subst -,$(space),$(1)) )
+t_tri_bound = $(word 7, $(subst -,$(space),$(1)) )
 
 wo_temp = $(subst $(space),-,$(strip $(call t_shape, $1) $(call t_rad, $1) $(call t_dist, $1) $(call t_theta, $1) $(call t_bound, $1)))
 
