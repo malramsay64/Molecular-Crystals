@@ -8,7 +8,7 @@ include system
 
 # Shape (Snowman|Trimer)
 # <<<LOOP>>>
-shape=Snowman
+shape=Snowman Trimer
 
 # Radius (0,1]
 # <<<LOOP>>>
@@ -16,7 +16,8 @@ radius = 0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1.0
+dist=1.0 1+radius
+dist_tri = 1.00
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
@@ -31,7 +32,7 @@ boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
-theta=
+theta=120
 
 # !!! Not Tested
 # Size ratio of two small particles in trimer
@@ -56,6 +57,8 @@ t_dep=false
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
 temp_1.0 = 0.68 0.70 0.72 0.75
+temp_1.637556 = 1.80
+temp_1.00 = 1.40
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5

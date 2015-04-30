@@ -8,7 +8,7 @@ include system
 
 # Shape (Snowman|Trimer)
 # <<<LOOP>>>
-shape=Snowman
+shape=Snowman Trimer
 
 # Radius (0,1]
 # <<<LOOP>>>
@@ -17,12 +17,13 @@ radius = 0.637556
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
 dist=1+radius 1.00
+dist_tri = 1.00
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys=p2gg pg p2mg p2
+crys= p2gg pg p2mg p2
 
 # Solid liquid interface options (1|2)
 # 1 -> x axis, 2 -> y axis doubles number of molecules
@@ -31,7 +32,7 @@ boundary= 1 2
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
-theta=
+theta=120
 # !!! Not Tested
 # Size ratio of two small particles in trimer
 ratio=
@@ -54,7 +55,7 @@ t_dep=false
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp_1.0 = 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85
+temp_1.00 = 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85
 temp_1.637556 = 1.50 1.55 1.60 1.70 1.80 1.85 1.90 1.95 2.00 2.10
 
 # Pressure - Leave constant temperature changes properties
