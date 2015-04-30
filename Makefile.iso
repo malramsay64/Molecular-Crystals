@@ -45,14 +45,14 @@ Snowman-%: wallpaper | $(PREFIX)/Snowman-%
 ifeq ($(SYS_NAME), silica)
 	@qsub -N $@-iso -o pbsout/$@.out iso.pbs -vmol=$@,PREFIX=$(PREFIX),BIN_PATH=$(BIN_PATH),dist=$(call p_dist, $@),rad=$(call p_rad, $@)
 else
-	cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 dimer all $(call p_dist, $@) $(call p_rad, $@) > out.log
+	@cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 dimer all $(call p_dist, $@) $(call p_rad, $@) > out.log
 endif
 
 Trimer-%: wallpaper | $(PREFIX)/Trimer-%
 ifeq ($(SYS_NAME), silica)
 	@qsub -N $@-iso -o pbsout/$@.out iso.pbs -vmol=$@,PREFIX=$(PREFIX),BIN_PATH=$(BIN_PATH),theta=$(call p_theta, $@),rad=$(call p_rad, $@)
 else
-	cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 trimer all $(call p_rad, $@) $(call p_theta, $@) > out.log
+	@cd $(PREFIX)/$@; $(BIN_PATH)/wallpaper 1 trimer all $(call p_rad, $@) $(call p_theta, $@) > out.log
 endif
 
 

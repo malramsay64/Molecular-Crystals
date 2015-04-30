@@ -6,14 +6,26 @@
 ##PBS -m abe
 #PBS -M malramsay64+silica@gmail.com
 
+
 source /etc/profile.d/modules.sh
 module load intel openmpi-intel
 
-cd "$PBS_O_WORKDIR"
+cd $PREFIX/$mol
 cat ${PBS_NODEFILE} > nodes.txt
 
-if [[ -z $dist ]] ; then 
-    cd $PREFIX/$mol; $BIN_PATH/wallpaper 1 dimer all $dist $rad > out.log
-else if [[ -z $theta ]]; then
-    cd $PREFIX/$mol; $BIN_PATH/wallpaper 1 trimer all $rad $theta > out.log
+echo "Begin" > out.log
+echo $mol dist: $dist rad: $rad theta: $theta >> out.log
+
+if [ ! -z $dist ] ; then
+    echo $mol >> out.log
+    echo "$BIN_PATH/wallpaper 1 dimer all $dist $rad" >> out.log
+    $BIN_PATH/wallpaper 1 dimer all $dist $rad >> out.log
+else
+    if [ ! -z $theta ]; then
+        echo $mol >> out.log
+        echo "$BIN_PATH/wallpaper 1 trimer all $rad $theta" >> out.log
+        $BIN_PATH/wallpaper 1 trimer all $rad $theta >> out.log
+    fi
 fi
+
+echo "Finished" >> out.log
