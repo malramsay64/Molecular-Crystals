@@ -11,28 +11,48 @@ ifneq ($(dimers), )
 	radius := $(call p_rad, $(mol))
 	dist := $(call p_dist, $(mol))
 	theta := $(call p_theta, $(mol))
-else 
+else
 	shape := $(call t_shape, $(mol))
+	temp := $(call t_temp, $(mol))
 	radius := $(call t_rad, $(mol))
 	dist := $(call t_dist, $(mol))
-	theta := $(call t_theta, $(mol))
-	temp := $(call t_temp, $(mol))
+ifeq ($(shape), Snowman)
+    atoms := 2
+	crys := $(call t_crys, $(mol))
 	bound := $(call t_bound, $(mol))
+	theta := $(empty)
+ifeq ($(temp), $(prev_t))
+	last_restart=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(crys) $(n_mol) $(bound))).rt
+else
+    last_restart=$(subst $(space),-,$(strip $(prev_t) $(shape) $(radius) $(dist) $(crys) $(n_mol) $(bound))).rt
+endif
+	restart=$(subst $(space),-,$(strip $(temp) $(shape) $(radius) $(dist) $(crys) $(n_mol) $(bound))).rt
+	molecule=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(crys))).mol
+	mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(crys) $(bound))).dat
+	base=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(crys)))
+else ifeq ($(shape), Trimer)
+	atoms := 3
+	theta = $(call t_theta, $(mol))
+	crys = $(call t_tri_crys, $(mol))
+	bound := $(call t_tri_bound, $(mol))
+ifeq ($(temp), $(prev_t))
+    last_restart=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(crys) $(n_mol) $(bound))).rt
+else
+    last_restart=$(subst $(space),-,$(strip $(prev_t) $(shape) $(radius) $(dist) $(theta) $(crys) $(n_mol) $(bound))).rt
+endif
+	restart=$(subst $(space),-,$(strip $(temp) $(shape) $(radius) $(dist) $(theta) $(crys) $(n_mol) $(bound))).rt
+	molecule=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(crys))).mol
+	mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(crys) $(bound))).dat
+	base=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(crys)))
+else ifeq ($(shape), Disc)
+	atoms := 1
+endif
 endif
 
 #to_plot:=$(addprefix plot-, $(to_plot))
 create_t = 5.0
 
-ifeq ($(shape), Snowman)
-    atoms := 2
-    t_crys := $(theta)
-else ifeq ($(shape), Trimer)
-    atoms := 3
-else ifeq ($(shape), Disc)
-	atoms := 1
-endif
-
-ifneq ($(t_crys), )
+ifneq ($(crys), )
 	override prev_t := 0.0
 ifneq ($(bound), )
     CREATE_IN:=$(BOUNDARY_IN)
@@ -44,18 +64,9 @@ endif
 SAVE:=$(mol)
 
 # Filenames generated from properties
-ifeq ($(temp), $(prev_t))
-    last_restart=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(n_mol) $(bound))).rt
-else
-    last_restart=$(subst $(space),-,$(strip $(prev_t) $(shape) $(radius) $(dist) $(theta) $(n_mol) $(bound))).rt
-endif
-restart=$(subst $(space),-,$(strip $(temp) $(shape) $(radius) $(dist) $(theta) $(n_mol) $(bound))).rt
-molecule=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta))).mol
-mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta) $(bound))).dat
-base=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta)))
 
 # Equilibrate all boundaries from same initial state at 'T = 0.0'
-ifneq ($(t_crys), )
+ifneq ($(crys), )
 	CREATE_VARS:=-v T $(temp) $(CREATE_VARS)
 endif
 
@@ -72,15 +83,16 @@ endif
 all:
 
 test:
+	@echo $(mol)
 
 # Create data files for molecule if not already generated
 files: $(mol_settings)
 
 # Generate crystal from unit cell in svg file
-ifneq ($(t_crys), )
+ifneq ($(crys), )
 $(mol_settings): | data
 	@echo Producing unit cell of $(base)
-	@tail -2 $(call crys_dir,$(base))/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(radius) $(dist) $(t_crys) $(bound)
+	tail -2 $(call crys_dir,$(base))/$(base).svg | head -1 | $(PYTHON) $(PYLIB)/$(CRYS_FILE) $(PREFIX)/data $(n_mol) $(shape) $(radius) $(dist) $(theta) $(crys) $(bound)
 
 # Generate Dimers
 else ifneq ($(dimers), )
@@ -97,7 +109,7 @@ endif
 
 $(last_restart): $(mol_settings) | $(FOLDERS) restarts
 	@echo Create $(last_restart)
-	@$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
+	$(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(CREATE_VARS) < $(CREATE_IN) > $(LOG)
 
 #Equilibration run for molecule
 $(restart): | $(last_restart) $(FOLDERS)
@@ -227,12 +239,8 @@ clean-density: clean-present
 	rm -f .make/density
 
 clean-plot: clean-collate
-	rm -f order/*.png
-	rm -f *.png
-	rm -f trj_contact/*.png
-	rm -f trj_contact/*.pdf
-	rm -f .make/plot*
 	rm -f myplot/*
+	rm -f .make/plot-*
 
 clean-collate: clean-present
 	rm -f my_latex/*

@@ -1,7 +1,7 @@
 include system
 
-# Inherent structure packing
-# settings.iso
+# Cool snowman
+# settings.cool_snow
 
 # Molecule Settings {{{
 # -----------------
@@ -16,7 +16,7 @@ radius = 0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1.00 1+0.20*radius 1+0.40*radius 1+0.60*radius 1+0.80*radius 1.00+radius
+dist=1+radius 1.0
 dist_tri = 1.00
 
 # Crystal unit cell
@@ -33,6 +33,7 @@ boundary=
 # Angle in degrees (0,180]
 # <<<LOOP>>>
 theta=120
+
 # !!! Not Tested
 # Size ratio of two small particles in trimer
 ratio=
@@ -42,20 +43,23 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 0
+steps = 160000000
 # Print every <N> steps, 0 produces logarithmic progression
 print = 0
 # Number of steps in equilibration (n >= 1)
-equil_steps = 1
+equil_steps = 80000000
 # Number of molecules (won't be exact, tries to keep simulation square)
-n_mol = 0
+n_mol = 2500
 
 # Dependent on previous temps
-t_dep=false
+t_dep=true
 
 # Can set a temp for each d (temp_$d)
 # <<<LOOP>>>
-temp = 0.4
+temp_1.0 = 3.50 3.00 2.50 2.00 1.80 1.60 1.40 1.20 1.10 1.00 0.90 0.80 0.75 0.70 0.68 0.65 0.60
+temp_1.637556 = 3.50 3.00 2.50 2.00 1.90 1.80 1.75 1.70 1.68 1.65 1.62 1.60 1.55 1.50
+# Temperature for trimers
+temp_1.00 = 3.50 3.00 2.50 2.00 1.80 1.60 1.50 1.40 1.35 1.30 1.25 1.20 1.15 1.10 1.05 1.00
 
 # Pressure - Leave constant temperature changes properties
 pressure = 13.5
@@ -77,7 +81,7 @@ density = 0.015625
 # -s <n>    Step size - only every n frames and key frames (default 1)
 # -k <n>    Key frame rate - add key frame every n frames (default 100)
 
-contact_args=-k 20 -q
+contact_args=-k 20
 
 # }}}
 # Plot Settings {{{ 
@@ -91,15 +95,15 @@ thermo=PotEng TotEng Density Press Xy Pxx Pyy
 # (order|frame|angle|dynamic|short-order|props|short-order-hist|radial))
 # All
 #to_plot = order frame angle dynamic short-order hist props short-order-hist radial struct rot-diff
-to_plot = frame radial hist
+to_plot = frame radial radial2d hist moved
 
 # Collate, Plots which take data from a number of temperatures or molecules
 # ( order | temp_dep | dynamics )
-collate_plots = order dynamics temp_dep
+collate_plots = order dynamics collate-msd collate-rot collate-struct
 
 # Output filetype
 # ( png | pdf )
-term_type = png
+term_type = pdf
 
 # }}}
 # Path variables {{{
@@ -108,15 +112,17 @@ term_type = png
 # Location of intermediate output files (scratch space)
 # Needs a lot (GBs) of space with fast access
 
-d_name=pack_iso
+d_name=cool
 
 ifeq ($(SYS_NAME), silica)
     PREFIX := /tmp3m/mram5995/$(d_name)
+	# Directory Makefile is located
 	my_dir := $(HOME)/make_$(d_name)
 else
     PREFIX := $(HOME)/scratch/$(d_name)
 	my_dir := $(HOME)/make
 endif
+
 
 # }}}
 

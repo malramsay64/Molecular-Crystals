@@ -12,17 +12,18 @@ shape=Snowman Trimer
 
 # Radius (0,1]
 # <<<LOOP>>>
-radius = 0.5 0.6 0.637556 0.7 0.8 0.9 1.0
+radius = 0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
 dist=1.00 1+0.20*radius 1+0.40*radius 1+0.60*radius 1+0.80*radius 1.00+radius
+dist_tri = 1.00
 
 # Crystal unit cell
 # (pg|p2|p2gg) will only run the states where there are the corresponding svg files in
 # the ./crystals directory
 # <<<LOOP>>>
-crys= p2 p2gg p2mg pg p3 
+crys= p1 p2 p2gg p2mg pg p3 
 crys_dir=t
 
 # Solid liquid interface options (1|2)
@@ -42,11 +43,11 @@ ratio=
 # -------------------
 
 # Number of steps
-steps = 32000000
+steps = 10000
 # Print every <N> steps, 0 produces logarithmic progression
-print = 128000
+print = 200
 # Number of steps in equilibration (n >= 1)
-equil_steps = 8000000
+equil_steps = 80000
 # Number of molecules (won't be exact, tries to keep simulation square)
 n_mol = 2500
 

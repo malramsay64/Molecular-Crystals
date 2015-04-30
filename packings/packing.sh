@@ -22,18 +22,17 @@ if [ -d $prefix ]; then
 fi
 
 # For Crystalling packings
-prefix=$HOME/scratch/pack_iso
-bash best.sh $prefix
+prefix=$HOME/scratch/pack_crys
 if [ -d $prefix ]; then
     echo $prefix exists
     dirs=$(ls -d $prefix/*-*)
 
     for d in $dirs; do
-        pack=$(head -n1 $d/best.dat | cut -d' ' -f2)
+        pack=$(grep -i "Packing Fraction:" $d/order.log | cut -d: -f2-)
         mol=$(basename $d)
-        echo $(echo $mol | cut -d- -f2- | tr - ' ') $pack >> $(echo $mol | cut -d- -f1)-iso.dat
+        echo $(echo $mol | cut -d- -f3- | tr - ' ') $pack >> $(echo $mol | cut -d- -f1)-crys.dat
     done
-    gnuplot pack_iso.plot
+    gnuplot pack_crys.plot
 fi
 
 # For Trimer Packings

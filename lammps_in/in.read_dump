@@ -23,6 +23,8 @@ boundary p p p
 # Read in interaction parameters
 read_data   ${the_path}/data/${mol_settings}
 
+read_dump trj/out.lammpstrj ${steps} x y  box yes purge yes add yes replace no trim no
+
 # Exclude bonded interactions for MD steps
 neigh_modify exclude molecule all
 
@@ -35,24 +37,8 @@ if "${diam} != 2" then &
 compute diam all property/atom d_diam
 
 # Thermodynamic output
-thermo          1000
-thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density lx ly xy
-
-log     ${my_path}/logs/create.log
-
-# Simulation parameters, bonds not able to move 
-fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 #xy 0 0 10
-fix 2 all enforce2d
-
-# Give particles an initial velocity
 velocity all create $T 122
 run 0
 velocity all scale $T
-
-timestep 1e-3
-run ${steps}
-
-min_style cg
-minimize 1e-6 1e-8 1000 1000
 
 write_restart   ${the_path}/restarts/${last_restart}

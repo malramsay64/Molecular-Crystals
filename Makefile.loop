@@ -4,6 +4,7 @@ shape := $(call p_shape, $(mol))
 radius := $(call p_rad, $(mol))
 dist := $(call p_dist, $(mol))
 theta := $(call p_theta, $(mol))
+crys := $(call p_crys, $(mol))
 bound := $(call p_bound, $(mol))
 
 # Temp range for each d
@@ -14,9 +15,14 @@ endif
 
 ifeq ($(shape), Disc)
 	save = $(addprefix $(strip $(shape))-,$(temp))
-else
-	save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(theta) $(bound))), $(temp)) 
+else ifeq ($(shape), Snowman)
+	save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(crys) $(bound))), $(temp)) 
 	save := $(addprefix $(strip $(shape))-, $(save1)) 
+	all_temps = $(notdir $(wildcard $(PREFIX)/$(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(crys) $(bound)))))
+else ifeq ($(shape), Trimer)
+	save1 := $(addsuffix $(subst $(space),-,-$(strip $(radius) $(dist) $(theta) $(crys) $(bound))), $(temp)) 
+	save := $(addprefix $(strip $(shape))-, $(save1))
+	all_temps = $(notdir $(wildcard $(PREFIX)/$(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(theta) $(crys) $(bound)))))
 endif
 
 ifneq ($(dimers), )
@@ -32,7 +38,6 @@ OPTIONS = --no-print-directory $(if $(filter $(MAKECMDGOALS), $(PRE)), -j 1)
 collate_command = echo $(call t_temp, $1),$$(cat $(PREFIX)/$1/$@ | cut -d: -f$2 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) >> $(PREFIX)/plots/$(mol)-$(basename $@).csv
 collate_header = echo "t,"$$(cat $(PREFIX)/$1/$@ | cut -d: -f1 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) > $(PREFIX)/plots/$(mol)-$(basename $@).csv
 
-all_temps = $(notdir $(wildcard $(PREFIX)/$(subst $(space),-,$(strip $(shape) * $(radius) $(dist) $(theta) $(bound)))))
 
 export
 
@@ -43,6 +48,7 @@ $(PRE): $(save)
 clean-collate:$(save)
 
 $(TARGETS): $(save)
+	@echo $@
 
 $(PRESENT): $(save)
 

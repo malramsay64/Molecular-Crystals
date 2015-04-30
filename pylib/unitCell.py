@@ -25,10 +25,13 @@ class cell:
         index = 0
         while index < len(molpos):
             x,y,phi = [float(i) for i in molpos[index:index+3]]
-            const = (1*1 + mol.getDist()*mol.getDist() - mol.getRadius()*mol.getRadius())/(2*mol.getDist()*1)
-            x += -(const)*cos(phi)
-            y += -(const)*sin(phi)
-            phi += pi/2
+            if mol.getName() == "Snowman":
+                const = (1*1 + mol.getDist()*mol.getDist() - mol.getRadius()*mol.getRadius())/(2*mol.getDist()*1)
+                x += -(const)*cos(phi)
+                y += -(const)*sin(phi)
+                phi += pi/2
+            if mol.getName() == "Trimer":
+                phi += pi
             self.addMol(x, y, phi)
             index += 3
 
@@ -103,13 +106,18 @@ class cell:
         aid = 1
         s = ""
         for mol in self.getMols():
+            mx,my = mol.COM()
+            mx2,my2 = wrap(mx,my,self.getA(),self.getHeight(),self.getB()*cos(self.getTheta()))
+            mol.translate(mx2-mx,my2-my)
+            taid = 1
             for atom in mol:
                 x,y = atom.getPos()
                 s += "{aid} {mid} {tid} {taid} {atype} {x} {y} {z}\n"\
                         .format(aid=aid, mid=mid, tid=1,\
-                        taid=atom.getType(), atype=atom.getType(),\
+                        taid=taid, atype=atom.getType(),\
                         x=x, y=y, z = 0)
                 aid += 1
+                taid += 1
             mid += 1
         return s
 
@@ -127,6 +135,7 @@ class cell:
         for mol in self.mols:
             for atom in mol:
                 x,y = atom.getPos()
+                x,y = wrap(x,y,self.getA(),self.getHeight(),xy)
                 s += "{x}, {y}, {size}\n".format(x=x,y=y,size=atom.getSize())
             s += "\n"
 
@@ -159,6 +168,7 @@ def lammpsFile(cell,path='.', filename=""):
     string += "ITEM: NUMBER OF ATOMS\n"
     string += "{}\n".format(cell.numAtoms())
     string += "ITEM: BOX BOUNDS\n"
+    xy = 0
     if xy < 0:
         string += "{xmin} {xmax} {xy}\n".format(xmin=xy, xmax=a, xy=xy)
     else:
@@ -169,9 +179,12 @@ def lammpsFile(cell,path='.', filename=""):
     atomID = 1
     molID = 1
     for m in cell.getMols():
+        #mx,my = m.COM()
+        #mx2,my2 = wrap(mx,my,self.getA(),self.getHeight(),self.getB()*cos(self.getTheta()))
+        #mol.translate(mx2-mx,my2-my)
         for atom in m:
             x,y = atom.getPos()
-            #x = wrap(x, cell.getA())
+            #x,y = wrap(x,y,cell.getA(),cell.getHeight(), xy)
             string += "{id} {molID} {type} {diam} {x} {y} {z}\n".format(\
                     id=atomID, molID=molID, type=atom.getType(),\
                     diam=2*atom.getSize(), x=x, y=y, z=0)
@@ -183,10 +196,19 @@ def lammpsFile(cell,path='.', filename=""):
     f.write(string)
     f.close()
 
-def wrap(x, a):
-    x = 2*pi*x/a
-    x = (atan2(sin(x),cos(x))+pi)*(a/(2*pi))
-    return x
+
+def wrap(x,y,a,height,xy):
+    while y > height:
+        y -= height
+        x -= xy
+    while y < 0:
+        y += height
+        x += xy
+    while x > a:
+        x -= a
+    while x < 0:
+        x += a
+    return x,y
 
 def cellFile(cell,path='.', filename=""):
     mol = cell.getMol()
@@ -198,16 +220,15 @@ def cellFile(cell,path='.', filename=""):
     string += '{}   extra bond per atom\n'.format(mol.maxBondCount())
     string += '{}   extra angle per atom\n\n'.format(mol.maxAngleCount())
     string += '0 {xdim}     xlo xhi\n'.format(xdim=a)
-    string += '0 {ydim}     ylo yhi\n'.format(ydim=b)
+    string += '0 {ydim}     ylo yhi\n'.format(ydim=cell.getHeight())
     string += '{xy} {xz} {yz}   xy xz yz\n\n'.format(xy=0,xz=0,yz=0)
-    
     string += '\nAtoms\n\n'
     string += str(cell)
     if mol.getBonds():
         string += '\nBond Coeffs\n\n'
         a,b,d = mol.getBonds()[0]
         string += '{bondID} {coeff} {dist}\n'.format(\
-                bondID=1, coeff=500, dist=d)
+                bondID=1, coeff=5000, dist=d)
     if mol.getAngles():
         string += '\nAngle Coeffs\n\n'
         a,b,c,theta = mol.getAngles()[0]
@@ -219,7 +240,6 @@ def cellFile(cell,path='.', filename=""):
     string += '\nPair Coeffs\n\n'
     for t in mol.getAtomTypes():
         string += '{0} {strength} {dist}\n'.format(t.getType(), strength=1, dist=2*t.getSize())
-    string += "\nAtoms\n"
     if not filename:
         filename=mol.getFilename()
         if cell.getCrys():

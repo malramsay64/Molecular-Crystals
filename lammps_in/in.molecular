@@ -41,7 +41,6 @@ dump_modify 1 pad 10
 
 if "$T == 5" then &
     "timestep 1e-3"
-timestep 1e-3
 
 run ${steps}
 
