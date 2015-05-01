@@ -20,8 +20,9 @@ class thermo():
                 l = f.readline()
                 while l and not l.startswith('Loop'):
                     d = l.split()
-                    for i in xrange(len(d)):
-                        self.data[i].append(float(d[i]))
+                    if d == len(self.data[0]):
+                        for i in xrange(len(d)):
+                            self.data[i].append(float(d[i]))
                     l = f.readline()
             l = f.readline()
 
