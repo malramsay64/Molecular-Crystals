@@ -33,7 +33,7 @@ boundary=
 
 # Angle in degrees (0,180]
 # <<<LOOP>>>
-theta=
+theta=120
 # !!! Not Tested
 # Size ratio of two small particles in trimer
 ratio=
