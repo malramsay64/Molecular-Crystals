@@ -1,7 +1,8 @@
 include system
 
-# Cool snowman
-# settings.cool_snow
+# Cool both snowmen and trimers
+# All dynamics
+# settings.cool
 
 # Molecule Settings {{{
 # -----------------
