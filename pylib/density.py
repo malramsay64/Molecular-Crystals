@@ -20,13 +20,14 @@ class thermo():
                 l = f.readline()
                 while l and not l.startswith('Loop'):
                     d = l.split()
-                    if d == len(self.data[0]):
+                    if len(d) == len(self.data):
                         for i in xrange(len(d)):
                             self.data[i].append(float(d[i]))
                     l = f.readline()
             l = f.readline()
 
     def last(self, prop):
+        print self.data[0]
         d = [x[-1] for x in self.data if x[0] == prop]
         return d[0]
 

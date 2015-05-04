@@ -117,8 +117,15 @@ def name(dir):
             shape, temp, radius, dist = d
             return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$".format(temp, radius, dist, crys)
     elif shape == "Trimer":
-        shape, temp, radius, dist, theta = d
-        return r"Trimer: Temp $= {0}$, $r = {1}$, $d = {2}$, $\theta = {3}$".format(temp, radius, dist, theta)
+        if len(d) == 6:
+            shape, temp, radius, dist, theta, crys = d
+            return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$, $\theta = {3}$ {4}".format(temp, radius, dist, theta, crys)
+        elif len(d) == 7:
+            shape, temp, radius, dist, theta, crys, bound = d
+            return r"Snowman: Temp$ = {0}$, $r = {1}$, $d = {2}$, $\theta = {3}$ {4}".format(temp, radius, dist, theta, crys)
+        else:
+            shape, temp, radius, dist, theta = d
+            return r"Trimer: Temp $= {0}$, $r = {1}$, $d = {2}$, $\theta = {3}$".format(temp, radius, dist, theta)
     else:
         shape, temp = d
         return r"Disc: Temp $= {0}$".format(temp)

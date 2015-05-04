@@ -126,7 +126,7 @@ iso:
 $(mol): program vars.mak | $(PREFIX) $(PREFIX)/plots
 ifeq ($(SYS_NAME), silica)
 ifneq ($(t_dep), false)
-	@qsub -N $@ -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
+	@qsub -N $@-$(d_name) -o pbsout/$@.out make.pbs -vmol=$@,target=$(MAKECMDGOALS)
 else
 	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 endif
