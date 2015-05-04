@@ -20,7 +20,7 @@ class thermo():
                 l = f.readline()
                 while l and not l.startswith('Loop'):
                     d = l.split()
-                    if d == len(self.data[0]):
+                    if len(d) == len(self.data):
                         for i in xrange(len(d)):
                             self.data[i].append(float(d[i]))
                     l = f.readline()
@@ -78,6 +78,7 @@ if __name__ == "__main__" :
     else:
         filename = '1.log'
     f = thermo(filename)
+    sys.stderr.write(f.last('Density'))
     print 'Density: {0:.4f}'.format(f.last('Density'))
     #print 'Total Energy: {0:.4f}'.format(f.last('TotEng'))
     if len(sys.argv) == 4:
