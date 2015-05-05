@@ -46,7 +46,7 @@ plot f every :::0::0 using 1:2:3 with circles linecolor rgb circle_colour
 
 unset multiplot
 
-set pm3d interpolate 20,20
+set pm3d interpolate 50,50
 #set contour
 #set cntrparam bspline 
 #set cntrparam points 30
@@ -54,6 +54,11 @@ set output prefix.plot_dir.'radial2d_part'.ext
 sorted = '< cat '.f.' | sort -n -r -k9'
 splot f every :::1 using 3:4:9 with pm3d
 
-#set style fill transparent solid 0.2 noborder
-#set output prefix.plot_dir.'radial2d_circ'.ext
-#plot f every :::1 using 3:4:(0.05):(sqrt($6)) with circles lc variable 
+set dgrid3d 300,300, splines gauss 0.2,0.2
+set pm3d
+set contour
+set cntrparam bspline
+set cntrparam points 30
+set cntrparam levels discrete 0.5, 0.8, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0
+set output prefix.plot_dir.'radial2d_cont'.ext
+splot f every :::1 using 3:4:9 with pm3d

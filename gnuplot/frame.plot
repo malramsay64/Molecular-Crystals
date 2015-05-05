@@ -12,6 +12,7 @@ unset colorbox
 unset border
 unset xtics
 unset ytics
+set cbrange [0:2*pi]
 
 my_green = '#4BAC6F'
 
@@ -34,7 +35,7 @@ do for [i=1:words(files)] {
     set object rectangle from -0,0 to a,height
 
     plot infile every :::1 using 1:2:3 with circles lc rgb 'black',\
-         infile every :::1 using 1:2:($3-0.05):(mod($4,pi)) \
+         infile every :::1 using 1:2:($3-0.05):4 \
                 with circles lc palette title "Configuration",\
          infile every :1::1 using 1:2 with line ls 1
 
