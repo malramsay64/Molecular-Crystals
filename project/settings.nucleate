@@ -80,7 +80,7 @@ density = 0.015625
 # -s <n>    Step size - only every n frames and key frames (default 1)
 # -k <n>    Key frame rate - add key frame every n frames (default 100)
 
-contact_args=-k 20 -t
+contact_args=-k 100 -t
 
 # }}}
 # Plot Settings {{{ 
