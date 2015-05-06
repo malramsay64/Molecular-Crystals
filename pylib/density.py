@@ -27,7 +27,6 @@ class thermo():
             l = f.readline()
 
     def last(self, prop):
-        print self.data[0]
         d = [x[-1] for x in self.data if x[0] == prop]
         return d[0]
 
@@ -80,7 +79,6 @@ if __name__ == "__main__" :
         filename = '1.log'
     f = thermo(filename)
     print 'Density: {0:.4f}'.format(f.last('Density'))
-    #print 'Total Energy: {0:.4f}'.format(f.last('TotEng'))
     if len(sys.argv) == 4:
         r = float(sys.argv[2])
         dist = float(sys.argv[3])
