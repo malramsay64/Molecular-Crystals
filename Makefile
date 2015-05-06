@@ -134,6 +134,7 @@ else
 	@$(MAKE) -f $(LOOP) $(MAKECMDGOALS) mol=$@
 endif
 
+.PHONY: vars.mak
 vars.mak:
 	@rm -f $@
 	@$(foreach V,\
