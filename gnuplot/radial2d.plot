@@ -59,6 +59,6 @@ set pm3d
 set contour
 set cntrparam bspline
 set cntrparam points 30
-set cntrparam levels discrete 0.5, 0.8, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0
+set cntrparam levels discrete 0.5, 0.6, 0.8, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0
 set output prefix.plot_dir.'radial2d_cont'.ext
 splot f every :::1 using 3:4:9 with pm3d
