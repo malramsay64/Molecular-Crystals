@@ -3,7 +3,7 @@ load '~/make/gnuplot/config.plot'
 set size ratio -1
 set datafile separator " "
 set style fill transparent solid 1 noborder
-set style line 1 lt 1 lc -1 lw 1
+set style line 1 lt 1 lc -1 lw 2
 
 set pm3d
 set palette file '~/make/gnuplot/husl.dat' every ::1 using 1:2:3:4
@@ -30,7 +30,7 @@ do for [i=1:words(files)] {
     set yrange[-2:height+2]
     set xrange[-2:a+2]
 
-    set terminal term_type enhanced size term_size*scaling, term_size/(a+0.)*height*scaling
+    set terminal term_type enhanced size term_size*scaling*4, term_size/(a+0.)*height*scaling*4
 
     set object rectangle from -0,0 to a,height
 

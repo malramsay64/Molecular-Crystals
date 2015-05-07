@@ -6,6 +6,7 @@ plot_dir = 'myplot/'
 set xrange [0:15]
 set style fill solid
 set style line 5 lw 3
+set key off
 
 set output plot_dir."radial".ext
 

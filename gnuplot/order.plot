@@ -4,7 +4,6 @@ set terminal term_type enhanced size term_size*scaling, term_y*scaling font ",".
 
 set datafile separator ","
 
-set key off
 set logscale y
 set format y "10^{%L}"
 set style line 5 pt 7 lw 2*scaling ps 0.5*scaling
@@ -21,7 +20,7 @@ set output ordering.ext
 set nologscale y
 set format y "%g"
 set yrange [0:1]
-set key on autotitle columnhead
+set key on outside right autotitle columnhead 
 set xlabel "1/T"
 set ylabel
 
