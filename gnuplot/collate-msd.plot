@@ -22,7 +22,7 @@ plot for [i=1:words(files)] word(files,i)."/msd.csv" using 1:2 with linespoints 
 
 
 unset logscale y
-set ylabel '{/Symbol a}(t)'
+set ylabel '{/symbol alpha}(t)'
 set output prefix.plot_dir.molecule."-alpha".ext
 
 plot for [i=1:words(files)] word(files,i)."/msd.csv" using 1:4 with linespoints linestyle 5\

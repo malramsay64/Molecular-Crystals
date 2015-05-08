@@ -33,6 +33,20 @@ plot_dict = {\
 
 plots=plot_dict.values()
 
+def printPlot(plot, caption, exclude=[]):
+    for x in exclude:
+        if x in plot:
+            return
+    print r"\begin{minipage}{0.5\textwidth}" 
+    print r"\begin{figure}[H]"
+    print r"\centering"
+    print r"\includegraphics[width=\mywidth]{{{{{{{0}}}}}}}".format(plot)
+    print r"\caption{{{name}}}".format(name=caption)
+    print r"\end{figure}"
+    print r"\end{minipage}"
+    return
+
+
 def figure(prefix, filename, caption=0):
     if not caption:
         caption = name(prefix)
@@ -59,13 +73,7 @@ def figure(prefix, filename, caption=0):
         print r"\captionof{{table}}{{{name}}}".format(name=caption)
         print r"\end{minipage}"
     elif len(plots) == 1:
-        print r"\begin{minipage}{0.5\textwidth}"
-        print r"\begin{figure}[H]"
-        print r"\centering"
-        print r"\includegraphics[width=\mywidth]{{{{{{{0}}}}}}}".format(plots[0])
-        print r"\caption{{{name}}}".format(name=caption)
-        print r"\end{figure}"
-        print r"\end{minipage}"
+        printPlot(plots[0], caption)
 
 def collated(prefix, filename, caption):
     if not caption:
@@ -74,13 +82,7 @@ def collated(prefix, filename, caption):
     plots = [os.path.splitext(file)[0] for file in glob.glob(filename)]
     plots.sort()
     for plot in plots:
-        print r"\begin{minipage}{0.5\textwidth}" 
-        print r"\begin{figure}[H]"
-        print r"\centering"
-        print r"\includegraphics[width=\mywidth]{{{{{{{0}}}}}}}".format(plot)
-        print r"\caption{{{name}}}".format(name=caption)
-        print r"\end{figure}"
-        print r"\end{minipage}"
+        printPlot(plot, caption)
 
 def collatedEx(prefix, filename, caption, exclude):
     if not caption:
@@ -89,16 +91,7 @@ def collatedEx(prefix, filename, caption, exclude):
     plots = [os.path.splitext(file)[0] for file in glob.glob(filename)]
     plots.sort()
     for plot in plots:
-        for x in exclude:
-            if x in plot:
-                break
-        print r"\begin{minipage}{0.5\textwidth}" 
-        print r"\begin{figure}[H]"
-        print r"\centering"
-        print r"\includegraphics[width=\mywidth]{{{{{{{0}}}}}}}".format(plot)
-        print r"\caption{{{name}}}".format(name=caption)
-        print r"\end{figure}"
-        print r"\end{minipage}"
+        printPlot(plot, caption, exclude)
 
 def name(dir):
     dir = os.path.basename(dir)

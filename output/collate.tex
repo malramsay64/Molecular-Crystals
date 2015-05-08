@@ -22,6 +22,9 @@
 \newcommand{\numcols}{1}
 \newcommand{\mywidth}{\linewidth}
 
+\let\oldsection\section
+\renewcommand\section{\clearpage\oldsection}
+
 \begin{document}
 
 \input{\string~/make/output/prefix.out}

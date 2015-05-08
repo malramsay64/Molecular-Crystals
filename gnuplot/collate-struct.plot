@@ -4,10 +4,11 @@ set terminal term_type enhanced size term_size*scaling, term_y*scaling font ",".
 
 set xlabel "Timestep"
 set format x "10^{%L}"
-set format x "10^{%L}"
+set format y "%g"
 set logscale x
 set key outside right
 set style line 5 pointtype 7 linewidth 2*scaling pointsize 0.5*scaling
+set yrange [0:]
 
 set datafile separator ","
 
