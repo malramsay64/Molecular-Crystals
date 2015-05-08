@@ -19,7 +19,7 @@ set output ordering.ext
 set nologscale y
 set format y "%g"
 set yrange [0:1]
-set key on outside top autotitle columnhead 
+set key on outside above autotitle columnhead 
 set xlabel "1/T"
 set ylabel
 
