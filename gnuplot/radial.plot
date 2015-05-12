@@ -1,6 +1,6 @@
 load '~/make/gnuplot/config.plot'
 
-set terminal term_type enhanced size term_size,y_size
+set terminal term_type enhanced size term_size,term_y
 
 set xrange [0:15]
 set style fill solid
