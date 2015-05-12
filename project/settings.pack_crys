@@ -16,7 +16,7 @@ radius = 0.637556
 
 # Dist (1+radius|1.0)
 # <<<LOOP>>> <<<COMPUTE>>>
-dist=1.00 1+0.20*radius 1+0.40*radius 1+0.60*radius 1+0.80*radius 1.00+radius
+dist=1.00 1.00+radius
 dist_tri = 1.00
 
 # Crystal unit cell
@@ -99,7 +99,7 @@ collate_plots = order
 
 # Output filetype
 # ( png | pdf )
-term_type = png
+term_type = pdf
 
 
 # }}}
