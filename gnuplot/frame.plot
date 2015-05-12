@@ -23,14 +23,14 @@ do for [i=1:words(files)] {
 
     infile = word(files,i)
 
-    set output plot_dir."frame-".system("basename ".infile." .dat").ext
+    set output plot_dir."frame-".system("basename ".infile." .dat").'.png'
 
     a = system("awk 'NR==1 {print  $1; exit}' ".infile)
     height = system("awk 'NR==1 {print  $2; exit}' ".infile)
     set yrange[-2:height+2]
     set xrange[-2:a+2]
 
-    set terminal term_type enhanced size term_size*scaling*4, term_size/(a+0.)*height*scaling*4
+    set terminal png enhanced size term_size*scaling*4, term_size/(a+0.)*height*scaling*4
 
     set object rectangle from -0,0 to a,height
 

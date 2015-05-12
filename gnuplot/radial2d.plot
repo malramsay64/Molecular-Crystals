@@ -1,6 +1,9 @@
+term_type = png
+scaling = 10
+
 load '~/make/gnuplot/config.plot'
 
-set terminal term_type enhanced size term_size*scaling, term_size*scaling font ",".font_size
+set terminal term_type enhanced size term_size*scaling, term_size*scaling
 
 my_colour = '#2b8cbe'
 circle_colour ="#9ecae1"
@@ -45,7 +48,7 @@ plot f every :::0::0 using 1:2:3 with circles linecolor rgb circle_colour
 
 unset multiplot
 
-set pm3d interpolate 50,50
+set pm3d interpolate 100,100
 set output prefix.plot_dir.'radial2d_part'.ext
 sorted = '< cat '.f.' | sort -n -r -k9'
 splot f every :::1 using 3:4:9 with pm3d
@@ -55,6 +58,5 @@ set pm3d
 set contour
 set cntrparam bspline
 set cntrparam points 30
-#set cntrparam levels discrete 0.5, 0.6, 0.7, 0.8, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0
 set output prefix.plot_dir.'radial2d_cont'.ext
 splot f every :::1 using 3:4:9 with pm3d

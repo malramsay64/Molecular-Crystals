@@ -17,12 +17,13 @@ set output prefix.plot_dir.molecule."-msd".ext
 
 plot for [i=1:words(files)] word(files,i)."/msd.csv" using 1:2 with linespoints linestyle 5\
      linecolor i title temp(word(files,i)),\
-     0.00001*x linecolor black title 'x'
+     0.00001*x linecolor black notitle
 
 
 
 unset logscale y
 set ylabel '{/symbol alpha}(t)'
+set format y "%g"
 set output prefix.plot_dir.molecule."-alpha".ext
 
 plot for [i=1:words(files)] word(files,i)."/msd.csv" using 1:4 with linespoints linestyle 5\
