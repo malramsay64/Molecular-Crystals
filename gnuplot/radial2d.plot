@@ -1,5 +1,5 @@
-term_type = png
-scaling = 10
+term_type = 'png'
+#scaling = 10
 
 load '~/make/gnuplot/config.plot'
 
