@@ -2,14 +2,14 @@ include config
 
 mol := Snowman-1.80-0.637556-1.0 Trimer-1.80-0.637556-1.00-120
 
-steps = 1000000
-print = $(steps)
+steps = 100000
+print = 10
 n_mol = 2500
-temp = 1.20
+temp = 1.40
 pressure = 13.5
 PREFIX = $(HOME)/scratch/contact
 my_dir = $(HOME)/make
-MPI = 
+#MPI = 
 molecule=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta))).mol
 restart=$(subst $(space),-,$(strip $(temp) $(shape) $(radius) $(dist) $(theta) $(n_mol))).rt
 mol_settings=$(subst $(space),-,$(strip $(shape) $(radius) $(dist) $(theta))).dat
@@ -24,7 +24,7 @@ $(mol): dirs
 	$(eval theta = $(call t_theta, $@))
 	$(eval atoms = $(if $(filter $(shape),Snowman),2,3))
 	cd $(PREFIX)/$(@); $(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) -v radius $(radius) < $(my_dir)/lammps_in/in.contact > out.log
-	cd $(PREFIX)/$(@); $(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) -v radius $(radius) < $(my_dir)/lammps_in/in.minimize > out.log
+#	cd $(PREFIX)/$(@); $(MPI) $(LAMMPS_PATH)$(LAMMPS) $(LAMMPS_FLAGS) $(LAMMPS_VARS) -v radius $(radius) < $(my_dir)/lammps_in/in.minimize > out.log
 
 dirs:
 	$(foreach m, $(mol), mkdir -p $(PREFIX)/$m/trj; mkdir -p $(PREFIX)/$m/logs)

@@ -26,7 +26,7 @@ fix 2 all enforce2d
 fix 3 all momentum 100 linear 1 1 0
 
 # Dump configuration printevery steps. Image is dumped at beginning and end
-dump 1 all custom ${steps} ${my_path}/trj/tmp.lammpstrj id mol type c_diam x y z
+dump 1 all custom ${printevery} ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
 
 dump_modify 1 first yes
 dump_modify 1 pad 10
