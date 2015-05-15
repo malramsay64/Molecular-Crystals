@@ -1,0 +1,46 @@
+# Using rigid molecules
+
+# Define molecule
+molecule    mymol ${the_path}/data/${molecule}
+
+read_restart ${the_path}/restarts/${restart}
+reset_timestep 0
+
+# Thermodynamic output
+thermo          1000
+thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density lx ly xy
+
+# log file name
+log     ${my_path}/logs/prod.log
+
+read_dump ${my_path}/trj/tmp.lammpstrj 0 x y
+
+fix 5 all property/atom d_diam
+set type 1 d_diam 2
+variable diam equal ${radius}*2 
+if "${diam} != 2" then &
+    "set type 2 d_diam ${diam}"
+compute diam all property/atom d_diam
+
+fix 2 all enforce2d
+
+# Dump configuration printevery steps. Image is dumped at beginning and end
+dump 1 all custom 1000 ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
+
+min_style cg
+minimize 1e-6 1e-8 1000 1000
+
+undump 1
+
+read_dump ${my_path}/trj/tmp.lammpstrj ${steps} x y
+
+fix 2 all enforce2d
+
+# Dump configuration printevery steps. Image is dumped at beginning and end
+dump 1 all custom 1000 ${my_path}/trj/out.lammpstrj id mol type c_diam x y z
+
+dump_modify 1 append yes
+
+min_style cg
+minimize 1e-6 1e-8 1000 1000
+
