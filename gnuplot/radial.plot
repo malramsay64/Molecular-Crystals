@@ -12,3 +12,8 @@ plot "radial_dist.dat" using 1:2 with line ls 5 lc -1 title 'Radial Distribution
 
 set output plot_dir."radial_part".ext
 plot "radial_part.dat" using 1:2 with line ls 5 lc -1
+
+
+set xrange[0.5:2]
+set output plot_dir."radial_frac".ext
+plot "radial_frac.dat" using 1:2 with line ls 5 lc -1
