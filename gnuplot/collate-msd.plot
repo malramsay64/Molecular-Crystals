@@ -1,6 +1,6 @@
 load '~/make/gnuplot/collate_config.plot'
 
-set terminal term_type enhanced size term_size*scaling, term_y*scaling font "arial,".font_size
+set terminal term_type enhanced size term_size*scaling, term_y*scaling font ",".font_size
 
 set encoding utf8
 set xlabel "Timestep"
@@ -22,7 +22,7 @@ plot for [i=1:words(files)] word(files,i)."/msd.csv" using 1:2 with linespoints 
 
 
 unset logscale y
-set ylabel '{/symbol alpha}(t)'
+set ylabel '{/Symbol a}'
 set format y "%g"
 set output prefix.plot_dir.molecule."-alpha".ext
 

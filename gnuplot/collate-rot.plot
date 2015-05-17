@@ -24,5 +24,5 @@ do for [r=2:num_cols(first)] {
     set ylabel heading(r,first)
 
     plot for [i=1:words(files)] word(files,i)."/rotation.csv" using 1:r with linespoints linestyle 5\
-         linecolor i title temp(word(files,i)), 1/e lc 'grey', 0 lc 'grey'
+         linecolor i title temp(word(files,i))
 }

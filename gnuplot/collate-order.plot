@@ -18,8 +18,8 @@ num_o = columns(ordering)
 set output ordering.ext
 set nologscale y
 set format y "%g"
-set yrange [0:1]
-set key on outside above autotitle columnhead 
+set yrange [0:]
+set key on outside right autotitle columnhead
 set xlabel "1/T"
 set ylabel
 

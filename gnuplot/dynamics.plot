@@ -13,7 +13,9 @@ columns(f) = system("awk -F, 'NR==1 {print NF;exit}' ".f.".csv")
 
 mols = system('ls '.prefix.plot_dir."*-contact.csv")
 
-mol(m) = system('basename '.m.' | sed s/-contact.csv//g ')
+mol(m) = system('basename '.m.' | sed s/-contact.csv//g | if [[ - = Snowman-0.637556-1.0 ]] ; \
+then echo S1 ; else if [[ - = Snowman-0.637556-1.637556 ]] ; then echo Sc ; else echo Tr ; fi')
+
 contact = prefix.plot_dir.molecule."-contact"
 num_c = columns(contact)
 
