@@ -192,9 +192,12 @@ $(FOLDERS):
 my_latex:
 	@mkdir -p $@
 
-.PHONY: touch-lammps
+.PHONY: touch-lammps touch-contact
 touch-lammps: | .make
 	@touch .make/lammps
+
+touch-contact: |.make
+	@touch .make/contact
 
 # Plots {{{
 # ---------

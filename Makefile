@@ -1,5 +1,5 @@
 
-PRE=files data lammps touch-lammps test $(all_clean)
+PRE=files data lammps touch-lammps touch-contact test $(all_clean)
 TARGETS=contact plot density movie
 PRESENT=grouped individual
 
