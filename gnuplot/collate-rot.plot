@@ -16,13 +16,11 @@ num_cols(f) = system("awk -F, 'NR==1 {print NF; exit}' ".f)
 heading(i,f) = system("awk -F, 'NR==1 {print $".i."; exit}' ".f)
 
 first = word(files,1)."/rotation.csv"
-e = 2.187
 
 do for [r=2:num_cols(first)] {
 
     set output prefix.plot_dir.molecule."-".heading(r,first).ext
     set ylabel heading(r,first)
-
-    plot for [i=1:words(files)] word(files,i)."/rotation.csv" using 1:r with linespoints linestyle 5\
-         linecolor i title temp(word(files,i))
+    plot for [i=2:words(files):2] word(files,i)."/rotation.csv" using 1:r with linespoints linestyle 5\
+         linecolor i/2 title temp(word(files,i))
 }

@@ -20,8 +20,8 @@ first = word(files,1)."/struct.csv"
 do for [r=2:num_cols(first)] {
 
     set output prefix.plot_dir.molecule."-".heading(r,first).ext
-    set ylabel heading(r,first)."(t)"
+    set ylabel heading(r,first)
 
-    plot for [i=1:words(files)] word(files,i)."/struct.csv" using 1:r with linespoints linestyle 5\
-         linecolor i title temp(word(files,i))
+    plot for [i=2:words(files):2] word(files,i)."/struct.csv" using 1:r with linespoints linestyle 5\
+         linecolor i/2 title temp(word(files,i))
 }

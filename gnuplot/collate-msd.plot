@@ -15,8 +15,8 @@ set style line 5 pointtype 7 linewidth 2*scaling pointsize 0.5*scaling
 set datafile separator ","
 set output prefix.plot_dir.molecule."-msd".ext
 
-plot for [i=1:words(files)] word(files,i)."/msd.csv" using 1:2 with linespoints linestyle 5\
-     linecolor i title temp(word(files,i)),\
+plot for [i=2:words(files):2] word(files,i)."/msd.csv" using 1:2 with linespoints linestyle 5\
+     linecolor i/2 title temp(word(files,i)),\
      0.00001*x linecolor black notitle
 
 
@@ -24,8 +24,10 @@ plot for [i=1:words(files)] word(files,i)."/msd.csv" using 1:2 with linespoints 
 unset logscale y
 set ylabel '{/Symbol a}'
 set format y "%g"
+set yrange [0:3]
 set output prefix.plot_dir.molecule."-alpha".ext
 
-plot for [i=1:words(files)] word(files,i)."/msd.csv" using 1:4 with linespoints linestyle 5\
-     linecolor i title temp(word(files,i))
+
+plot for [i=2:words(files):2] word(files,i)."/msd.csv" using 1:4 with linespoints linestyle 5\
+     linecolor i/2 title temp(word(files,i))
 

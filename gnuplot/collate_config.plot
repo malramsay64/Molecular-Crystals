@@ -25,3 +25,8 @@ glob = system('echo '.molecule.' | sed s/-/-*-/')
 files = system('ls -d '.prefix.glob)
 
 temp(mol) = system( 'echo '.mol.' | cut -d- -f2')
+
+#colours = "#e41a1c #377eb8 #4daf4a #984ea3 #ff7f00 #ffff33 #a65628 #f781bf"
+#"#e41a1c #377eb8 #4daf4a #984ea3 #ff7f00 #ffff33 #a65628 #f781bf #999999"
+
+

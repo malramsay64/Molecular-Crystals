@@ -7,14 +7,14 @@ set datafile missing 'NAN'
 set logscale y
 set format y "10^{%L}"
 set style line 5 pt 7 lw 2*scaling ps 0.5*scaling
-set key outside above
+set key outside right
 
 columns(f) = system("awk -F, 'NR==1 {print NF;exit}' ".f.".csv")
 
-mols = system('ls '.prefix.plot_dir."*-contact.csv")
+mols = system('ls '.prefix.plot_dir."*\-contact.csv")
 
-mol(m) = system('basename '.m.' | sed s/-contact.csv//g | if [[ - = Snowman-0.637556-1.0 ]] ; \
-then echo S1 ; else if [[ - = Snowman-0.637556-1.637556 ]] ; then echo Sc ; else echo Tr ; fi')
+mol(m) = system('f=$(basename '.m.' | sed s/\-contact.csv//g); if [[ $f = Snowman-0.637556-1.0 ]] ; \
+then echo S1 ; else if [[ $f = Snowman-0.637556-1.637556 ]] ; then echo Sc ; else echo Tr ; fi; fi')
 
 contact = prefix.plot_dir.molecule."-contact"
 num_c = columns(contact)
@@ -33,6 +33,10 @@ set format y "%g"
 
 set output prefix.plot_dir.'t1.t2'.ext
 set ylabel 't1/t2'
+plot for [j=1:words(mols)] word(mols,j) using (1/$1):($2*$3) with linespoints ls 5 lc j title mol(word(mols,j))
+
+set output prefix.plot_dir.'D.t1.T'.ext
+set ylabel 'D.{Symbol t}_1/t'
 plot for [j=1:words(mols)] word(mols,j) using (1/$1):($2*$3) with linespoints ls 5 lc j title mol(word(mols,j))
 
 set output prefix.plot_dir.'t1.D'.ext
