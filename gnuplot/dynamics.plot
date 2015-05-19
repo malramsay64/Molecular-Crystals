@@ -28,23 +28,34 @@ do for [i=2:num_c] {
     plot for [j=1:words(mols)] word(mols,j) using (1/$1):i with linespoints ls 5 lc j title mol(word(mols,j))
 }
 
-unset logscale y
-set format y "%g"
+set xlabel "t"
 
 set output prefix.plot_dir.'t1.t2'.ext
 set ylabel 't1/t2'
-plot for [j=1:words(mols)] word(mols,j) using (1/$1):($2*$3) with linespoints ls 5 lc j title mol(word(mols,j))
+plot for [j=1:words(mols)] word(mols,j) using ($1):($2*$3) with linespoints ls 5 lc j title mol(word(mols,j))
+
+set output prefix.plot_dir.'t1.ts'.ext
+set ylabel 't1/ts'
+plot for [j=1:words(mols)] word(mols,j) using ($1):($2*$4) with linespoints ls 5 lc j title mol(word(mols,j))
+
+
+unset logscale y
+set format y "%g"
 
 set output prefix.plot_dir.'D.t1.T'.ext
-set ylabel 'D.{Symbol t}_1/t'
-plot for [j=1:words(mols)] word(mols,j) using (1/$1):($2*$3) with linespoints ls 5 lc j title mol(word(mols,j))
+set ylabel 'D.{Symbol t}_1/T'
+plot for [j=1:words(mols)] word(mols,j) using ($1):($5*$3/$1) with linespoints ls 5 lc j title mol(word(mols,j))
 
 set output prefix.plot_dir.'t1.D'.ext
 set ylabel't1.D'
-plot for [j=1:words(mols)] word(mols,j) using (1/$1):($2*$5) with linespoints ls 5 lc j title mol(word(mols,j))
+plot for [j=1:words(mols)] word(mols,j) using ($1):($2*$5) with linespoints ls 5 lc j title mol(word(mols,j))
 
-set output prefix.plot_dir.'t2.D'.ext
-set ylabel't2.D'
-plot for [j=1:words(mols)] word(mols,j) using (1/$1):($3*$5) with linespoints ls 5 lc j title mol(word(mols,j))
+set output prefix.plot_dir.'D.ts.T'.ext
+set ylabel'D.{Symbol t}_s/T'
+plot for [j=1:words(mols)] word(mols,j) using ($1):($5*$4/$1) with linespoints ls 5 lc j title mol(word(mols,j))
+
+set output prefix.plot_dir.'D.ts'.ext
+set ylabel'D.{Symbol t}_s'
+plot for [j=1:words(mols)] word(mols,j) using ($1):($5*$4) with linespoints ls 5 lc j title mol(word(mols,j))
 
 
