@@ -19,7 +19,7 @@ plot for [i=2:words(files):2] word(files,i)."/msd.csv" using 1:2 with linespoint
      linecolor i/2 title temp(word(files,i)),\
      0.00001*x linecolor black notitle
 
-set ylabel "dMSD/dt"
+set ylabel "dlog(MSD)/dlog(t)"
 set output prefix.plot_dir.molecule."-dMSD".ext
 plot for [i=2:words(files):2] word(files,i)."/msd.csv" using 1:5 with linespoints linestyle 5\
     linecolor i/2 title temp(word(files,i))
