@@ -11,7 +11,7 @@ set xrange [0:7.5]
 no_ext(f) = system("f=".f."; echo ${f%.*}")
 radial = "radial_dist.dat radial_part.dat"
 
-do for [r=2:words(radial)] {
+do for [r=1:words(radial)] {
 
     first = word(files,1).word(radial,r)
     set output prefix.plot_dir.molecule."-".no_ext(word(radial,r)).ext

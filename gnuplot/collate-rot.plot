@@ -2,7 +2,7 @@ load '~/make/gnuplot/collate_config.plot'
 
 set terminal term_type enhanced size term_size*scaling, term_y*scaling font ",".font_size
 
-set xlabel "Timestep"
+set xlabel "Time"
 set ylabel "MSD"
 set format x "10^{%L}"
 set logscale x

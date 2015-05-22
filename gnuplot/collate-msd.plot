@@ -3,7 +3,7 @@ load '~/make/gnuplot/collate_config.plot'
 set terminal term_type enhanced size term_size*scaling, term_y*scaling font ",".font_size
 
 set encoding utf8
-set xlabel "Timestep"
+set xlabel "Time"
 set ylabel "MSD"
 set format x "10^{%L}"
 set format y "10^{%L}"
@@ -19,6 +19,10 @@ plot for [i=2:words(files):2] word(files,i)."/msd.csv" using 1:2 with linespoint
      linecolor i/2 title temp(word(files,i)),\
      0.00001*x linecolor black notitle
 
+set ylabel "dlog(MSD)/dlog(t)"
+set output prefix.plot_dir.molecule."-dMSD".ext
+plot for [i=2:words(files):2] word(files,i)."/msd.csv" using 1:5 with linespoints linestyle 5\
+    linecolor i/2 title temp(word(files,i))
 
 
 unset logscale y
@@ -30,4 +34,6 @@ set output prefix.plot_dir.molecule."-alpha".ext
 
 plot for [i=2:words(files):2] word(files,i)."/msd.csv" using 1:4 with linespoints linestyle 5\
      linecolor i/2 title temp(word(files,i))
+
+
 
