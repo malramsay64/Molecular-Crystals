@@ -203,7 +203,7 @@ touch-contact: |.make
 # ---------
 
 plot: $(addprefix copy-, $(to_plot))
-	@echo Generating Plots
+	@echo Generated Plots
 	@touch .make/plot
 
 copy-%: plot-% | %
@@ -211,9 +211,9 @@ copy-%: plot-% | %
 	@$(foreach f, $(wildcard myplot/$(subst copy-,,$@)*), cp $f ../plots/$(subst copy-,,$@)/$(notdir $(shell pwd))-$(notdir $f); )
 
 plot-%: %.plot contact | %
+	@echo $@
 	@gnuplot -e "prefix='$(shell pwd)/'; term_type='$(term_type)'" $<  #&> $(LOG)
 	@touch .make/$@
-	@echo $@
 
 $(to_plot):
 	@mkdir -p $(PREFIX)/plots/$@
