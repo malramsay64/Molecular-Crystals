@@ -20,14 +20,16 @@ plot for [i=2:words(files):2] word(files,i)."/msd.csv" using 1:2 with linespoint
      0.00001*x linecolor black notitle
 
 set ylabel "dlog(MSD)/dlog(t)"
+#set xrange [:10000]
+set format y "%g"
+unset logscale y
+set yrange [:2.5]
 set output prefix.plot_dir.molecule."-dMSD".ext
 plot for [i=2:words(files):2] word(files,i)."/msd.csv" using 1:5 with linespoints linestyle 5\
     linecolor i/2 title temp(word(files,i))
+unset xrange
 
-
-unset logscale y
 set ylabel '{/Symbol a}'
-set format y "%g"
 set yrange [0:3]
 set output prefix.plot_dir.molecule."-alpha".ext
 

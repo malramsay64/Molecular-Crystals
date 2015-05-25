@@ -7,6 +7,7 @@ set ylabel ""
 set key outside right
 set style line 5 linewidth 2*scaling
 set xrange [0:7.5]
+set yrange [0:]
 
 no_ext(f) = system("f=".f."; echo ${f%.*}")
 radial = "radial_dist.dat radial_part.dat"
