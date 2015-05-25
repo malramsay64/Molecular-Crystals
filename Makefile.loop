@@ -35,8 +35,8 @@ last_t:=$(word 1, $(temp))
 
 OPTIONS = --no-print-directory $(if $(filter $(MAKECMDGOALS), $(PRE)), -j 1)
 
-collate_command = echo $(call t_temp, $1),$$(cat $(PREFIX)/$1/$@ | cut -d: -f$2 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) >> $(PREFIX)/plots/$(mol)-$(basename $@).csv
-collate_header = echo "t,"$$(cat $(PREFIX)/$1/$@ | cut -d: -f1 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) > $(PREFIX)/plots/$(mol)-$(basename $@).csv
+collate_command = echo $(call t_temp, $1),$$(cat $(PREFIX)/$1/$@ | grep : | cut -d: -f$2 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) >> $(PREFIX)/plots/$(mol)-$(basename $@).csv
+collate_header = echo "t,"$$(cat $(PREFIX)/$1/$@ | grep : | cut -d: -f1 | tr -d ' ' | tr '\n' ',' | rev | cut -c2- | rev ) > $(PREFIX)/plots/$(mol)-$(basename $@).csv
 
 
 export
