@@ -61,3 +61,22 @@ plot for [j=1:words(mols)] word(mols,j) using (1/$1):($5*$4/$1) with linespoints
 set output prefix.plot_dir.'D.ts'.ext
 set ylabel'D.{/Symbol t}_s'
 plot for [j=1:words(mols)] word(mols,j) using (1/$1):($5*$4) with linespoints ls 5 lc j title mol(word(mols,j))
+
+set output prefix.plot_dir."DW.D".ext
+set xlabel "1/<u^2>"
+set ylabel "D"
+set logscale y
+plot for [j=1:words(mols)] word(mols,j) using (1/$6):($5) with linespoints ls 5 lc j title mol(word(mols,j))
+
+
+set output prefix.plot_dir."DW.t1".ext
+set xlabel "1/<u^2>"
+set ylabel "{/Symbol t}_1"
+set logscale y
+plot for [j=1:words(mols)] word(mols,j) using (1/$6):($2) with linespoints ls 5 lc j title mol(word(mols,j))
+
+set output prefix.plot_dir."DW.ts".ext
+set xlabel "1/<u^2>"
+set ylabel "{/Symbol t}_s"
+set logscale y
+plot for [j=1:words(mols)] word(mols,j) using (1/$6):($4) with linespoints ls 5 lc j title mol(word(mols,j))
