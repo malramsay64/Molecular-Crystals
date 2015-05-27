@@ -21,6 +21,22 @@ my_green = '#4BAC6F'
 files = system('ls '.prefix.'/trj_contact/*.dat')
 mod(a,b) = a-b*floor(a/b)
 
+mol = system('f=$(basename $(pwd) | cut -d- -f1,3-); if [[ $f = Snowman-0.637556-1.0 ]] ; \
+then echo D1 ; else if [[ $f = Snowman-0.637556-1.637556 ]] ; then echo Dc ; else echo Tr ; fi; fi')
+
+
+if (mol eq "D1") {
+    colouring(c4,c5,c6,c7) = c5 > 0.9 ? mod(c4,pi)*2 : 0
+}
+else {
+    if (mol eq "Dc") {
+    colouring(c4,c5,c6,c7) = c6 == 1 ? c4 : 0
+    }
+    else {
+        colouringc(c4,c5,c6,c7) = c7 == 4 ? c4 : 0
+    }
+}
+
 do for [i=1:words(files)] {
 
     infile = word(files,i)
@@ -35,7 +51,7 @@ do for [i=1:words(files)] {
     set object rectangle from -0,0 to a,height
 
     plot infile every :::1 using 1:2:3 with circles lc rgb 'black',\
-         infile every :::1 using 1:2:($3-0.05):4 \
+         infile every :::1 using 1:2:($3-0.05):(colouring($4,$5,$6,$7)) \
                 with circles lc palette title "Configuration",\
          infile every :1::1 using 1:2 with line ls 1
 
