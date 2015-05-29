@@ -8,32 +8,34 @@ set style fill transparent solid 1 noborder
 set style line 1 lt 1 lc -1 lw 2
 
 set pm3d
-set palette file '~/make/gnuplot/husl.dat' every ::1 using 1:2:3:4
+set palette file '~/make/gnuplot/husl.dat' using 1:2:3:4
 set key off
 unset colorbox
 unset border
 unset xtics
 unset ytics
-set cbrange [0:2*pi]
+set cbrange [-2*pi:2*pi]
 
 my_green = '#4BAC6F'
 
 files = system('ls '.prefix.'/trj_contact/*.dat')
 mod(a,b) = a-b*floor(a/b)
 
-mol = system('f=$(basename $(pwd) | cut -d- -f1,3-); if [[ $f = Snowman-0.637556-1.0 ]] ; \
-then echo D1 ; else if [[ $f = Snowman-0.637556-1.637556 ]] ; then echo Dc ; else echo Tr ; fi; fi')
+mol = system('f=$(basename $(pwd) | cut -d- -f1,3-); if [[ $f = Snowman-0.637556-1.0* ]] ; \
+then echo D1 ; else if [[ $f = Snowman-0.637556-1.637556* ]] ; then echo Dc ; else echo Tr ; fi; fi')
 
+colouring(c4,c5,c6,c7) = c4
 
 if (mol eq "D1") {
-    colouring(c4,c5,c6,c7) = c5 > 0.9 ? mod(c4,pi)*2 : 0
+    colouring(c4,c5,c6,c7) = c5 > 0.8 ? mod(c4,pi)*2 : -2*pi
 }
 else {
     if (mol eq "Dc") {
-    colouring(c4,c5,c6,c7) = c6 == 1 ? c4 : 0
+    colouring(c4,c5,c6,c7) = c6 == 1 ? c4 : -2*pi
     }
     else {
-        colouringc(c4,c5,c6,c7) = c7 == 4 ? c4 : 0
+        # Trimer
+        colouring(c4,c5,c6,c7) = c5 > 0.70 ? mod(c4,pi)*2 : -2*pi
     }
 }
 

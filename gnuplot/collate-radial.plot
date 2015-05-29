@@ -17,6 +17,6 @@ do for [r=1:words(radial)] {
     first = word(files,1).word(radial,r)
     set output prefix.plot_dir.molecule."-".no_ext(word(radial,r)).ext
 
-    plot for [i=2:words(files):2] word(files,i)."/".word(radial,r) using 1:($2+i) with lines linestyle 5\
+    plot for [i=2:words(files):2] word(files,i)."/".word(radial,r) using 1:($2+i-2) with lines linestyle 5\
          linecolor i/2 title temp(word(files,i))
 }
