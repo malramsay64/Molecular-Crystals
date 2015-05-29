@@ -30,6 +30,27 @@ class thermo():
         d = [x[-1] for x in self.data if x[0] == prop]
         return d[0]
 
+    def mean(self, prop):
+        n = 0
+        mean = 0.
+        for val in [x[1:] for x in self.data if x[0] == prop][0]:
+            n += 1
+            delta = val - mean
+            mean += delta/n
+        return mean
+
+    def stats(self, prop):
+        n = 0
+        mean = 0.
+        M2 = 0.
+        for val in [x[1:] for x in self.data if x[0] == prop][0]:
+            n += 1
+            delta = val - mean
+            mean += delta/n
+            M2 += delta * (val - mean)
+        print mean, "+-", (math.sqrt(M2/n))
+
+
     def output(self, fname, *args):
         f = open(fname, 'w')
         px = [x[0] for x in self.data].index("Step")
