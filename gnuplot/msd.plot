@@ -14,5 +14,6 @@ set output plot_dir."msd".ext
 set logscale y
 set logscale x
 
-plot for [i=2:2] "msd.csv" using 1:i with linespoints ls 5 lc 1
+nc = system("awk -F',' '{print NF; exit}' msd.csv")
 
+plot for [i=2:nc] "msd.csv" using 1:i with linespoints ls 5 lc i-1

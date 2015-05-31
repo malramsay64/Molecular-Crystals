@@ -6,7 +6,8 @@ set datafile separator ","
 set datafile missing 'NAN'
 set logscale y
 set format y "10^{%L}"
-set style line 5 pt 7 lw 2*scaling ps 0.5*scaling
+set style line 5 pt 7 lw 4*scaling ps 0.5*scaling
+
 set key outside right
 
 columns(f) = system("awk -F, 'NR==1 {print NF;exit}' ".f.".csv")
@@ -19,16 +20,29 @@ then echo D1 ; else if [[ $f = Snowman-0.637556-1.637556 ]] ; then echo Dc ; els
 contact = prefix.plot_dir.molecule."-contact"
 num_c = columns(contact)
 
-do for [i=2:num_c] {
-
-    command = sprintf("awk -F, 'NR==1 {print $%i;exit}' %s.csv", i, contact)
-    set output prefix.plot_dir.system(command).ext
-    set xlabel "1/T"
-    set ylabel system(command)
-    plot for [j=1:words(mols)] word(mols,j) using (1/$1):i with linespoints ls 5 lc j title mol(word(mols,j))
-}
-
 set xlabel "1/T"
+set format x "%.1f"
+set xtics 0.2
+
+set output prefix.plot_dir."t1".ext
+set ylabel "{/Symbol t}_1"
+plot for [j=1:words(mols)] word(mols,j) using (1/$1):2 with linespoints ls 5 lc j title mol(word(mols,j))
+
+set output prefix.plot_dir."t2".ext
+set ylabel "{/Symbol t}_2"
+plot for [j=1:words(mols)] word(mols,j) using (1/$1):3 with linespoints ls 5 lc j title mol(word(mols,j))
+
+set output prefix.plot_dir."ts".ext
+set ylabel "{/Symbol t}_s"
+plot for [j=1:words(mols)] word(mols,j) using (1/$1):4 with linespoints ls 5 lc j title mol(word(mols,j))
+
+set output prefix.plot_dir."D".ext
+set ylabel "D"
+plot for [j=1:words(mols)] word(mols,j) using (1/$1):5 with linespoints ls 5 lc j title mol(word(mols,j))
+
+set output prefix.plot_dir."DW".ext
+set ylabel "DW"
+plot for [j=1:words(mols)] word(mols,j) using (1/$1):6 with linespoints ls 5 lc j title mol(word(mols,j))
 
 set output prefix.plot_dir.'t1.t2'.ext
 set ylabel '{/Symbol t}_1/{/Symbol t}_2'
@@ -62,10 +76,12 @@ set output prefix.plot_dir.'D.ts'.ext
 set ylabel'D.{/Symbol t}_s'
 plot for [j=1:words(mols)] word(mols,j) using (1/$1):($5*$4) with linespoints ls 5 lc j title mol(word(mols,j))
 
-set output prefix.plot_dir."DW.D".ext
 set xlabel "1/<u^2>"
 set ylabel "D"
 set logscale y
+set xtics 5
+
+set output prefix.plot_dir."DW.D".ext
 plot for [j=1:words(mols)] word(mols,j) using (1/$6):($5) with linespoints ls 5 lc j title mol(word(mols,j))
 
 
