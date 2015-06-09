@@ -41,7 +41,7 @@ thermo_style    custom step temp press pxx pyy pxy etotal ke pe enthalpy density
 log     ${my_path}/logs/create.log
 
 # Simulation parameters, bonds not able to move 
-fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 #xy 0 0 10
+fix 1 all npt temp $T $T 10 x ${press} ${press} 10 y ${press} ${press} 10 xy 0 0 10
 fix 2 all enforce2d
 
 # Give particles an initial velocity
@@ -54,5 +54,7 @@ run ${steps}
 
 min_style cg
 minimize 1e-6 1e-8 1000 1000
+
+unfix 1
 
 write_restart   ${the_path}/restarts/${last_restart}

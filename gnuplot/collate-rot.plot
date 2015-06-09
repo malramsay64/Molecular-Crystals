@@ -9,6 +9,7 @@ set logscale x
 set key outside right
 set style line 5 pointtype 7 linewidth 2*scaling pointsize 0.5*scaling
 set yrange [0:1]
+set xrange[:10**7]
 
 set datafile separator ","
 

@@ -11,6 +11,7 @@ set logscale x
 set logscale y
 set key outside right
 set style line 5 pointtype 7 linewidth 2*scaling pointsize 0.5*scaling
+set xrange[:10**7]
 
 set datafile separator ","
 set output prefix.plot_dir.molecule."-msd".ext

@@ -50,7 +50,7 @@ do for [i=1:words(files)] {
     set yrange[-2:height+2]
     set xrange[-2:a+2]
     set terminal term_type enhanced size term_size*scaling*4, term_size/(a+0.)*height*scaling*4
-    set object rectangle from -0,0 to a,height
+    #set object rectangle from -0,0 to a,height
 
     plot infile every :::1 using 1:2:3 with circles lc rgb 'black',\
          infile every :::1 using 1:2:($3-0.05):(colouring($4,$5,$6,$7)) \
