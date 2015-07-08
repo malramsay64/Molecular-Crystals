@@ -1,3 +1,40 @@
+# Makefile to generate all the shapes from the file settings.
+# Takes all combinations of the radii, distances, angles and other
+# shape parateteres to generate a list of molecules. Makefile.loop
+# is then called for each molecule.
+#
+# List of targets
+#    all         - compiles the code for the analysis creating the 
+#                  binary files.
+#    files       - creates the files nessecary for lammpsto run. Files
+#                  contain the descriptions of the molecules and their
+#                  positions where appropriate.
+#    lammps      - runs the simulations using lammps using the 
+#                  simulation parameters given in the settings
+#                  file. Will run each molecule as a separate job
+#                  if running on silica.
+#    contact     - analyses the lammpstrj files output by lammps passing
+#                  the options in settings.
+#    plot        - generates the plots from the data of the analysis.
+#                  the plots generated are specified in the settings 
+#                  file with the name being the filename given in the
+#                  gnuplot directory.
+#    collate     - this collates the data from all the temperatures 
+#                  analysed for each molecule into single plots. The
+#                  plots for this are given in the settings file.
+#    present     - creates a pdf file showing all the plots generated.
+#    contact-all - performs the contact analysis on all the molecules
+#                  at each temperatrure that has a lammpstrj file.
+#    delete      - deletes all the data from the directory specified
+#                  in the settings file
+#    clean       - removes all the binary files for the analysis
+#    clean-*
+#        contact - removes all files generated from contact
+#        plot    - removes all files generated from plot
+#        collate - removes files generated from collate
+#        present - removes files generated from present
+#
+
 
 PRE=files data lammps touch-lammps touch-contact test $(all_clean)
 TARGETS=contact plot density movie
@@ -186,10 +223,6 @@ $(PREFIX)latex:
 	@mkdir -p $@
 
 .PHONY: test $(mol) clean delete vars.mak $(TARGETS) $(PRE) clean-plot clean-collate
-
-#test: $(mol)
-#	@echo test
-
 clean:
 	-rm -rf bin/*
 
