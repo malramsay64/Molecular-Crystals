@@ -1,4 +1,7 @@
-#
+# Makefile.loop
+# 
+# This file takes the list of molecules and creates nessecary direcories for each
+# molecule. It then runs Makefile.run in ech directory to perform the analysis.
 
 include vars.mak
 

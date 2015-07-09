@@ -1,3 +1,9 @@
+# Makefile.run
+# Malcolm Ramsay 2015
+#
+# This file performs the analysis of each molecule creating the files required to keep
+# track of which elements are up to date.
+
 include $(my_dir)/vars.mak
 
 # Variable setup
@@ -199,7 +205,7 @@ touch-lammps: | .make
 touch-contact: |.make
 	@touch .make/contact
 
-# Plots {{{
+# Plots 
 # ---------
 
 plot: $(addprefix copy-, $(to_plot))
