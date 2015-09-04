@@ -34,7 +34,7 @@ LAMMPS 09 Dec 2014 with packages molecule and rigid
 gcc 4.6.3 or Apple LLVM 6.1.0
 gnuplot 5.0
 Tex Live 2014
-
+anlysis 1.0 https://github.com/malramsay64/analysis.git
 
 MAKEFILES
 ---------
